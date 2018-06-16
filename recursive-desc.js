@@ -1022,7 +1022,7 @@ function defaultBreathIce(container, macro, verbose) {
 
   if (isFatal(macro)) {
       if (macro.breathStyle == "line") {
-        return "You heave a lance of frigid cold from your gullet, freezing a " + container.describe(verbose) + " to the core.";
+        return "You heave a lance of frigid cold from your gullet, freezing " + container.describe(verbose) + " to the core.";
       } else if (macro.breathStyle == "cone") {
         return "A blizzard erupts from your maw, flash-freezing " + container.describe(verbose) + ". " + (container.count > 1 ? "They" : "It") + " shatters a heartbeat later, reduced to dust by your power.";
     }
@@ -1038,7 +1038,7 @@ function defaultBreathElectric(container, macro, verbose) {
 
   if (isFatal(macro)) {
       if (macro.breathStyle == "line") {
-        return "A blinding lance of lightning blasts from your spread " + macro.jawDesc(true) + ", cooking a " + container.describe(verbose) + " from the inside out.";
+        return "A blinding lance of lightning blasts from your spread " + macro.jawDesc(true) + ", cooking " + container.describe(verbose) + " from the inside out.";
       } else if (macro.breathStyle == "cone") {
         return "You exhale a brilliant, forking spray of lightning. The flickering bolts arc through " + container.describe(verbose) + ", cooking everything to a crisp.";
     }
@@ -1054,7 +1054,7 @@ function defaultBreathSmoke(container, macro, verbose) {
 
   if (isFatal(macro)) {
       if (macro.breathStyle == "line") {
-        return "You part your " + macro.jawDesc(true) + " a touch and blow, casting a thin gout of smoke that envelops a " + container.describe(verbose) + ". Your prey is snuffed out like a candle.";
+        return "You part your " + macro.jawDesc(true) + " a touch and blow, casting a thin gout of smoke that envelops " + container.describe(verbose) + ". Your prey is snuffed out like a candle.";
       } else if (macro.breathStyle == "cone") {
         return "You open wide and exhale. A rolling storm of smoke pours forth, smothering " + container.describe(verbose) + " in a pyroclastic flow.";
     }
@@ -1070,7 +1070,7 @@ function defaultBreathRadiation(container, macro, verbose) {
 
   if (isFatal(macro)) {
       if (macro.breathStyle == "line") {
-        return "Your depths pour out a narrow beam of crackling green energy, striking a " + container.describe(verbose) + " and frying it to a crisp, turning your prey to dust in the wind.";
+        return "Your depths pour out a narrow beam of crackling green energy, striking " + container.describe(verbose) + " and frying it to a crisp, turning your prey to dust in the wind.";
       } else if (macro.breathStyle == "cone") {
         return "You part your " +  macro.jawDesc(true) + ", roaring as a massive tide of radiation spews forth. It rolls over " + container.describe(verbose) + ", evaporating " + (container.count > 1 ? "them" : "it") + " in seconds.";
     }
