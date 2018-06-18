@@ -393,6 +393,10 @@ let macro =
     return volume * this.breastDensity;
   },
 
+  get droolVolume() {
+    return this.scaling(this.droolBaseVolume, this.scale, 3);
+  },
+
   "digest": function(owner, organ, time=15) {
 
     // ignore if using manual digestion
@@ -1928,6 +1932,10 @@ function feed()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(5);
+
+  if (macro.droolEnabled) {
+    drool();
+  }
 }
 
 function chew()
@@ -1968,8 +1976,31 @@ function chew()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(10);
+
+  if (macro.droolEnabled) {
+    drool();
+  }
 }
 
+function drool()
+{
+  let vol = macro.droolVolume * (Math.random() / 5 + 0.9);
+  let area = Math.pow(vol, 2/3);
+
+  let prey = getPrey(biome, area);
+  let line = describe("drool", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("liquid",preyMass);
+
+  add_victim_people("drool",prey);
+
+  update([sound,line,linesummary,newline]);
+}
 function stomp()
 {
   if (macro.gooMolten && !macro.footShoeWorn && !macro.footSockWorn) {
@@ -3702,6 +3733,8 @@ function breath(type, style) {
 
   update([sound, line, linesummary, newline]);
   add_victim_people("breath-" + type, prey);
+
+  macro.arouse(5);
 }
 
 function breath_fire() {
@@ -4220,6 +4253,11 @@ function startGame(e) {
     warns.push("Fatal actions are enabled.");
     enable_button("chew");
     enable_victim("chew","Chewed");
+  }
+
+  if (macro.droolEnabled) {
+    enable_button("drool");
+    enable_victim("drool","Drenched in drool");
   }
 
   if (macro.arousalEnabled) {

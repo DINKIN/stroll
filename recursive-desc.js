@@ -31,7 +31,7 @@ var actions = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","an
 "sheath-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push",
 "goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push",
 "goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer",
-"breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul"];
+"breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool"];
 
 for (let i=0; i<actions.length; i++) {
   rules[actions[i]] = [];
@@ -1094,6 +1094,16 @@ function defaultBreathFoul(container, macro, verbose) {
 
   return "FOUL" + container.describe(verbose);
 }
+
+function defaultDrool(container, macro, verbose) {
+  if (container.count == 0)
+    return "$VOLUME of hot drool oozes from your " + macro.jawDesc(true) + ".";
+  else if (isFatal(macro))
+    return "A rain of slobber falls from your maw, inundating " + container.describe(verbose) + " in $VOLUME of slimy drool.";
+  else
+    return "$VOLUME of your drool rains down from your " + macro.jawDesc(true) + ", washing over " + container.describe(verbose) + ".";
+}
+
 
 // EATING
 
