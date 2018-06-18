@@ -3689,7 +3689,7 @@ function breath(type, style) {
   let prey = new Container();
 
   if (style == "line") {
-    area *= 50;
+    area *= (Math.log10(macro.scale) + 1) * 10;
     prey = getOnePrey(biome, area, true);
   } else if (style == "cone") {
     prey = getPrey(biome, area, true);
