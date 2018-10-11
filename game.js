@@ -3318,10 +3318,9 @@ function scat(vol) {
     vol = macro.scatStorage.amount;
   }
 
-  let area = Math.pow(vol, 2/3);
+  let area = Math.pow(vol, 2/3) / 2;
+  let scatLength = Math.pow(vol, 1/3) * 4;
 
-  let scatArea = macro.analVoreArea;
-  let scatLength = vol / macro.analVoreArea;
   let prey = getPrey(biome, area);
   let line = describe("scat", prey, macro, verbose).replace("$MASS",mass(vol*1000,unit,true)).replace("$LENGTH",length(scatLength,unit,true));
   let linesummary = summarize(prey.sum(), true);
