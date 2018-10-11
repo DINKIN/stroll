@@ -306,17 +306,27 @@ function fill_area(area, weights, variance=0.15)
     // for small amounts, actually do the randomness
 
     // the first few ones get a much better shot
-    while (loopvar > 0) {
-      if (loopvar <= clusters[candidate.name] && loopvar == 1 && Math.random() < cluster_chances[candidate.name])
-        count += 1;
+
+    // if we have nothing at all, it's even better!
+
+    if (limit > 0 && result.length == 0) {
+      ++count;
+      ++loopvar;
+    }
+
+    while (loopvar < limit) {
+      if (loopvar <= clusters[candidate.name] && loopvar == 0 && Math.random() < cluster_chances[candidate.name]) {
+        ++count;
+      }
       else if (loopvar <= clusters[candidate.name]) {
         if (Math.random() < candidate.weight ? 1 : 0 || Math.random() < 0.75 * cluster_chances[candidate.name]) {
-          count += 1;
+          ++count;
         }
       }
-      else
+      else {
         count += Math.random() < candidate.weight ? 1 : 0;
-      --loopvar;
+      }
+      ++loopvar;
     }
 
     if (limit < max) {
