@@ -1203,21 +1203,6 @@ rules["chew"].push({
     caught between two fingers and popped back in to be crunched between molars and swallowed.";
   }
 });
-
-rules["chew"].push({
-  "test": function(container, macro) {
-    return hasOnly(container, ["Person"]) &&
-     hasExactly(container, "Person", 2) &&
-     isGory(macro);
-  }, "desc": function(container, macro, verbose) {
-    var prey1 = macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose);
-    var prey2 = macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose);
-    return "Powerful " + macro.jawDesc(true) + "  obliterate " + prey1  +"'s body. You toss your head back and swallow their gory remains, your free hand slowly crushing " + prey2 + " like a nut \
-    in a vice. A heartbeat later, their face is jammed into your bloody throat. A squeeze of your " + macro.jawDesc(true) + " snaps their spine with ease, and their limp body plunges down into \
-    your churning depths to be destroyed.";
-  }
-});
-
 // STOMPING
 
 rules["stomp"].push({
@@ -1259,6 +1244,38 @@ rules["stomp"].push({
     falling off.";
   }
 });
+
+rules["stomp"].push({
+  "test": function(container, macro) {
+    return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
+     isFatal(macro);
+  }, "desc": function(container, macro, verbose) {
+    return "Your heavy " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing the poor thing like an insect.";
+  }
+});
+
+rules["stomp"].push({
+  "test": function(container, macro) {
+    return hasOnly(container, ["Bus"]) &&
+     hasExactly(container, "Bus", 1) &&
+     isFatal(macro);
+  }, "desc": function(container, macro, verbose) {
+    return "Your heavy " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing the poor thing like an insect.";
+  }
+});
+
+
+rules["stomp"].push({
+  "test": function(container, macro) {
+    return hasOnly(container, ["Person","Car", "Bus"]) &&
+     hasExactly(container, "Bus", 1) &&
+     hasLessThan(container, "Car", 10);
+  }, "desc": function(container, macro, verbose) {
+    return "You punt a " + container.contents["Bus"].describe(verbose) + ", sending it tumbling down the road into a " + describe_all(container.contents, verbose, ["Bus"]);
+  }
+});
+
 
 // ANAL VORE
 

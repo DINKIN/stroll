@@ -137,6 +137,40 @@ var clusters =
   "Macro": 0,
 };
 
+var cluster_chances =
+{
+  "Container": 0,
+  "Person": 0.8,
+  "Human": 0.8,
+  "Cow": 0.5,
+  "Car": 0.5,
+  "Bus": 0.25,
+  "Tram": 0.2,
+  "House": 0.5,
+  "Barn": 0.1,
+  "Small Skyscraper": 0.25,
+  "Large Skyscraper": 0.25,
+  "Train": 0.1,
+  "Train Car": 0.05,
+  "Parking Garage": 0.1,
+  "Town": 0.1,
+  "City": 0.2,
+  "Continent": 0.5,
+  "Planet": 1,
+  "Star": 1,
+  "Solar System": 1,
+  "Galaxy": 1,
+  "Cluster": 1,
+  "Universe": 1,
+  "Multiverse": 1,
+  "Soldier": 0,
+  "Tank": 0,
+  "Artillery": 0,
+  "Helicopter": 0,
+  "Micro": 10,
+  "Macro": 0,
+};
+
 var contents =
 {
   "Container": [],
@@ -273,10 +307,10 @@ function fill_area(area, weights, variance=0.15)
 
     // the first few ones get a much better shot
     while (loopvar > 0) {
-      if (loopvar <= clusters[candidate.name] && loopvar == 1)
+      if (loopvar <= clusters[candidate.name] && loopvar == 1 && Math.random() < cluster_chances[candidate.name])
         count += 1;
       else if (loopvar <= clusters[candidate.name]) {
-        if (Math.random() < candidate.weight ? 1 : 0 || Math.random() < 0.75) {
+        if (Math.random() < candidate.weight ? 1 : 0 || Math.random() < 0.75 * cluster_chances[candidate.name]) {
           count += 1;
         }
       }
