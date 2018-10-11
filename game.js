@@ -841,7 +841,6 @@ let macro =
         owner.digest(owner, this, owner.gooDigestTime);
       }
 
-
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -1520,7 +1519,6 @@ let macro =
     return (this.tailCount > 1 ? this.tailCount + " " : "") + length(this.tailLength, unit, true) + "-long " + this.tailType;
   },
 
-
   get describeDick() {
     let state = "";
     if (!this.arousalEnabled) {
@@ -1902,7 +1900,6 @@ function crop_swallow()
   digest_all(macro.crop);
 }
 
-
 function feed()
 {
   let area = macro.handArea;
@@ -1925,7 +1922,6 @@ function feed()
     macro.stomach.feed(prey);
     line = describe("eat", prey, macro, verbose);
   }
-
 
   add_victim_people("eaten",prey);
 
@@ -1967,8 +1963,6 @@ function chew()
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("chew",prey);
 
   macro.stomach.feed(prey);
@@ -1988,6 +1982,10 @@ function drool()
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
+
+  if (prey.count == 0) {
+    return;
+  }
   let line = describe("drool", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
@@ -2018,8 +2016,6 @@ function stomp()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("crush",preyMass);
-
-
 
   add_victim_people("stomped",prey);
 
@@ -2080,8 +2076,6 @@ function stomp_goo() {
 
   let sound = getSound("goo",preyMass);
 
-
-
   macro.goo.feed(prey);
 
   update([sound,line,linesummary,newline]);
@@ -2128,8 +2122,6 @@ function flex_toes() {
 
   let sound = getSound("crush",preyMass);
 
-
-
   add_victim_people("flex-toes",prey);
 
   update([sound,line,linesummary,newline]);
@@ -2148,8 +2140,6 @@ function paw_stench() {
     return;
 
   let preyMass = prey.sum_property("mass");
-
-
 
   add_victim_people("paw-stench",prey);
 
@@ -2178,8 +2168,6 @@ function grind()
 
   let sound = getSound("crush",preyMass);
 
-
-
   add_victim_people("humped",prey);
 
   update([sound,line,linesummary,newline]);
@@ -2200,8 +2188,6 @@ function anal_vore()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("insert",preyMass);
-
-
 
   macro.bowels.feed(prey);
 
@@ -2231,8 +2217,6 @@ function sit()
 
   let sound = getSound("crush",crushedMass);
 
-
-
   update([sound,line,linesummary,newline]);
 
   add_victim_people("ass-crush",crushed);
@@ -2260,8 +2244,6 @@ function sit_goo()
 
   macro.goo.feed(prey);
 
-
-
   update([sound,line,linesummary,newline]);
 
   macro.arouse(15);
@@ -2284,8 +2266,6 @@ function ass_stench() {
     return;
 
   let preyMass = prey.sum_property("mass");
-
-
 
   add_victim_people("ass-stench",prey);
 
@@ -2327,7 +2307,6 @@ function cleavage_crush()
 
   let sound = getSound("crush",preyMass);
 
-
   add_victim_people("cleavage-crush",prey);
 
   update([sound,line,linesummary,newline]);
@@ -2348,7 +2327,6 @@ function cleavage_drop()
 
   let sound = getSound("drop",preyMass);
 
-
   add_victim_people("cleavage-drop",prey);
   update([sound,line,linesummary,newline]);
 
@@ -2367,7 +2345,6 @@ function cleavage_absorb()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("insert",preyMass);
-
 
   add_victim_people("cleavage-absorb",prey);
   update([sound,line,linesummary,newline]);
@@ -2404,7 +2381,6 @@ function breast_crush()
 
   let sound = getSound("crush",preyMass);
 
-
   add_victim_people("breast-crush",prey);
 
   update([sound,line,linesummary,newline]);
@@ -2431,10 +2407,8 @@ function breast_vore()
 
   let sound = getSound("insert",preyMass);
 
-
   add_victim_people("breast-vore",prey);
   macro.breasts.feed(prey);
-
 
   update([sound,line,linesummary,newline]);
 
@@ -2466,7 +2440,6 @@ function breast_milk(vol)
 
   let sound = getSound("liquid",preyMass);
 
-
   add_victim_people("milk-flood",prey);
   update([sound,line,linesummary,newline]);
 
@@ -2485,8 +2458,6 @@ function unbirth()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("insert",preyMass);
-
-
 
   macro.womb.feed(prey);
   add_victim_people("unbirth",prey);
@@ -2614,7 +2585,6 @@ function cockslap()
 
   let sound = getSound("crush",preyMass);
 
-
   add_victim_people("cock-slap",prey);
   update([sound,line,linesummary,newline]);
 
@@ -2633,8 +2603,6 @@ function cock_vore()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("insert",preyMass);
-
-
 
   macro.balls.feed(prey);
 
@@ -2657,8 +2625,6 @@ function ball_smother()
 
   let sound = getSound("crush",preyMass);
 
-
-
   add_victim_people("ball-smother",prey);
   update([sound,line,linesummary,newline]);
 
@@ -2678,7 +2644,6 @@ function male_spurt(vol)
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("liquid",preyMass);
-
 
   add_victim_people("cum-flood",prey);
 
@@ -2701,8 +2666,6 @@ function male_spurt_musk(area) {
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("male-spurt-musk",prey);
 
   update([line,linesummary,newline]);
@@ -2723,7 +2686,6 @@ function male_orgasm(vol,times)
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("liquid",preyMass);
-
 
   add_victim_people("cum-flood",prey);
 
@@ -2746,8 +2708,6 @@ function male_orgasm_musk(area) {
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("male-orgasm-musk",prey);
 
   update([line,linesummary,newline]);
@@ -2768,7 +2728,6 @@ function female_spurt(vol)
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("liquid",preyMass);
-
 
   add_victim_people("femcum-flood",prey);
 
@@ -2791,8 +2750,6 @@ function female_spurt_musk(area) {
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("female-spurt-musk",prey);
 
   update([line,linesummary,newline]);
@@ -2813,7 +2770,6 @@ function female_orgasm(vol,times)
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("liquid",preyMass);
-
 
   add_victim_people("femcum-flood",prey);
 
@@ -2836,8 +2792,6 @@ function female_orgasm_musk(area) {
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("female-orgasm-musk",prey);
 
   update([line,linesummary,newline]);
@@ -2857,7 +2811,6 @@ function tail_slap()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("crush",preyMass);
-
 
   add_victim_people("tail-slap",prey);
 
@@ -2918,7 +2871,6 @@ function tail_vore(count)
     lines.push(line);
   }
 
-
   let linesummary = summarize(totalPrey.sum(), false);
 
   lines.push(linesummary);
@@ -2931,11 +2883,8 @@ function tail_vore(count)
 
   let sound = getSound("swallow",preyMass);
 
-
-
   macro.tail.feed(totalPrey);
   add_victim_people("tail-vore",totalPrey);
-
 
   update([sound].concat(lines));
 
@@ -2956,7 +2905,6 @@ function pouch_stuff()
   let sound = getSound("insert",preyMass);
 
   macro.pouch.add(prey);
-
 
   update([sound,line,linesummary,newline]);
 
@@ -2986,10 +2934,8 @@ function pouch_eat()
 
   let sound = getSound("swallow",preyMass);
 
-
   macro.stomach.feed(prey);
   add_victim_people("eaten",prey);
-
 
   update([sound,line,linesummary,newline]);
 
@@ -3010,11 +2956,8 @@ function pouch_absorb()
 
   let sound = getSound("insert",preyMass);
 
-
-
   macro.stomach.feed(prey);
   add_victim_people("pouch-absorb",prey);
-
 
   update([sound,line,linesummary,newline]);
 
@@ -3035,8 +2978,6 @@ function soul_vore()
 
   let sound = getSound("swallow",preyMass);
 
-
-
   macro.souls.feed(prey);
 
   update([sound,line,linesummary,newline]);
@@ -3056,7 +2997,6 @@ function soul_absorb_paw()
   let preyMass = prey.sum_property("mass");
 
   let sound = getSound("crush",preyMass);
-
 
   add_victim_people("soul-paw",prey);
 
@@ -3085,9 +3025,7 @@ function belch(vol)
 
   let sound = getSound("belch",preyMass);
 
-
   add_victim_people("gas-belch",prey);
-
 
   update([sound,line,linesummary,newline]);
 }
@@ -3112,9 +3050,7 @@ function fart(vol)
 
   let sound = getSound("fart",preyMass);
 
-
   add_victim_people("gas-fart",prey);
-
 
   update([sound,line,linesummary,newline]);
 }
@@ -3166,8 +3102,6 @@ function remove_shoes_stench() {
       return;
 
     let preyMass = prey.sum_property("mass");
-
-
 
     add_victim_people("paw-stench",prey);
 
@@ -3224,8 +3158,6 @@ function remove_socks_stench() {
 
     let preyMass = prey.sum_property("mass");
 
-
-
     add_victim_people("paw-stench",prey);
 
     update([line,linesummary,newline]);
@@ -3276,7 +3208,6 @@ function dump_socks() {
 
   update([line,summary,newline]);
 }
-
 
 function footwearUpdate() {
   disable_button("wear_shoes");
@@ -3355,8 +3286,6 @@ function piss_stench(area) {
 
   let preyMass = prey.sum_property("mass");
 
-
-
   add_victim_people("piss-stench",prey);
 
   update([line,linesummary,newline]);
@@ -3427,8 +3356,6 @@ function scat_stench(area) {
     return;
 
   let preyMass = prey.sum_property("mass");
-
-
 
   add_victim_people("scat-stench",prey);
 
@@ -3704,8 +3631,6 @@ function paw_vore()
 
   let sound = getSound("insert",preyMass);
 
-
-
   macro.pawsVore.feed(prey);
 
   add_victim_people("paw-vore",prey);
@@ -3848,8 +3773,6 @@ function update(lines = [])
     }
   }
 
-
-
   document.getElementById("height").innerHTML = "Height: " + transformNumbers(length(macro.height, unit));
   document.getElementById("mass").innerHTML = "Mass: " + transformNumbers(mass(macro.totalMass, unit));
 
@@ -3989,7 +3912,6 @@ function grow_dick(factor)
 function grow_balls(factor)
 {
 
-
   let oldDiameter = macro.ballDiameter;
   let oldMass = macro.ballMass;
 
@@ -4002,7 +3924,6 @@ function grow_balls(factor)
 
 function grow_breasts(factor)
 {
-
 
   let oldDiameter = macro.breastDiameter;
   let oldMass = macro.breastMass;
@@ -4028,7 +3949,6 @@ function grow_vagina(factor)
 
 function grow_ass(factor)
 {
-
 
   let oldDiameter = Math.pow(macro.assArea,1/2);
 
