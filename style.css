@@ -52,12 +52,30 @@ body.dark div {
 @media (max-aspect-ratio: 16/9){
   .game-area {
     width: 100%
+    height: 60%;
+  }
+  #log {
+    height: 80vh;
+    max-height: 50vh;
+  }
+  #react-log {
+    height: 40vh;
   }
 }
 
 @media (min-aspect-ratio: 16/10){
   .game-area {
-    width: 75%
+    width: 90%
+  }
+  #log {
+    float: left;
+    height: 75vh;
+    width: 50vh;
+  }
+  #react-log {
+    float: right;
+    height: 75vh;
+    width: 50vh;
   }
 }
 
@@ -66,9 +84,28 @@ body.dark div {
   display:none;
 }
 
-body.light #log {
-  height: 900px;
+#log {
   overflow: auto;
+}
+
+body.light #react-log {
+  color: #000;
+  background-color: #e7e7e7;
+}
+
+body.light #react-log div {
+  background-color: #e7e7e7;
+}
+
+body.dark #react-log {
+  color: #eee;
+  background-color: #151515;
+}
+
+body.dark #react-log div {
+  background-color: #151515;
+}
+body.light #react-log {
   color: #000;
   background-color: #e7e7e7;
 }
@@ -78,8 +115,6 @@ body.light #log div {
 }
 
 body.dark #log {
-  height: 900px;
-  overflow: auto;
   color: #eee;
   background-color: #151515;
 }
