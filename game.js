@@ -1139,13 +1139,13 @@ let macro =
       let amount = self.gasStorage.amount - self.gasStorage.limit*3/4;
       if (self.belchEnabled && self.fartEnabled) {
         if (Math.random() < 0.5)
-          belch(amount);
+          belch(amount, false);
         else
-          fart(amount);
+          fart(amount, false);
       } else if (self.belchEnabled) {
-        belch(amount);
+        belch(amount, false);
       } else if (self.fartEnabled) {
-        fart(amount);
+        fart(amount, false);
       }
 
     }
@@ -1281,7 +1281,7 @@ let macro =
 
       if (!this.orgasm) {
         this.orgasm = true;
-        update(["You shudder as ecstasy races up your spine",newline]);
+        update(["You shudder as ecstasy races up your spine",newline], false);
         if (this.maleParts) {
           this.maleOrgasm(this);
           if (this.sheath.container.count > 0)
@@ -1332,11 +1332,11 @@ let macro =
           self.femaleSpurt += ((self.arousal-100)/100 + Math.random()) / 25 * (self.edge);
 
         if (self.maleSpurt > 1) {
-          male_spurt(macro.cumVolume * (0.1 + Math.random() / 10));
+          male_spurt(macro.cumVolume * (0.1 + Math.random() / 10), false);
           self.maleSpurt = 0;
         }
         if (self.femaleSpurt > 1) {
-          female_spurt(macro.femcumVolume * (0.1 + Math.random() / 10));
+          female_spurt(macro.femcumVolume * (0.1 + Math.random() / 10), false);
           self.femaleSpurt = 0;
         }
         update();
@@ -1360,7 +1360,7 @@ let macro =
         amount += spurt;
         this.cumStorage.amount -= spurt;
       }
-      male_orgasm(amount,5);
+      male_orgasm(amount, 5, false);
       setTimeout(function() { self.maleOrgasm(self); }, 2000);
     }
   },
@@ -1377,7 +1377,7 @@ let macro =
         amount += spurt;
         this.femcumStorage.amount -= spurt;
       }
-      female_orgasm(amount,5);
+      female_orgasm(amount, 5, false);
       setTimeout(function() { self.femaleOrgasm(self); }, 2000);
     }
   },
@@ -1822,7 +1822,7 @@ function do_digestion(owner, organ, container) {
     let sound = getSound("insert",container.sum_property("mass"));
     let line = organ.describeMove(container);
     let summary = summarize(container.sum(),false);
-    update([line, summary, newline]);
+    update([line, summary, newline], false);
     return;
   }
 
@@ -1849,9 +1849,9 @@ function do_digestion(owner, organ, container) {
       soulLine = "Their " + (soulCount == 1 ? "soul is" : "souls are") + " trapped in your depths!";
     else
       soulLine = "No souls, though...";
-    update([sound,line,summary,soulLine,newline]);
+    update([sound,line,summary,soulLine,newline], false);
   } else {
-    update([sound,line,summary,newline]);
+    update([sound,line,summary,newline], false);
   }
 }
 
@@ -2420,7 +2420,7 @@ function breast_vore()
   macro.arouse(10);
 }
 
-function breast_milk(vol)
+function breast_milk(vol, active=true)
 {
   if (vol == undefined) {
     vol = Math.min(macro.lactationVolume, macro.milkStorage.amount);
@@ -2441,7 +2441,7 @@ function breast_milk(vol)
   let sound = getSound("liquid",preyMass);
 
   add_victim_people("milk-flood",prey);
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   macro.arouse(20);
 }
@@ -2631,7 +2631,7 @@ function ball_smother()
   macro.arouse(10);
 }
 
-function male_spurt(vol)
+function male_spurt(vol, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
@@ -2647,14 +2647,14 @@ function male_spurt(vol)
 
   add_victim_people("cum-flood",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_spurt_musk(area * macro.baseMaleMuskArea);
+    male_spurt_musk(area * macro.baseMaleMuskArea, active);
   }
 }
 
-function male_spurt_musk(area) {
+function male_spurt_musk(area, active=true) {
   let prey = getPrey(biome, area);
   let line = describe("male-spurt-musk", prey, macro, verbose);
   let linesummary = summarize(prey.sum(), true);
@@ -2673,7 +2673,7 @@ function male_spurt_musk(area) {
   macro.arouse(5);
 }
 
-function male_orgasm(vol,times)
+function male_orgasm(vol,times, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
@@ -2689,14 +2689,14 @@ function male_orgasm(vol,times)
 
   add_victim_people("cum-flood",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_orgasm_musk(area * macro.baseMaleMuskArea);
+    male_orgasm_musk(area * macro.baseMaleMuskArea, active);
   }
 }
 
-function male_orgasm_musk(area) {
+function male_orgasm_musk(area, active=true) {
   let prey = getPrey(biome, area);
   let line = describe("male-orgasm-musk", prey, macro, verbose);
   let linesummary = summarize(prey.sum(), true);
@@ -2710,12 +2710,12 @@ function male_orgasm_musk(area) {
 
   add_victim_people("male-orgasm-musk",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
 
-function female_spurt(vol)
+function female_spurt(vol, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
@@ -2731,14 +2731,14 @@ function female_spurt(vol)
 
   add_victim_people("femcum-flood",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_spurt_musk(area * macro.baseFemaleMuskArea);
+    female_spurt_musk(area * macro.baseFemaleMuskArea, active);
   }
 }
 
-function female_spurt_musk(area) {
+function female_spurt_musk(area, active=true) {
   let prey = getPrey(biome, area);
   let line = describe("female-spurt-musk", prey, macro, verbose);
   let linesummary = summarize(prey.sum(), true);
@@ -2752,12 +2752,12 @@ function female_spurt_musk(area) {
 
   add_victim_people("female-spurt-musk",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
 
-function female_orgasm(vol,times)
+function female_orgasm(vol,times, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
@@ -2773,14 +2773,14 @@ function female_orgasm(vol,times)
 
   add_victim_people("femcum-flood",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_orgasm_musk(area * macro.baseFemaleMuskArea);
+    female_orgasm_musk(area * macro.baseFemaleMuskArea, active);
   }
 }
 
-function female_orgasm_musk(area) {
+function female_orgasm_musk(area, active=true) {
   let prey = getPrey(biome, area);
   let line = describe("female-orgasm-musk", prey, macro, verbose);
   let linesummary = summarize(prey.sum(), true);
@@ -2794,7 +2794,7 @@ function female_orgasm_musk(area) {
 
   add_victim_people("female-orgasm-musk",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
@@ -3005,7 +3005,7 @@ function soul_absorb_paw()
   macro.arouse(25);
 }
 
-function belch(vol)
+function belch(vol, active=true)
 {
   if (vol == undefined) {
     vol = Math.min(macro.gasStorage.amount,macro.gasStorage.limit/3);
@@ -3027,10 +3027,10 @@ function belch(vol)
 
   add_victim_people("gas-belch",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 }
 
-function fart(vol)
+function fart(vol, active=true)
 {
   if (vol == undefined) {
     vol = Math.min(macro.gasStorage.amount,macro.gasStorage.limit/2);
@@ -3052,7 +3052,7 @@ function fart(vol)
 
   add_victim_people("gas-fart",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 }
 
 function wear_shoes() {
@@ -3313,7 +3313,7 @@ function bladder_vore() {
   macro.arouse(20);
 }
 
-function scat(vol) {
+function scat(vol, active=true) {
   if (vol == undefined) {
     vol = macro.scatStorage.amount;
   }
@@ -3333,7 +3333,7 @@ function scat(vol) {
 
   macro.scatStorage.victims = new Container();
   add_victim_people("scat",prey);
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   macro.scatStorage.amount -= vol;
 
@@ -3748,9 +3748,9 @@ function transformNumbers(line)
   return line.toString().replace(/[0-9]+(\.[0-9]+)?(e\+[0-9]+)?/g, function(text) { return number(text, numbers); });
 }
 
-function update(lines = [])
+function update(lines = [], active=true)
 {
-  let log = document.getElementById("log");
+  let log = active ? document.getElementById("log") : document.getElementById("react-log");
 
   let oldHeight = log.scrollHeight;
 
@@ -3766,7 +3766,7 @@ function update(lines = [])
     let deltaHeight = log.scrollHeight - oldHeight;
 
     if (deltaHeight / window.innerHeight >= 0.2 && verbose && autoVerbose) {
-      update(["Switching to simple text!", newline]);
+      update(["Switching to simple text!", newline], false);
       autoVerbose = false;
       toggle_verbose();
     }

@@ -57,8 +57,10 @@ body.dark div {
   #log {
     height: 80vh;
     max-height: 50vh;
+    margin: 0 0 1vh 0;
   }
   #react-log {
+    margin: 1vh 0 0 0;
     height: 40vh;
   }
 }
@@ -70,12 +72,12 @@ body.dark div {
   #log {
     float: left;
     height: 75vh;
-    width: 50vh;
+    width: 48%;
   }
   #react-log {
     float: right;
     height: 75vh;
-    width: 50vh;
+    width: 48%;
   }
 }
 
@@ -85,6 +87,10 @@ body.dark div {
 }
 
 #log {
+  overflow: auto;
+}
+
+#react-log {
   overflow: auto;
 }
 
