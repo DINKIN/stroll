@@ -1944,24 +1944,10 @@ function chew()
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
-  let sound = "";
-  if (people == 0) {
-    sound = "";
-  } else if (people < 3) {
-    sound = "Snap.";
-  } else if (people < 10) {
-    sound = "Crunch.";
-  } else if (people < 50) {
-    sound = "Crack!";
-  } else if (people < 500) {
-    sound = "CRUNCH!";
-  } else if (people < 5000) {
-    sound = "CRRRUNCH!";
-  } else {
-    sound = "Oh the humanity!";
-  }
 
   let preyMass = prey.sum_property("mass");
+  
+  let sound = getSound("chew", preyMass);
 
   add_victim_people("chew",prey);
 
