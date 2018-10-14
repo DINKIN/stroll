@@ -461,11 +461,11 @@ function defaultMaleSpurt(container, macro, verbose) {
 
 function defaultMaleOrgasm(container, macro, verbose) {
   if (container.count == 0)
-    return "Your " + macro.describeDick + " cock spurts $TIMES times, gushing out a $VOLUME glob of cum.";
+    return "Your " + macro.describeDick + " cock spurts, gushing out a $VOLUME glob of cum.";
   else if (isFatal(macro))
-    return "You're cumming! Your " + macro.describeDick + " cock erupts with $TIMES ropes of seed, obliterating " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
+    return "You're cumming! Your " + macro.describeDick + " cock erupts, obliterating " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
   else
-    return "You're cumming! Your " + macro.describeDick + " shaft erupts with $TIMES ropes of seed, splooging " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
+    return "You're cumming! Your " + macro.describeDick + " shaft spews a thick rope of seed, splooging " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
 }
 
 function defaultFemaleSpurt(container, macro, verbose) {
@@ -481,13 +481,13 @@ function defaultFemaleSpurt(container, macro, verbose) {
 
 function defaultFemaleOrgasm(container, macro, verbose) {
   if (container.count == 0)
-    return "Your moist slit sprays $TIMES times, gushing out $VOLUME of slick femcum.";
+    return "Your moist slit gushes $VOLUME of slick femcum.";
   else if (isSadistic(macro))
     return "Your quivering slit sprays $VOLUME of your intoxicating femcum, dissolving " + container.describe(verbose) + " in an unstoppable torrent of deadly lust.";
   else if (isFatal(macro))
-    return "Your moist slit sprays $VOLUME of slick femcum, obliterating " + container.describe(verbose) + " in $TIMES consecutive bursts of lust.";
+    return "Your moist slit sprays $VOLUME of slick femcum, obliterating " + container.describe(verbose) + " in a torrent of nectar.";
   else
-    return "Your moist slit sprays $VOLUME of slick femcum, splooging " + container.describe(verbose) + " with $TIMES orgasmic spurts.";
+    return "Your moist slit sprays $VOLUME of slick femcum, splooging " + container.describe(verbose) + " as you swoon with orgasmic lust.";
 }
 
 function defaultGrind(container, macro, verbose) {

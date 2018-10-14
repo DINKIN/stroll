@@ -1274,6 +1274,9 @@ let macro =
     if (this.afterglow)
       return;
 
+    if (this.orgasm)
+      amount /= 5;
+    
     this.arousal += amount * this.arousalFactor;
 
     if (this.arousal >= 200) {
@@ -1293,7 +1296,6 @@ let macro =
         if (!this.maleParts && !this.femaleParts) {
           this.nullOrgasm(this);
         }
-        this.quench(100);
       }
     }
   },
@@ -1340,6 +1342,8 @@ let macro =
           self.femaleSpurt = 0;
         }
         update();
+      } else if (self.orgasm) {
+        self.quench(1);
       } else if (self.afterglow) {
         self.quench(0.5);
         self.edge = Math.max(0,self.edge - 0.01);
@@ -1348,20 +1352,15 @@ let macro =
     setTimeout(function() { self.quenchExcess(self); }, 200);
   },
 
-  "maleOrgasm": function(self) {
+  "maleOrgasm": function(self, times=0) {
     if (!this.arousalEnabled)
       return;
 
     if (self.orgasm) {
-      let amount = 0;
-      let times = Math.round(Math.random()*3+3);
-      for (let i=0; i<5; i++) {
-        let spurt = Math.min(this.cumVolume, this.cumStorage.amount);
-        amount += spurt;
-        this.cumStorage.amount -= spurt;
-      }
-      male_orgasm(amount, 5, false);
-      setTimeout(function() { self.maleOrgasm(self); }, 2000);
+      let spurt = Math.min(this.cumVolume, this.cumStorage.amount);
+      this.cumStorage.amount -= spurt;
+      male_orgasm(spurt, false);
+      setTimeout(function() { self.maleOrgasm(self); }, 5000);
     }
   },
 
@@ -1370,15 +1369,10 @@ let macro =
       return;
 
     if (this.orgasm) {
-      let amount = 0;
-      let times = Math.round(Math.random()*3+3);
-      for (let i=0; i<5; i++) {
-        let spurt = Math.min(this.femcumVolume, this.femcumStorage.amount);
-        amount += spurt;
-        this.femcumStorage.amount -= spurt;
-      }
-      female_orgasm(amount, 5, false);
-      setTimeout(function() { self.femaleOrgasm(self); }, 2000);
+      let spurt = Math.min(this.femcumVolume, this.femcumStorage.amount);
+      this.femcumStorage.amount -= spurt;
+      female_orgasm(spurt, false);
+      setTimeout(function() { self.femaleOrgasm(self); }, 5000);
     }
   },
 
@@ -2681,12 +2675,12 @@ function male_spurt_musk(area, active=true) {
   macro.arouse(5);
 }
 
-function male_orgasm(vol,times, active=true)
+function male_orgasm(vol, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("male-orgasm", prey, macro, verbose).replace("$TIMES",times).replace("$VOLUME",volume(vol*times,unit,true));
+  let line = describe("male-orgasm", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2765,12 +2759,12 @@ function female_spurt_musk(area, active=true) {
   macro.arouse(5);
 }
 
-function female_orgasm(vol,times, active=true)
+function female_orgasm(vol, active=true)
 {
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("female-orgasm", prey, macro, verbose).replace("$TIMES",times).replace("$VOLUME",volume(vol*times,unit,false));
+  let line = describe("female-orgasm", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
