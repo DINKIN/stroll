@@ -1801,7 +1801,7 @@ function getPrey(region, area, sameSize = false)
   return prey;
 }
 
-function digest_all(organ) {
+function digest_all(organ, active=false) {
   let prey = new Container();
 
   for (let i = 0; i < organ.stages; i++) {
@@ -1813,16 +1813,16 @@ function digest_all(organ) {
     return;
   }
 
-  do_digestion(organ.owner, organ, prey);
+  do_digestion(organ.owner, organ, prey, active);
 }
 
-function do_digestion(owner, organ, container) {
+function do_digestion(owner, organ, container, active=false) {
   if (organ.moves != undefined) {
     organ.moves.feed(container);
     let sound = getSound("insert",container.sum_property("mass"));
     let line = organ.describeMove(container);
     let summary = summarize(container.sum(),false);
-    update([line, summary, newline], false);
+    update([line, summary, newline], active);
     return;
   }
 
@@ -1856,48 +1856,48 @@ function do_digestion(owner, organ, container) {
 }
 
 function digest_stomach() {
-  digest_all(macro.stomach);
+  digest_all(macro.stomach, true);
 }
 
 function digest_tail() {
-  digest_all(macro.tail);
+  digest_all(macro.tail, true);
 }
 
 function digest_anal() {
-  digest_all(macro.bowels);
+  digest_all(macro.bowels, true);
 }
 
 function digest_cock() {
-  digest_all(macro.balls);
+  digest_all(macro.balls, true);
 }
 
 function digest_breast() {
-  digest_all(macro.breasts);
+  digest_all(macro.breasts, true);
 }
 
 function digest_unbirth() {
-  digest_all(macro.womb);
+  digest_all(macro.womb, true);
 }
 
 function digest_soul() {
-  digest_all(macro.souls);
+  digest_all(macro.souls, true);
 }
 
 function digest_bladder() {
-  digest_all(macro.bladder);
+  digest_all(macro.bladder, true);
 }
 
 function digest_goo() {
-  digest_all(macro.goo);
+  digest_all(macro.goo, true);
 }
 
 function digest_paws() {
-  digest_all(macro.pawsVore);
+  digest_all(macro.pawsVore, true);
 }
 
 function crop_swallow()
 {
-  digest_all(macro.crop);
+  digest_all(macro.crop, true);
 }
 
 function feed()
