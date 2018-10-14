@@ -1946,7 +1946,7 @@ function chew()
   let people = get_living_prey(prey.sum());
 
   let preyMass = prey.sum_property("mass");
-  
+
   let sound = getSound("chew", preyMass);
 
   add_victim_people("chew",prey);
@@ -2159,6 +2159,28 @@ function grind()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(20);
+}
+
+function ass_grind()
+{
+  let area = macro.assArea / 2;
+
+  let prey = getPrey(biome, area);
+
+  let line = describe("ass-grind", prey, macro, verbose);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("crush",preyMass);
+
+  add_victim_people("ass-ground",prey);
+
+  update([sound,line,linesummary,newline]);
+
+  macro.arouse(15);
 }
 
 function anal_vore()
@@ -4117,6 +4139,7 @@ function startGame(e) {
   enable_victim("flex-toes","Squished between toes");
   enable_victim("eaten","Devoured");
   enable_victim("ass-crush","Sat on");
+  enable_victim("ass-ground","Ground beneath ass");
   enable_victim("humped","Humped");
 
   document.getElementById("log-area").style.display = 'inline';
@@ -4150,6 +4173,7 @@ function startGame(e) {
 
   enable_button("sit");
   enable_button("grind");
+  enable_button("ass_grind");
 
   enable_growth_part("body");
   enable_growth_part("ass");
@@ -4484,6 +4508,10 @@ function startGame(e) {
 
   update(warns);
 
+  if (warns.length > 0) {
+    update([newline]);
+  }
+
   document.getElementById("actions-body").style.display = 'flex';
   document.getElementById("stat-container").style.display = 'flex';
 
@@ -4523,6 +4551,7 @@ function showStats() {
     }
   }
   lines.push("Total: " + total);
+  lines.push(newline);
   update(lines);
 }
 

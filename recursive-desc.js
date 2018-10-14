@@ -20,7 +20,7 @@ function getDefault(name) {
   return window[funcName];
 }
 
-var actions = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","tail-slap","tail-vore","tails-vore",
+var actions = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore",
 "cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush",
 "breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush",
 "sheath-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt",
@@ -233,6 +233,15 @@ function defaultAssCrush(container, macro, verbose) {
     return "Your heavy ass obliterates " + container.describe(verbose) + ". ";
   else
     return "You sit on " + container.describe(verbose);
+}
+
+function defaultAssGrind(container, macro, verbose) {
+  if (container.count == 0) {
+    return "You rub your ass on a wall.";
+  } else {
+    return "You grind your ass against " + container.describe(verbose) + ", flattening " + (container.count == 1 ? "it" : "them") + " under your weight.";
+  }
+
 }
 
 function defaultTailSlap(container, macro, verbose) {
