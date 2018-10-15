@@ -401,7 +401,7 @@ let macro =
 
     // ignore if using manual digestion
     if (time != 0) {
-      setTimeout(function() { owner.digest(owner, organ, time); }, time * 1000 / organ.stages);
+      setTimeout(function() { owner.digest(owner, organ, time); }, time * 1000 / organ.stages / macro.fastDigestFactor);
     }
 
     let count = Math.min(organ.contents.length, organ.maxDigest);
@@ -1562,6 +1562,8 @@ let macro =
 
   "magicEnabled": false,
   "shrunkPrey": null,
+  "fastDigestFactor": 1,
+  "fastDigestTimer": null,
 
   "growthPoints": 0,
 
@@ -3731,6 +3733,19 @@ function magic_shrink()
   return;
 }
 
+function magic_fast_digestion()
+{
+  let line = "You infuse your depths with power, speeding your digestion.";
+
+  if (macro.fastDigestTimer) {
+    clearTimeout(macro.fastDigestTimer);
+  }
+
+  macro.fastDigestFactor = 3;
+  macro.fastDigestTimer = setTimeout(function() { macro.fastDigestFactor = 1; macro.fastDigestTimer = null; update(["The digestion magic wears off...", newline]);}, 30000);
+  update([line, newline]);
+}
+
 function cooldown_start(name) {
   let button = document.querySelector("#" + "button-action-" + name);
 
@@ -4221,6 +4236,7 @@ function startGame(e) {
   if (macro.magicEnabled) {
     enable_panel("magic");
     enable_button("magic_shrink");
+    enable_button("magic_fast_digestion");
   }
 
   if (macro.arousalEnabled) {
