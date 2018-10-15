@@ -1436,7 +1436,7 @@ let macro =
       else if (this.orgasm) {
         result.push("You're cumming!");
       } else if (this.arousal < 25) {
-
+        result.push("You're not at all aroused.");
       } else if (this.arousal < 75) {
         result.push("You're feeling a little aroused.");
       } else if (this.arousal < 150) {
@@ -1456,7 +1456,7 @@ let macro =
     }
 
     if (this.femaleParts) {
-      line = "Your glistening " + this.describeVagina + " slit peeks out from between your legs.";
+      line = "Your " + this.describeVagina + " slit peeks out from between your legs.";
       result.push(line);
       result.push(macro.womb.description);
     }
@@ -1464,6 +1464,9 @@ let macro =
     if (this.hasBreasts) {
       line = "You have two " + length(this.breastDiameter, unit, true) + "-wide breasts that weigh " + mass(macro.breastMass, unit) + " apiece.";
 
+      if (this.lactationEnabled) {
+        line += " They slosh with " + volume(this.milkStorage.amount, unit, false) + " of creamy milk.";
+      }
       if (this.cleavage.container.count > 0)
         line += " Between them are " + this.cleavage.container.describe(false) + ".";
 
@@ -1570,6 +1573,7 @@ let macro =
   // 0 = entirely non-fatal
   // 1 = fatal, but not specific
   // 2 = gory
+  // 3 = uwu
 
   "brutality": 1,
 
@@ -3656,7 +3660,8 @@ function paw_vore()
   macro.arouse(5);
 }
 
-function breath(type, style) {
+function breath(type, style)
+{
   let area = macro.breathArea;
   let prey = new Container();
 
@@ -3752,6 +3757,7 @@ function cooldown_start(name) {
   if (button.dataset.free) {
     return;
   }
+
   let parent = button.parentElement;
 
   let category = parent.id.replace("actions-", "");
