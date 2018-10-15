@@ -465,20 +465,25 @@ body.light a:visited {
 }
 
 body.light a:hover {
-  color: #0000EE;
+  color: #2222EE;
 }
 
 body.dark a {
-  color: #0000FF;
+  color: #8888FF;
   text-decoration: none;
 }
 
 body.dark a:visited {
-  color: #0000DD;
+  color: #8888DD;
 }
 
 body.dark a:hover {
-  color: #0000EE;
+  color: #AAAAEE;
+}
+
+a:hover {
+  text-shadow: 0px 0px 5px #eeeeff;
+  text-decoration: none;
 }
 
 .character-build {
