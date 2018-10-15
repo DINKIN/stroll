@@ -20,7 +20,9 @@ let sounds = {
   "breath":
   [["Woosh."],["Fwoosh."],["FWOOSH."],["FWOOSH!"],["FWOOOOOOSH!"]],
   "chew":
-  [["Snap.", "Crack."],["Crunch."],["Crack!"],["CRUNCH!"],["CRRRUNCH!"]]
+  [["Snap.", "Crack."],["Crunch."],["Crack!"],["CRUNCH!"],["CRRRUNCH!"]],
+  "magic":
+  [["Zap."],["Zap!"],["Fwoosh!"]]
 };
 
 function pickByMass(name, mass) {

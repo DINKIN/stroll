@@ -210,6 +210,7 @@
         <button class="action-part-button" id="action-part-shoes">Shoes</button>
         <button class="action-part-button" id="action-part-waste">Waste</button>
         <button class="action-part-button" id="action-part-goo">Goo</button>
+        <button class="action-part-button" id="action-part-magic">Magic</button>
         <button class="action-part-button" id="action-part-misc">Misc</button>
         <button class="action-part-button" id="action-part-breath">Breath</button>
         <button class="action-part-button" id="action-part-options">Options</button>
@@ -337,6 +338,11 @@
         <button class="action-button" id="button-action-breath_smoke">Smoke</button>
         <button class="action-button" id="button-action-breath_radiation">Radiation</button>
         <button class="action-button" id="button-action-breath_foul">Foul</button>
+      </div>
+
+      <div class="action-tab" id="actions-magic">
+        <button class="action-button" id="button-action-magic_shrink">Shrink</button>
+        <button class="action-button" id="button-action-magic_hypnotize">Hypnotize</button>
       </div>
 
       <div class="action-tab" id="actions-options">
@@ -1130,6 +1136,14 @@
                 <input autocomplete="off" type="number" step="any" id="droolBaseVolume" name="droolBaseVolume" data-unit="volume" placeholder="0.0001">
                 <div class="preview" id="droolBaseVolumePreview"></div>
               </li>
+            </div>
+          </div>
+
+          <div class="custom-category">
+            <input autocomplete="off" class="custom-header-checkbox" type="checkbox" id="magicEnabled" name="magicEnabled" />
+            <label class="custom-header" for="magicEnabled">Magic</label>
+            <div class="reveal-if-active">
+
             </div>
           </div>
         </ul>

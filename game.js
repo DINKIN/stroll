@@ -1276,7 +1276,7 @@ let macro =
 
     if (this.orgasm)
       amount /= 5;
-    
+
     this.arousal += amount * this.arousalFactor;
 
     if (this.arousal >= 200) {
@@ -1558,6 +1558,11 @@ let macro =
     return length(this.vaginaLength, unit, true) + " long " + state;
   },
 
+  "droolEnabled": false,
+
+  "magicEnabled": false,
+  "shrunkPrey": null,
+
   "growthPoints": 0,
 
   // 0 = entirely non-fatal
@@ -1690,6 +1695,9 @@ function summarize(sum, fatal = true)
 
 function getOnePrey(biome, area, sameSize = true)
 {
+  if (macro.shrunkPrey != null) {
+    return getPrey(biome, area, sameSize);
+  }
   let weights = getWeights(biome, area);
 
   let potential = [];
@@ -1786,6 +1794,11 @@ function getWeights(region, area) {
 
 function getPrey(region, area, sameSize = false)
 {
+  if (macro.shrunkPrey != null) {
+    let prey = macro.shrunkPrey;
+    macro.shrunkPrey = null;
+    return prey;
+  }
   let weights = getWeights(region, area);
 
   var prey = fill_area(area,weights);
@@ -3699,6 +3712,25 @@ function breath_cone() {
   update(["You prepare to exhale a broad cone of breath!",newline]);
 }
 
+function magic_shrink()
+{
+  let prey = new Container();
+
+  prey = getPrey(biome, macro.height * macro.height * 100, true);
+
+  macro.shrunkPrey = prey;
+  macro.shrunkPrey.mass /= 1000000;
+
+  let line = describe("magic-shrink", prey, macro, false);
+  let linesummary = summarize(prey.sum(), false);
+  let preyMass = prey.sum_property("mass");
+  let sound = getSound("magic", preyMass);
+
+  update([sound, line, linesummary, newline]);
+
+  return;
+}
+
 function cooldown_start(name) {
   let button = document.querySelector("#" + "button-action-" + name);
   let parent = button.parentElement;
@@ -4181,6 +4213,11 @@ function startGame(e) {
   if (macro.droolEnabled) {
     enable_button("drool");
     enable_victim("drool","Drenched in drool");
+  }
+
+  if (macro.magicEnabled) {
+    enable_panel("magic");
+    enable_button("magic_shrink");
   }
 
   if (macro.arousalEnabled) {
