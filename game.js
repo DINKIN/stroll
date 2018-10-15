@@ -1260,6 +1260,7 @@ let macro =
   "arousalEnabled": true,
 
   "arousalFactor": 1,
+  "edgeFactor": 1,
 
   "arousal": 0,
   "edge": 0,
@@ -1324,9 +1325,8 @@ let macro =
     if (self.arousalEnabled) {
       if (self.arousal > 100 && !self.orgasm) {
         self.arousal = Math.max(100,self.arousal-1);
-        self.edge += Math.sqrt((self.arousal - 100)) / 500;
+        self.edge += Math.sqrt((self.arousal - 100)) / 500 * macro.edgeFactor;
         self.edge = Math.min(1,self.edge);
-        self.edge = Math.max(0,self.edge - 0.002);
 
         if (self.maleParts)
           self.maleSpurt += ((self.arousal-100)/100 + Math.random()) / 25 * (self.edge);
@@ -3852,6 +3852,7 @@ function applyPercentage(name, meterPos) {
   document.querySelector("#" + name + "Meter .fill").style.setProperty("transform", "translate(0px, " + Math.round(meterPos) + "px)");
 
   let meter = document.querySelector("#" + name + "Meter");
+  console.log(meterPos);
   if (meterPos == 0) {
     meter.classList.add("shaking");
   } else {
