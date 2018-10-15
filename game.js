@@ -3733,6 +3733,10 @@ function magic_shrink()
 
 function cooldown_start(name) {
   let button = document.querySelector("#" + "button-action-" + name);
+
+  if (button.dataset.free) {
+    return;
+  }
   let parent = button.parentElement;
 
   let category = parent.id.replace("actions-", "");
@@ -3752,7 +3756,6 @@ function cooldown(category, time, timestart) {
     let button = document.getElementById("action-part-" + category);
 
     let amount = Math.round((timestart - time) / timestart * 100);
-    console.log(amount);
 
     let unselect = dark ? "#111" : "#ddd";
     let select = dark ? "#444" : "#555";
@@ -4245,7 +4248,9 @@ function startGame(e) {
       enable_victim("tail-vore","Tailmaw'd");
       if (macro.tailCount > 1) {
         enable_button("tail_vore_one");
-        enable_button("tail_vore_some");
+        if (macro.tailCount > 2) {
+          enable_button("tail_vore_some");
+        }
         enable_button("tail_vore_all");
       } else {
         enable_button("tail_vore_only");
