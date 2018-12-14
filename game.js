@@ -4598,19 +4598,38 @@ function actionTab(e) {
 function showStats() {
   let lines = [];
 
-  if (macro.brutality > 0) {
-    lines.push("Total kills:");
-  } else {
-    lines.push("Total victims:");
-  }
-
   let total = 0;
   for (var key in victims) {
     if (victims.hasOwnProperty(key)) {
-      lines.push(victims[key]["people"] + " " + describe("victim-" + key, null, macro, false));
-      total += victims[key]["people"];
+      if (victims[key]["people"] > 0) {
+        lines.push([
+          victims[key]["people"] + " " + describe("victim-" + key, null, macro, false),
+          victims[key]["people"]
+        ]);
+        total += victims[key]["people"];
+      }
     }
   }
+
+  // sort in descending order of kills/victims
+  lines = lines.sort(function(x, y) {
+    if (x[1] == y[1]) {
+      return 0;
+    } else {
+      return x[1] > y[1] ? -1 : 1;
+    }
+  });
+
+  lines = lines.map(function(x) {
+    return x[0];
+  });
+
+  if (macro.brutality > 0) {
+    lines.splice(0, 0, "Kills:");
+  } else {
+    lines.insert(0, 0, "Victims:");
+  }
+
   lines.push("Total: " + total);
   lines.push(newline);
   update(lines);

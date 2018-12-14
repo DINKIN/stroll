@@ -234,7 +234,7 @@ function defaultAssCrush(container, macro, verbose) {
   if (container.count == 0)
     return "You take a seat. It's good to have a break!";
   else if (isSadistic(macro))
-    return "You lower your heavy ass to the ground, biting you lip as you feel " + container.describe(verbose) + " collapse beneath your massive cheeks. " + (count > 1 ? count + " lives are" : "A life is") + " snuffed out as you settle down, grinding your ass into the remains before slowly rising back up.";
+    return "You lower your heavy ass to the ground, biting your lip as you feel " + container.describe(verbose) + " collapse beneath your massive cheeks. " + (count > 1 ? count + " lives are" : "A life is") + " snuffed out as you settle down, grinding your ass into the remains before slowly rising back up.";
   else if (isFatal(macro))
     return "Your heavy ass obliterates " + container.describe(verbose) + ". ";
   else
