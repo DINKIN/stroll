@@ -1175,7 +1175,7 @@ let macro =
   "fillPiss": function(self) {
     self.pissStorage.amount += self.pissScale * self.pissStorage.limit / self.pissStorageScale / 1000;
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
-      piss(self.pissStorage.amount);
+      piss(self.pissStorage.amount, false);
     setTimeout(function () { self.fillPiss(self); }, 100);
     update();
   },
@@ -1183,7 +1183,7 @@ let macro =
   "fillScat": function(self) {
     self.scatStorage.amount += self.scatScale * self.scatStorage.limit / self.scatStorageScale / 1000;
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
-      scat(self.scatStorage.amount);
+      scat(self.scatStorage.amount, false);
     setTimeout(function () { self.fillScat(self); }, 100);
     update();
   },
@@ -3269,7 +3269,7 @@ function footwearUpdate() {
   }
 }
 
-function piss(vol) {
+function piss(vol, active=true) {
   if (vol == undefined) {
     vol = macro.pissStorage.amount;
   }
@@ -3289,16 +3289,16 @@ function piss(vol) {
   let sound = getSound("liquid",preyMass);
 
   add_victim_people("piss",prey);
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   macro.arouse(20);
 
   if (macro.stenchEnabled && macro.basePissStenchArea > 0) {
-    piss_stench(area * macro.basePissStenchArea);
+    piss_stench(area * macro.basePissStenchArea, active);
   }
 }
 
-function piss_stench(area) {
+function piss_stench(area, active=true) {
   let prey = getPrey(biome, area);
   let line = describe("piss-stench", prey, macro, verbose);
   let linesummary = summarize(prey.sum(), true);
@@ -3312,7 +3312,7 @@ function piss_stench(area) {
 
   add_victim_people("piss-stench",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
