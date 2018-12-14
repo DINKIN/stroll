@@ -1,6 +1,7 @@
 // do da dark mode
 
-let dark = false;
+let dark = true;
+setDarkMode(dark);
 
 function toggleDarkMode(e) {
   dark = !dark;

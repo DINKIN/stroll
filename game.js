@@ -286,6 +286,9 @@ let macro =
   get tailDesc() {
     return this.tailType + " " + (this.tailCount > 1 ? "tails" : "tail");
   },
+  get tailNoDesc() {
+    return (this.tailCount > 1 ? "tails" : "tail");
+  },
   "dickType": "canine",
   "baseDickLength": 0.3,
   "baseDickDiameter": 0.08,
@@ -1088,8 +1091,9 @@ let macro =
       this.fillFemcum(this);
     if (this.lactationEnabled && this.hasBreasts)
       this.fillBreasts(this);
-    if (this.arousalEnabled)
-      this.quenchExcess(this);
+
+    this.quenchExcess(this);
+
     if (this.gasEnabled)
       this.fillGas(this);
     if (this.pissEnabled)
@@ -1381,7 +1385,6 @@ let macro =
       return;
 
     if (this.orgasm) {
-      this.quench(10);
       setTimeout(function() { self.nullOrgasm(self); }, 2000);
     }
   },
@@ -3325,7 +3328,7 @@ function bladder_vore() {
 
   let sound = getSound("insert",preyMass);
 
-  add_victim_people("bladder_vore",prey);
+  add_victim_people("bladder-vore",prey);
 
   macro.bladder.feed(prey);
 
@@ -4127,10 +4130,9 @@ function add_victim_people(category, prey) {
   update();
 }
 
-function enable_victim(category, name) {
+function enable_victim(category) {
   victims[category] = {};
   victims[category]["people"] = 0;
-  victims[category]["name"] = name;
 }
 
 function enable_button(name) {
@@ -4316,7 +4318,7 @@ function startGame(e) {
     }
 
     if (macro.arousalEnabled) {
-      enable_victim("cum-flood","Flooded by cum");
+      enable_victim("cum-flood",describe("victim-cum-flood", null, macro, null));
 
       if (macro.maleMuskEnabled) {
         enable_victim("male-spurt-musk","Inundated in masculine precum musk");
@@ -4458,7 +4460,7 @@ function startGame(e) {
     if (macro.bladderVore) {
       enable_button("bladder_vore");
 
-      enable_victim("bladder_vore","Dissolved into piss");
+      enable_victim("bladder-vore","Dissolved into piss");
 
       if (macro.bladderDigestTime == 0) {
         enable_button("digest_bladder");
@@ -4605,7 +4607,7 @@ function showStats() {
   let total = 0;
   for (var key in victims) {
     if (victims.hasOwnProperty(key)) {
-      lines.push(victims[key]["name"] + ": " + victims[key]["people"]);
+      lines.push(victims[key]["people"] + " " + describe("victim-" + key, null, macro, false));
       total += victims[key]["people"];
     }
   }
