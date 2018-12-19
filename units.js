@@ -99,7 +99,12 @@ function number_words_repeated(value) {
     case 4: return Math.round(value / 1e12).toString() + " trillion";
     case 5: return Math.round(value / 1e15).toString() + " quadrillion";
     case 6: return Math.round(value / 1e18).toString() + " quintillion";
-    default: return number_words_repeated(value / 1e18) + " quintillion";
+    case 7: return Math.round(value / 1e21).toString() + " sextillion";
+    case 8: return Math.round(value / 1e24).toString() + " septillion";
+    case 9: return Math.round(value / 1e27).toString() + " octillion";
+    case 10: return Math.round(value / 1e30).toString() + " nonillion";
+    case 11: return Math.round(value / 1e33).toString() + " decillion";
+    default: return number_words_repeated(value / 1e33) + " decillion";
   }
 }
 
