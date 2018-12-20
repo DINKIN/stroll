@@ -6,6 +6,7 @@
   <title>Stroll</title>
   <link rel="stylesheet" href="style.css">
   <script src="sounds.js"></script>
+  <script src="features.js"></script>
   <script src="migrations.js"></script>
   <script src="presets.js"></script>
   <script src="units.js"></script>
@@ -427,51 +428,9 @@
         </div>
       </ul>
       <form id="custom-species-form" name="custom-species-form">
-        <ul class="flex-outer">
-          <div class="custom-category">
-            <div class="custom-header-static">Basics</div>
-            <div>
-              <li>
-                <label for="name">Name</label>
-                <input autocomplete="off" type="text" id="name" name="name" />
-              </li>
-              <li>
-                <label for="species">Species</label>
-                <input autocomplete="off" type="text" id="species" name="species" placeholder="crux" />
-              </li>
-              <li>
-                <label for="scale" class="has-tooltip" title="How many times larger than normal you start.">Scale (?)</label>
-                <input autocomplete="off" type="number" step="any" id="scale" name="scale" placeholder="1" />
-                <div class="preview" id="scalePreview"></div>
-              </li>
-              <li>
-                <label for="baseHeight">Height</label>
-                <input autocomplete="off" type="number" step="any" id="baseHeight" name="baseHeight" data-unit="length" placeholder="2.26" />
-                <div class="preview" id="baseHeightPreview"></div>
-              </li>
-              <li>
-                <label for="baseMass">Weight</label>
-                <input autocomplete="off" type="number" step="any" id="baseMass" name="baseMass" data-unit="mass" placeholder="135">
-                <div class="preview" id="baseMassPreview"></div>
-              </li>
-              <li>
-                <label for="basePawArea">Paw area</label>
-                <input autocomplete="off" type="number" step="any" id="basePawArea" name="basePawArea" data-unit="area" placeholder="0.1">
-                <div class="preview" id="basePawAreaPreview"></div>
-              </li>
-              <li>
-                <label for="baseHandArea">Hand area</label>
-                <input autocomplete="off" type="number" step="any" id="baseHandArea" name="baseHandArea" data-unit="area" placeholder="0.1">
-                <div class="preview" id="baseHandAreaPreview"></div>
-              </li>
-              <li>
-                <label for="baseAssArea">Ass area</label>
-                <input autocomplete="off" type="number" step="any" id="baseAssArea" name="baseAssArea" data-unit="area" placeholder="0.25">
-                <div class="preview" id="baseAssAreaPreview"></div>
-              </li>
-            </div>
-          </div>
+        <ul class="flex-outer" id="character-flex-outer">
 
+          <!--
           <div class="custom-category">
             <div class="custom-header-static">Difficulty</div>
             <div>
@@ -487,6 +446,7 @@
             </div>
             </div>
           </div>
+        -->
 
           <div class="custom-category">
             <div class="custom-header-static">Brutality</div>

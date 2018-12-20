@@ -4711,6 +4711,8 @@ window.addEventListener('load', function(event) {
     }
   }());
 
+  construct_options();
+
   document.querySelectorAll("input[type='number']").forEach(function(x) {
     x.addEventListener("input", function() { updatePreview(x.id); });
   });
@@ -4772,5 +4774,140 @@ window.addEventListener('load', function(event) {
   document.getElementById("button-load-custom").addEventListener("click",function() { loadSettings(); });
   document.getElementById("button-save-custom").addEventListener("click",saveSettings);
   document.getElementById("button-start").addEventListener("click",startGame);
+
   setTimeout(pick_move, 2000);
 });
+
+function construct_options() {
+  let root = document.getElementById("character-flex-outer");
+
+  options.forEach(function(category) {
+    let name = category.name;
+    let cat_id = category.id;
+
+    let cat_div = document.createElement("div");
+    cat_div.classList.add("custom-category");
+
+    let header_div = document.createElement("div");
+
+    if (category.optional) {
+      header_div.classList.add("custom-header");
+    } else {
+      header_div.classList.add("custom-header-static");
+    }
+
+    header_div.innerText = name;
+
+    let options_div = document.createElement("div");
+
+    category.entries.forEach(function(option) {
+      let li = document.createElement("li");
+
+      if (option.type == "text") {
+        let input = document.createElement("input");
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("id", option.id);
+        input.setAttribute("name", option.id);
+        input.setAttribute("type", "text");
+
+        if (option.default) {
+          input.setAttribute("placeholder", option.default);
+        }
+
+        let label = document.createElement("label");
+        label.setAttribute("for", option.id);
+        label.innerText = option.name;
+
+        li.appendChild(label);
+        li.appendChild(input);
+      }
+
+      if (option.type == "float") {
+        let input = document.createElement("input");
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("id", option.id);
+        input.setAttribute("name", option.id);
+        input.setAttribute("type", "number");
+        input.setAttribute("step", "any");
+
+        if (option.default) {
+          input.setAttribute("placeholder", option.default);
+        }
+
+
+        let label = document.createElement("label");
+        label.setAttribute("for", option.id);
+        label.innerText = option.name;
+
+        li.appendChild(label);
+        li.appendChild(input);
+
+        if (option.unit) {
+          input.setAttribute("data-unit", option.unit);
+
+          let unit = document.createElement("div");
+
+          unit.classList.add("preview");
+          unit.id = option.id + "Preview";
+          li.appendChild(unit);
+        }
+
+      }
+
+      if (option.type == "radio") {
+        option.choices.forEach(function(choice) {
+          let li = document.createElement("li");
+
+          let input = document.createElement("input");
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("id", option.id + "-" + choice.value);
+          input.setAttribute("name", option.id);
+          input.setAttribute("value", choice.value);
+          input.setAttribute("type", "radio");
+
+          if (option.default == choice.value) {
+            input.setAttribute("checked", true);
+          }
+
+          let label = document.createElement("label");
+          label.setAttribute("for", option.id + "-" + choice.value);
+          label.innerText = choice.name;
+
+          li.appendChild(input);
+          li.appendChild(label);
+          options_div.appendChild(li);
+
+        });
+
+        // we added n li elements; we need to skip the default one
+        return;
+      }
+
+      if (option.type == "select") {
+        let label = document.createElement("label");
+        label.setAttribute("for", option.id);
+
+        let select = document.createElement("select");
+        select.setAttribute("name", option.id);
+
+        option.choices.forEach(function(choice) {
+          let sub_option = document.createElement("option");
+          sub_option.innerText = choice.name;
+          sub_option.setAttribute("value", choice.value);
+
+          select.appendChild(sub_option);
+        });
+
+        li.appendChild(label);
+        li.appendChild(select);
+      }
+
+      options_div.appendChild(li);
+
+    });
+
+    cat_div.appendChild(header_div);
+    cat_div.appendChild(options_div);
+    root.appendChild(cat_div);
+  });
+}
