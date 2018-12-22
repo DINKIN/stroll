@@ -80,5 +80,68 @@ options = [
         ]
       }
     ]
+  },
+  {
+    "name": "Brutality",
+    "id": "brutality",
+    "optional": false,
+    "entries":
+    [
+      {
+        "type": "radio",
+        "id": "brutality",
+        "default": "1",
+        "choices":
+        [
+          {
+            "name": "Non-fatal",
+            "value": "0"
+          },
+          {
+            "name": "Fatal",
+            "value": "1"
+          },
+          {
+            "name": "Gory",
+            "value": "2"
+          },
+          {
+            "name": "Sadistic",
+            "value": "3"
+          },
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Victims",
+    "id": "victims",
+    "optional": false,
+    "entries":
+    [
+      {
+        "type": "checkbox",
+        "id": "victims",
+        "choices":
+        [
+          {
+            "name": "Human prey",
+            "value": "Human"
+          },
+          {
+            "name": "Military",
+            "value": "Military"
+          },
+          {
+            "name": "Other macros",
+            "value": "Macros"
+          },
+          {
+            "name": "Micros",
+            "value": "Micros"
+          },
+        ]
+      }
+    ]
   }
 ];

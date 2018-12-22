@@ -4883,6 +4883,34 @@ function construct_options() {
         return;
       }
 
+      if (option.type == "checkbox") {
+        option.choices.forEach(function(choice) {
+          let li = document.createElement("li");
+
+          let input = document.createElement("input");
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("id", option.id + choice.value);
+          input.setAttribute("name", option.id + choice.value);
+          input.setAttribute("type", "checkbox");
+
+          if (choice.default) {
+            input.setAttribute("checked", true);
+          }
+
+          let label = document.createElement("label");
+          label.setAttribute("for", option.id + choice.value);
+          label.innerText = choice.name;
+
+          li.appendChild(input);
+          li.appendChild(label);
+          options_div.appendChild(li);
+
+        });
+
+        // we added n li elements; we need to skip the default one
+        return;
+      }
+
       if (option.type == "select") {
         let label = document.createElement("label");
         label.setAttribute("for", option.id);
