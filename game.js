@@ -2890,8 +2890,6 @@ function tail_vore(count)
       totalPrey = totalPrey.merge(prey);
     }
 
-    console.log(i + ", " + area + ", " + area * i);
-    let line = describe("tails-vore", totalPrey, macro, verbose).replace("$COUNT", number(count, numbers));
     lines.push(line);
   }
 
@@ -3858,7 +3856,6 @@ function applyPercentage(name, meterPos) {
   document.querySelector("#" + name + "Meter .fill").style.setProperty("transform", "translate(0px, " + Math.round(meterPos) + "px)");
 
   let meter = document.querySelector("#" + name + "Meter");
-  console.log(meterPos);
   if (meterPos == 0) {
     meter.classList.add("shaking");
   } else {
@@ -4787,179 +4784,248 @@ window.addEventListener('load', function(event) {
   setTimeout(pick_move, 2000);
 });
 
+function render_text_option(li, option) {
+  let input = document.createElement("input");
+  input.setAttribute("autocomplete", "off");
+  input.setAttribute("id", option.id);
+  input.setAttribute("name", option.id);
+  input.setAttribute("type", "text");
+
+  if (option.default) {
+    input.setAttribute("placeholder", option.default);
+  }
+
+  let label = document.createElement("label");
+  label.setAttribute("for", option.id);
+  label.innerText = option.name;
+
+  li.appendChild(label);
+  li.appendChild(input);
+}
+
+function render_float_option(li, option) {
+  let input = document.createElement("input");
+  input.setAttribute("autocomplete", "off");
+  input.setAttribute("id", option.id);
+  input.setAttribute("name", option.id);
+  input.setAttribute("type", "number");
+  input.setAttribute("step", "any");
+
+  if (option.default) {
+    input.setAttribute("placeholder", option.default);
+  }
+
+
+  let label = document.createElement("label");
+  label.setAttribute("for", option.id);
+  label.innerText = option.name;
+
+  li.appendChild(label);
+  li.appendChild(input);
+
+  if (option.unit) {
+    input.setAttribute("data-unit", option.unit);
+
+    let unit = document.createElement("div");
+
+    unit.classList.add("preview");
+    unit.id = option.id + "Preview";
+    li.appendChild(unit);
+  }
+}
+
+function render_radio_option(options_div, option) {
+  option.choices.forEach(function(choice) {
+    let li = document.createElement("li");
+
+    let input = document.createElement("input");
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("id", option.id + "-" + choice.value);
+    input.setAttribute("name", option.id);
+    input.setAttribute("value", choice.value);
+    input.setAttribute("type", "radio");
+
+    if (option.default == choice.value) {
+      input.setAttribute("checked", true);
+    }
+
+    let label = document.createElement("label");
+    label.setAttribute("for", option.id + "-" + choice.value);
+    label.innerText = choice.name;
+
+    li.appendChild(input);
+    li.appendChild(label);
+    options_div.appendChild(li);
+
+  });
+}
+
+function render_checkbox_option(options_div, option) {
+  option.choices.forEach(function(choice) {
+    let li = document.createElement("li");
+
+    let input = document.createElement("input");
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("id", option.id + choice.value);
+    input.setAttribute("name", option.id + choice.value);
+    input.setAttribute("type", "checkbox");
+
+    if (choice.default) {
+      input.setAttribute("checked", true);
+    }
+
+    let label = document.createElement("label");
+    label.setAttribute("for", option.id + choice.value);
+    label.innerText = choice.name;
+
+    li.appendChild(input);
+    li.appendChild(label);
+    options_div.appendChild(li);
+
+  });
+}
+
+function render_select_option(li, option) {
+  let label = document.createElement("label");
+  label.setAttribute("for", option.id);
+  label.innerText = option.name;
+  
+  let select = document.createElement("select");
+  select.setAttribute("name", option.id);
+
+  option.choices.forEach(function(choice) {
+    let sub_option = document.createElement("option");
+    sub_option.innerText = choice.name;
+    sub_option.setAttribute("value", choice.value);
+
+    select.appendChild(sub_option);
+  });
+
+  li.appendChild(label);
+  li.appendChild(select);
+}
+
+function render_subcategory_option(li, option) {
+  let sub_div = document.createElement("div");
+  sub_div.classList.add("custom-category-sub");
+
+  let sub_ul = document.createElement("ul");
+  sub_ul.classList.add("flex-outer-sub");
+
+  let sub_input = document.createElement("input");
+  sub_input.classList.add("custom-header-checkbox");
+  sub_input.id = option.id;
+  sub_input.setAttribute("name", option.id);
+  sub_input.setAttribute("type", "checkbox");
+
+  let sub_label = document.createElement("label");
+  sub_label.classList.add("custom-header");
+  sub_label.setAttribute("for", option.id);
+  sub_label.innerText = option.name;
+
+  let sub_div_inner = document.createElement("div");
+
+  sub_div_inner.classList.add("reveal-if-active");
+
+  sub_ul.appendChild(sub_input);
+  sub_ul.appendChild(sub_label);
+  sub_ul.appendChild(sub_div_inner);
+
+  option.entries.forEach(function(option) {
+    let li = document.createElement("li");
+
+    render_option(sub_div_inner, li, option);
+
+    sub_div_inner.appendChild(li);
+  });
+
+  sub_div.appendChild(sub_ul);
+
+  li.appendChild(sub_div);
+}
+
+function render_option(root_div, li, option) {
+  if (option.type == "text") {
+    render_text_option(li, option);
+  }
+
+  if (option.type == "float") {
+    render_float_option(li, option);
+  }
+
+  if (option.type == "radio") {
+    render_radio_option(root_div, option);
+    // we added n li elements; we need to skip the default one
+    return;
+  }
+
+  if (option.type == "checkbox") {
+    render_checkbox_option(root_div, option);
+
+    // we added n li elements; we need to skip the default one
+    return;
+  }
+
+  if (option.type == "select") {
+    render_select_option(li, option);
+  }
+
+  if (option.type == "subcategory") {
+    render_subcategory_option(li, option);
+  }
+
+  root_div.appendChild(li);
+}
+
+function render_category(root, category) {
+  let name = category.name;
+  let cat_id = category.id;
+
+  let cat_div = document.createElement("div");
+  cat_div.classList.add("custom-category");
+
+  let header;
+
+  if (category.optional) {
+    header = document.createElement("label");
+    let input = document.createElement("input");
+    input.classList.add("custom-header-checkbox");
+    input.setAttribute("type", "checkbox");
+    input.id = category.id;
+    input.name = category.id;
+
+    cat_div.appendChild(input);
+
+    header.classList.add("custom-header");
+    header.setAttribute("for", category.id);
+  } else {
+    header = document.createElement("div");
+    header.classList.add("custom-header-static");
+  }
+
+  header.innerText = name;
+
+  let options_div = document.createElement("div")
+
+  if (category.optional) {
+    options_div.classList.add("reveal-if-active");
+  }
+
+  category.entries.forEach(function(option) {
+    let li = document.createElement("li");
+
+    render_option(options_div, li, option);
+  });
+
+  cat_div.appendChild(header);
+  cat_div.appendChild(options_div);
+  root.appendChild(cat_div);
+}
+
 function construct_options() {
   let root = document.getElementById("character-flex-outer");
 
   options.forEach(function(category) {
-    let name = category.name;
-    let cat_id = category.id;
-
-    let cat_div = document.createElement("div");
-    cat_div.classList.add("custom-category");
-
-    let header;
-
-    if (category.optional) {
-      header = document.createElement("label");
-      let input = document.createElement("input");
-      input.classList.add("custom-header-checkbox");
-      input.setAttribute("type", "checkbox");
-      input.id = category.id;
-      input.name = category.id;
-
-      cat_div.appendChild(input);
-
-      header.classList.add("custom-header");
-      header.setAttribute("for", category.id);
-    } else {
-      header = document.createElement("div");
-      header.classList.add("custom-header-static");
-    }
-
-    header.innerText = name;
-
-    let options_div = document.createElement("div")
-
-    if (category.optional) {
-      options_div.classList.add("reveal-if-active");
-    }
-
-    category.entries.forEach(function(option) {
-      let li = document.createElement("li");
-
-      if (option.type == "text") {
-        let input = document.createElement("input");
-        input.setAttribute("autocomplete", "off");
-        input.setAttribute("id", option.id);
-        input.setAttribute("name", option.id);
-        input.setAttribute("type", "text");
-
-        if (option.default) {
-          input.setAttribute("placeholder", option.default);
-        }
-
-        let label = document.createElement("label");
-        label.setAttribute("for", option.id);
-        label.innerText = option.name;
-
-        li.appendChild(label);
-        li.appendChild(input);
-      }
-
-      if (option.type == "float") {
-        let input = document.createElement("input");
-        input.setAttribute("autocomplete", "off");
-        input.setAttribute("id", option.id);
-        input.setAttribute("name", option.id);
-        input.setAttribute("type", "number");
-        input.setAttribute("step", "any");
-
-        if (option.default) {
-          input.setAttribute("placeholder", option.default);
-        }
-
-
-        let label = document.createElement("label");
-        label.setAttribute("for", option.id);
-        label.innerText = option.name;
-
-        li.appendChild(label);
-        li.appendChild(input);
-
-        if (option.unit) {
-          input.setAttribute("data-unit", option.unit);
-
-          let unit = document.createElement("div");
-
-          unit.classList.add("preview");
-          unit.id = option.id + "Preview";
-          li.appendChild(unit);
-        }
-
-      }
-
-      if (option.type == "radio") {
-        option.choices.forEach(function(choice) {
-          let li = document.createElement("li");
-
-          let input = document.createElement("input");
-          input.setAttribute("autocomplete", "off");
-          input.setAttribute("id", option.id + "-" + choice.value);
-          input.setAttribute("name", option.id);
-          input.setAttribute("value", choice.value);
-          input.setAttribute("type", "radio");
-
-          if (option.default == choice.value) {
-            input.setAttribute("checked", true);
-          }
-
-          let label = document.createElement("label");
-          label.setAttribute("for", option.id + "-" + choice.value);
-          label.innerText = choice.name;
-
-          li.appendChild(input);
-          li.appendChild(label);
-          options_div.appendChild(li);
-
-        });
-
-        // we added n li elements; we need to skip the default one
-        return;
-      }
-
-      if (option.type == "checkbox") {
-        option.choices.forEach(function(choice) {
-          let li = document.createElement("li");
-
-          let input = document.createElement("input");
-          input.setAttribute("autocomplete", "off");
-          input.setAttribute("id", option.id + choice.value);
-          input.setAttribute("name", option.id + choice.value);
-          input.setAttribute("type", "checkbox");
-
-          if (choice.default) {
-            input.setAttribute("checked", true);
-          }
-
-          let label = document.createElement("label");
-          label.setAttribute("for", option.id + choice.value);
-          label.innerText = choice.name;
-
-          li.appendChild(input);
-          li.appendChild(label);
-          options_div.appendChild(li);
-
-        });
-
-        // we added n li elements; we need to skip the default one
-        return;
-      }
-
-      if (option.type == "select") {
-        let label = document.createElement("label");
-        label.setAttribute("for", option.id);
-
-        let select = document.createElement("select");
-        select.setAttribute("name", option.id);
-
-        option.choices.forEach(function(choice) {
-          let sub_option = document.createElement("option");
-          sub_option.innerText = choice.name;
-          sub_option.setAttribute("value", choice.value);
-
-          select.appendChild(sub_option);
-        });
-
-        li.appendChild(label);
-        li.appendChild(select);
-      }
-
-      options_div.appendChild(li);
-
-    });
-
-    cat_div.appendChild(header);
-    cat_div.appendChild(options_div);
-    root.appendChild(cat_div);
+    render_category(root, category);
   });
 }

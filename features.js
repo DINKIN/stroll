@@ -1,7 +1,6 @@
 options = [
   {
     "name": "Basics",
-    "id": "basics",
     "optional": false,
     "entries": [
       {
@@ -59,7 +58,6 @@ options = [
   },
   {
     "name": "Difficulty",
-    "id": "difficulty",
     "optional": false,
     "entries":
     [
@@ -83,7 +81,6 @@ options = [
   },
   {
     "name": "Brutality",
-    "id": "brutality",
     "optional": false,
     "entries":
     [
@@ -115,7 +112,6 @@ options = [
   },
   {
     "name": "Victims",
-    "id": "victims",
     "optional": false,
     "entries":
     [
@@ -165,10 +161,88 @@ options = [
     "entries":
     [
       {
+        "name": "Anus diameter",
+        "id": "baseAnalVoreDiameter",
+        "type": "float",
+        "default": "0.2",
+        "unit": "length"
+      },
+      {
         "name": "Digestion time",
         "id": "analDigestTime",
         "type": "float",
         "default": "15"
+      },
+      {
+        "id": "analVore",
+        "type": "checkbox",
+        "choices":
+        [
+          {
+            "name": "Anal vore goes to stomach",
+            "value": "ToStomach"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Footwear",
+    "id": "footWear",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Socks",
+        "id": "footSockEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Sock type",
+            "id": "footSock",
+            "type": "select",
+            "choices":
+            [
+              {
+                "name": "Socks",
+                "value": "sock"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Shoes",
+        "id": "footShoeEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Shoe type",
+            "id": "footShoe",
+            "type": "select",
+            "choices":
+            [
+              {
+                "name": "Shoes",
+                "value": "shoe"
+              },
+              {
+                "name": "Boots",
+                "value": "boot"
+              },
+              {
+                "name": "Trainers",
+                "value": "trainer"
+              },
+              {
+                "name": "Sandals",
+                "value": "sandal"
+              },
+            ]
+          }
+        ]
       }
     ]
   }
