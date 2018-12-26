@@ -143,5 +143,33 @@ options = [
         ]
       }
     ]
+  },
+  {
+    "name": "Oral Vore",
+    "id": "oralVore",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Digestion time",
+        "id": "oralDigestTime",
+        "type": "float",
+        "default": "15"
+      }
+    ]
+  },
+  {
+    "name": "Anal Vore",
+    "id": "analVore",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Digestion time",
+        "id": "analDigestTime",
+        "type": "float",
+        "default": "15"
+      }
+    ]
   }
 ];

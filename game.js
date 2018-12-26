@@ -3399,8 +3399,11 @@ function gooButtons(molten) {
   setButton("melt", !molten);
   setButton("solidify", molten);
   setButton("flood", molten);
-  setButton("goo_stomach_pull", molten);
-  setButton("goo_stomach_push", molten);
+
+  if (macro.oralVore) {
+    setButton("goo_stomach_pull", molten);
+    setButton("goo_stomach_push", molten);
+  }
 
   if (macro.analVore) {
     setButton("goo_bowels_pull", molten);
@@ -4202,24 +4205,10 @@ function startGame(e) {
   enable_panel("options");
 
   enable_panel("body");
-  enable_button("feed");
-
-  if (macro.oralDigestTime == 0) {
-    enable_button("digest_stomach");
-  }
-
-  if (macro.cropEnabled) {
-    enable_button("crop_swallow");
-  }
 
   enable_panel("paws");
 
   enable_button("stomp");
-
-  if (macro.vomitEnabled) {
-    enable_button("vomit");
-    enable_victim("vomit");
-  }
 
   if (macro.footType != "hoof")
     enable_button("flex_toes");
@@ -4233,8 +4222,6 @@ function startGame(e) {
 
   if (macro.brutality > 0) {
     warns.push("Fatal actions are enabled.");
-    enable_button("chew");
-    enable_victim("chew","Chewed");
   }
 
   if (macro.droolEnabled) {
@@ -4252,6 +4239,28 @@ function startGame(e) {
     document.querySelector("#arousalMeter").style.display = 'inline-block';
     document.querySelector("#orgasmMeter").style.display = 'inline-block';
     document.querySelector("#edgeMeter").style.display = 'inline-block';
+  }
+
+  if (macro.oralVore) {
+    enable_button("feed");
+
+    if (macro.brutality > 0) {
+      enable_button("chew");
+      enable_victim("chew","Chewed");
+    }
+
+    if (macro.oralDigestTime == 0) {
+      enable_button("digest_stomach");
+    }
+
+    if (macro.cropEnabled) {
+      enable_button("crop_swallow");
+    }
+
+    if (macro.vomitEnabled) {
+      enable_button("vomit");
+      enable_victim("vomit");
+    }
   }
 
   if (macro.analVore) {
@@ -4788,17 +4797,32 @@ function construct_options() {
     let cat_div = document.createElement("div");
     cat_div.classList.add("custom-category");
 
-    let header_div = document.createElement("div");
+    let header;
 
     if (category.optional) {
-      header_div.classList.add("custom-header");
+      header = document.createElement("label");
+      let input = document.createElement("input");
+      input.classList.add("custom-header-checkbox");
+      input.setAttribute("type", "checkbox");
+      input.id = category.id;
+      input.name = category.id;
+
+      cat_div.appendChild(input);
+
+      header.classList.add("custom-header");
+      header.setAttribute("for", category.id);
     } else {
-      header_div.classList.add("custom-header-static");
+      header = document.createElement("div");
+      header.classList.add("custom-header-static");
     }
 
-    header_div.innerText = name;
+    header.innerText = name;
 
-    let options_div = document.createElement("div");
+    let options_div = document.createElement("div")
+
+    if (category.optional) {
+      options_div.classList.add("reveal-if-active");
+    }
 
     category.entries.forEach(function(option) {
       let li = document.createElement("li");
@@ -4934,7 +4958,7 @@ function construct_options() {
 
     });
 
-    cat_div.appendChild(header_div);
+    cat_div.appendChild(header);
     cat_div.appendChild(options_div);
     root.appendChild(cat_div);
   });
