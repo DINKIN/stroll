@@ -4297,11 +4297,19 @@ function startGame(e) {
     enable_panel("dick");
 
     enable_victim("cock-slap","Cockslapped");
-    enable_victim("cock-vore","Cock vore");
     enable_victim("ball-smother","Smothered under balls");
 
     enable_button("cockslap");
-    enable_button("cock_vore");
+
+    if (macro.cockVoreEnabled){
+      enable_button("cock_vore");
+      enable_victim("cock-vore","Cock vore");
+
+      if (macro.cockDigestTime == 0) {
+        enable_button("digest_cock");
+      }
+    }
+
     enable_button("ball_smother");
 
     enable_stat("cum");
@@ -4309,18 +4317,18 @@ function startGame(e) {
     enable_growth_part("dick");
     enable_growth_part("balls");
 
-    if (macro.cockDigestTime == 0) {
-      enable_button("digest_cock");
-    }
-
     if (macro.hasSheath) {
       enable_victim("sheath-crush","Crushed in sheath");
-      enable_victim("sheath-absorb","Absorbed by sheath");
+
+      if (macro.sheathAbsorptionEnabled) {
+        enable_button("sheath_absorb");
+        enable_victim("sheath-absorb","Absorbed by sheath");
+      }
+
 
       enable_button("sheath_stuff");
       enable_button("sheath_toy");
       enable_button("sheath_clench");
-      enable_button("sheath_absorb");
     }
 
     if (macro.arousalEnabled) {
@@ -4334,11 +4342,13 @@ function startGame(e) {
   }
 
   if (macro.femaleParts) {
-    enable_victim("unbirth","Unbirthed");
 
     enable_panel("vagina");
 
-    enable_button("unbirth");
+    if (macro.unbirthEnabled) {
+      enable_button("unbirth");
+      enable_victim("unbirth","Unbirthed");
+    }
     enable_button("slit_toy");
 
     enable_stat("femcum");
