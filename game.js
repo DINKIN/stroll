@@ -4860,36 +4860,31 @@ function render_radio_option(options_div, option) {
   });
 }
 
-function render_checkbox_option(options_div, option) {
-  option.choices.forEach(function(choice) {
-    let li = document.createElement("li");
+function render_checkbox_option(li, option) {
 
-    let input = document.createElement("input");
-    input.setAttribute("autocomplete", "off");
-    input.setAttribute("id", option.id + choice.value);
-    input.setAttribute("name", option.id + choice.value);
-    input.setAttribute("type", "checkbox");
+  let input = document.createElement("input");
+  input.setAttribute("autocomplete", "off");
+  input.setAttribute("id", option.id);
+  input.setAttribute("name", option.id);
+  input.setAttribute("type", "checkbox");
 
-    if (choice.default) {
-      input.setAttribute("checked", true);
-    }
+  if (option.default) {
+    input.setAttribute("checked", true);
+  }
 
-    let label = document.createElement("label");
-    label.setAttribute("for", option.id + choice.value);
-    label.innerText = choice.name;
+  let label = document.createElement("label");
+  label.setAttribute("for", option.id);
+  label.innerText = option.name;
 
-    li.appendChild(input);
-    li.appendChild(label);
-    options_div.appendChild(li);
-
-  });
+  li.appendChild(input);
+  li.appendChild(label);
 }
 
 function render_select_option(li, option) {
   let label = document.createElement("label");
   label.setAttribute("for", option.id);
   label.innerText = option.name;
-  
+
   let select = document.createElement("select");
   select.setAttribute("name", option.id);
 
@@ -4960,10 +4955,7 @@ function render_option(root_div, li, option) {
   }
 
   if (option.type == "checkbox") {
-    render_checkbox_option(root_div, option);
-
-    // we added n li elements; we need to skip the default one
-    return;
+    render_checkbox_option(li, option);
   }
 
   if (option.type == "select") {

@@ -116,27 +116,24 @@ options = [
     "entries":
     [
       {
-        "type": "checkbox",
-        "id": "victims",
-        "choices":
-        [
-          {
-            "name": "Human prey",
-            "value": "Human"
-          },
-          {
-            "name": "Military",
-            "value": "Military"
-          },
-          {
-            "name": "Other macros",
-            "value": "Macros"
-          },
-          {
-            "name": "Micros",
-            "value": "Micros"
-          },
-        ]
+        "name": "Human prey",
+        "id": "victimsHuman",
+        "type": "checkbox"
+      },
+      {
+        "name": "Military",
+        "id": "victimsMilitary",
+        "type": "checkbox"
+      },
+      {
+        "name": "Macros",
+        "id": "victimsMacros",
+        "type": "checkbox"
+      },
+      {
+        "name": "Micros",
+        "id": "victimsMicros",
+        "type": "checkbox"
       }
     ]
   },
@@ -174,15 +171,9 @@ options = [
         "default": "15"
       },
       {
-        "id": "analVore",
-        "type": "checkbox",
-        "choices":
-        [
-          {
-            "name": "Anal vore goes to stomach",
-            "value": "ToStomach"
-          }
-        ]
+        "name": "Anal vore goes to stomach",
+        "id": "analVoreToStomach",
+        "type": "checkbox"
       }
     ]
   },
@@ -241,6 +232,284 @@ options = [
                 "value": "sandal"
               },
             ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Arousal",
+    "id": "arousalEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Arousal multiplier",
+        "id": "arousalFactor",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Edge multiplier",
+        "id": "edgeFactor",
+        "type": "float",
+        "default": "1"
+      }
+    ]
+  },
+  {
+    "name": "Tail",
+    "id": "hasTail",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Number of tails",
+        "id": "tailCount",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Tail description",
+        "id": "tailType",
+        "type": "text",
+        "default": "fluffy"
+      },
+      {
+        "name": "Tail length",
+        "id": "baseTailLength",
+        "type": "float",
+        "default": "1",
+        "unit": "length"
+      },
+      {
+        "name": "Tail diameter",
+        "id": "baseTailDiameter",
+        "type": "float",
+        "default": "0.3",
+        "unit": "length"
+      },
+      {
+        "name": "Tail Vore",
+        "id": "tailMaw",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Tail stretchiness",
+            "id": "tailStretchiness",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Digestion time",
+            "id": "tailDigestTime",
+            "type": "float",
+            "default": "15"
+          },
+          {
+            "name": "Tail vore goes to stomach",
+            "id": "tailVoreToStomach",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Pouch",
+    "id": "hasPouch",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Absorption",
+        "id": "pouchAbsorption",
+        "type": "checkbox"
+      }
+    ]
+  },
+  {
+    "name": "Male Genitals",
+    "id": "maleParts",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Cock description",
+        "id": "dickType",
+        "type": "text",
+        "default": "canine"
+      },
+      {
+        "name": "Cock length",
+        "id": "baseDickLength",
+        "type": "float",
+        "default": "0.3",
+        "unit": "length"
+      },
+      {
+        "name": "Cock diameter",
+        "id": "baseDickDiameter",
+        "type": "float",
+        "default": "0.08",
+        "unit": "length"
+      },
+      {
+        "name": "Cock stretchiness",
+        "id": "dickStretchiness",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Ball diameter",
+        "id": "baseBallDiameter",
+        "type": "float",
+        "default": "0.05",
+        "unit": "length",
+      },
+      {
+        "name": "Orgasm size",
+        "id": "baseCumRatio",
+        "type": "float",
+        "default": "1",
+      },
+      {
+        "name": "Passive cum production",
+        "id": "cumScale",
+        "type": "float",
+        "default": "0.01"
+      },
+      {
+        "name": "Cum storage factor",
+        "id": "cumStorageScale",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Cock Vore",
+        "id": "cockVoreEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Cum digestion factor",
+            "id": "baseCumDigestFactor",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Digestion time",
+            "id": "cockDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },
+      {
+        "name": "Sheath",
+        "id": "hasSheath",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Absorption",
+            "id": "sheathAbsorptionEnabled",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "name": "Musk",
+        "id": "maleMuskEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Musk factor",
+            "id": "baseMaleMuskArea",
+            "type": "float",
+            "default": "0.5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Female Genitals",
+    "id": "femaleParts",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Slit length",
+        "id": "baseVaginaLength",
+        "type": "float",
+        "default": "0.1",
+        "unit": "length"
+      },
+      {
+        "name": "Slit width",
+        "id": "baseVaginaWidth",
+        "type": "float",
+        "default": "0.05",
+        "unit": "length"
+      },
+      {
+        "name": "Slit stretchiness",
+        "id": "vaginaStretchiness",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Orgasm size",
+        "id": "baseFemcumRatio",
+        "type": "float",
+        "default": "1",
+      },
+      {
+        "name": "Passive femcum production",
+        "id": "femcumScale",
+        "type": "float",
+        "default": "0.01"
+      },
+      {
+        "name": "Femcum storage factor",
+        "id": "femcumStorageScale",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Unbirth",
+        "id": "unbirthEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Femcum digestion factor",
+            "id": "baseFemcumDigestFactor",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Digestion time",
+            "id": "unbirthDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },
+      {
+        "name": "Musk",
+        "id": "femaleMuskEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Musk factor",
+            "id": "baseFemaleMuskArea",
+            "type": "float",
+            "default": "0.5"
           }
         ]
       }
