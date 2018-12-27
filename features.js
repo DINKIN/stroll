@@ -53,6 +53,58 @@ options = [
         "type": "float",
         "default": "0.2",
         "unit": "area"
+      },
+      {
+        "name": "Same-size stomping",
+        "id": "sameSizeStomp",
+        "type": "checkbox"
+      }
+    ]
+  },
+  {
+    "name": "Body Details",
+    "optional": false,
+    "entries":
+    [
+      {
+        "name": "Foot type",
+        "id": "footType",
+        "type": "select",
+        "choices":
+        [
+          {
+            "name": "Paws",
+            "value": "paw"
+          },
+          {
+            "name": "Hooves",
+            "value": "hoof"
+          },
+          {
+            "name": "Feet",
+            "value": "foot",
+          },
+          {
+            "name": "Avian",
+            "value": "avian"
+          }
+        ]
+      },
+      {
+        "name": "Mouth type",
+        "id": "jawType",
+        "type": "select",
+        "choices":
+        [
+          {
+            "name": "Jaws",
+            "value": "jaw"
+          },
+          {
+            "name": "Beak",
+            "value": "beak"
+          }
+        ]
       }
     ]
   },
@@ -148,6 +200,16 @@ options = [
         "id": "oralDigestTime",
         "type": "float",
         "default": "15"
+      },
+      {
+        "name": "Same-size vore",
+        "id": "sameSizeVore",
+        "type": "checkbox"
+      },
+      {
+        "name": "Vomiting",
+        "id": "vomitEnabled",
+        "type": "checkbox"
       }
     ]
   },
@@ -378,7 +440,7 @@ options = [
         "name": "Passive cum production",
         "id": "cumScale",
         "type": "float",
-        "default": "0.01"
+        "default": "1"
       },
       {
         "name": "Cum storage factor",
@@ -471,7 +533,7 @@ options = [
         "name": "Passive femcum production",
         "id": "femcumScale",
         "type": "float",
-        "default": "0.01"
+        "default": "1"
       },
       {
         "name": "Femcum storage factor",
@@ -513,6 +575,370 @@ options = [
           }
         ]
       }
+    ]
+  },
+  {
+    "name": "Breasts",
+    "id": "hasBreasts",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Breast diameter",
+        "id": "baseBreastDiameter",
+        "type": "float",
+        "default": "0.1",
+        "unit": "length"
+      },
+      {
+        "name": "Lactation",
+        "id": "lactationEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Lactation scale",
+            "id": "lactationFactor",
+            "type": "float",
+            "default": "0.25"
+          },
+          {
+            "name": "Passive milk production",
+            "id": "lactationScale",
+            "type": "float",
+            "default": "1"
+          }
+        ]
+      },
+      {
+        "name": "Breast Vore",
+        "id": "breastVore",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Breast stretchiness",
+            "id": "breastStretchiness",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Milk digestion scale",
+            "id": "baseMilkDigestFactor",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Digestion time",
+            "id": "breastDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stench",
+    "id": "stenchEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Paw stench scale",
+        "id": "basePawStenchArea",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Ass stench scale",
+        "id": "basePawStenchArea",
+        "type": "float",
+        "default": "1.5"
+      },
+      {
+        "name": "Piss stench scale",
+        "id": "basePawStenchArea",
+        "type": "float",
+        "default": "0.75"
+      },
+      {
+        "name": "Scat stench scale",
+        "id": "basePawStenchArea",
+        "type": "float",
+        "default": "3"
+      },
+    ]
+  },
+  {
+    "name": "Gas",
+    "id": "gasEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Belching",
+        "id": "belchEnabled",
+        "type": "checkbox"
+      },
+      {
+        "name": "Farting",
+        "id": "fartEnabled",
+        "type": "checkbox"
+      },
+      {
+        "name": "Passive gas production",
+        "id": "gasScale",
+        "type": "float",
+        "default": "3"
+      },
+      {
+        "name": "Gas storage scale",
+        "id": "gasStorageScale",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Gas digestion factor",
+        "id": "baseGasDigestFactor",
+        "type": "float",
+        "default": "1"
+      }
+    ]
+  },
+  {
+    "name": "Soul Vore",
+    "id": "soulVoreEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Digestion time",
+        "id": "soulDigestTime",
+        "type": "float",
+        "default": "15"
+      },
+      {
+        "type": "radio",
+        "id": "soulVoreType",
+        "default": "0",
+        "choices":
+        [
+          {
+            "name": "Released",
+            "value": "release"
+          },
+          {
+            "name": "Trapped",
+            "value": "body"
+          },
+          {
+            "name": "Digested",
+            "value": "oblivion"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Piss",
+    "id": "pissEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Passive piss production",
+        "id": "pissScale",
+        "type": "float",
+        "default": "0.3"
+      },
+      {
+        "name": "Piss storage scale",
+        "id": "pissStorageScale",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Bladder Vore",
+        "id": "bladderVore",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Urethra diameter",
+            "id": "baseUrethraDiameter",
+            "type": "float",
+            "default": "0.03",
+            "unit": "length"
+          },
+          {
+            "name": "Urethra stretchiness",
+            "id": "urethraStretchiness",
+            "type": "float",
+            "default": "5"
+          },
+          {
+            "name": "Piss digestion scale",
+            "id": "basePissDigestFactor",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Digestion time",
+            "id": "bladderDigestTime",
+            "type": "float",
+            "default": "15"
+          },
+          {
+            "name": "Scale piss with size",
+            "id": "pissScaleWithSize",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scat",
+    "id": "scatEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Scat digestion scale",
+        "id": "baseScatDigestFactor",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Passive scat production",
+        "id": "scatScale",
+        "type": "float",
+        "default": "0.2"
+      },
+      {
+        "name": "Scat storage scale",
+        "id": "scatStorageScale",
+        "type": "float",
+        "default": "1"
+      },
+      {
+        "name": "Scale scat with size",
+        "id": "scatScaleWithSize",
+        "type": "checkbox"
+      }
+    ]
+  },
+  {
+    "name": "Goo",
+    "id": "gooEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Digestion",
+        "id": "gooDigestion",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "gooDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Paw Vore",
+    "id": "pawVoreEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Digestion time",
+        "id": "pawDigestTime",
+        "type": "float",
+        "default": "15"
+      }
+    ]
+  },
+  {
+    "name": "Crop",
+    "id": "cropEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Transfer time",
+        "id": "cropTransferTime",
+        "type": "float",
+        "default": "10"
+      }
+    ]
+  },
+  {
+    "name": "Breath",
+    "id": "breathEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Fire",
+        "id": "breathFire",
+        "type": "checkbox"
+      },
+      {
+        "name": "Ice",
+        "id": "breathIce",
+        "type": "checkbox"
+      },
+      {
+        "name": "Electric",
+        "id": "breathElectric",
+        "type": "checkbox"
+      },
+      {
+        "name": "Smoke",
+        "id": "breathSmoke",
+        "type": "checkbox"
+      },
+      {
+        "name": "Radiation",
+        "id": "breathRadiation",
+        "type": "checkbox"
+      },
+      {
+        "name": "Foul",
+        "id": "breathFoul",
+        "type": "checkbox"
+      },
+    ]
+  },
+  {
+    "name": "Drool",
+    "id": "droolEnabled",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Drool volume",
+        "id": "droolBaseVolume",
+        "type": "float",
+        "default": "0.0001",
+        "unit": "volume"
+      }
+    ]
+  },
+  {
+    "name": "Magic",
+    "id": "magicEnabled",
+    "optional": true,
+    "entries":
+    [
+
     ]
   }
 ];
