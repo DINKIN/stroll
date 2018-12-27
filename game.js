@@ -35,39 +35,41 @@ let victims = {};
 
 let macro =
 {
-  "scaling": function(value, scale, factor) { return value * Math.pow(scale,factor); },
-  "name": "",
-  "species": "crux",
-  "color" : "blue",
-  "baseHeight": 2.26,
-  get height() { return this.scaling(this.baseHeight, this.scale, 1); },
-  "baseMass": 135,
-  get mass () { return this.scaling(this.baseMass, this.scale, 3); },
-  "pawScale": 1,
-  "basePawArea": 0.1,
-  get pawArea() { return this.scaling(this.basePawArea * this.pawScale * this.pawScale, this.scale, 2); },
-  "baseAnalVoreDiameter": 0.1,
-  get analVoreArea() { return this.scaling(Math.pow(this.baseAnalVoreDiameter * this.assScale, 2), this.scale, 2); },
-  "baseAssArea": 0.25,
-  get assArea() { return this.scaling(this.baseAssArea * this.assScale, this.scale, 2); },
-  "baseHandArea": 0.1,
-  get handArea() { return this.scaling(this.baseHandArea, this.scale, 2); },
+  "shrunkPrey": null,
+  "fastDigestFactor": 1,
+  "fastDigestTimer": null,
 
-  "sameSizeVore": true,
-  "sameSizeStomp": true,
+  "growthPoints": 0,
 
+  "orgasm": false,
+  "afterglow": false,
+
+  "arousal": 0,
+  "edge": 0,
+
+  "maleSpurt": 0,
+  "femaleSpurt": 0,
+
+  "scale": 1,
   "assScale": 1,
-  "analVore": true,
+  "dickScale": 1,
+  "ballScale": 1,
+  "vaginaScale": 1,
+  "breastScale": 1,
+  "tailScale": 1,
 
-  // part types
+  "tailDensity": 1000,
+  "dickDensity": 1000,
+  "ballDensity": 1000,
+  "breastDensity": 1000,
 
-  "footType": "paw",
-  "footSockEnabled": false,
-  "footShoeEnabled": false,
-  "footSock": "none",
-  "footShoe": "none",
-  "footSockWorn": false,
-  "footShoeWorn": false,
+  "scaling": function(value, scale, factor) { return value * Math.pow(scale,factor); },
+  get height() { return this.scaling(this.baseHeight, this.scale, 1); },
+  get mass () { return this.scaling(this.baseMass, this.scale, 3); },
+  get pawArea() { return this.scaling(this.basePawArea * this.pawScale * this.pawScale, this.scale, 2); },
+  get analVoreArea() { return this.scaling(Math.pow(this.baseAnalVoreDiameter * this.assScale, 2), this.scale, 2); },
+  get assArea() { return this.scaling(this.baseAssArea * this.assScale, this.scale, 2); },
+  get handArea() { return this.scaling(this.baseHandArea, this.scale, 2); },
 
   "footOnlyDesc": function(plural=false,capital=false) {
     let result = "";
@@ -221,8 +223,6 @@ let macro =
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
 
-  "jawType": "jaw",
-
   "jawDesc": function(plural=false,capital=false) {
     let result = "";
     switch(this.jawType) {
@@ -248,16 +248,6 @@ let macro =
     }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
-
-  "hasTail": true,
-  "tailType": "slinky",
-  "tailCount": 1,
-  "baseTailLength": 1,
-  "baseTailDiameter": 0.1,
-  "tailDensity": 250,
-  "tailStretchiness": 2,
-  "tailScale": 1,
-  "tailMaw": false,
 
   get tailLength() {
     return this.scaling(this.baseTailLength * this.tailScale, this.scale, 1);
@@ -289,12 +279,7 @@ let macro =
   get tailNoDesc() {
     return (this.tailCount > 1 ? "tails" : "tail");
   },
-  "dickType": "canine",
-  "baseDickLength": 0.3,
-  "baseDickDiameter": 0.08,
-  "dickDensity": 1000,
-  "dickStretchiness": 2,
-  "dickScale": 1,
+
   get dickLength() {
     let factor = 1;
     if (!this.arousalEnabled || this.arousal < 25) {
@@ -330,9 +315,8 @@ let macro =
   get dickMass() {
     return this.dickVolume * this.dickDensity;
   },
-  "baseBallDiameter": 0.05,
-  "ballDensity": 1000,
-  "ballScale": 1,
+
+
   get ballDiameter() { return this.scaling(this.baseBallDiameter * this.ballScale, this.scale, 1); },
   get ballArea() { return 2 * Math.PI * Math.pow(this.ballDiameter/2, 2); },
   get ballVolume() {
@@ -344,41 +328,24 @@ let macro =
     return volume * this.ballDensity;
   },
 
-  "baseCumRatio": 1,
-  "cumScale": 1,
   get cumVolume() {
     return this.dickGirth * this.baseCumRatio * (1 + this.edge) + Math.max(0,this.cumStorage.amount - this.cumStorage.limit);
   },
-
-  "baseVaginaLength": 0.1,
-  "baseVaginaWidth": 0.05,
-  "vaginaStretchiness": 2,
-  "vaginaScale": 1,
 
   get vaginaLength() { return this.scaling(this.baseVaginaLength * this.vaginaScale, this.scale, 1); },
   get vaginaWidth() { return this.scaling(this.baseVaginaWidth * this.vaginaScale, this.scale, 1); },
   get vaginaArea() { return this.vaginaLength * this.vaginaWidth; },
   get vaginaStretchArea() { return this.vaginaStretchiness * this.vaginaStretchiness * this.vaginaLength * this.vaginaWidth; },
   get vaginaVolume() { return this.vaginaArea * this.vaginaWidth; },
-  "baseFemcumRatio": 1,
-  "femcumScale": 1,
   get femcumVolume() {
     return this.vaginaArea * this.baseFemcumRatio * (1 + this.edge) + Math.max(0,this.femcumStorage.amount - this.femcumStorage.limit);
   },
-
-  hasBreasts: true,
-  lactationEnabled: true,
-  lactationScale: 1,
-  lactationFactor: 0.25,
 
   get lactationVolume() {
     return this.milkStorage.limit * this.lactationFactor;
   },
 
-  "baseBreastDiameter": 0.1,
-  "breastScale": 1,
-  "breastStretchiness": 2,
-  "breastDensity": 1000,
+
   get breastDiameter() { return this.scaling(this.baseBreastDiameter * this.breastScale, this.scale, 1); },
   get breastStretchDiameter() { return this.scaling(this.breastStretchiness * this.baseBreastDiameter * this.breastScale, this.scale, 1); },
   get breastArea() {
@@ -419,8 +386,6 @@ let macro =
 
   },
 
-  "baseScatDigestFactor": 1,
-  "scatScaleWithSize": true,
   get scatDigestFactor() {
     if (this.scatScaleWithSize) {
       return this.baseScatDigestFactor * this.scale;
@@ -573,8 +538,6 @@ let macro =
     "stages": 3
   },
 
-  "baseFemcumDigestFactor": 1,
-  "femcumScaleWithSize": true,
   get femcumDigestFactor() {
     if (this.femcumScaleWithSize) {
       return this.baseFemcumDigestFactor * this.scale;
@@ -625,8 +588,6 @@ let macro =
     "stages": 3
   },
 
-  "baseCumDigestFactor": 1,
-  "cumScaleWithSize": true,
   get cumDigestFactor() {
     if (this.cumScaleWithSize) {
       return this.baseCumDigestFactor * this.scale;
@@ -677,8 +638,6 @@ let macro =
     "stages": 3
   },
 
-  "baseMilkDigestFactor": 1,
-  "milkScaleWithSize": true,
   get milkDigestFactor() {
     if (this.milkScaleWithSize) {
       return this.baseMilkDigestFactor * this.scale;
@@ -730,9 +689,6 @@ let macro =
     "contents" : [],
     "stages": 3
   },
-
-  "basePissDigestFactor": 1,
-  "pissScaleWithSize": true,
   get pissDigestFactor() {
     if (this.pissScaleWithSize) {
       return this.basePissDigestFactor * this.scale;
@@ -783,8 +739,6 @@ let macro =
     "stages": 3
   },
 
-  soulVoreEnabled: true,
-
   "souls": {
     "name" : "souls",
     "setup": function(owner) {
@@ -827,10 +781,6 @@ let macro =
     "contents" : [],
     "stages": 3
   },
-
-  "gooEnabled": true,
-  "gooMolten": false,
-  "gooDigestion": true,
 
   "goo": {
     "name" : "goo",
@@ -878,12 +828,7 @@ let macro =
     "stages": 3
   },
 
-  "breathEnabled": false,
-  "baseBreathArea": 10,
-  "breathStyle": "cone",
   get breathArea() { return this.scaling(this.baseBreathArea, this.scale, 2); },
-
-  "pawVoreEnabled": false,
 
   "pawsVore": {
     "name" : "paws",
@@ -920,8 +865,6 @@ let macro =
     "contents" : [],
     "stages": 3
   },
-
-  "cropEnabled": false,
 
   "crop": {
     "name" : "crop",
@@ -964,7 +907,6 @@ let macro =
 
   // holding spots
 
-  hasPouch: true,
   "pouch": {
     "name": "pouch",
     "container": new Container(),
@@ -979,7 +921,6 @@ let macro =
     }
   },
 
-  hasSheath: true,
   "sheath": {
     "name": "sheath",
     "container": new Container(),
@@ -994,7 +935,6 @@ let macro =
     }
   },
 
-  hasCleavage: true,
   "cleavage": {
     "name": "cleavage",
     "container": new Container(),
@@ -1102,9 +1042,6 @@ let macro =
       this.fillScat(this);
   },
 
-  "maleParts": true,
-  "femaleParts": true,
-
   "fillCum": function(self) {
     self.cumStorage.amount += self.cumScale * self.cumStorage.limit / self.cumStorageScale / 1000;
     if (self.cumStorage.amount > self.cumStorage.limit)
@@ -1156,11 +1093,6 @@ let macro =
     setTimeout(function () { self.fillGas(self); }, 100);
     update();
   },
-
-  "pissEnabled": true,
-  "pissScale": 1,
-  "baseUrethraDiameter": 0.03,
-  "urethraStretchiness": 5,
 
   get urethraDiameter() {
     return this.scaling(this.baseUrethraDiameter, this.scale, 1);
@@ -1223,8 +1155,6 @@ let macro =
     }
   },
 
-  "scatEnabled": true,
-
   "scatStorage": {
     "amount": 0,
     "victims": new Container(),
@@ -1233,21 +1163,14 @@ let macro =
     }
   },
 
-  "stenchEnabled": true,
-  "basePawStenchArea": 1,
   get pawStenchArea() {
     return this.pawArea * this.basePawStenchArea;
   },
-  "baseAssStenchArea": 1,
+
   get assStenchArea() {
     return this.assArea * this.baseAssStenchArea;
   },
 
-  "gasEnabled": true,
-  "gasScale": 1,
-  "gasFactor": 1,
-  "baseGasDigestFactor": 1,
-  "gasScaleWithSize": true,
   get gasDigestFactor() {
     if (this.gasScaleWithSize) {
       return this.baseGasDigestFactor * this.scale;
@@ -1255,22 +1178,6 @@ let macro =
       return this.baseGasDigestFactor;
     }
   },
-  "belchEnabled": true,
-  "fartEnabled": true,
-
-  "orgasm": false,
-  "afterglow": false,
-
-  "arousalEnabled": true,
-
-  "arousalFactor": 1,
-  "edgeFactor": 1,
-
-  "arousal": 0,
-  "edge": 0,
-
-  "maleSpurt": 0,
-  "femaleSpurt": 0,
 
   "arouse": function(amount) {
     if (!this.arousalEnabled)
@@ -1563,24 +1470,6 @@ let macro =
 
     return length(this.vaginaLength, unit, true) + " long " + state;
   },
-
-  "droolEnabled": false,
-
-  "magicEnabled": false,
-  "shrunkPrey": null,
-  "fastDigestFactor": 1,
-  "fastDigestTimer": null,
-
-  "growthPoints": 0,
-
-  // 0 = entirely non-fatal
-  // 1 = fatal, but not specific
-  // 2 = gory
-  // 3 = uwu
-
-  "brutality": 1,
-
-  "scale": 1,
 };
 
 function look()
@@ -2156,8 +2045,10 @@ function grind()
 
   if (macro.maleParts)
     area += macro.dickArea;
-  if (macro.femalePartS)
+  if (macro.femaleParts)
     area += macro.vaginaArea;
+
+  console.log(area)
 
   let prey = getPrey(biome, area);
 
@@ -4693,6 +4584,8 @@ function updatePreview(name) {
 
   if (unitType == undefined)
     return;
+
+  // we might have a second scale to worry about!
 
   if (unitType == "length")
     result = length(value * scale, unit);

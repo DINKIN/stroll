@@ -6,12 +6,8 @@ options = [
       {
         "name": "Name",
         "id": "name",
-        "type": "text"
-      },
-      {
-        "name": "Species",
-        "id": "species",
-        "type": "text"
+        "type": "text",
+        "default": "Fen"
       },
       {
         "name": "Scale",
@@ -28,7 +24,7 @@ options = [
       },
       {
         "name": "Weight",
-        "id": "baseWeight",
+        "id": "baseMass",
         "type": "float",
         "default": "135",
         "unit": "mass"
@@ -66,6 +62,12 @@ options = [
     "optional": false,
     "entries":
     [
+      {
+        "name": "Species",
+        "id": "species",
+        "type": "text",
+        "default": "crux"
+      },
       {
         "name": "Foot type",
         "id": "footType",
@@ -398,12 +400,6 @@ options = [
     "entries":
     [
       {
-        "name": "Cock description",
-        "id": "dickType",
-        "type": "text",
-        "default": "canine"
-      },
-      {
         "name": "Cock length",
         "id": "baseDickLength",
         "type": "float",
@@ -424,11 +420,17 @@ options = [
         "default": "1"
       },
       {
+        "name": "Cock description",
+        "id": "dickType",
+        "type": "text",
+        "default": "canine"
+      },
+      {
         "name": "Ball diameter",
         "id": "baseBallDiameter",
         "type": "float",
         "default": "0.05",
-        "unit": "length",
+        "unit": "length"
       },
       {
         "name": "Orgasm size",
@@ -605,6 +607,12 @@ options = [
           {
             "name": "Passive milk production",
             "id": "lactationScale",
+            "type": "float",
+            "default": "1"
+          },
+          {
+            "name": "Milk storage scale",
+            "id": "milkStorageScale",
             "type": "float",
             "default": "1"
           }
