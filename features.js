@@ -948,5 +948,33 @@ options = [
     [
 
     ]
+  },
+  {
+    "name": "Wings",
+    "id": "hasWings",
+    "optional": true,
+    "entries":
+    [
+      {
+        "name": "Wing width",
+        "id": "baseWingWidth",
+        "type": "float",
+        "default": "1",
+        "unit": "length"
+      },
+      {
+        "name": "Wing length",
+        "id": "baseWingLength",
+        "type": "float",
+        "default": "1",
+        "unit": "length"
+      },
+      {
+        "name": "Wing description",
+        "id": "wingDesc",
+        "type": "text",
+        "default": "feathery"
+      }
+    ]
   }
 ];

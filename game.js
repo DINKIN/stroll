@@ -71,6 +71,10 @@ let macro =
   get assArea() { return this.scaling(this.baseAssArea * this.assScale, this.scale, 2); },
   get handArea() { return this.scaling(this.baseHandArea, this.scale, 2); },
 
+  get wingLength() { return this.scaling(this.baseWingLength, this.scale, 1); },
+  get wingWidth() { return this.scaling(this.baseWingWidth, this.scale, 1); },
+  get wingArea() { return this.wingLength * this.wingWidth; },
+
   "footOnlyDesc": function(plural=false,capital=false) {
     let result = "";
 
@@ -3646,6 +3650,24 @@ function magic_fast_digestion()
   update([line, newline]);
 }
 
+function wings_flap()
+{
+  let area = macro.wingArea * 2;
+  let prey = getPrey(biome, area, false);
+  let line = describe("wings-flap", prey, macro, verbose);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("breath", preyMass);
+
+  add_victim_people("wings-flap", prey);
+
+  update([sound,line,linesummary,newline]);
+}
+
 function cooldown_start(name) {
   let button = document.querySelector("#" + "button-action-" + name);
 
@@ -4449,6 +4471,12 @@ function startGame(e) {
       enable_button("breath_foul");
       enable_victim("breath-foul","Smothered in humid breath");
     }
+  }
+
+  if (macro.hasWings) {
+    enable_panel("misc");
+    enable_button("wings_flap");
+    enable_victim("wings-flap");
   }
 
   document.getElementById("button-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
