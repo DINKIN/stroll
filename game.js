@@ -909,6 +909,49 @@ let macro =
     "stages": 3
   },
 
+  "wings": {
+    "name" : "wings",
+    "setup": function(owner) {
+      this.owner = owner;
+      for (let i = 0; i < this.stages; i++)
+        this.contents.push(new Container());
+      owner.digest(owner, this, owner.wingDigestTime);
+    },
+    "feed": function(prey) {
+      this.feedFunc(prey,this,this.owner);
+    },
+    "feedFunc": function(prey,self,owner) {
+      this.contents[0] = this.contents[0].merge(prey);
+    },
+    "describeMove" : function(container) {
+      return describe("wings-to-stomach",container,this.owner,verbose);
+    },
+    "describeDigestion" : function(container) {
+      return describe("wings",container,this.owner,verbose);
+    },
+    "fill": function(owner,container) {
+      // no-op
+    },
+    get description() {
+      let prey = new Container();
+      this.contents.forEach(function(x) {
+        prey = prey.merge(x);
+      });
+
+      if (prey.count == 0) {
+        return "Your don't have anyone trapped in your wings.";
+      } else {
+        if (macro.brutality > 0)  {
+          return "Your folded wings bulge as they squeeze in on " + prey.describe(false) + ", slowly breaking them down.";
+        } else {
+          return "Your wings bulge with " + prey.describe(false) + ".";
+        }
+      }
+    },
+    "contents" : [],
+    "stages": 3
+  },
+
   // holding spots
 
   "pouch": {
@@ -1010,6 +1053,7 @@ let macro =
     this.goo.setup(this);
     this.pawsVore.setup(this);
     this.crop.setup(this);
+    this.wings.setup(this);
     this.cumStorage.owner = this;
     this.femcumStorage.owner = this;
     this.milkStorage.owner = this;
@@ -1025,6 +1069,10 @@ let macro =
 
     if (this.tailVoreToStomach) {
       this.tail.moves = this.stomach;
+    }
+
+    if (this.wingVoreToStomach) {
+      this.wings.moves = this.stomach;
     }
 
     this.crop.moves = this.stomach;
@@ -1392,6 +1440,10 @@ let macro =
 
     if (this.soulVoreEnabled) {
       result.push(this.souls.description);
+    }
+
+    if (this.wingVoreEnabled) {
+      result.push(this.wings.description);
     }
 
     if (this.hasPouch) {
@@ -3668,6 +3720,26 @@ function wings_flap()
   update([sound,line,linesummary,newline]);
 }
 
+function wings_vore()
+{
+  let area = macro.wingArea * 2;
+  let prey = getPrey(biome, area, false);
+  let line = describe("wings-vore", prey, macro, verbose);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("insert", preyMass);
+
+  macro.wings.feed(prey);
+
+  add_victim_people("wings-vore", prey);
+
+  update([sound,line,linesummary,newline]);
+}
+
 function cooldown_start(name) {
   let button = document.querySelector("#" + "button-action-" + name);
 
@@ -4477,6 +4549,11 @@ function startGame(e) {
     enable_panel("misc");
     enable_button("wings_flap");
     enable_victim("wings-flap");
+
+    if (macro.wingVoreEnabled) {
+      enable_button("wings_vore");
+      enable_victim("wings-vore");
+    }
   }
 
   document.getElementById("button-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");

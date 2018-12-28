@@ -27,13 +27,13 @@ var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick"
 "female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw",
 "paw-stench","ass-stench","piss-stench","scat-stench","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk",
 "belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder",
-"soul-digest","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat",
+"soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat",
 "sheath-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push",
 "goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push",
 "goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer",
-"breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap"];
+"breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
 
-var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap"]
+var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
@@ -752,6 +752,22 @@ function defaultSoulDigest(container, macro, verbose) {
   }
 }
 
+function defaultWings(container, macro, verbose) {
+  if (isSadistic(macro))
+    return "Your wings slacken as the " + container.describe(false) + " within melts into a slurry of meat and wreckage.";
+  if (isFatal(macro))
+    return "Your wings squeeze tightly as they absorb " + container.describe(false) + " into your body";
+  else
+    return "Your wings squeeze as they absorb " + container.describe(false);
+}
+
+function defaultWingsToStomach(container, macro, verbose) {
+  if (isFatal(macro))
+    return "Your wings clench, forcing " + container.describe(false) + " deeper and into your stomach.";
+  else
+    return "Your wings squeeze " + container.describe(false) + " into your belly.";
+}
+
 function defaultWearShoe(container, macro, verbose) {
   if (container.count == 0) {
     return "You slip on your " + macro.shoeDesc(true,false) + ".";
@@ -1124,7 +1140,20 @@ function defaultMagicShrink(container, macro, verbose) {
 }
 
 function defaultWingsFlap(container, macro, verbose) {
-  return "You flap your wings, blowing away " + container.describe(verbose) + ".";
+  if (container.counter == 0) {
+    return "You flap your wings.";
+  } else {
+    return "You flap your wings, blowing away " + container.describe(verbose) + ".";
+  }
+}
+
+function defaultWingsVore(container, macro, verbose) {
+  if (container.counter == 0) {
+    return "You flap your wings aggressively.";
+  } else {
+    return "You spread your wings wide, wrapping them around " + container.describe(verbose) + " and ensnaring them";
+  }
+
 }
 
 function defaultVictimCumFlood(container, macro, verbose) {
@@ -1758,6 +1787,18 @@ function defaultVictimWingsFlap(container, macro, verbose) {
     return "thrown away by your swooping wings";
   } else if (isNonFatal(macro)) {
     return "blown away by your wings";
+  }
+}
+
+function defaultVictimWingsVore(container, macro, verbose) {
+  if (isSadistic(macro)) {
+    return "shrink-wrapped in your wings and dissolved";
+  } else if (isGory(macro)) {
+    return "wrapped up in your airless wings and digested";
+  } else if (isFatal(macro)) {
+    return "snared in your wings and digested";
+  } else if (isNonFatal(macro)) {
+    return "trapped in your wings";
   }
 }
 // EATING

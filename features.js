@@ -974,6 +974,25 @@ options = [
         "id": "wingDesc",
         "type": "text",
         "default": "feathery"
+      },
+      {
+        "name": "Wing Vore",
+        "id": "wingVoreEnabled",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "wingDigestTime",
+            "type": "float",
+            "default": "15"
+          },
+          {
+            "name": "Wing vore goes to stomach",
+            "id": "wingVoreToStomach",
+            "type": "checkbox"
+          }
+        ]
       }
     ]
   }
