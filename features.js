@@ -729,7 +729,7 @@ options = [
       {
         "type": "radio",
         "id": "soulVoreType",
-        "default": "0",
+        "default": "body",
         "choices":
         [
           {
