@@ -739,6 +739,10 @@ options = [
               {
                 "name": "Socks",
                 "value": "sock"
+              },
+              {
+                "name": "Stockings",
+                "value": "stocking"
               }
             ]
           }
@@ -772,6 +776,14 @@ options = [
                 "name": "Sandals",
                 "value": "sandal"
               },
+              {
+                "name": "High Heels",
+                "value": "heel",
+              },
+              {
+                "name": "Crocs",
+                "value": "croc"
+              }
             ]
           }
         ]

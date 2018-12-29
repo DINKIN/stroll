@@ -116,11 +116,21 @@ let macro =
         case "sandal":
           result = plural ? "sandals" : "sandal";
           break;
+        case "heel":
+          return plural ? "high heels" : "high heel";
+          break;
+        case "croc":
+          return plural ? "crocs" : "croc";
+          break;
       }
     } else if (this.footSockWorn) {
       switch(this.footSock) {
         case "sock":
           result = "socked " + this.footOnlyDesc(plural,false);
+          break;
+        case "stocking":
+          result = "stocking-wrapped " + this.footOnlyDesc(plural, false);
+          break;
       }
     }
 
@@ -186,11 +196,21 @@ let macro =
         case "sandal":
           result = plural ? "treads" : "tread";
           break;
+        case "heel":
+          return plural ? "high heels" : "high heel";
+          break;
+        case "croc":
+          return plural ? "crocs" : "croc";
+          break;
       }
     } else if (this.footSockWorn) {
       switch(this.footSock) {
         case "sock":
           result = "socked " + this.toeOnlyDesc(plural,false);
+          break;
+        case "stocking":
+          result = "stocking-wrapped " + this.footOnlyDesc(plural, false);
+          break;
       }
     }
 
@@ -215,6 +235,12 @@ let macro =
       case "sandal":
         result = plural ? "sandals" : "sandal";
         break;
+      case "heel":
+        return plural ? "high heels" : "high heel";
+        break;
+      case "croc":
+        return plural ? "crocs" : "croc";
+        break;
     }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
@@ -224,6 +250,9 @@ let macro =
     switch(this.footSock) {
       case "sock":
         result = plural ? "socks" : "sock";
+        break;
+      case "stocking":
+        result = plural ? "stockings" : "stocking";
         break;
     }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
