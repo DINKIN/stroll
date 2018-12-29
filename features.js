@@ -1,3 +1,480 @@
+panels = {
+    "body": {
+        "name": "Body",
+        "buttons": [
+            {
+                "name": "Eat",
+                "target": "feed"
+            },
+            {
+                "name": "Crop Swallow",
+                "target": "crop_swallow"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_stomach"
+            },
+            {
+                "name": "Chew",
+                "target": "chew"
+            },
+            {
+                "name": "Drool",
+                "target": "drool"
+            },
+            {
+                "name": "Vomit",
+                "target": "vomit"
+            },
+            {
+                "name": "Sit",
+                "target": "sit"
+            },
+            {
+                "name": "Grind ass",
+                "target": "ass_grind"
+            },
+            {
+                "name": "Anal Vore",
+                "target": "anal_vore"
+            },
+            {
+                "name": "Digest Bowels",
+                "target": "digest_anal"
+            },
+            {
+                "name": "Grind hips",
+                "target": "grind"
+            }
+        ]
+    },
+    "paws": {
+        "name": "Paws",
+        "buttons": [
+            {
+                "name": "Stomp",
+                "target": "stomp"
+            },
+            {
+                "name": "Flex Toes",
+                "target": "flex_toes"
+            },
+            {
+                "name": "Absorb",
+                "target": "paw_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_paws"
+            }
+        ]
+    },
+    "tails": {
+        "name": "Tails",
+        "buttons": [
+            {
+                "name": "Tail Slap",
+                "target": "tail_slap"
+            },
+            {
+                "name": "Tail Vore",
+                "target": "tail_vore_only"
+            },
+            {
+                "name": "Tail Vore (1)",
+                "target": "tail_vore_one"
+            },
+            {
+                "name": "Tail Vore (some)",
+                "target": "tail_vore_some"
+            },
+            {
+                "name": "Tail Vore (all!)",
+                "target": "tail_vore_all"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_tail"
+            }
+        ]
+    },
+    "breasts": {
+        "name": "Breasts",
+        "buttons": [
+            {
+                "name": "Stuff Cleavage",
+                "target": "cleavage_stuff"
+            },
+            {
+                "name": "Squeeze Cleavage",
+                "target": "breast_toy"
+            },
+            {
+                "name": "Crush Cleavage",
+                "target": "cleavage_crush"
+            },
+            {
+                "name": "Drop Cleavage",
+                "target": "cleavage_drop"
+            },
+            {
+                "name": "Absorb Cleavage",
+                "target": "cleavage_absorb"
+            },
+            {
+                "name": "Breast Crush",
+                "target": "breast_crush"
+            },
+            {
+                "name": "Breast Vore",
+                "target": "breast_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_breast"
+            },
+            {
+                "name": "Milk Breasts",
+                "target": "breast_milk"
+            }
+        ]
+    },
+    "vagina": {
+        "name": "Slit",
+        "buttons": [
+            {
+                "name": "Unbirth",
+                "target": "unbirth"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_unbirth"
+            },
+            {
+                "name": "Finger Slit",
+                "target": "slit_toy"
+            }
+        ]
+    },
+    "dick": {
+        "name": "Cock",
+        "buttons": [
+            {
+                "name": "Stuff Sheath",
+                "target": "sheath_stuff"
+            },
+            {
+                "name": "Squeeze Sheath",
+                "target": "sheath_toy"
+            },
+            {
+                "name": "Clench Sheath",
+                "target": "sheath_clench"
+            },
+            {
+                "name": "Absorb Sheath",
+                "target": "sheath_absorb"
+            },
+            {
+                "name": "Cockslap",
+                "target": "cockslap"
+            },
+            {
+                "name": "Cock Vore",
+                "target": "cock_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_cock"
+            },
+            {
+                "name": "Ball Smother",
+                "target": "ball_smother"
+            }
+        ]
+    },
+    "souls": {
+        "name": "Souls",
+        "buttons": [
+            {
+                "name": "Soul Vore",
+                "target": "soul_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_soul"
+            },
+            {
+                "name": "Paws",
+                "target": "soul_absorb_paw"
+            }
+        ]
+    },
+    "shoes": {
+        "name": "Footwear",
+        "buttons": [
+            {
+                "name": "Put On Shoes",
+                "target": "wear_shoes"
+            },
+            {
+                "name": "Take Off Shoes",
+                "target": "remove_shoes"
+            },
+            {
+                "name": "Put On Socks",
+                "target": "wear_socks"
+            },
+            {
+                "name": "Take Off Socks",
+                "target": "remove_socks"
+            },
+            {
+                "name": "Stuff Shoes",
+                "target": "stuff_shoes"
+            },
+            {
+                "name": "Stuff Socks",
+                "target": "stuff_socks"
+            },
+            {
+                "name": "Dump Shoes",
+                "target": "dump_shoes"
+            },
+            {
+                "name": "Dump Socks",
+                "target": "dump_socks"
+            }
+        ]
+    },
+    "waste": {
+        "name": "Waste",
+        "buttons": [
+            {
+                "name": "Belch",
+                "target": "belch"
+            },
+            {
+                "name": "Fart",
+                "target": "fart"
+            },
+            {
+                "name": "Piss",
+                "target": "piss"
+            },
+            {
+                "name": "Bladder Vore",
+                "target": "bladder_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_bladder"
+            },
+            {
+                "name": "Scat",
+                "target": "scat"
+            }
+        ]
+    },
+    "goo": {
+        "name": "Goo",
+        "buttons": [
+            {
+                "name": "Solidify",
+                "target": "solidify"
+            },
+            {
+                "name": "Melt",
+                "target": "melt"
+            },
+            {
+                "name": "Flood",
+                "target": "flood"
+            },
+            {
+                "name": "Push to Stomach",
+                "target": "goo_stomach_push"
+            },
+            {
+                "name": "Pull from Stomach",
+                "target": "goo_stomach_pull"
+            },
+            {
+                "name": "Push to Bowels",
+                "target": "goo_bowels_push"
+            },
+            {
+                "name": "Pull from Bowels",
+                "target": "goo_bowels_pull"
+            },
+            {
+                "name": "Push to Womb",
+                "target": "goo_womb_push"
+            },
+            {
+                "name": "Pull from Womb",
+                "target": "goo_womb_pull"
+            },
+            {
+                "name": "Push to Balls",
+                "target": "goo_balls_push"
+            },
+            {
+                "name": "Pull from Balls",
+                "target": "goo_balls_pull"
+            },
+            {
+                "name": "Push to Breasts",
+                "target": "goo_breasts_push"
+            },
+            {
+                "name": "Pull from Breasts",
+                "target": "goo_breasts_pull"
+            },
+            {
+                "name": "Push to Tails",
+                "target": "goo_tail_push"
+            },
+            {
+                "name": "Pull from Tails",
+                "target": "goo_tail_pull"
+            },
+            {
+                "name": "Push to Paws",
+                "target": "goo_paws_push"
+            },
+            {
+                "name": "Pull from Paws",
+                "target": "goo_paws_pull"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_goo"
+            }
+        ]
+    },
+    "misc": {
+        "name": "Misc",
+        "buttons": [
+            {
+                "name": "Stuff Pouch",
+                "target": "pouch_stuff"
+            },
+            {
+                "name": "Rub Pouch",
+                "target": "pouch_rub"
+            },
+            {
+                "name": "Eat From Pouch",
+                "target": "pouch_eat"
+            },
+            {
+                "name": "Absorb Pouch",
+                "target": "pouch_absorb"
+            },
+            {
+                "name": "Flap Wings",
+                "target": "wings_flap"
+            },
+            {
+                "name": "Wing Vore",
+                "target": "wings_vore"
+            }
+        ]
+    },
+    "breath": {
+        "name": "Breath",
+        "buttons": [
+            {
+                "name": "Line Shape",
+                "target": "breath_line"
+            },
+            {
+                "name": "Cone Shape",
+                "target": "breath_cone"
+            },
+            {
+                "name": "Fire",
+                "target": "breath_fire"
+            },
+            {
+                "name": "Ice",
+                "target": "breath_ice"
+            },
+            {
+                "name": "Electric",
+                "target": "breath_electric"
+            },
+            {
+                "name": "Smoke",
+                "target": "breath_smoke"
+            },
+            {
+                "name": "Radiation",
+                "target": "breath_radiation"
+            },
+            {
+                "name": "Foul",
+                "target": "breath_foul"
+            }
+        ]
+    },
+    "magic": {
+        "name": "Magic",
+        "buttons": [
+            {
+                "name": "Shrink",
+                "target": "magic_shrink"
+            },
+            {
+                "name": "Fast Digestion",
+                "target": "magic_fast_digestion"
+            }
+        ]
+    },
+    "options": {
+        "name": "Options",
+        "buttons": [
+            {
+                "name": "Arousal On",
+                "target": "arousal",
+                "default": true
+            },
+            {
+                "name": "Status: Standing",
+                "target": "stroll",
+                "default": true
+            },
+            {
+                "name": "Numbers: Words",
+                "target": "numbers",
+                "default": true
+            },
+            {
+                "name": "Units: Metric",
+                "target": "units",
+                "default": true
+            },
+            {
+                "name": "Verbose Text",
+                "target": "verbose",
+                "default": true
+            },
+            {
+                "name": "Toggle Dark Mode",
+                "target": "dark_mode",
+                "default": true
+            },
+            {
+                "name": "Debug Log",
+                "target": "debug",
+                "default": true
+            }
+        ]
+    }
+}
+
+
 options = [
   {
     "name": "Basics",

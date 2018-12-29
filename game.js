@@ -4129,6 +4129,7 @@ function disable_button(name) {
 }
 
 function enable_panel(name) {
+  console.log(name);
   document.getElementById("action-part-" + name).style.display = "inline";
 }
 
@@ -4556,7 +4557,7 @@ function startGame(e) {
     }
   }
 
-  document.getElementById("button-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
+  document.getElementById("button-action-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
   if (!macro.arousalEnabled) {
     document.getElementById("arousal").style.display = "none";
     document.getElementById("edge").style.display = "none";
@@ -4726,6 +4727,7 @@ window.addEventListener('load', function(event) {
   }());
 
   construct_options();
+  construct_panels();
 
   document.querySelectorAll("input[type='number']").forEach(function(x) {
     x.addEventListener("input", function() { updatePreview(x.id); });
@@ -4751,19 +4753,19 @@ window.addEventListener('load', function(event) {
   });
 
   document.getElementById("button-look").addEventListener("click",look);
-  document.getElementById("button-stroll").addEventListener("click",toggle_auto);
-  document.getElementById("button-numbers").addEventListener("click",toggle_numbers);
-  document.getElementById("button-units").addEventListener("click",toggle_units);
-  document.getElementById("button-verbose").addEventListener("click",toggle_verbose);
-  document.getElementById("button-arousal").addEventListener("click",toggle_arousal);
+  document.getElementById("button-action-stroll").addEventListener("click",toggle_auto);
+  document.getElementById("button-action-numbers").addEventListener("click",toggle_numbers);
+  document.getElementById("button-action-units").addEventListener("click",toggle_units);
+  document.getElementById("button-action-verbose").addEventListener("click",toggle_verbose);
+  document.getElementById("button-action-arousal").addEventListener("click",toggle_arousal);
 
   document.getElementById("button-dark-mode-options").addEventListener("click",toggleDarkMode);
-  document.getElementById("button-dark-mode-game").addEventListener("click",toggleDarkMode);
+  document.getElementById("button-action-dark_mode").addEventListener("click",toggleDarkMode);
 
   document.getElementById("button-units-options").addEventListener("click",toggle_units_options);
 
   document.getElementById("button-stats").addEventListener("click",showStats);
-  document.getElementById("button-debug-log").addEventListener("click",debugLog);
+  document.getElementById("button-action-debug").addEventListener("click",debugLog);
 
   document.querySelectorAll(".growth-part").forEach(function (button) {
     button.addEventListener("click", function() { grow_part_pick(button.id); });
@@ -5028,4 +5030,42 @@ function construct_options() {
   options.forEach(function(category) {
     render_category(root, category);
   });
+}
+
+function construct_panels() {
+  let root = document.getElementById("action-panel");
+
+  let panelList = document.createElement("div");
+  panelList.classList.add("action-part-container");
+
+  root.appendChild(panelList);
+
+  Object.entries(panels).forEach(function([name, contents]) {
+    let buttons = document.createElement("div");
+    buttons.classList.add("action-tab");
+    buttons.id = "actions-" + name;
+
+    let panel_button = document.createElement("button");
+    panel_button.classList.add("action-part-button");
+    panel_button.id = "action-part-" + name;
+    panel_button.innerText = contents.name;
+
+    panelList.appendChild(panel_button);
+
+    contents.buttons.forEach(function(action) {
+      let button = document.createElement("button");
+      button.classList.add("action-button");
+      button.id = "button-action-" + action.target;
+      button.innerText = action.name;
+
+      if (action.default) {
+        button.style.display = "inline";
+      }
+
+      buttons.appendChild(button);
+    });
+
+    root.appendChild(buttons);
+  });
+
 }
