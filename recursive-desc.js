@@ -183,11 +183,11 @@ function defaultStompWedge(container, macro, verbose) {
   if (container.count == 1) {
     let line = container.describe(verbose);
     line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " is wedged between your " + macro.toeDesc(true);
+    return line + " is wedged in your " + macro.toeDesc(true);
   } else {
     let line = container.describe(verbose);
     line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " are wedged between your " + macro.toeDesc(true);
+    return line + " are wedged in your " + macro.toeDesc(true);
   }
 }
 

@@ -51,6 +51,7 @@ let macro =
   "femaleSpurt": 0,
 
   "scale": 1,
+  "pawScale": 1,
   "assScale": 1,
   "dickScale": 1,
   "ballScale": 1,
@@ -197,10 +198,10 @@ let macro =
           result = plural ? "treads" : "tread";
           break;
         case "heel":
-          return plural ? "high heels" : "high heel";
+          return plural ? "treads" : "tread";
           break;
         case "croc":
-          return plural ? "crocs" : "croc";
+          return plural ? "treads" : "tread";
           break;
       }
     } else if (this.footSockWorn) {
@@ -1035,9 +1036,9 @@ let macro =
     "container": new Container(),
     get description() {
       if (this.container.count == 0)
-        return "Your shoes are empty.";
+        return "Your " + macro.shoeDesc(true) + " are empty.";
       else
-        return "Your shoes contain " + this.container.describe(false);
+        return "Your " + macro.shoeDesc(true) + " contain " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1049,9 +1050,9 @@ let macro =
     "container": new Container(),
     get description() {
       if (this.container.count == 0)
-        return "Your socks are empty.";
+        return "Your " + macro.sockDesc(true) + " are empty.";
       else
-        return "Your socks contain " + this.container.describe(false);
+        return "Your " + macro.sockDesc(true) + " contain " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
