@@ -1582,17 +1582,17 @@ function look()
   update(desc);
 }
 
-function toggle_auto()
+function toggle_auto(e)
 {
   strolling = !strolling;
-  document.getElementById("button-stroll").innerHTML = "Status: " + (strolling ? "Strolling" : "Standing");
+  e.target.innerText = "Status: " + (strolling ? "Strolling" : "Standing");
   if (strolling)
     update(["You start walking.",newline]);
   else
     update(["You stop walking.",newline]);
 }
 
-function toggle_units()
+function toggle_units(e)
 {
   switch(unit) {
     case "metric": unit = "customary"; break;
@@ -1600,24 +1600,24 @@ function toggle_units()
     case "approx": unit = "metric"; break;
   }
 
-  document.getElementById("button-units").innerHTML = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
+  e.target.innerText = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
 
   update();
 }
 
-function toggle_units_options()
+function toggle_units_options(e)
 {
   switch(unit) {
     case "metric": unit = "customary"; break;
     case "customary": unit = "metric"; break;
   }
 
-  document.getElementById("button-units-options").innerHTML = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
+  e.target.innerText = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
 
   updateAllPreviews();
 }
 
-function toggle_numbers() {
+function toggle_numbers(e) {
   switch(numbers) {
     case "full": numbers="prefix"; break;
     case "prefix": numbers="words"; break;
@@ -1625,23 +1625,23 @@ function toggle_numbers() {
     case "scientific": numbers = "full"; break;
   }
 
-  document.getElementById("button-numbers").innerHTML = "Numbers: " + numbers.charAt(0).toUpperCase() + numbers.slice(1);
+  e.target.innerText = "Numbers: " + numbers.charAt(0).toUpperCase() + numbers.slice(1);
 
   update();
 }
 
-function toggle_verbose()
+function toggle_verbose(e)
 {
   verbose = !verbose;
 
-  document.getElementById("button-verbose").innerHTML = (verbose ? "Verbose Text" : "Simple Text");
+  e.target.innerText = (verbose ? "Verbose Text" : "Simple Text");
 }
 
-function toggle_arousal()
+function toggle_arousal(e)
 {
   macro.arousalEnabled = !macro.arousalEnabled;
 
-  document.getElementById("button-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
+  e.target.innerText = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
   if (macro.arousalEnabled) {
     document.getElementById("arousal").style.display = "block";
     document.getElementById("edge").style.display = "block";
@@ -4200,6 +4200,7 @@ function startGame(e) {
   }
 
   registerActions();
+  registerOptions();
 
   if (!macro.hasTail) {
     macro.tailCount = 0;
@@ -4589,7 +4590,7 @@ function startGame(e) {
     }
   }
 
-  document.getElementById("button-action-arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
+  document.getElementById("button-option-toggle_arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
   if (!macro.arousalEnabled) {
     document.getElementById("arousal").style.display = "none";
     document.getElementById("edge").style.display = "none";
@@ -4695,6 +4696,17 @@ function registerActions() {
   });
 }
 
+function registerOptions() {
+  let buttons = document.querySelectorAll("[id^='button-option']");
+
+  buttons.forEach( function(button) {
+    let name = button.id;
+    name = name.replace(/button-option-/,"");
+    button.addEventListener("click", function(e) { window[name](e); });
+
+  });
+}
+
 function updateAllPreviews() {
   document.querySelectorAll(".preview").forEach(function(prev) {
     let name = prev.id.replace("Preview","");
@@ -4785,20 +4797,9 @@ window.addEventListener('load', function(event) {
   });
 
   document.getElementById("button-look").addEventListener("click",look);
-  document.getElementById("button-action-stroll").addEventListener("click",toggle_auto);
-  document.getElementById("button-action-numbers").addEventListener("click",toggle_numbers);
-  document.getElementById("button-action-units").addEventListener("click",toggle_units);
-  document.getElementById("button-action-verbose").addEventListener("click",toggle_verbose);
-  document.getElementById("button-action-arousal").addEventListener("click",toggle_arousal);
+  document.getElementById("button-stats").addEventListener("click",showStats);
 
   document.getElementById("button-dark-mode-options").addEventListener("click",toggleDarkMode);
-  document.getElementById("button-action-dark_mode").addEventListener("click",toggleDarkMode);
-
-  document.getElementById("button-units-options").addEventListener("click",toggle_units_options);
-
-  document.getElementById("button-stats").addEventListener("click",showStats);
-  document.getElementById("button-action-debug").addEventListener("click",debugLog);
-
   document.querySelectorAll(".growth-part").forEach(function (button) {
     button.addEventListener("click", function() { grow_part_pick(button.id); });
   });
@@ -5087,7 +5088,12 @@ function construct_panels() {
     contents.buttons.forEach(function(action) {
       let button = document.createElement("button");
       button.classList.add("action-button");
-      button.id = "button-action-" + action.target;
+      if (contents.type == "options") {
+        button.id = "button-option-" + action.target;
+      } else {
+        button.id = "button-action-" + action.target;
+      }
+
       button.innerText = action.name;
 
       if (action.default) {

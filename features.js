@@ -434,40 +434,41 @@ panels = {
     },
     "options": {
         "name": "Options",
+        "type": "options",
         "buttons": [
             {
                 "name": "Arousal On",
-                "target": "arousal",
+                "target": "toggle_arousal",
                 "default": true
             },
             {
                 "name": "Status: Standing",
-                "target": "stroll",
+                "target": "toggle_auto",
                 "default": true
             },
             {
                 "name": "Numbers: Words",
-                "target": "numbers",
+                "target": "toggle_numbers",
                 "default": true
             },
             {
                 "name": "Units: Metric",
-                "target": "units",
+                "target": "toggle_units",
                 "default": true
             },
             {
                 "name": "Verbose Text",
-                "target": "verbose",
+                "target": "toggle_verbose",
                 "default": true
             },
             {
                 "name": "Toggle Dark Mode",
-                "target": "dark_mode",
+                "target": "toggleDarkMode",
                 "default": true
             },
             {
                 "name": "Debug Log",
-                "target": "debug",
+                "target": "debugLog",
                 "default": true
             }
         ]
