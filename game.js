@@ -2136,8 +2136,6 @@ function grind()
   if (macro.femaleParts)
     area += macro.vaginaArea;
 
-  console.log(area)
-
   let prey = getPrey(biome, area);
 
   let line = describe("grind", prey, macro, verbose);
@@ -3847,7 +3845,9 @@ function update(lines = [], active=true)
     if (deltaHeight / window.innerHeight >= 0.2 && verbose && autoVerbose) {
       update(["Switching to simple text!", newline], false);
       autoVerbose = false;
-      toggle_verbose();
+      let button = document.querySelector("button-option-toggle_verbose");
+
+      toggle_verbose({"target": button});
     }
   }
 
@@ -4161,7 +4161,6 @@ function disable_button(name) {
 }
 
 function enable_panel(name) {
-  console.log(name);
   document.getElementById("action-part-" + name).style.display = "inline";
 }
 
