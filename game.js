@@ -56,6 +56,7 @@ let macro =
   "dickScale": 1,
   "ballScale": 1,
   "vaginaScale": 1,
+  "wombScale": 1,
   "breastScale": 1,
   "tailScale": 1,
 
@@ -274,6 +275,7 @@ let macro =
 
   "biteDesc": function(plural=false,capital=false) {
     let result = "";
+
     switch(this.jawType) {
       case "jaw":
         result = plural ? "crushes" : "crush";
@@ -373,7 +375,11 @@ let macro =
   get vaginaWidth() { return this.scaling(this.baseVaginaWidth * this.vaginaScale, this.scale, 1); },
   get vaginaArea() { return this.vaginaLength * this.vaginaWidth; },
   get vaginaStretchArea() { return this.vaginaStretchiness * this.vaginaStretchiness * this.vaginaLength * this.vaginaWidth; },
+  // this isn't how biology works but I'll leave it in
+
   get vaginaVolume() { return this.vaginaArea * this.vaginaWidth; },
+
+  get wombVolume() { return this.scaling(this.baseWombVolume, this.wombScale * this.scale, 3); },
 
   get femcumVolume() {
     let vol = this.scaling(this.baseFemcumVolume, this.scale, 3);
@@ -1130,7 +1136,7 @@ let macro =
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.cumScale * self.cumStorage.limit / self.cumStorageScale / 1000;
+    self.cumStorage.amount += self.scaling(self.baseCumProduction / 10, self.scale * self.ballScale, 3);
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
     setTimeout(function () { self.fillCum(self); }, 100);
@@ -1138,7 +1144,7 @@ let macro =
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.femcumScale * self.femcumStorage.limit / self.femcumStorageScale / 1000;
+    self.femcumStorage.amount += self.scaling(self.baseFemcumProduction / 10, self.scale * self.wombScale, 3);
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, 100);
@@ -1210,14 +1216,14 @@ let macro =
   "cumStorage": {
     "amount": 0,
     get limit() {
-      return this.owner.ballVolume * this.owner.cumStorageScale;
+      return this.owner.ballVolume * this.owner.cumStorageScale * 2;
     }
   },
 
   "femcumStorage": {
     "amount": 0,
     get limit() {
-      return this.owner.vaginaVolume * this.owner.femcumStorageScale;
+      return this.owner.wombVolume * this.owner.femcumStorageScale;
     }
   },
 
@@ -1356,6 +1362,11 @@ let macro =
 
     if (self.orgasm) {
       let spurt = Math.min(this.cumVolume, this.cumStorage.amount);
+
+      if (spurt == this.cumVolume) {
+        let excess = this.cumStorage.amount - this.cumVolume;
+        spurt += excess / 5;
+      }
       this.cumStorage.amount -= spurt;
       male_orgasm(spurt, false);
       setTimeout(function() { self.maleOrgasm(self); }, 5000);
@@ -1368,6 +1379,12 @@ let macro =
 
     if (this.orgasm) {
       let spurt = Math.min(this.femcumVolume, this.femcumStorage.amount);
+
+      if (spurt == this.femcumVolume) {
+        let excess = this.femcumStorage.amount - this.femcumVolume;
+        spurt += excess / 5;
+      }
+
       this.femcumStorage.amount -= spurt;
       female_orgasm(spurt, false);
       setTimeout(function() { self.femaleOrgasm(self); }, 5000);
@@ -3925,6 +3942,7 @@ function grow_pick(times) {
       case "dick": grow_dick(times); break;
       case "balls": grow_balls(times); break;
       case "slit": grow_vagina(times); break;
+      case "womb": grow_womb(times); break;
       case "breasts": grow_breasts(times); break;
     }
   }
@@ -4027,6 +4045,19 @@ function grow_vagina(factor)
 
   update(["Power surges through you as your moist slit expands by by " + length(lengthDelta, unit, false),newline]);
 }
+
+function grow_womb(factor)
+{
+
+  let oldVolume = macro.wombVolume;
+
+  macro.wombScale *= factor;
+
+  let volumeDelta = macro.wombVolume - oldVolume;
+
+  update(["Power surges through you as your womb grows larger, gaining " + volume(volumeDelta, unit, false) + " of capacity",newline]);
+}
+
 
 function grow_ass(factor)
 {
@@ -4375,6 +4406,7 @@ function startGame(e) {
     enable_stat("femcum");
 
     enable_growth_part("slit");
+    enable_growth_part("womb");
 
     if (macro.arousalEnabled) {
       enable_victim("femcum-flood","Flooded by femcum");

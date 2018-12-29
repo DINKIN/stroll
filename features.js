@@ -931,7 +931,7 @@ options = [
       },
       {
         "name": "Passive cum production",
-        "id": "cumScale",
+        "id": "baseCumProduction",
         "type": "float",
         "default": "1"
       },
@@ -1017,14 +1017,21 @@ options = [
         "default": "1"
       },
       {
+        "name": "Womb volume",
+        "id": "baseWombVolume",
+        "type": "float",
+        "default": "0.0001",
+        "unit": "volume"
+      },
+      {
         "name": "Orgasm size",
         "id": "baseFemcumVolume",
         "type": "float",
-        "default": "1",
+        "default": "0.1",
       },
       {
         "name": "Passive femcum production",
-        "id": "femcumScale",
+        "id": "baseFemcumProduction",
         "type": "float",
         "default": "1"
       },
