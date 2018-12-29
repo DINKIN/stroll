@@ -3865,7 +3865,7 @@ function update(lines = [], active=true)
     if (deltaHeight / window.innerHeight >= 0.2 && verbose && autoVerbose) {
       update(["Switching to simple text!", newline], false);
       autoVerbose = false;
-      let button = document.querySelector("button-option-toggle_verbose");
+      let button = document.querySelector("#button-option-toggle_verbose");
 
       toggle_verbose({"target": button});
     }
