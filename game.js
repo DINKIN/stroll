@@ -63,6 +63,8 @@ let macro =
   "ballDensity": 1000,
   "breastDensity": 1000,
 
+  "breathStyle": "cone",
+
   "scaling": function(value, scale, factor) { return value * Math.pow(scale,factor); },
   get height() { return this.scaling(this.baseHeight, this.scale, 1); },
   get mass () { return this.scaling(this.baseMass, this.scale, 3); },
