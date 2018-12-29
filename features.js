@@ -933,7 +933,8 @@ options = [
         "name": "Passive cum production",
         "id": "baseCumProduction",
         "type": "float",
-        "default": "1"
+        "default": "0.01",
+        "unit": "volume",
       },
       {
         "name": "Cum storage factor",
@@ -1020,7 +1021,7 @@ options = [
         "name": "Womb volume",
         "id": "baseWombVolume",
         "type": "float",
-        "default": "0.0001",
+        "default": "0.1",
         "unit": "volume"
       },
       {
@@ -1033,7 +1034,8 @@ options = [
         "name": "Passive femcum production",
         "id": "baseFemcumProduction",
         "type": "float",
-        "default": "1"
+        "default": "0.01",
+        "unit": "volume"
       },
       {
         "name": "Femcum storage factor",
@@ -1104,9 +1106,10 @@ options = [
           },
           {
             "name": "Passive milk production",
-            "id": "lactationScale",
+            "id": "baseLactationProduction",
             "type": "float",
-            "default": "1"
+            "default": "0.001",
+            "unit": "volume"
           },
           {
             "name": "Milk storage scale",
@@ -1194,9 +1197,10 @@ options = [
       },
       {
         "name": "Passive gas production",
-        "id": "gasScale",
+        "id": "baseGasProduction",
         "type": "float",
-        "default": "3"
+        "default": "0.01",
+        "unit": "volume"
       },
       {
         "name": "Gas storage scale",
@@ -1254,9 +1258,10 @@ options = [
     [
       {
         "name": "Passive piss production",
-        "id": "pissScale",
+        "id": "basePissProduction",
         "type": "float",
-        "default": "0.3"
+        "default": "0.01",
+        "unit": "volume"
       },
       {
         "name": "Piss storage scale",
@@ -1318,9 +1323,10 @@ options = [
       },
       {
         "name": "Passive scat production",
-        "id": "scatScale",
+        "id": "baseScatProduction",
         "type": "float",
-        "default": "0.2"
+        "default": "0.001",
+        "unit": "volume"
       },
       {
         "name": "Scat storage scale",
@@ -1433,7 +1439,7 @@ options = [
         "name": "Drool volume",
         "id": "droolBaseVolume",
         "type": "float",
-        "default": "0.0001",
+        "default": "0.01",
         "unit": "volume"
       }
     ]

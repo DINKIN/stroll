@@ -367,7 +367,7 @@ let macro =
   },
 
   get cumVolume() {
-    let vol = this.scaling(this.baseCumVolume, this.scale, 3);
+    let vol = this.scaling(this.baseCumVolume / 1000, this.scale, 3);
     return this.scaling(vol, this.dickScale, 2);
   },
 
@@ -382,7 +382,7 @@ let macro =
   get wombVolume() { return this.scaling(this.baseWombVolume, this.wombScale * this.scale, 3); },
 
   get femcumVolume() {
-    let vol = this.scaling(this.baseFemcumVolume, this.scale, 3);
+    let vol = this.scaling(this.baseFemcumVolume / 1000, this.scale, 3);
     return this.scaling(vol, this.vaginaScale, 2);
   },
 
@@ -409,7 +409,7 @@ let macro =
   },
 
   get droolVolume() {
-    return this.scaling(this.droolBaseVolume, this.scale, 3);
+    return this.scaling(this.droolBaseVolume / 1000 , this.scale, 3);
   },
 
   "digest": function(owner, organ, time=15) {
@@ -1136,7 +1136,7 @@ let macro =
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.scaling(self.baseCumProduction / 10, self.scale * self.ballScale, 3);
+    self.cumStorage.amount += self.scaling(self.baseCumProduction / 10 / 1000, self.scale * self.ballScale, 3);
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
     setTimeout(function () { self.fillCum(self); }, 100);
@@ -1144,7 +1144,7 @@ let macro =
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.scaling(self.baseFemcumProduction / 10, self.scale * self.wombScale, 3);
+    self.femcumStorage.amount += self.scaling(self.baseFemcumProduction / 10 / 1000, self.scale * self.wombScale, 3);
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, 100);
@@ -1152,10 +1152,11 @@ let macro =
   },
 
   "fillBreasts": function(self) {
+    self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.wombScale, 3);
+
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit);
     }
-    self.milkStorage.amount += self.lactationScale * self.milkStorage.limit / self.milkStorageScale / 1000;
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       self.milkStorage.amount = self.milkStorage.limit;
@@ -1165,7 +1166,7 @@ let macro =
   },
 
   "fillGas": function(self) {
-    self.gasStorage.amount += self.gasScale * self.gasStorage.limit / self.gasStorageScale / 1000;
+    self.gasStorage.amount += self.scaling(self.baseGasProduction / 10 / 1000, self.scale, 3);
 
     let ratio = self.gasStorage.amount / self.gasStorage.limit;
 
@@ -1198,7 +1199,8 @@ let macro =
   },
 
   "fillPiss": function(self) {
-    self.pissStorage.amount += self.pissScale * self.pissStorage.limit / self.pissStorageScale / 1000;
+    self.pissStorage.amount += self.scaling(self.basePissProduction / 10 / 1000, self.scale, 3);
+
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
     setTimeout(function () { self.fillPiss(self); }, 100);
@@ -1206,7 +1208,8 @@ let macro =
   },
 
   "fillScat": function(self) {
-    self.scatStorage.amount += self.scatScale * self.scatStorage.limit / self.scatStorageScale / 1000;
+    self.scatStorage.amount += self.scaling(self.baseScatProduction / 10 / 1000, self.scale, 3);
+
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
     setTimeout(function () { self.fillScat(self); }, 100);
@@ -4776,7 +4779,7 @@ function updatePreview(name) {
   else if (unitType == "area")
     result = area(value * scale * scale, unit);
   else if (unitType == "volume")
-    result = volume(value * scale * scale * scale, unit);
+    result = volume(value * scale * scale * scale / 1000, unit);
   else if (unitType == "mass")
     result = mass(value * scale * scale * scale, unit);
 
