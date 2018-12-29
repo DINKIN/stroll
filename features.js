@@ -924,9 +924,10 @@ options = [
       },
       {
         "name": "Orgasm size",
-        "id": "baseCumRatio",
+        "id": "baseCumVolume",
         "type": "float",
-        "default": "1",
+        "default": "0.1",
+        "unit": "volume"
       },
       {
         "name": "Passive cum production",
@@ -1017,7 +1018,7 @@ options = [
       },
       {
         "name": "Orgasm size",
-        "id": "baseFemcumRatio",
+        "id": "baseFemcumVolume",
         "type": "float",
         "default": "1",
       },

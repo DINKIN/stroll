@@ -365,7 +365,8 @@ let macro =
   },
 
   get cumVolume() {
-    return this.dickGirth * this.baseCumRatio * (1 + this.edge) + Math.max(0,this.cumStorage.amount - this.cumStorage.limit);
+    let vol = this.scaling(this.baseCumVolume, this.scale, 3);
+    return this.scaling(vol, this.dickScale, 2);
   },
 
   get vaginaLength() { return this.scaling(this.baseVaginaLength * this.vaginaScale, this.scale, 1); },
@@ -373,8 +374,10 @@ let macro =
   get vaginaArea() { return this.vaginaLength * this.vaginaWidth; },
   get vaginaStretchArea() { return this.vaginaStretchiness * this.vaginaStretchiness * this.vaginaLength * this.vaginaWidth; },
   get vaginaVolume() { return this.vaginaArea * this.vaginaWidth; },
+
   get femcumVolume() {
-    return this.vaginaArea * this.baseFemcumRatio * (1 + this.edge) + Math.max(0,this.femcumStorage.amount - this.femcumStorage.limit);
+    let vol = this.scaling(this.baseFemcumVolume, this.scale, 3);
+    return this.scaling(vol, this.vaginaScale, 2);
   },
 
   get lactationVolume() {
