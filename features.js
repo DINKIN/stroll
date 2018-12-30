@@ -1176,19 +1176,19 @@ options = [
       },
       {
         "name": "Ass stench scale",
-        "id": "basePawStenchArea",
+        "id": "baseAssStenchArea",
         "type": "float",
         "default": "1.5"
       },
       {
         "name": "Piss stench scale",
-        "id": "basePawStenchArea",
+        "id": "basePissStenchArea",
         "type": "float",
         "default": "0.75"
       },
       {
         "name": "Scat stench scale",
-        "id": "basePawStenchArea",
+        "id": "baseScatStenchArea",
         "type": "float",
         "default": "3"
       },
