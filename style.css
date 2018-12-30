@@ -690,3 +690,7 @@ body.dark .meterLabel {
 .growth-amount {
   display: block;
 }
+
+.save-version {
+  display: none;
+}

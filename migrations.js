@@ -1,13 +1,8 @@
 // bumps save versions
 
 migrations = [
-  // 0 -> 1
-  // notes: only adds version number
-  function(save) {
-    save["version"] = 1;
-  }
-  //
-]
+
+];
 
 function migrate(save, target=null) {
   if (target == null) {
@@ -17,7 +12,9 @@ function migrate(save, target=null) {
   let version = save.version;
 
   if (version == undefined) {
-    version = 0;
+    alert("This save is from before versioning was added. It can't be automatically updated, and it might lose some settings. Double check that everything's there! Any subsequent saves will work correctly.");
+    save["version"] = migrations.length;
+    return false;
   }
 
   if (version < target) {

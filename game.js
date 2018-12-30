@@ -3,6 +3,10 @@
 /*jshint browser: true*/
 /*jshint devel: true*/
 
+let version = "v0.7.4";
+
+let save_version = 0;
+
 let errored = false;
 
 window.onerror = function(msg, source, lineno, colno, error) {
@@ -4150,6 +4154,9 @@ function loadSettings(settings = null) {
 
     settings = JSON.parse(storage.getItem('settings'));
   }
+
+  migrate(settings);
+
   let form = document.forms.namedItem("custom-species-form");
 
   for (let i=0; i<form.length; i++) {
@@ -4807,8 +4814,14 @@ window.addEventListener('load', function(event) {
     }
   }());
 
+  document.querySelectorAll(".version").forEach(function(x) {
+    x.innerText = "Version: " + version;
+  });
+
   construct_options();
   construct_panels();
+
+  document.querySelector("#save-version").innerText = save_version;
 
   document.querySelectorAll("input[type='number']").forEach(function(x) {
     x.addEventListener("input", function() { updatePreview(x.id); });
