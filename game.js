@@ -4177,6 +4177,20 @@ function saveSettings() {
   updateCustomCharacters();
 }
 
+function deleteSettings() {
+  let select = document.querySelector("#custom-characters");
+  let name = select.options[select.selectedIndex].value;
+
+  let settings = JSON.parse(storage.getItem('custom-characters'));
+
+  if (settings[name] != undefined && confirm("Really delete " + name + "?")) {
+    let settings = JSON.parse(storage.getItem('custom-characters'));
+    delete settings[name];
+    localStorage.setItem("custom-characters", JSON.stringify(settings));
+    updateCustomCharacters();
+  }
+}
+
 function loadAutosave() {
   if (window.localStorage.getItem('autosave') == null)
     return;
@@ -4929,18 +4943,19 @@ window.addEventListener('load', function(event) {
   document.getElementById("button-growth-20").addEventListener("click",function() { grow_pick(200); });
   document.getElementById("button-growth-100").addEventListener("click",function() { grow_pick(1000); });
 
-  document.getElementById("button-load-preset").addEventListener("click",loadPreset);
+  document.getElementById("button-load-preset").addEventListener("click", loadPreset);
 
-  document.getElementById("button-export-clear").addEventListener("click",clearExport);
-  document.getElementById("button-export-preset").addEventListener("click",exportSettings);
-  document.getElementById("button-import-preset").addEventListener("click",importSettings);
+  document.getElementById("button-export-clear").addEventListener("click", clearExport);
+  document.getElementById("button-export-preset").addEventListener("click", exportSettings);
+  document.getElementById("button-import-preset").addEventListener("click", importSettings);
 
-  document.getElementById("button-reset-custom").addEventListener("click",resetSettings);
-  document.getElementById("button-load-autosave").addEventListener("click",loadAutosave);
+  document.getElementById("button-reset-custom").addEventListener("click", resetSettings);
+  document.getElementById("button-load-autosave").addEventListener("click", loadAutosave);
 
-  document.getElementById("button-load-custom").addEventListener("click",function() { loadSettings(); });
-  document.getElementById("button-save-custom").addEventListener("click",saveSettings);
-  document.getElementById("button-start").addEventListener("click",startGame);
+  document.getElementById("button-load-custom").addEventListener("click", loadSettings);
+  document.getElementById("button-save-custom").addEventListener("click", saveSettings);
+  document.getElementById("button-delete-custom").addEventListener("click", deleteSettings);
+  document.getElementById("button-start").addEventListener("click", startGame);
 
   setTimeout(pick_move, 2000);
 });
