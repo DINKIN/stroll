@@ -114,9 +114,12 @@ function nothingLarger(container, thing) {
   return true;
 }
 
-function describe(action, container, macro, verbose=true) {
+function describe(action, container, macro, verbose=true, flat=false) {
   var options = [];
 
+  if (flat) {
+    container = flatten(container);
+  }
   for (var i = 0; i < rules[action].length; i++) {
     if(rules[action][i].test(container,macro)) {
       options.push(rules[action][i].desc);

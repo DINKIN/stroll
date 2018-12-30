@@ -28,6 +28,9 @@ let unit = "metric";
 let numbers = "words";
 
 let verbose = true;
+let flat = false;
+
+let text_verbosity = "verbose";
 
 let autoVerbose = true;
 
@@ -458,7 +461,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container) {
-      return describe("stomach",container,this.owner,verbose);
+      return describe("stomach",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
       if (owner.gasEnabled)
@@ -478,9 +481,9 @@ let macro =
         return "Your belly is flat, growling and gurgling for want of prey.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your belly churns and bubbles as it works to melt " + prey.describe(false) + " down to chyme.";
+          return "Your belly churns and bubbles as it works to melt " + prey.describe(false, flat) + " down to chyme.";
         } else {
-          return "Your belly sloshes with the weight of " + prey.describe(false) + " trapped within.";
+          return "Your belly sloshes with the weight of " + prey.describe(false, flat) + " trapped within.";
         }
       }
     },
@@ -503,10 +506,10 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeMove" : function(container) {
-      return describe("tail-to-stomach",container,this.owner,verbose);
+      return describe("tail-to-stomach",container,this.owner,verbose, flat);
     },
     "describeDigestion" : function(container) {
-      return describe("tail",container,this.owner,verbose);
+      return describe("tail",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
       if (owner.gasEnabled)
@@ -526,12 +529,12 @@ let macro =
         return "Your " + this.owner.tailDesc + " are empty.";
       } else {
         if (this.owner.tailVoreToStomach) {
-          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "clench and squeeze around " : "clenches and squeezes around ") + prey.describe(false) + ", working them deeper and deeper inside.";
+          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "clench and squeeze around " : "clenches and squeezes around ") + prey.describe(false, flat) + ", working them deeper and deeper inside.";
         }
         else if (macro.brutality > 0)  {
-          return "Your " + this.owner.tailDesc + " " +  (this.owner.tailCount > 1 ? "groans" : "groan") + " ominously as " + (this.owner.tailCount > 1 ? "they gurgle" : "it gurgles" ) + " around " + prey.describe(false) + ", slowly absorbing them into your musky depths.";
+          return "Your " + this.owner.tailDesc + " " +  (this.owner.tailCount > 1 ? "groans" : "groan") + " ominously as " + (this.owner.tailCount > 1 ? "they gurgle" : "it gurgles" ) + " around " + prey.describe(false, flat) + ", slowly absorbing them into your musky depths.";
         } else {
-          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "bulge" : "bulges") + " with " + prey.describe(false) + ".";
+          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "bulge" : "bulges") + " with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -554,10 +557,10 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeMove" : function(container) {
-      return describe("bowels-to-stomach",container,this.owner,verbose);
+      return describe("bowels-to-stomach",container,this.owner,verbose, flat);
     },
     "describeDigestion" : function(container) {
-      return describe("bowels",container,this.owner,verbose);
+      return describe("bowels",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
       if (owner.gasEnabled)
@@ -577,9 +580,9 @@ let macro =
         return "Your bowels are empty.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your bowels groan ominously as they clench around " + prey.describe(false) + ", slowly absorbing them into your musky depths.";
+          return "Your bowels groan ominously as they clench around " + prey.describe(false, flat) + ", slowly absorbing them into your musky depths.";
         } else {
-          return "Your bowels bulge with " + prey.describe(false) + ".";
+          return "Your bowels bulge with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -610,7 +613,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container, vol) {
-      return describe("womb",container,this.owner,verbose).replace("$VOLUME",volume(vol,unit,false));
+      return describe("womb",container,this.owner,verbose, flat).replace("$VOLUME",volume(vol,unit,false));
     },
     "fill": function(owner,container) {
       let amount = container.sum_property("mass") * owner.femcumDigestFactor / 1e3;
@@ -627,9 +630,9 @@ let macro =
         return "Your lower belly is flat.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your womb tingles as its rhythmically grinds down on " + prey.describe(false) + ", turning them soft and wet as they start to dissolve into femcum.";
+          return "Your womb tingles as its rhythmically grinds down on " + prey.describe(false, flat) + ", turning them soft and wet as they start to dissolve into femcum.";
         } else {
-          return "Your womb clenches around " + prey.describe(false) + ".";
+          return "Your womb clenches around " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -660,7 +663,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container, vol) {
-      return describe("balls",container,this.owner,verbose).replace("$VOLUME",volume(vol,unit,false));
+      return describe("balls",container,this.owner,verbose, flat).replace("$VOLUME",volume(vol,unit,false));
     },
     "fill": function(owner,container) {
       let amount = container.sum_property("mass") * owner.cumDigestFactor / 1e3;
@@ -677,9 +680,9 @@ let macro =
         return "Your balls are smooth.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your balls slosh and bulge as they work to convert " + prey.describe(false) + " into hot cum.";
+          return "Your balls slosh and bulge as they work to convert " + prey.describe(false, flat) + " into hot cum.";
         } else {
-          return "Your balls slosh about, loaded down with " + prey.describe(false) + ".";
+          return "Your balls slosh about, loaded down with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -710,7 +713,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container, vol) {
-      return describe("breasts",container,this.owner,verbose).replace("$VOLUME",volume(vol,unit,false));
+      return describe("breasts",container,this.owner,verbose, flat).replace("$VOLUME",volume(vol,unit,false));
     },
     "fill": function(owner,container) {
       if (macro.lactationEnabled) {
@@ -729,9 +732,9 @@ let macro =
         return "Your breasts are smooth.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your breasts slosh from side to side, " + prey.describe(false) + " slowly digesting into creamy milk.";
+          return "Your breasts slosh from side to side, " + prey.describe(false, flat) + " slowly digesting into creamy milk.";
         } else {
-          return "Your breasts bulge with " + prey.describe(false) + ".";
+          return "Your breasts bulge with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -761,7 +764,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container, vol) {
-      return describe("bladder",container,this.owner,verbose).replace("$VOLUME",volume(vol,unit,false));
+      return describe("bladder",container,this.owner,verbose, flat).replace("$VOLUME",volume(vol,unit,false));
     },
     "fill": function(owner,container) {
       let amount = container.sum_property("mass") * owner.pissDigestFactor / 1e3;
@@ -778,9 +781,9 @@ let macro =
         return "Your bladder has nobody in it.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your bladder bulges, " + prey.describe(false) + " dissolving in your acrid piss.";
+          return "Your bladder bulges, " + prey.describe(false, flat) + " dissolving in your acrid piss.";
         } else {
-          return "Your bladder bulges with " + prey.describe(false) + ".";
+          return "Your bladder bulges with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -804,7 +807,7 @@ let macro =
         this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion": function(container) {
-      return describe("soul-digest",container,this.owner,verbose);
+      return describe("soul-digest",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
       add_victim_people("soul-digest",container);
@@ -852,7 +855,7 @@ let macro =
     },
     "describeDigestion": function(container) {
       add_victim_people("goo", container);
-      return describe("goo-digest",container,this.owner,verbose);
+      return describe("goo-digest",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
 
@@ -867,9 +870,9 @@ let macro =
         return "You contain no prey.";
       } else {
         if (macro.gooDigestion)  {
-          return "Your gooey body contains " + prey.describe(false) + ", gradually absorbing them into your bulk.";
+          return "Your gooey body contains " + prey.describe(false, flat) + ", gradually absorbing them into your bulk.";
         } else {
-          return "Your gooey body contains " + prey.describe(false) + ".";
+          return "Your gooey body contains " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -894,7 +897,7 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion" : function(container) {
-      return describe("paws",container,this.owner,verbose);
+      return describe("paws",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
 
@@ -908,7 +911,7 @@ let macro =
       if (prey.count == 0) {
         return "Your " + this.owner.footOnlyDesc(true) + " don't contain any prey.";
       } else {
-        return "Your " + this.owner.footOnlyDesc(true) + " have enveloped " + prey.describe(false);
+        return "Your " + this.owner.footOnlyDesc(true) + " have enveloped " + prey.describe(false, flat);
       }
     },
     "contents" : [],
@@ -930,10 +933,10 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeDigestion" : function(container) {
-      return describe("crop-transfer",container,this.owner,verbose);
+      return describe("crop-transfer",container,this.owner,verbose, flat);
     },
     "describeMove" : function(container) {
-      return describe("crop-transfer",container,this.owner,verbose);
+      return describe("crop-transfer",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
 
@@ -947,7 +950,7 @@ let macro =
       if (prey.count == 0) {
         return "Your crop don't contain any prey.";
       } else {
-        return "Your crop bulges with " + prey.describe(false) + ".";
+        return "Your crop bulges with " + prey.describe(false, flat) + ".";
       }
     },
     "contents" : [],
@@ -969,10 +972,10 @@ let macro =
       this.contents[0] = this.contents[0].merge(prey);
     },
     "describeMove" : function(container) {
-      return describe("wings-to-stomach",container,this.owner,verbose);
+      return describe("wings-to-stomach",container,this.owner,verbose, flat);
     },
     "describeDigestion" : function(container) {
-      return describe("wings",container,this.owner,verbose);
+      return describe("wings",container,this.owner,verbose, flat);
     },
     "fill": function(owner,container) {
       // no-op
@@ -987,9 +990,9 @@ let macro =
         return "Your don't have anyone trapped in your wings.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your folded wings bulge as they squeeze in on " + prey.describe(false) + ", slowly breaking them down.";
+          return "Your folded wings bulge as they squeeze in on " + prey.describe(false, flat) + ", slowly breaking them down.";
         } else {
-          return "Your wings bulge with " + prey.describe(false) + ".";
+          return "Your wings bulge with " + prey.describe(false, flat) + ".";
         }
       }
     },
@@ -1006,7 +1009,7 @@ let macro =
       if (this.container.count == 0)
         return "Your pouch is empty";
       else
-        return "Your pouch contains " + this.container.describe(false);
+        return "Your pouch contains " + this.container.describe(false, flat);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1020,7 +1023,7 @@ let macro =
       if (this.container.count == 0)
         return "Your sheath is empty";
       else
-        return "Your sheath contains " + this.container.describe(false);
+        return "Your sheath contains " + this.container.describe(false, flat);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1034,7 +1037,7 @@ let macro =
       if (this.container.count == 0)
         return "Your breasts don't have anyone stuck between them";
       else
-        return "Your cleavage contains " + this.container.describe(false);
+        return "Your cleavage contains " + this.container.describe(false, flat);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1051,7 +1054,7 @@ let macro =
       if (this.container.count == 0)
         return "Your " + macro.shoeDesc(true) + " are empty.";
       else
-        return "Your " + macro.shoeDesc(true) + " contain " + this.container.describe(false);
+        return "Your " + macro.shoeDesc(true) + " contain " + this.container.describe(false, flat);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1065,7 +1068,7 @@ let macro =
       if (this.container.count == 0)
         return "Your " + macro.sockDesc(true) + " are empty.";
       else
-        return "Your " + macro.sockDesc(true) + " contain " + this.container.describe(false);
+        return "Your " + macro.sockDesc(true) + " contain " + this.container.describe(false, flat);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1079,7 +1082,7 @@ let macro =
       if (this.container.count == 0)
         return "You don't have anyone stuck between your " + this.owner.toeDesc(true);
       else
-        return "You have " + this.container.describe(false) + " wedged between your " + this.owner.toeDesc(true);
+        return "You have " + this.container.describe(false, flat) + " wedged between your " + this.owner.toeDesc(true);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1489,7 +1492,7 @@ let macro =
         line += " They slosh with " + volume(this.milkStorage.amount, unit, false) + " of creamy milk.";
       }
       if (this.cleavage.container.count > 0)
-        line += " Between them are " + this.cleavage.container.describe(false) + ".";
+        line += " Between them are " + this.cleavage.container.describe(false, flat) + ".";
 
       result.push(line);
       if (this.breastVore) {
@@ -1512,16 +1515,16 @@ let macro =
     line = "Your two " + this.footDesc(true) + " shake the earth.";
 
     if (this.footShoeWorn && this.shoe.container.count > 0) {
-      line += " Within " + (this.shoe.container.count > 1 ? "are" : "is") + " " + this.shoe.container.describe(false);
+      line += " Within " + (this.shoe.container.count > 1 ? "are" : "is") + " " + this.shoe.container.describe(false, flat);
       if (this.footSockWorn && this.sock.container.count > 0) {
-        line += " and " + this.sock.container.describe(false) + " in your socks.";
+        line += " and " + this.sock.container.describe(false, flat) + " in your socks.";
       }
     } else if (this.footSockWorn && this.sock.container.count > 0) {
-      line += " Within " + (this.sock.container.count > 1 ? "are" : "is") + " " + this.sock.container.describe(false);
+      line += " Within " + (this.sock.container.count > 1 ? "are" : "is") + " " + this.sock.container.describe(false, flat);
     }
 
     if (this.paws.container.count > 0) {
-      line += " You have " + this.paws.container.describe(false) + " wedged between your " + macro.toeDesc(true);
+      line += " You have " + this.paws.container.describe(false, flat) + " wedged between your " + macro.toeDesc(true);
     }
 
     result.push(line);
@@ -1659,9 +1662,26 @@ function toggle_numbers(e) {
 
 function toggle_verbose(e)
 {
-  verbose = !verbose;
-
-  e.target.innerText = (verbose ? "Verbose Text" : "Simple Text");
+  switch(text_verbosity) {
+    case "verbose":
+      text_verbosity = "concise";
+      e.target.innerText = "Concise Text";
+      verbose = false;
+      flat = true;
+      break;
+    case "concise":
+      text_verbosity = "simple";
+      e.target.innerText = "Simple Text";
+      verbose = false;
+      flat = false;
+      break;
+    case "simple":
+      text_verbosity = "verbose";
+      e.target.innerText = "Verbose Text";
+      verbose = true;
+      flat = false;
+      break;
+  }
 }
 
 function toggle_arousal(e)
@@ -1941,10 +1961,10 @@ function feed()
 
   if (macro.cropEnabled) {
     macro.crop.feed(prey);
-    line = describe("crop-swallow", prey, macro, verbose);
+    line = describe("crop-swallow", prey, macro, verbose, flat);
   } else {
     macro.stomach.feed(prey);
-    line = describe("eat", prey, macro, verbose);
+    line = describe("eat", prey, macro, verbose, flat);
   }
 
   add_victim_people("eaten",prey);
@@ -1963,7 +1983,7 @@ function chew()
   let area = macro.handArea;
   let prey = getPrey(biome, area, macro.sameSizeVore);
 
-  let line = describe("chew", prey, macro, verbose);
+  let line = describe("chew", prey, macro, verbose, flat);
 
   let linesummary = summarize(prey.sum(), false);
 
@@ -1996,7 +2016,7 @@ function drool()
   if (prey.count == 0) {
     return;
   }
-  let line = describe("drool", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("drool", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2018,7 +2038,7 @@ function stomp()
 
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
-  let line = describe("stomp", prey, macro, verbose);
+  let line = describe("stomp", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2058,7 +2078,7 @@ function stomp_wedge() {
   if (prey.count == 0)
     return;
 
-  let line = describe("stomp-wedge", prey, macro, verbose);
+  let line = describe("stomp-wedge", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2077,7 +2097,7 @@ function stomp_wedge() {
 function stomp_goo() {
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
-  let line = describe("stomp-goo", prey, macro, verbose);
+  let line = describe("stomp-goo", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2123,7 +2143,7 @@ function flex_toes() {
     }
   }
 
-  let line = describe("flex-toes", prey, macro, verbose);
+  let line = describe("flex-toes", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2141,7 +2161,7 @@ function paw_stench() {
 
   let area = macro.pawStenchArea;
   let prey = getPrey(biome, area);
-  let line = describe("paw-stench", prey, macro, verbose);
+  let line = describe("paw-stench", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2169,7 +2189,7 @@ function grind()
 
   let prey = getPrey(biome, area);
 
-  let line = describe("grind", prey, macro, verbose);
+  let line = describe("grind", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2191,7 +2211,7 @@ function ass_grind()
 
   let prey = getPrey(biome, area);
 
-  let line = describe("ass-grind", prey, macro, verbose);
+  let line = describe("ass-grind", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2212,7 +2232,7 @@ function anal_vore()
   let area = macro.analVoreArea;
   let prey = getOnePrey(biome, area, macro.sameSizeVore);
 
-  let line = describe("anal-vore", prey, macro, verbose);
+  let line = describe("anal-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2240,7 +2260,7 @@ function sit()
   let area = macro.assArea;
   let crushed = getPrey(biome, area, macro.sameSizeStomp);
 
-  let line = describe("ass-crush", crushed, macro, verbose);
+  let line = describe("ass-crush", crushed, macro, verbose, flat);
   let linesummary = summarize(crushed.sum(), true);
 
   let people = get_living_prey(crushed.sum());
@@ -2265,7 +2285,7 @@ function sit_goo()
   let area = macro.assArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
 
-  let line = describe("ass-goo", prey, macro, verbose);
+  let line = describe("ass-goo", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2289,7 +2309,7 @@ function ass_stench() {
 
   let area = macro.assStenchArea;
   let prey = getPrey(biome, area);
-  let line = describe("ass-stench", prey, macro, verbose);
+  let line = describe("ass-stench", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2310,7 +2330,7 @@ function cleavage_stuff()
 {
   let area = macro.handArea;
   let prey = getPrey(biome, area);
-  let line = describe("cleavage-stuff", prey, macro, verbose);
+  let line = describe("cleavage-stuff", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2330,7 +2350,7 @@ function cleavage_crush()
 {
   let prey = macro.cleavage.container;
   macro.cleavage.container = new Container();
-  let line = describe("cleavage-crush", prey, macro, verbose);
+  let line = describe("cleavage-crush", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2350,7 +2370,7 @@ function cleavage_drop()
 {
   let prey = macro.cleavage.container;
   macro.cleavage.container = new Container();
-  let line = describe("cleavage-drop", prey, macro, verbose);
+  let line = describe("cleavage-drop", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2369,7 +2389,7 @@ function cleavage_absorb()
 {
   let prey = macro.cleavage.container;
   macro.cleavage.container = new Container();
-  let line = describe("cleavage-absorb", prey, macro, verbose);
+  let line = describe("cleavage-absorb", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2387,7 +2407,7 @@ function cleavage_absorb()
 function breast_toy()
 {
   let prey = macro.cleavage.container;
-  let line = describe("breast-toy", prey, macro, verbose);
+  let line = describe("breast-toy", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2404,7 +2424,7 @@ function breast_crush()
 {
   let area = macro.breastArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
-  let line = describe("breast-crush", prey, macro, verbose);
+  let line = describe("breast-crush", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2430,7 +2450,7 @@ function breast_vore()
   // todo nipple areas?
   let area = macro.breastStretchArea/4;
   let prey = getPrey(biome, area, macro.sameSizeVore);
-  let line = describe("breast-vore", prey, macro, verbose);
+  let line = describe("breast-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2463,7 +2483,7 @@ function breast_milk(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("breast-milk", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("breast-milk", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2482,7 +2502,7 @@ function unbirth()
 {
   let area = macro.vaginaStretchArea;
   let prey = getPrey(biome, area, macro.sameSizeVore);
-  let line = describe("unbirth", prey, macro, verbose);
+  let line = describe("unbirth", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2501,7 +2521,7 @@ function unbirth()
 function slit_toy()
 {
   let prey = macro.womb.contents[0].merge(macro.womb.contents[1]);
-  let line = describe("slit-toy", prey, macro, verbose);
+  let line = describe("slit-toy", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2518,7 +2538,7 @@ function sheath_stuff()
 {
   let area = Math.min(macro.handArea, macro.dickArea);
   let prey = getPrey(biome, area, macro.sameSizeVore);
-  let line = describe("sheath-stuff", prey, macro, verbose);
+  let line = describe("sheath-stuff", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2536,7 +2556,7 @@ function sheath_stuff()
 function sheath_toy()
 {
   let prey = macro.sheath.container;
-  let line = describe("sheath-toy", prey, macro, verbose);
+  let line = describe("sheath-toy", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2553,7 +2573,7 @@ function sheath_clench()
 {
   let prey = macro.sheath.container;
   macro.sheath.container = new Container();
-  let line = describe("sheath-clench", prey, macro, verbose);
+  let line = describe("sheath-clench", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2571,7 +2591,7 @@ function sheath_crush()
 {
   let prey = macro.sheath.container;
   macro.sheath.container = new Container();
-  let line = describe("sheath-crush", prey, macro, verbose);
+  let line = describe("sheath-crush", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2589,7 +2609,7 @@ function sheath_absorb()
 {
   let prey = macro.sheath.container;
   macro.sheath.container = new Container();
-  let line = describe("sheath-absorb", prey, macro, verbose);
+  let line = describe("sheath-absorb", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2608,7 +2628,7 @@ function cockslap()
 {
   let area = macro.dickArea;
   let prey = getPrey(biome, area);
-  let line = describe("cockslap", prey, macro, verbose);
+  let line = describe("cockslap", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2627,7 +2647,7 @@ function cock_vore()
 {
   let area = macro.dickStretchGirth;
   let prey = getPrey(biome, area, macro.sameSizeVore);
-  let line = describe("cock-vore", prey, macro, verbose);
+  let line = describe("cock-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2648,7 +2668,7 @@ function ball_smother()
 {
   let area = macro.ballArea * 2;
   let prey = getPrey(biome, area);
-  let line = describe("ball-smother", prey, macro, verbose);
+  let line = describe("ball-smother", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2668,7 +2688,7 @@ function male_spurt(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("male-spurt", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("male-spurt", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2688,7 +2708,7 @@ function male_spurt(vol, active=true)
 
 function male_spurt_musk(area, active=true) {
   let prey = getPrey(biome, area);
-  let line = describe("male-spurt-musk", prey, macro, verbose);
+  let line = describe("male-spurt-musk", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2710,7 +2730,7 @@ function male_orgasm(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("male-orgasm", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,true));
+  let line = describe("male-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2730,7 +2750,7 @@ function male_orgasm(vol, active=true)
 
 function male_orgasm_musk(area, active=true) {
   let prey = getPrey(biome, area);
-  let line = describe("male-orgasm-musk", prey, macro, verbose);
+  let line = describe("male-orgasm-musk", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2752,7 +2772,7 @@ function female_spurt(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("female-spurt", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("female-spurt", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2772,7 +2792,7 @@ function female_spurt(vol, active=true)
 
 function female_spurt_musk(area, active=true) {
   let prey = getPrey(biome, area);
-  let line = describe("female-spurt-musk", prey, macro, verbose);
+  let line = describe("female-spurt-musk", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2794,7 +2814,7 @@ function female_orgasm(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("female-orgasm", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("female-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2814,7 +2834,7 @@ function female_orgasm(vol, active=true)
 
 function female_orgasm_musk(area, active=true) {
   let prey = getPrey(biome, area);
-  let line = describe("female-orgasm-musk", prey, macro, verbose);
+  let line = describe("female-orgasm-musk", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2835,7 +2855,7 @@ function tail_slap()
 {
   let area = macro.tailArea * macro.tailCount;
   let prey = getPrey(biome, area);
-  let line = describe("tail-slap", prey, macro, verbose);
+  let line = describe("tail-slap", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -2881,7 +2901,7 @@ function tail_vore(count)
       let area = macro.tailStretchGirth;
       let prey = getPrey(biome, area, macro.sameSizeVore);
       totalPrey = totalPrey.merge(prey);
-      let line = describe("tail-vore", prey, macro, verbose);
+      let line = describe("tail-vore", prey, macro, verbose, flat);
       lines.push(line);
     }
   } else {
@@ -2925,7 +2945,7 @@ function pouch_stuff()
 {
   let area = macro.handArea;
   let prey = getPrey(biome, area);
-  let line = describe("pouch-stuff", prey, macro, verbose);
+  let line = describe("pouch-stuff", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2945,7 +2965,7 @@ function pouch_rub()
 {
   let prey = macro.pouch.container;
 
-  let line = describe("pouch-rub", prey, macro, verbose);
+  let line = describe("pouch-rub", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
   update([line,linesummary,newline]);
 }
@@ -2955,7 +2975,7 @@ function pouch_eat()
   let prey = macro.pouch.container;
   macro.pouch.container = new Container();
 
-  let line = describe("pouch-eat", prey, macro, verbose);
+  let line = describe("pouch-eat", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2977,7 +2997,7 @@ function pouch_absorb()
   let prey = macro.pouch.container;
   macro.pouch.container = new Container();
 
-  let line = describe("pouch-absorb", prey, macro, verbose);
+  let line = describe("pouch-absorb", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -2999,7 +3019,7 @@ function soul_vore()
   let area = macro.height * macro.height;
   let prey = getPrey(biome, area);
 
-  let line = describe("soul-vore", prey, macro, verbose);
+  let line = describe("soul-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -3019,7 +3039,7 @@ function soul_absorb_paw()
 {
   let prey = getPrey(biome, macro.pawArea, macro.sameSizeStomp);
 
-  let line = describe("soul-absorb-paw", prey, macro, verbose);
+  let line = describe("soul-absorb-paw", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3046,7 +3066,7 @@ function belch(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("belch", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("belch", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3071,7 +3091,7 @@ function fart(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("fart", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("fart", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3088,7 +3108,7 @@ function fart(vol, active=true)
 function wear_shoes() {
   macro.shoe.container = macro.shoe.container.merge(macro.paws.container);
 
-  let line = describe("wear-shoe",macro.shoe.container.merge(macro.paws.container),macro,verbose);
+  let line = describe("wear-shoe",macro.shoe.container.merge(macro.paws.container, flat),macro,verbose);
   macro.paws.container = new Container();
   let summary = summarize(macro.shoe.container.sum(),false);
 
@@ -3108,7 +3128,7 @@ function remove_shoes() {
   macro.shoeTrapped = macro.paws.container;
   macro.paws.container = new Container();
 
-  let line = describe("remove-shoe",macro.shoe.container,macro,verbose);
+  let line = describe("remove-shoe",macro.shoe.container,macro,verbose, flat);
   let summary = summarize(macro.shoe.container.sum(),false);
 
   footwearUpdate();
@@ -3123,7 +3143,7 @@ function remove_shoes() {
 function remove_shoes_stench() {
     let area = macro.pawStenchArea * 2;
     let prey = getPrey(biome, area);
-    let line = describe("paw-stench", prey, macro, verbose);
+    let line = describe("paw-stench", prey, macro, verbose, flat);
     let linesummary = summarize(prey.sum(), true);
 
     let people = get_living_prey(prey.sum());
@@ -3143,7 +3163,7 @@ function remove_shoes_stench() {
 function wear_socks() {
   macro.sock.container = macro.sock.container.merge(macro.paws.container);
 
-  let line = describe("wear-sock",macro.sock.container,macro,verbose);
+  let line = describe("wear-sock",macro.sock.container,macro,verbose, flat);
   macro.paws.container = new Container();
   let summary = summarize(macro.sock.container.sum(),false);
 
@@ -3163,7 +3183,7 @@ function remove_socks() {
   macro.sockTrapped = macro.paws.container;
   macro.paws.container = new Container();
 
-  let line = describe("remove-sock",macro.sock.container,macro,verbose);
+  let line = describe("remove-sock",macro.sock.container,macro,verbose, flat);
   let summary = summarize(macro.sock.container.sum(),false);
 
   footwearUpdate();
@@ -3178,7 +3198,7 @@ function remove_socks() {
 function remove_socks_stench() {
     let area = macro.pawStenchArea * 2;
     let prey = getPrey(biome, area);
-    let line = describe("paw-stench", prey, macro, verbose);
+    let line = describe("paw-stench", prey, macro, verbose, flat);
     let linesummary = summarize(prey.sum(), true);
 
     let people = get_living_prey(prey.sum());
@@ -3200,7 +3220,7 @@ function stuff_shoes() {
 
   macro.shoe.add(prey);
 
-  let line = describe("stuff-shoe",prey,macro,verbose);
+  let line = describe("stuff-shoe",prey,macro,verbose, flat);
   let summary = summarize(prey.sum(),false);
 
   update([line,summary,newline]);
@@ -3211,7 +3231,7 @@ function stuff_socks() {
 
   macro.sock.add(prey);
 
-  let line = describe("stuff-sock",prey,macro,verbose);
+  let line = describe("stuff-sock",prey,macro,verbose, flat);
   let summary = summarize(prey.sum(),false);
 
   update([line,summary,newline]);
@@ -3222,7 +3242,7 @@ function dump_shoes() {
 
   macro.shoe.container = new Container();
 
-  let line = describe("dump-shoe",prey,macro,verbose);
+  let line = describe("dump-shoe",prey,macro,verbose, flat);
   let summary = summarize(prey.sum(),false);
 
   update([line,summary,newline]);
@@ -3233,7 +3253,7 @@ function dump_socks() {
 
   macro.sock.container = new Container();
 
-  let line = describe("dump-sock",prey,macro,verbose);
+  let line = describe("dump-sock",prey,macro,verbose, flat);
   let summary = summarize(prey.sum(),false);
 
   update([line,summary,newline]);
@@ -3285,7 +3305,7 @@ function piss(vol, active=true) {
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("piss", prey, macro, verbose).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("piss", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3306,7 +3326,7 @@ function piss(vol, active=true) {
 
 function piss_stench(area, active=true) {
   let prey = getPrey(biome, area);
-  let line = describe("piss-stench", prey, macro, verbose);
+  let line = describe("piss-stench", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3325,7 +3345,7 @@ function piss_stench(area, active=true) {
 
 function bladder_vore() {
   let prey = getPrey(biome, macro.urethraStretchArea, macro.sameSizeVore);
-  let line = describe("bladder-vore", prey, macro, verbose);
+  let line = describe("bladder-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -3352,7 +3372,7 @@ function scat(vol, active=true) {
   let scatLength = Math.pow(vol, 1/3) * 4;
 
   let prey = getPrey(biome, area);
-  let line = describe("scat", prey, macro, verbose).replace("$MASS",mass(vol*1000,unit,true)).replace("$LENGTH",length(scatLength,unit,true));
+  let line = describe("scat", prey, macro, verbose, flat).replace("$MASS",mass(vol*1000,unit,true)).replace("$LENGTH",length(scatLength,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3376,7 +3396,7 @@ function scat(vol, active=true) {
 
 function scat_stench(area) {
   let prey = getPrey(biome, area);
-  let line = describe("scat-stench", prey, macro, verbose);
+  let line = describe("scat-stench", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3465,7 +3485,7 @@ function melt()
     macro.shoe.container = new Container();
   }
 
-  let line = describe("melt", prey, macro, verbose);
+  let line = describe("melt", prey, macro, verbose, flat);
 
   macro.goo.feed(prey);
 
@@ -3476,7 +3496,7 @@ function flood()
 {
   let area = Math.pow(macro.totalMass / 1000, 2/3);
   let prey = getPrey(biome, area, macro.sameSizeStomp);
-  let line = describe("flood", prey, macro, verbose);
+  let line = describe("flood", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
@@ -3505,7 +3525,7 @@ function solidify()
     macro.goo.contents[i] = new Container();
   }
 
-  let line = describe("solidify", prey, macro, verbose);
+  let line = describe("solidify", prey, macro, verbose, flat);
 
   let linesummary = summarize(prey.sum(), true);
 
@@ -3531,7 +3551,7 @@ function vomit() {
     macro.stomach.contents[i] = new Container();
   }
 
-  let line = describe("vomit", prey, macro, verbose);
+  let line = describe("vomit", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
   let preyMass = prey.sum_property("mass");
   let sound = getSound("vomit", preyMass);
@@ -3555,7 +3575,7 @@ function move_prey(from, to) {
 
 function goo_move_prey(from, to, name) {
   let prey = move_prey(from, to);
-  let line = describe(name, prey, macro, verbose);
+  let line = describe(name, prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
   let preyMass = prey.sum_property("mass");
   let sound = getSound("goo", preyMass);
@@ -3629,24 +3649,24 @@ function paw_vore()
     let area = macro.pawArea;
     prey = prey.merge(getPrey(biome, area, macro.sameSizeVore));
 
-    lines.push(describe("paw-vore", prey, macro, verbose));
+    lines.push(describe("paw-vore", prey, macro, verbose, flat));
   }
 
   if (macro.paws.container.count > 0) {
     prey = prey.merge(macro.paws.container);
-    lines.push(describe("paw-vore-toes", macro.paws.container, macro, verbose));
+    lines.push(describe("paw-vore-toes", macro.paws.container, macro, verbose, flat));
     macro.paws.container = new Container();
   }
 
   if (macro.shoe.container.count > 0 && macro.footShoeWorn && (!macro.footSockEnabled || !macro.footSockWorn)) {
     prey = prey.merge(macro.shoe.container);
-    lines.push(describe("paw-vore-toes", macro.shoe.container, macro, verbose));
+    lines.push(describe("paw-vore-toes", macro.shoe.container, macro, verbose, flat));
     macro.shoe.container = new Container();
   }
 
   if (macro.sock.container.count > 0 && macro.footSockWorn) {
     prey = prey.merge(macro.sock.container);
-    lines.push(describe("paw-vore-toes", macro.sock.container, macro, verbose));
+    lines.push(describe("paw-vore-toes", macro.sock.container, macro, verbose, flat));
     macro.sock.container = new Container();
   }
 
@@ -3684,7 +3704,7 @@ function breath(type, style)
     prey = getPrey(biome, area, true);
   }
 
-  let line = describe("breath-" + type, prey, macro, verbose);
+  let line = describe("breath-" + type, prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
   let preyMass = prey.sum_property("mass");
   let sound = getSound("breath", preyMass);
@@ -3740,7 +3760,7 @@ function magic_shrink()
   macro.shrunkPrey = prey;
   macro.shrunkPrey.mass /= 1000000;
 
-  let line = describe("magic-shrink", prey, macro, false);
+  let line = describe("magic-shrink", prey, macro, false, flat);
   let linesummary = summarize(prey.sum(), false);
   let preyMass = prey.sum_property("mass");
   let sound = getSound("magic", preyMass);
@@ -3767,7 +3787,7 @@ function wings_flap()
 {
   let area = macro.wingArea * 2;
   let prey = getPrey(biome, area, false);
-  let line = describe("wings-flap", prey, macro, verbose);
+  let line = describe("wings-flap", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3785,7 +3805,7 @@ function wings_vore()
 {
   let area = macro.wingArea * 2;
   let prey = getPrey(biome, area, false);
-  let line = describe("wings-vore", prey, macro, verbose);
+  let line = describe("wings-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -3874,7 +3894,7 @@ function update(lines = [], active=true)
     let deltaHeight = log.scrollHeight - oldHeight;
 
     if (deltaHeight / window.innerHeight >= 0.2 && verbose && autoVerbose) {
-      update(["Switching to simple text!", newline], false);
+      update(["Switching to concise text!", newline], false);
       autoVerbose = false;
       let button = document.querySelector("#button-option-toggle_verbose");
 
@@ -4454,7 +4474,7 @@ function startGame(e) {
     }
 
     if (macro.arousalEnabled) {
-      enable_victim("cum-flood",describe("victim-cum-flood", null, macro, null));
+      enable_victim("cum-flood",describe("victim-cum-flood", null, macro, null, flat));
 
       if (macro.maleMuskEnabled) {
         enable_victim("male-spurt-musk","Inundated in masculine precum musk");
@@ -4757,7 +4777,7 @@ function showStats() {
     if (victims.hasOwnProperty(key)) {
       if (victims[key]["people"] > 0) {
         lines.push([
-          victims[key]["people"] + " " + describe("victim-" + key, null, macro, false),
+          victims[key]["people"] + " " + describe("victim-" + key, null, macro, false, flat),
           victims[key]["people"]
         ]);
         total += victims[key]["people"];
