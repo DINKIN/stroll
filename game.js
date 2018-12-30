@@ -4129,12 +4129,42 @@ function importSettings() {
   loadSettings(settings);
 }
 
+function updateCustomCharacters() {
+  let select = document.querySelector("#custom-characters");
+  select.innerHTML = "";
+
+  let saves = JSON.parse(storage.getItem("custom-characters"));
+
+  if (Object.keys(saves).length == 0) {
+    let none = document.createElement("option");
+    none.innerText = "No characters to load";
+
+    select.appendChild(none);
+
+    return;
+  } else {
+    Object.entries(saves).forEach(function([name, contents]) {
+      let entry = document.createElement("option");
+      entry.value = name;
+      entry.innerText = name;
+
+      select.appendChild(entry);
+    });
+  }
+}
+
 function saveSettings() {
   let storage = window.localStorage;
 
   let settings = generateSettings();
 
-  storage.setItem('settings',JSON.stringify(settings));
+  let saves = JSON.parse(storage.getItem("custom-characters"));
+
+  saves[settings.name] = settings;
+
+  storage.setItem('custom-characters',JSON.stringify(saves));
+
+  updateCustomCharacters();
 }
 
 function loadAutosave() {
@@ -4147,12 +4177,18 @@ function loadAutosave() {
 function loadSettings(settings = null) {
 
   if (settings == null) {
-    if (window.localStorage.getItem('settings') == null)
-      return;
 
     let storage = window.localStorage;
 
-    settings = JSON.parse(storage.getItem('settings'));
+    let select = document.querySelector("#custom-characters");
+
+    let name = select.options[select.selectedIndex].value;
+
+    settings = JSON.parse(storage.getItem('custom-characters'))[name];
+
+    if (settings == undefined) {
+      return;
+    }
   }
 
   migrate(settings);
@@ -4813,6 +4849,24 @@ window.addEventListener('load', function(event) {
       setDarkMode(storage.getItem("dark-mode") === "true");
     }
   }());
+
+  if (storage.getItem("custom-characters") == undefined) {
+    storage.setItem("custom-characters", JSON.stringify({}));
+  }
+
+  // this migrates the old single custom character slot over
+  if (storage.getItem("settings") != undefined) {
+    let character = JSON.parse(storage.getItem("settings"));
+
+    let saves = JSON.parse(storage.getItem("custom-characters"));
+
+    saves[character.name] = character;
+
+    localStorage.setItem("custom-characters", JSON.stringify(saves));
+    localStorage.removeItem("settings")
+  }
+
+  updateCustomCharacters();
 
   document.querySelectorAll(".version").forEach(function(x) {
     x.innerText = "Version: " + version;

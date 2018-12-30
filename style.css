@@ -694,3 +694,7 @@ body.dark .meterLabel {
 .save-version {
   display: none;
 }
+
+#custom-characters {
+  font-size: 24px;
+}
