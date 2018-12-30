@@ -499,7 +499,7 @@ function flatten(thing) {
     let obj = new things[key](val);
 
     obj.contents = [];
-    
+
     list.push(obj);
   });
 
@@ -559,6 +559,15 @@ function defaultAddContent(thing) {
   };
 }
 
+function defaultDescribeSimple(thing) {
+  return function(flat) {
+    if (flat) {
+      return flatten(thing).describe(false)
+    } else {
+      return thing.describe(false);
+    }
+  }
+}
 function DefaultEntity() {
   this.sum = defaultSum;
   this.area = defaultArea;
@@ -566,6 +575,7 @@ function DefaultEntity() {
   this.sum_property = defaultSumProperty;
   this.merge = defaultMerge;
   this.multiply = defaultMultiply;
+  this.describeSimple = defaultDescribeSimple;
 
   return this;
 }
