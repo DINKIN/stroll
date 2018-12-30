@@ -3761,6 +3761,7 @@ function breath(type, style)
   let sound = getSound("breath", preyMass);
 
   update([sound, line, linesummary, newline]);
+
   add_victim_people("breath-" + type, prey);
 
   macro.arouse(5);

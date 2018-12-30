@@ -494,16 +494,12 @@ function flatten(thing) {
   let list = [];
 
   Object.entries(dict).forEach(function([key, val]) {
-    console.log(key);
-    console.log(things[key])
     let obj = new things[key](val);
 
     obj.contents = [];
 
     list.push(obj);
   });
-
-  console.log(list);
 
   return new Container(list);
 }
