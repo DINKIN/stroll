@@ -4952,9 +4952,12 @@ window.addEventListener('load', function(event) {
   document.getElementById("button-reset-custom").addEventListener("click", resetSettings);
   document.getElementById("button-load-autosave").addEventListener("click", loadAutosave);
 
-  document.getElementById("button-load-custom").addEventListener("click", loadSettings);
-  document.getElementById("button-save-custom").addEventListener("click", saveSettings);
-  document.getElementById("button-delete-custom").addEventListener("click", deleteSettings);
+  // note to self - the anonymous function is so that
+  // loadSettings doesn't receive the mouseEvent!
+
+  document.getElementById("button-load-custom").addEventListener("click", function() { loadSettings(); });
+  document.getElementById("button-save-custom").addEventListener("click", function() { saveSettings(); });
+  document.getElementById("button-delete-custom").addEventListener("click", function() { deleteSettings(); });
   document.getElementById("button-start").addEventListener("click", startGame);
 
   setTimeout(pick_move, 2000);
