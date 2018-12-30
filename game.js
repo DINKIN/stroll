@@ -481,9 +481,9 @@ let macro =
         return "Your belly is flat, growling and gurgling for want of prey.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your belly churns and bubbles as it works to melt " + prey.describe(false, flat) + " down to chyme.";
+          return "Your belly churns and bubbles as it works to melt " + prey.describe(false) + " down to chyme.";
         } else {
-          return "Your belly sloshes with the weight of " + prey.describe(false, flat) + " trapped within.";
+          return "Your belly sloshes with the weight of " + prey.describe(false) + " trapped within.";
         }
       }
     },
@@ -529,12 +529,12 @@ let macro =
         return "Your " + this.owner.tailDesc + " are empty.";
       } else {
         if (this.owner.tailVoreToStomach) {
-          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "clench and squeeze around " : "clenches and squeezes around ") + prey.describe(false, flat) + ", working them deeper and deeper inside.";
+          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "clench and squeeze around " : "clenches and squeezes around ") + prey.describe(false) + ", working them deeper and deeper inside.";
         }
         else if (macro.brutality > 0)  {
-          return "Your " + this.owner.tailDesc + " " +  (this.owner.tailCount > 1 ? "groans" : "groan") + " ominously as " + (this.owner.tailCount > 1 ? "they gurgle" : "it gurgles" ) + " around " + prey.describe(false, flat) + ", slowly absorbing them into your musky depths.";
+          return "Your " + this.owner.tailDesc + " " +  (this.owner.tailCount > 1 ? "groans" : "groan") + " ominously as " + (this.owner.tailCount > 1 ? "they gurgle" : "it gurgles" ) + " around " + prey.describe(false) + ", slowly absorbing them into your musky depths.";
         } else {
-          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "bulge" : "bulges") + " with " + prey.describe(false, flat) + ".";
+          return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "bulge" : "bulges") + " with " + prey.describe(false) + ".";
         }
       }
     },
@@ -580,9 +580,9 @@ let macro =
         return "Your bowels are empty.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your bowels groan ominously as they clench around " + prey.describe(false, flat) + ", slowly absorbing them into your musky depths.";
+          return "Your bowels groan ominously as they clench around " + prey.describe(false) + ", slowly absorbing them into your musky depths.";
         } else {
-          return "Your bowels bulge with " + prey.describe(false, flat) + ".";
+          return "Your bowels bulge with " + prey.describe(false) + ".";
         }
       }
     },
@@ -630,9 +630,9 @@ let macro =
         return "Your lower belly is flat.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your womb tingles as its rhythmically grinds down on " + prey.describe(false, flat) + ", turning them soft and wet as they start to dissolve into femcum.";
+          return "Your womb tingles as its rhythmically grinds down on " + prey.describe(false) + ", turning them soft and wet as they start to dissolve into femcum.";
         } else {
-          return "Your womb clenches around " + prey.describe(false, flat) + ".";
+          return "Your womb clenches around " + prey.describe(false) + ".";
         }
       }
     },
@@ -680,9 +680,9 @@ let macro =
         return "Your balls are smooth.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your balls slosh and bulge as they work to convert " + prey.describe(false, flat) + " into hot cum.";
+          return "Your balls slosh and bulge as they work to convert " + prey.describe(false) + " into hot cum.";
         } else {
-          return "Your balls slosh about, loaded down with " + prey.describe(false, flat) + ".";
+          return "Your balls slosh about, loaded down with " + prey.describe(false) + ".";
         }
       }
     },
@@ -732,9 +732,9 @@ let macro =
         return "Your breasts are smooth.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your breasts slosh from side to side, " + prey.describe(false, flat) + " slowly digesting into creamy milk.";
+          return "Your breasts slosh from side to side, " + prey.describe(false) + " slowly digesting into creamy milk.";
         } else {
-          return "Your breasts bulge with " + prey.describe(false, flat) + ".";
+          return "Your breasts bulge with " + prey.describe(false) + ".";
         }
       }
     },
@@ -781,9 +781,9 @@ let macro =
         return "Your bladder has nobody in it.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your bladder bulges, " + prey.describe(false, flat) + " dissolving in your acrid piss.";
+          return "Your bladder bulges, " + prey.describe(false) + " dissolving in your acrid piss.";
         } else {
-          return "Your bladder bulges with " + prey.describe(false, flat) + ".";
+          return "Your bladder bulges with " + prey.describe(false) + ".";
         }
       }
     },
@@ -870,9 +870,9 @@ let macro =
         return "You contain no prey.";
       } else {
         if (macro.gooDigestion)  {
-          return "Your gooey body contains " + prey.describe(false, flat) + ", gradually absorbing them into your bulk.";
+          return "Your gooey body contains " + prey.describe(false) + ", gradually absorbing them into your bulk.";
         } else {
-          return "Your gooey body contains " + prey.describe(false, flat) + ".";
+          return "Your gooey body contains " + prey.describe(false) + ".";
         }
       }
     },
@@ -911,7 +911,7 @@ let macro =
       if (prey.count == 0) {
         return "Your " + this.owner.footOnlyDesc(true) + " don't contain any prey.";
       } else {
-        return "Your " + this.owner.footOnlyDesc(true) + " have enveloped " + prey.describe(false, flat);
+        return "Your " + this.owner.footOnlyDesc(true) + " have enveloped " + prey.describe(false);
       }
     },
     "contents" : [],
@@ -950,7 +950,7 @@ let macro =
       if (prey.count == 0) {
         return "Your crop don't contain any prey.";
       } else {
-        return "Your crop bulges with " + prey.describe(false, flat) + ".";
+        return "Your crop bulges with " + prey.describe(false) + ".";
       }
     },
     "contents" : [],
@@ -990,9 +990,9 @@ let macro =
         return "Your don't have anyone trapped in your wings.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your folded wings bulge as they squeeze in on " + prey.describe(false, flat) + ", slowly breaking them down.";
+          return "Your folded wings bulge as they squeeze in on " + prey.describe(false) + ", slowly breaking them down.";
         } else {
-          return "Your wings bulge with " + prey.describe(false, flat) + ".";
+          return "Your wings bulge with " + prey.describe(false) + ".";
         }
       }
     },
@@ -1009,7 +1009,7 @@ let macro =
       if (this.container.count == 0)
         return "Your pouch is empty";
       else
-        return "Your pouch contains " + this.container.describe(false, flat);
+        return "Your pouch contains " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1023,7 +1023,7 @@ let macro =
       if (this.container.count == 0)
         return "Your sheath is empty";
       else
-        return "Your sheath contains " + this.container.describe(false, flat);
+        return "Your sheath contains " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1037,7 +1037,7 @@ let macro =
       if (this.container.count == 0)
         return "Your breasts don't have anyone stuck between them";
       else
-        return "Your cleavage contains " + this.container.describe(false, flat);
+        return "Your cleavage contains " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1054,7 +1054,7 @@ let macro =
       if (this.container.count == 0)
         return "Your " + macro.shoeDesc(true) + " are empty.";
       else
-        return "Your " + macro.shoeDesc(true) + " contain " + this.container.describe(false, flat);
+        return "Your " + macro.shoeDesc(true) + " contain " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1068,7 +1068,7 @@ let macro =
       if (this.container.count == 0)
         return "Your " + macro.sockDesc(true) + " are empty.";
       else
-        return "Your " + macro.sockDesc(true) + " contain " + this.container.describe(false, flat);
+        return "Your " + macro.sockDesc(true) + " contain " + this.container.describe(false);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1082,7 +1082,7 @@ let macro =
       if (this.container.count == 0)
         return "You don't have anyone stuck between your " + this.owner.toeDesc(true);
       else
-        return "You have " + this.container.describe(false, flat) + " wedged between your " + this.owner.toeDesc(true);
+        return "You have " + this.container.describe(false) + " wedged between your " + this.owner.toeDesc(true);
     },
     "add": function(victims) {
       this.container = this.container.merge(victims);
@@ -1492,7 +1492,7 @@ let macro =
         line += " They slosh with " + volume(this.milkStorage.amount, unit, false) + " of creamy milk.";
       }
       if (this.cleavage.container.count > 0)
-        line += " Between them are " + this.cleavage.container.describe(false, flat) + ".";
+        line += " Between them are " + this.cleavage.container.describe(false) + ".";
 
       result.push(line);
       if (this.breastVore) {
@@ -1515,16 +1515,16 @@ let macro =
     line = "Your two " + this.footDesc(true) + " shake the earth.";
 
     if (this.footShoeWorn && this.shoe.container.count > 0) {
-      line += " Within " + (this.shoe.container.count > 1 ? "are" : "is") + " " + this.shoe.container.describe(false, flat);
+      line += " Within " + (this.shoe.container.count > 1 ? "are" : "is") + " " + this.shoe.container.describe(false);
       if (this.footSockWorn && this.sock.container.count > 0) {
-        line += " and " + this.sock.container.describe(false, flat) + " in your socks.";
+        line += " and " + this.sock.container.describe(false) + " in your socks.";
       }
     } else if (this.footSockWorn && this.sock.container.count > 0) {
-      line += " Within " + (this.sock.container.count > 1 ? "are" : "is") + " " + this.sock.container.describe(false, flat);
+      line += " Within " + (this.sock.container.count > 1 ? "are" : "is") + " " + this.sock.container.describe(false);
     }
 
     if (this.paws.container.count > 0) {
-      line += " You have " + this.paws.container.describe(false, flat) + " wedged between your " + macro.toeDesc(true);
+      line += " You have " + this.paws.container.describe(false) + " wedged between your " + macro.toeDesc(true);
     }
 
     result.push(line);

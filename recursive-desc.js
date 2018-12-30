@@ -117,47 +117,52 @@ function nothingLarger(container, thing) {
 function describe(action, container, macro, verbose=true, flat=false) {
   var options = [];
 
-  if (flat) {
-    container = flatten(container);
-  }
   for (var i = 0; i < rules[action].length; i++) {
     if(rules[action][i].test(container,macro)) {
       options.push(rules[action][i].desc);
     }
   }
 
+  if (flat) {
+    container = flatten(container);
+  }
+
   if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
     let choice = Math.floor(Math.random() * options.length);
-    return options[choice](container, macro, verbose);
+    return options[choice](container, macro, verbose, flat);
   }
   else {
-    return getDefault(action)(container, macro, verbose);
+    return getDefault(action)(container, macro, verbose, flat);
   }
 }
 
 // DEFAULTS
 
-function defaultEat(container, macro, verbose) {
+function defaultEat(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else
     return "You scoop up " + container.describe(verbose) + " and swallow " + (container.count > 1 ? "them" : "it") + " whole.";
 }
 
-function defaultChew(container, macro, verbose) {
+function defaultChew(container, macro, verbose, flat) {
   let pronoun = (container.count > 1 ? "them" : "it");
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else if (isSadistic(macro))
     return "Your greedy fingers gather up " + container.describe(verbose) + ", stuffing " + pronoun + " into your " + macro.jawDesc(true) + ". A slow, lazy bite " + macro.biteDesc(true) + " " + pronoun + ", rending flesh, snapping bone, and crushing everything between your savage " + macro.jawDesc(true) + ". You tip back your head and swallow...consigning the gory remains to your roiling gut.";
   else if (isNonFatal(macro))
-    return defaultEat(container, macro, verbose);
+    return defaultEat(container, macro, verbose, flat);
   else {
     return "You scoop up " + container.describe(verbose) + " and " + macro.biteDesc() + " " + pronoun + " with your " + macro.jawDesc(true) + ", then swallow them down.";
   }
 }
 
-function defaultVomit(container, macro, verbose) {
+function defaultVomit(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You retch, but nothing happens.";
   } else if (isSadistic(macro)) {
@@ -171,7 +176,7 @@ function defaultVomit(container, macro, verbose) {
   }
 }
 
-function defaultStomp(container, macro, verbose) {
+function defaultStomp(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + macro.footDesc() + " thumps the ground.";
   else if (isSadistic(macro))
@@ -182,7 +187,7 @@ function defaultStomp(container, macro, verbose) {
     return "You step on " + container.describe(verbose) + ".";
 }
 
-function defaultStompWedge(container, macro, verbose) {
+function defaultStompWedge(container, macro, verbose, flat) {
   if (container.count == 1) {
     let line = container.describe(verbose);
     line = line.charAt(0).toUpperCase() + line.slice(1);
@@ -194,7 +199,11 @@ function defaultStompWedge(container, macro, verbose) {
   }
 }
 
-function defaultFlexToes(container, macro, verbose) {
+function defaultFlexToes(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     if (macro.footShoeWorn) {
       return "You flex your " + macro.toeNoShoeDesc(true) + " inside your " + macro.footDesc(true) + ".";
@@ -218,21 +227,21 @@ function defaultFlexToes(container, macro, verbose) {
   }
 }
 
-function defaultKick(container, macro, verbose) {
+function defaultKick(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You swing your mighty " + macro.footDesc() + "..and hit nothing.";
   else
     return "You punt " + container.describe(verbose) + ", destroying " + (container.count > 1 ? "them" : "it") + ".";
 }
 
-function defaultAnalVore(container, macro, verbose) {
+function defaultAnalVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You're pretty sure you just sat on a rock.";
   else
     return "You sit yourself down on " + container.describe(verbose) + ". " + (container.count > 1 ? "They slide" : "It slides") + " inside with ease.";
 }
 
-function defaultAssCrush(container, macro, verbose) {
+function defaultAssCrush(container, macro, verbose, flat) {
   let count = get_living_prey(container.sum());
   if (container.count == 0)
     return "You take a seat. It's good to have a break!";
@@ -244,7 +253,7 @@ function defaultAssCrush(container, macro, verbose) {
     return "You sit on " + container.describe(verbose);
 }
 
-function defaultAssGrind(container, macro, verbose) {
+function defaultAssGrind(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "You rub your ass on a wall.";
   } else {
@@ -253,7 +262,7 @@ function defaultAssGrind(container, macro, verbose) {
 
 }
 
-function defaultTailSlap(container, macro, verbose) {
+function defaultTailSlap(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + (macro.tailCount > 1 ? "tails swing" : "tail swings") + " to and fro";
   else if (isFatal(macro))
@@ -263,7 +272,7 @@ function defaultTailSlap(container, macro, verbose) {
     return "Your " + macro.describeTail + (macro.tailCount > 1 ? " tails slap" : " tail slaps") + " against " + container.describe(verbose) + ", bowling them over.";
 }
 
-function defaultTailVore(container, macro, verbose) {
+function defaultTailVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your drooling tail swings to and fro";
   else if (isFatal(macro))
@@ -274,7 +283,7 @@ function defaultTailVore(container, macro, verbose) {
      ". It scarfs down everything in a second, gulping forcefully and pulling your prey inside.";
 }
 
-function defaultTailsVore(container, macro, verbose) {
+function defaultTailsVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your drooling tails swing to and fro";
   else if (isFatal(macro))
@@ -285,14 +294,18 @@ function defaultTailsVore(container, macro, verbose) {
      ". They scarf down your prey, gulping forcefully and pulling them deep inside.";
 }
 
-function defaultCleavageStuff(container, macro, verbose) {
+function defaultCleavageStuff(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You can't fit anything into your cleavage right now.";
   else
     return "You snatch up " + container.describe(verbose) + " and stuff " + (container.count > 1 ? "them" : "it") + " into your cleavage.";
 }
 
-function defaultCleavageCrush(container, macro, verbose) {
+function defaultCleavageCrush(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "You grasp your breasts and forcefully squeeze them together.";
   else if (isSadistic(macro))
@@ -305,7 +318,11 @@ function defaultCleavageCrush(container, macro, verbose) {
     return "You grasp your breasts and squish them together, smooshing " + container.describe(false) + ".";
 }
 
-function defaultCleavageDrop(container, macro, verbose) {
+function defaultCleavageDrop(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "You pull your breasts apart and give them a shake.";
   if (isFatal(macro))
@@ -314,14 +331,18 @@ function defaultCleavageDrop(container, macro, verbose) {
     return "You pull your breasts apart far enough for the " + container.describe(false) + " trapped within to fall out.";
 }
 
-function defaultCleavageAbsorb(container, macro, verbose) {
+function defaultCleavageAbsorb(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
-    return defaultCleavageCrush(container, macro, verbose);
+    return defaultCleavageCrush(container, macro, verbose, flat);
   else
     return "Your squeeze your breasts together, swiftly absorbing " + container.describe(false) + " into your chest.";
 }
 
-function defaultBreastCrush(container, macro, verbose) {
+function defaultBreastCrush(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your thump your breasts against the ground.";
   else if (isFatal(macro))
@@ -330,7 +351,7 @@ function defaultBreastCrush(container, macro, verbose) {
     return "You smoosh " + container.describe(verbose) + " with your breasts.";
 }
 
-function defaultBreastVore(container, macro, verbose) {
+function defaultBreastVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "It'd be pretty hot to stick someone in your breasts. Shame you can't right now.";
   else
@@ -338,7 +359,7 @@ function defaultBreastVore(container, macro, verbose) {
 }
 
 
-function defaultBreastMilk(container, macro, verbose) {
+function defaultBreastMilk(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You squeeze your breasts, coaxing out $VOLUME of warm, creamy milk that splatters on the ground.";
   else if (isFatal(macro))
@@ -347,21 +368,25 @@ function defaultBreastMilk(container, macro, verbose) {
     return "You squeeze your breasts, coaxing out $VOLUME of warm, creamy milk that floods " + container.describe(verbose) + ".";
 }
 
-function defaultUnbirth(container, macro, verbose) {
+function defaultUnbirth(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your slit...but they won't fit.";
   else
     return "You gasp as you slide " + container.describe(verbose) + " up your slit. ";
 }
 
-function defaultSheathStuff(container, macro, verbose) {
+function defaultSheathStuff(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab a " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your sheath-slit...but they won't fit.";
   else
     return "You pluck " + container.describe(verbose) + " from the ground and slip them into your musky sheath.";
 }
 
-function defaultBreastToy(container, macro, verbose) {
+function defaultBreastToy(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count > 0) {
     return "You smush your breasts together, squeezing " + container.describe(false) + " between the heavy mounds.";
   } else {
@@ -369,7 +394,11 @@ function defaultBreastToy(container, macro, verbose) {
   }
 }
 
-function defaultSlitToy(container, macro, verbose) {
+function defaultSlitToy(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count > 0) {
     return "You slip your fingers into your snatch, teasing yourself and pushing the " + container.describe(false) + " within a little deeper.";
   } else {
@@ -377,7 +406,11 @@ function defaultSlitToy(container, macro, verbose) {
   }
 }
 
-function defaultSheathToy(container, macro, verbose) {
+function defaultSheathToy(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count > 0) {
     if (macro.orgasm) {
       return "You stroke your spurting cock, then reach down to give your sheath a firm <i>squeeze</i>. Anything within has been ground away to nothingness by the force of your orgasm.";
@@ -405,7 +438,11 @@ function defaultSheathToy(container, macro, verbose) {
   }
 }
 
-function defaultSheathClench(container, macro, verbose) {
+function defaultSheathClench(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "You squeeze your sheath.";
   else if (isGory(macro))
@@ -416,7 +453,11 @@ function defaultSheathClench(container, macro, verbose) {
     return "Your squeeze your sheath, pushing " + container.describe(false) + " out of your sheath.";
 }
 
-function defaultSheathCrush(container, macro, verbose) {
+function defaultSheathCrush(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "Your orgasm causes your " + macro.describeDick + " cock to swell and surge.";
   else if (isGory(macro))
@@ -427,21 +468,25 @@ function defaultSheathCrush(container, macro, verbose) {
     return "Your orgasm causes your " + macro.describeDick + " cock to swell, squeezing " + container.describe(false) + " out from your sheath.";
 }
 
-function defaultSheathAbsorb(container, macro, verbose) {
+function defaultSheathAbsorb(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count > 0)
     return "You grip your sheath and give it a firm <i>squeeze</i>, abruptly absorbing " + container.describe(false) + " into your musky body.";
   else
-    return defaultSheathToy(container, macro, verbose);
+    return defaultSheathToy(container, macro, verbose, flat);
 }
 
-function defaultCockVore(container, macro, verbose) {
+function defaultCockVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your cock...but they won't fit.";
   else
     return "You stuff " + container.describe(verbose) + " into your throbbing shaft, forcing them down to your heavy balls.";
 }
 
-function defaultCockslap(container, macro, verbose) {
+function defaultCockslap(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + macro.describeDick + " swings through the air. Lewd!";
   else if (isFatal(macro))
@@ -450,7 +495,7 @@ function defaultCockslap(container, macro, verbose) {
     return "You smack " + container.describe(verbose) + " with your " + macro.describeDick + " shaft.";
 }
 
-function defaultBallSmother(container, macro, verbose) {
+function defaultBallSmother(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You rest your heavy balls on the ground.";
   else if (isFatal(macro))
@@ -459,7 +504,7 @@ function defaultBallSmother(container, macro, verbose) {
     return "Your weighty balls spread over " + container.describe(verbose) + ".";
 }
 
-function defaultMaleSpurt(container, macro, verbose) {
+function defaultMaleSpurt(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + macro.describeDick + " cock spews $VOLUME of bitter precum.";
   else if (isFatal(macro))
@@ -468,7 +513,7 @@ function defaultMaleSpurt(container, macro, verbose) {
     return "Your " + macro.describeDick + " shaft spurts precum, splooging " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
 }
 
-function defaultMaleOrgasm(container, macro, verbose) {
+function defaultMaleOrgasm(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + macro.describeDick + " cock spurts, gushing out a $VOLUME glob of cum.";
   else if (isFatal(macro))
@@ -477,7 +522,7 @@ function defaultMaleOrgasm(container, macro, verbose) {
     return "You're cumming! Your " + macro.describeDick + " shaft spews a thick rope of seed, splooging " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
 }
 
-function defaultFemaleSpurt(container, macro, verbose) {
+function defaultFemaleSpurt(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your moist slit splatters $VOLUME of slick juices.";
   else if (isSadistic(macro))
@@ -488,7 +533,7 @@ function defaultFemaleSpurt(container, macro, verbose) {
     return "Your moist slit splatters $VOLUME of slick juices, splooging " + container.describe(verbose) + ".";
 }
 
-function defaultFemaleOrgasm(container, macro, verbose) {
+function defaultFemaleOrgasm(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your moist slit gushes $VOLUME of slick femcum.";
   else if (isSadistic(macro))
@@ -499,7 +544,7 @@ function defaultFemaleOrgasm(container, macro, verbose) {
     return "Your moist slit sprays $VOLUME of slick femcum, splooging " + container.describe(verbose) + " as you swoon with orgasmic lust.";
 }
 
-function defaultGrind(container, macro, verbose) {
+function defaultGrind(container, macro, verbose, flat) {
   var mid = isFatal(macro) ? ", smashing them apart" : ", using them as a toy";
   var end = macro.arousalEnabled ? " to fuel your lust." : ".";
   var desc = container.count > 0 ? container.describe(verbose) + mid + end : "the ground.";
@@ -514,42 +559,50 @@ function defaultGrind(container, macro, verbose) {
   }
 }
 
-function defaultPouchStuff(container, macro, verbose) {
+function defaultPouchStuff(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and stuff them against your pouch...but they won't fit!";
   else
     return "You grab " + container.describe(verbose) + " and stuff " + (container.count > 1 ? "them" : "it") + " into your pouch.";
 }
 
-function defaultPouchRub(container, macro, verbose) {
+function defaultPouchRub(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "You rub your empty pouch.";
   else
     return "You rub your bulging pouch, feeling at " + container.describe(false) + " trapped within.";
 }
 
-function defaultPouchEat(container, macro, verbose) {
+function defaultPouchEat(container, macro, verbose, flat) {
   if (container.count == 0)
     return "There's nothing in your pouch!";
   else
     return "You snatch " + container.describe(verbose) + " from your pouch and shove " + (container.count > 1 ? "them" : "it") + " down your gullet!";
 }
 
-function defaultPouchAbsorb(container, macro, verbose) {
+function defaultPouchAbsorb(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0)
     return "There's nothing in your pouch!";
   else
     return "Your pouch flattens as it absorbs " + container.describe(false);
 }
 
-function defaultSoulVore(container, macro, verbose) {
+function defaultSoulVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "No souls here.";
   else
     return "You open your " + macro.jawDesc(true) + " and inhale, ripping the souls from " + container.describe(verbose) + " and dragging them down deep inside.";
 }
 
-function defaultSoulAbsorbPaw(container, macro, verbose) {
+function defaultSoulAbsorbPaw(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (container.count == 0)
     return "Your " + macro.footDesc() + " thumps against the ground";
@@ -559,7 +612,11 @@ function defaultSoulAbsorbPaw(container, macro, verbose) {
     return "Your " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing them to pieces and absorbing " + sum + (sum == 1 ? " soul" : " souls") + " into your pads.";
 }
 
-function defaultPawStench(container, macro, verbose) {
+function defaultPawStench(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Horrific miasma flows from your " + macro.footDesc(true)+ ", the corrsoive fumes reducing " + (sum > 1 ? sum + " people" : "a person") + " to charred flesh as they wash over " + container.describe(false) + ".";
@@ -569,7 +626,11 @@ function defaultPawStench(container, macro, verbose) {
     return "Your stinky " + macro.footDesc(true) + " overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultAssStench(container, macro, verbose) {
+function defaultAssStench(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Rancid fumes from your ass sear the flesh of " + (sum > 1 ? sum + " people" : "a person") + " as they wash over " + container.describe(false) + ", corroding everything in their path.";
@@ -579,7 +640,11 @@ function defaultAssStench(container, macro, verbose) {
     return "Your stinky butt sickens " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultPissStench(container, macro, verbose) {
+function defaultPissStench(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Waves of corrosive fumes waft from your piss, the toxic cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describe(false) + ".";
@@ -589,7 +654,11 @@ function defaultPissStench(container, macro, verbose) {
     return "Your stinky piss overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultScatStench(container, macro, verbose) {
+function defaultScatStench(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "A rancid miasma spews from your shit - a thick, choking avalanche of toxic vapors that reduce " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " to nothing but bones as it melts " + container.describe(false) + ".";
@@ -599,7 +668,11 @@ function defaultScatStench(container, macro, verbose) {
     return "Your stinky scat overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultMaleSpurtMusk(container, macro, verbose) {
+function defaultMaleSpurtMusk(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Waves of corrosive musk waft from your precum, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describe(false) + ".";
@@ -609,7 +682,11 @@ function defaultMaleSpurtMusk(container, macro, verbose) {
     return "Your musky precum overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultFemaleSpurtMusk(container, macro, verbose) {
+function defaultFemaleSpurtMusk(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Waves of corrosive musk waft from your precum, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describe(false) + ".";
@@ -619,7 +696,11 @@ function defaultFemaleSpurtMusk(container, macro, verbose) {
     return "Your musky precum overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultMaleOrgasmMusk(container, macro, verbose) {
+function defaultMaleOrgasmMusk(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Waves of corrosive musk waft from your cum, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describe(false) + ".";
@@ -629,7 +710,11 @@ function defaultMaleOrgasmMusk(container, macro, verbose) {
     return "Your musky cum overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultFemaleOrgasmMusk(container, macro, verbose) {
+function defaultFemaleOrgasmMusk(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
     return "Waves of corrosive musk waft from your cum, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describe(false) + ".";
@@ -639,7 +724,7 @@ function defaultFemaleOrgasmMusk(container, macro, verbose) {
     return "Your musky cum overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
-function defaultBelch(container, macro, verbose) {
+function defaultBelch(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (container.count == 0)
     return "An ominous groan precedes a crass belch.";
@@ -651,7 +736,7 @@ function defaultBelch(container, macro, verbose) {
     return "You let out a loud burp, blowing over " + container.describe(verbose) + "!";
 }
 
-function defaultFart(container, macro, verbose) {
+function defaultFart(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (container.count == 0)
     return "An ominous groan precedes a loud, pungent fart.";
@@ -663,7 +748,11 @@ function defaultFart(container, macro, verbose) {
     return "You let out a crass fart, blowing over " + container.describe(verbose) + "!";
 }
 
-function defaultStomach(container, macro, verbose) {
+function defaultStomach(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isSadistic(macro))
     return "Your churning guts crushes your prey into a gory paste, annihilating " + container.describe(false) + " and reducing everything to rancid chyme.";
   else if (isGory(macro))
@@ -674,7 +763,11 @@ function defaultStomach(container, macro, verbose) {
     return "Your stomach groans and abosrbs " + container.describe(false) + ".";
 }
 
-function defaultTail(container, macro, verbose) {
+function defaultTail(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isSadistic(macro))
     return "Your " + macro.tailDesc + " " + (macro.tailCount > 1 ? "clench" : "clenches") + ", crushing " + container.describe(false) + " into unrecognizable paste.";
   else if (isGory(macro))
@@ -685,14 +778,22 @@ function defaultTail(container, macro, verbose) {
     return "Your " + (macro.tailCount > 1 ? "tails groan and absorb " : "tail groans and absorbs ") + container.describe(false) + ".";
 }
 
-function defaultTailToStomach(container, macro, verbose) {
+function defaultTailToStomach(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro))
     return "Your " + (macro.tailCount > 1 ? "tails clench" : "tail clenches") + ", squeezing " + container.describe(false) + " into your gurgling stomach.";
   else
     return "Your " + (macro.tailCount > 1 ? "tails squeeze" : "tail squeezes") + " " + container.describe(false) + " into your belly.";
 }
 
-function defaultBowels(container, macro, verbose) {
+function defaultBowels(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isSadistic(macro))
     return "Your rancid bowels clench and churn, crushing " + container.describe(false) + " into a paste of gore and rubble - and then swiftly absorbing everything.";
   if (isFatal(macro))
@@ -701,35 +802,55 @@ function defaultBowels(container, macro, verbose) {
     return "Your bowels churn as they absorb " + container.describe(false);
 }
 
-function defaultBowelsToStomach(container, macro, verbose) {
+function defaultBowelsToStomach(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro))
     return "Your bowels clench, forcing " + container.describe(false) + " into your roiling, caustic stomach.";
   else
     return "Your bowels clench, squeezing " + container.describe(false) + " into your belly.";
 }
 
-function defaultWomb(container, macro, verbose) {
+function defaultWomb(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro))
     return "Your womb squeezes and dissolves " + container.describe(false) + ", turning them into $VOLUME of slick femcum.";
   else
     return "Your womb squeezes as it absorbs " + container.describe(false);
 }
 
-function defaultBalls(container, macro, verbose) {
+function defaultBalls(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro))
     return "Your balls slosh as they digest " + container.describe(false) + " into $VOLUME of cum";
   else
     return "Your balls slosh as they absorb " + container.describe(false);
 }
 
-function defaultBreasts(container, macro, verbose) {
+function defaultBreasts(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro) && macro.lactationEnabled)
     return "Your breasts grrgle as they digest " + container.describe(false) + " into $VOLUME of milk";
   else
     return "Your breasts slosh as they absorb " + container.describe(false);
 }
 
-function defaultBladder(container, macro, verbose) {
+function defaultBladder(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isSadistic(macro)) {
     let fatalities = get_living_prey(container.sum());
     let line = "Your bladder swells as " + container.describe(false) + " are dissolved in your acrid piss, digesting them down to $VOLUME of fresh urine";
@@ -743,7 +864,7 @@ function defaultBladder(container, macro, verbose) {
     return "Your bladder squeezes as it absorbs " + container.describe(false);
 }
 
-function defaultSoulDigest(container, macro, verbose) {
+function defaultSoulDigest(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   switch(macro.soulVoreType) {
     case "release":
@@ -755,7 +876,11 @@ function defaultSoulDigest(container, macro, verbose) {
   }
 }
 
-function defaultWings(container, macro, verbose) {
+function defaultWings(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isSadistic(macro))
     return "Your wings slacken as the " + container.describe(false) + " within melts into a slurry of meat and wreckage.";
   if (isFatal(macro))
@@ -764,14 +889,22 @@ function defaultWings(container, macro, verbose) {
     return "Your wings squeeze as they absorb " + container.describe(false);
 }
 
-function defaultWingsToStomach(container, macro, verbose) {
+function defaultWingsToStomach(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (isFatal(macro))
     return "Your wings clench, forcing " + container.describe(false) + " deeper and into your stomach.";
   else
     return "Your wings squeeze " + container.describe(false) + " into your belly.";
 }
 
-function defaultWearShoe(container, macro, verbose) {
+function defaultWearShoe(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You slip on your " + macro.shoeDesc(true,false) + ".";
   } else {
@@ -779,7 +912,11 @@ function defaultWearShoe(container, macro, verbose) {
   }
 }
 
-function defaultRemoveShoe(container, macro, verbose) {
+function defaultRemoveShoe(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You pull off your " + macro.shoeDesc(true,false) + ".";
   } else {
@@ -787,7 +924,11 @@ function defaultRemoveShoe(container, macro, verbose) {
   }
 }
 
-function defaultWearSock(container, macro, verbose) {
+function defaultWearSock(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You slip on your " + macro.sockDesc(true,false) + ".";
   } else {
@@ -795,7 +936,11 @@ function defaultWearSock(container, macro, verbose) {
   }
 }
 
-function defaultRemoveSock(container, macro, verbose) {
+function defaultRemoveSock(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You pull off your " + macro.sockDesc(true,false) + ". Cool air washes over your " + macro.toeOnlyDesc(true);
   } else {
@@ -803,7 +948,7 @@ function defaultRemoveSock(container, macro, verbose) {
   }
 }
 
-function defaultStuffShoe(container, macro, verbose) {
+function defaultStuffShoe(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "You don't have anything to stuff into your " + macro.shoeDesc(true) + ".";
   } else {
@@ -811,7 +956,7 @@ function defaultStuffShoe(container, macro, verbose) {
   }
 }
 
-function defaultStuffSock(container, macro, verbose) {
+function defaultStuffSock(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "You don't have anything to stuff into your " + macro.sockDesc(true) + ".";
   } else {
@@ -819,7 +964,11 @@ function defaultStuffSock(container, macro, verbose) {
   }
 }
 
-function defaultDumpShoe(container, macro, verbose) {
+function defaultDumpShoe(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "Your " + macro.shoeDesc(true) + " are empty, silly.";
   } else {
@@ -827,7 +976,11 @@ function defaultDumpShoe(container, macro, verbose) {
   }
 }
 
-function defaultDumpSock(container, macro, verbose) {
+function defaultDumpSock(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "You don't have anything to stuff into your " + macro.sockDesc(true) + ".";
   } else {
@@ -835,7 +988,7 @@ function defaultDumpSock(container, macro, verbose) {
   }
 }
 
-function defaultPiss(container, macro, verbose) {
+function defaultPiss(container, macro, verbose, flat) {
   if (macro.maleParts) {
     if (container.count == 0) {
       return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + " cock.";
@@ -863,7 +1016,7 @@ function defaultPiss(container, macro, verbose) {
   }
 }
 
-function defaultBladderVore(container, macro, verbose) {
+function defaultBladderVore(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "You don't have anything to shove into your bladder!";
   }
@@ -878,7 +1031,7 @@ function defaultBladderVore(container, macro, verbose) {
   }
 }
 
-function defaultScat(container, macro, verbose) {
+function defaultScat(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (macro.scatStorage.amount == 0) {
     return "Your bowels are empty.";
@@ -897,7 +1050,11 @@ function defaultScat(container, macro, verbose) {
   }
 }
 
-function defaultMelt(container, macro, verbose) {
+function defaultMelt(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "Your body turns gooey.";
   } else {
@@ -906,17 +1063,21 @@ function defaultMelt(container, macro, verbose) {
 
 }
 
-function defaultSolidify(container, macro, verbose) {
+function defaultSolidify(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   if (container.count == 0) {
     return "Your body turns solid.";
   } else if (macro.gooDigest > 0) {
-    return "Your body turns solid, pushing out " + container.describe(verbose) + ".";
+    return "Your body turns solid, pushing out " + container.describe(false) + ".";
   } else {
-    return "Your body turns solid, swiftly absorbing " + container.describe(verbose) + ".";
+    return "Your body turns solid, swiftly absorbing " + container.describe(false) + ".";
   }
 }
 
-function defaultFlood(container, macro, verbose) {
+function defaultFlood(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "Your gooey body melts and floods outward..but doesn't catch anything.";
   } else {
@@ -924,7 +1085,7 @@ function defaultFlood(container, macro, verbose) {
   }
 }
 
-function defaultStompGoo(container, macro, verbose) {
+function defaultStompGoo(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "Your gooey paw hits the ground.";
   } else {
@@ -932,7 +1093,7 @@ function defaultStompGoo(container, macro, verbose) {
   }
 }
 
-function defaultAssGoo(container, macro, verbose) {
+function defaultAssGoo(container, macro, verbose, flat) {
   if (container.count == 0) {
     return "Your gooey ass sits down on the ground.";
   } else {
@@ -940,93 +1101,165 @@ function defaultAssGoo(container, macro, verbose) {
   }
 }
 
-function defaultGooDigest(container, macro, verbose) {
+function defaultGooDigest(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your goopy depths dissolve " + container.describe(false) + ".";
 }
 
-function defaultGooStomachPull(container, macro, verbose) {
+function defaultGooStomachPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your stomach, drawing them into the viscous goo.";
 }
 
 function defaultGooStomachPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your gurgling stomach.";
 }
 
-function defaultGooBowelsPull(container, macro, verbose) {
+function defaultGooBowelsPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your bowels, drawing them into the viscous goo.";
 }
 
 function defaultGooBowelsPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your clenching bowels.";
 }
 
-function defaultGooWombPull(container, macro, verbose) {
+function defaultGooWombPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your womb, drawing them into the viscous goo.";
 }
 
 function defaultGooWombPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your slick womb.";
 }
 
-function defaultGooBallsPull(container, macro, verbose) {
+function defaultGooBallsPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your balls, drawing them into the viscous goo.";
 }
 
 function defaultGooBallsPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your musky balls.";
 }
 
-function defaultGooBreastsPull(container, macro, verbose) {
+function defaultGooBreastsPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your breasts, drawing them into the viscous goo.";
 }
 
 function defaultGooBreastsPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your breasts.";
 }
 
-function defaultGooTailPull(container, macro, verbose) {
+function defaultGooTailPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your " + macro.tailDesc + ", drawing them into the viscous goo.";
 }
 
 function defaultGooTailPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your " + macro.tailDesc;
 }
 
-function defaultGooPawsPull(container, macro, verbose) {
+function defaultGooPawsPull(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your molten depths squeeze in around the " + container.describe(false) + " imprisoned in your " + macro.footOnlyDesc(true) + ", drawing them into the viscous goo.";
 }
 
 function defaultGooPawsPush(container, macro, verobse) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your churning goo herds " + container.describe(false) + " into your " + macro.footOnlyDesc(true) + ".";
 }
 
-function defaultPawVore(container, macro, verbose) {
+function defaultPawVore(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your " + macro.footOnlyDesc(true) + " smother over " + container.describe(false) + ", absorbing them into your soles!";
 }
 
-function defaultPawVoreToes(container, macro, verbose) {
+function defaultPawVoreToes(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "The " + container.describe(false) + " trapped between your toes " + (container.count > 1 ? "are" : "is") + " sucked inside.";
 }
 
-function defaultPaws(container, macro, verbose) {
+function defaultPaws(container, macro, verbose, flat) {
+  if (verbose || flat) {
+    container = flatten(container);
+  }
+
   return "Your " + macro.footOnlyDesc(true) + " fully absorb " + container.describe(false) + ".";
 }
 
-function defaultCropSwallow(container, macro, verbose) {
+function defaultCropSwallow(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else
     return "You scoop up " + container.describe(verbose) + " and swallow " + (container.count > 1 ? "them" : "it") + " whole, pulling your prey into your crop.";
 }
 
-function defaultCropTransfer(container, macro, verbose) {
+function defaultCropTransfer(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You have nothing in your crop";
   else
     return "Your throat squeezes, forcing " + container.describe(verbose) + " out of your crop and in to your stomach.";
 }
 
-function nonFatalBreath(container, macro, verbose, type, verb) {
+function nonFatalBreath(container, macro, verbose, flat, type, verb) {
   if (macro.breathStyle == "line") {
     return "You exhale a narrow gout of " + type + ", " + verb + " " + container.describe(verbose) + ".";
   } else if (macro.breathStyle == "cone") {
@@ -1034,9 +1267,9 @@ function nonFatalBreath(container, macro, verbose, type, verb) {
   }
 }
 
-function defaultBreathFire(container, macro, verbose) {
+function defaultBreathFire(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "fire", "blasting");
+    return nonFatalBreath(container, macro, verbose, flat, "fire", "blasting");
   }
 
   if (isFatal(macro)) {
@@ -1049,9 +1282,9 @@ function defaultBreathFire(container, macro, verbose) {
 
   return "FIRE" + container.describe(verbose);
 }
-function defaultBreathIce(container, macro, verbose) {
+function defaultBreathIce(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "cold", "freezing");
+    return nonFatalBreath(container, macro, verbose, flat, "cold", "freezing");
   }
 
   if (isFatal(macro)) {
@@ -1065,9 +1298,9 @@ function defaultBreathIce(container, macro, verbose) {
   return "ICE" + container.describe(verbose);
 }
 
-function defaultBreathElectric(container, macro, verbose) {
+function defaultBreathElectric(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "electricity", "shocking");
+    return nonFatalBreath(container, macro, verbose, flat, "electricity", "shocking");
   }
 
   if (isFatal(macro)) {
@@ -1081,9 +1314,9 @@ function defaultBreathElectric(container, macro, verbose) {
   return "ELECTRIC" + container.describe(verbose);
 }
 
-function defaultBreathSmoke(container, macro, verbose) {
+function defaultBreathSmoke(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "smoke", "smothering");
+    return nonFatalBreath(container, macro, verbose, flat, "smoke", "smothering");
   }
 
   if (isFatal(macro)) {
@@ -1097,9 +1330,9 @@ function defaultBreathSmoke(container, macro, verbose) {
   return "SMOKE" + container.describe(verbose);
 }
 
-function defaultBreathRadiation(container, macro, verbose) {
+function defaultBreathRadiation(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "radiation", "frying");
+    return nonFatalBreath(container, macro, verbose, flat, "radiation", "frying");
   }
 
   if (isFatal(macro)) {
@@ -1113,9 +1346,9 @@ function defaultBreathRadiation(container, macro, verbose) {
   return "RADIATION" + container.describe(verbose);
 }
 
-function defaultBreathFoul(container, macro, verbose) {
+function defaultBreathFoul(container, macro, verbose, flat) {
   if (isNonFatal(macro)) {
-    return nonFatalBreath(container, macro, verbose, "foul air", "withering");
+    return nonFatalBreath(container, macro, verbose, flat, "foul air", "withering");
   }
 
   if (isFatal(macro)) {
@@ -1129,7 +1362,7 @@ function defaultBreathFoul(container, macro, verbose) {
   return "FOUL" + container.describe(verbose);
 }
 
-function defaultDrool(container, macro, verbose) {
+function defaultDrool(container, macro, verbose, flat) {
   if (container.count == 0)
     return "$VOLUME of hot drool oozes from your " + macro.jawDesc(true) + ".";
   else if (isFatal(macro))
@@ -1138,11 +1371,11 @@ function defaultDrool(container, macro, verbose) {
     return "$VOLUME of your drool rains down from your " + macro.jawDesc(true) + ", washing over " + container.describe(verbose) + ".";
 }
 
-function defaultMagicShrink(container, macro, verbose) {
+function defaultMagicShrink(container, macro, verbose, flat) {
   return "You envelop " + container.describe(verbose) + " in swirling tendrils of magic, shrinking " + (container.count == 1 ? "it" : "them") + " down!";
 }
 
-function defaultWingsFlap(container, macro, verbose) {
+function defaultWingsFlap(container, macro, verbose, flat) {
   if (container.counter == 0) {
     return "You flap your wings.";
   } else {
@@ -1150,7 +1383,7 @@ function defaultWingsFlap(container, macro, verbose) {
   }
 }
 
-function defaultWingsVore(container, macro, verbose) {
+function defaultWingsVore(container, macro, verbose, flat) {
   if (container.counter == 0) {
     return "You flap your wings aggressively.";
   } else {
@@ -1159,7 +1392,7 @@ function defaultWingsVore(container, macro, verbose) {
 
 }
 
-function defaultVictimCumFlood(container, macro, verbose) {
+function defaultVictimCumFlood(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drowned in viscous cum";
   } else if (isGory(macro)) {
@@ -1171,7 +1404,7 @@ function defaultVictimCumFlood(container, macro, verbose) {
   }
 }
 
-function defaultVictimFemcumFlood(container, macro, verbose) {
+function defaultVictimFemcumFlood(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drowned in slick femcum";
   } else if (isGory(macro)) {
@@ -1183,7 +1416,7 @@ function defaultVictimFemcumFlood(container, macro, verbose) {
   }
 }
 
-function defaultVictimStomped(container, macro, verbose) {
+function defaultVictimStomped(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "crushed into pulp beneath your " + macro.footDesc(true);
   } else if (isGory(macro)) {
@@ -1195,7 +1428,7 @@ function defaultVictimStomped(container, macro, verbose) {
   }
 }
 
-function defaultVictimFlexToes(container, macro, verbose) {
+function defaultVictimFlexToes(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "ground to a thick paste between your " + macro.toeDesc(true);
   } else if (isGory(macro)) {
@@ -1207,7 +1440,7 @@ function defaultVictimFlexToes(container, macro, verbose) {
   }
 }
 
-function defaultVictimEaten(container, macro, verbose) {
+function defaultVictimEaten(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "devoured and digested down to molten chyme";
   } else if (isGory(macro)) {
@@ -1219,7 +1452,7 @@ function defaultVictimEaten(container, macro, verbose) {
   }
 }
 
-function defaultVictimAssCrush(container, macro, verbose) {
+function defaultVictimAssCrush(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "snuffed out under your ass";
   } else if (isGory(macro)) {
@@ -1231,7 +1464,7 @@ function defaultVictimAssCrush(container, macro, verbose) {
   }
 }
 
-function defaultVictimAssGround(container, macro, verbose) {
+function defaultVictimAssGround(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "ground out of existence beneath your heavy ass";
   } else if (isGory(macro)) {
@@ -1243,7 +1476,7 @@ function defaultVictimAssGround(container, macro, verbose) {
   }
 }
 
-function defaultVictimHumped(container, macro, verbose) {
+function defaultVictimHumped(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "smashed to gory paste by your thrusting hips";
   } else if (isGory(macro)) {
@@ -1255,7 +1488,7 @@ function defaultVictimHumped(container, macro, verbose) {
   }
 }
 
-function defaultVictimVomit(container, macro, verbose) {
+function defaultVictimVomit(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "spewed from your caustic depths and left to die";
   } else if (isGory(macro)) {
@@ -1267,7 +1500,7 @@ function defaultVictimVomit(container, macro, verbose) {
   }
 }
 
-function defaultVictimChew(container, macro, verbose) {
+function defaultVictimChew(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "chewed to a bloody pulp by your scything " + macro.jawDesc(true);
   } else if (isGory(macro)) {
@@ -1279,7 +1512,7 @@ function defaultVictimChew(container, macro, verbose) {
   }
 }
 
-function defaultVictimDrool(container, macro, verbose) {
+function defaultVictimDrool(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "inundated in your drool and drowned";
   } else if (isGory(macro)) {
@@ -1291,7 +1524,7 @@ function defaultVictimDrool(container, macro, verbose) {
   }
 }
 
-function defaultVictimAnalVore(container, macro, verbose) {
+function defaultVictimAnalVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "crammed into your bowels and obliterated";
   } else if (isGory(macro)) {
@@ -1303,7 +1536,7 @@ function defaultVictimAnalVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimTailSlap(container, macro, verbose) {
+function defaultVictimTailSlap(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "cut down like wheat by your swooping, scything " + macro.tailDesc;
   } else if (isGory(macro)) {
@@ -1315,7 +1548,7 @@ function defaultVictimTailSlap(container, macro, verbose) {
   }
 }
 
-function defaultVictimTailVore(container, macro, verbose) {
+function defaultVictimTailVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "snapped up and devoured by your ravenous " + macro.tailNoDesc;
   } else if (isGory(macro)) {
@@ -1327,7 +1560,7 @@ function defaultVictimTailVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimCockSlap(container, macro, verbose) {
+function defaultVictimCockSlap(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "obliterated beneath your massive, swinging shaft.";
   } else if (isGory(macro)) {
@@ -1339,7 +1572,7 @@ function defaultVictimCockSlap(container, macro, verbose) {
   }
 }
 
-function defaultVictimCockVore(container, macro, verbose) {
+function defaultVictimCockVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "plunged into the depths of your shaft";
   } else if (isGory(macro)) {
@@ -1351,7 +1584,7 @@ function defaultVictimCockVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimBallSmother(container, macro, verbose) {
+function defaultVictimBallSmother(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "reduce to broken gore under your massive balls";
   } else if (isGory(macro)) {
@@ -1363,7 +1596,7 @@ function defaultVictimBallSmother(container, macro, verbose) {
   }
 }
 
-function defaultVictimSheathCrush(container, macro, verbose) {
+function defaultVictimSheathCrush(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "crushed and smeared between your shaft and sheath";
   } else if (isGory(macro)) {
@@ -1375,7 +1608,7 @@ function defaultVictimSheathCrush(container, macro, verbose) {
   }
 }
 
-function defaultVictimSheathAbsorb(container, macro, verbose) {
+function defaultVictimSheathAbsorb(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dissolved and absorbed into your tight sheath";
   } else if (isGory(macro)) {
@@ -1387,7 +1620,7 @@ function defaultVictimSheathAbsorb(container, macro, verbose) {
   }
 }
 
-function defaultVictimCumFlood(container, macro, verbose) {
+function defaultVictimCumFlood(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drowned in a caustic flood of cum";
   } else if (isGory(macro)) {
@@ -1399,7 +1632,7 @@ function defaultVictimCumFlood(container, macro, verbose) {
   }
 }
 
-function defaultVictimMaleSpurtMusk(container, macro, verbose) {
+function defaultVictimMaleSpurtMusk(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dissolved in a tide of slick, musky precum";
   } else if (isGory(macro)) {
@@ -1411,7 +1644,7 @@ function defaultVictimMaleSpurtMusk(container, macro, verbose) {
   }
 }
 
-function defaultVictimMaleOrgasmMusk(container, macro, verbose) {
+function defaultVictimMaleOrgasmMusk(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "corroded by your caustic, overwhelming masculine musk";
   } else if (isGory(macro)) {
@@ -1423,7 +1656,7 @@ function defaultVictimMaleOrgasmMusk(container, macro, verbose) {
   }
 }
 
-function defaultVictimUnbirth(container, macro, verbose) {
+function defaultVictimUnbirth(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "crushed by your overwhelming womb";
   } else if (isGory(macro)) {
@@ -1435,7 +1668,7 @@ function defaultVictimUnbirth(container, macro, verbose) {
   }
 }
 
-function defaultVictimFemcumFlood(container, macro, verbose) {
+function defaultVictimFemcumFlood(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drowned and dissolved in slippery femcum";
   } else if (isGory(macro)) {
@@ -1447,7 +1680,7 @@ function defaultVictimFemcumFlood(container, macro, verbose) {
   }
 }
 
-function defaultVictimFemaleSpurtMusk(container, macro, verbose) {
+function defaultVictimFemaleSpurtMusk(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "suffocated by a spurt of corrosive feminine precum";
   } else if (isGory(macro)) {
@@ -1459,7 +1692,7 @@ function defaultVictimFemaleSpurtMusk(container, macro, verbose) {
   }
 }
 
-function defaultVictimFemaleOrgasmMusk(container, macro, verbose) {
+function defaultVictimFemaleOrgasmMusk(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "corroded by your caustic, overwhelming feminine musk";
   } else if (isGory(macro)) {
@@ -1471,7 +1704,7 @@ function defaultVictimFemaleOrgasmMusk(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreastCrush(container, macro, verbose) {
+function defaultVictimBreastCrush(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "reduced to broken gore beneath your breasts";
   } else if (isGory(macro)) {
@@ -1483,7 +1716,7 @@ function defaultVictimBreastCrush(container, macro, verbose) {
   }
 }
 
-function defaultVictimCleavageCrush(container, macro, verbose) {
+function defaultVictimCleavageCrush(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "cracked open like gore-filled nuts between your breasts";
   } else if (isGory(macro)) {
@@ -1495,7 +1728,7 @@ function defaultVictimCleavageCrush(container, macro, verbose) {
   }
 }
 
-function defaultVictimCleavageAbsorb(container, macro, verbose) {
+function defaultVictimCleavageAbsorb(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "agonizingly absorbed into your greedy bosom";
   } else if (isGory(macro)) {
@@ -1507,7 +1740,7 @@ function defaultVictimCleavageAbsorb(container, macro, verbose) {
   }
 }
 
-function defaultVictimCleavageDrop(container, macro, verbose) {
+function defaultVictimCleavageDrop(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dropped from your cleavage and dashed to bloody bits";
   } else if (isGory(macro)) {
@@ -1519,7 +1752,7 @@ function defaultVictimCleavageDrop(container, macro, verbose) {
   }
 }
 
-function defaultVictimMilkFlood(container, macro, verbose) {
+function defaultVictimMilkFlood(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drenched in and dissolved by your milk";
   } else if (isGory(macro)) {
@@ -1531,7 +1764,7 @@ function defaultVictimMilkFlood(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreastVore(container, macro, verbose) {
+function defaultVictimBreastVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "fed into your breasts to be churned and obliterated";
   } else if (isGory(macro)) {
@@ -1543,7 +1776,7 @@ function defaultVictimBreastVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimPouchAbsorb(container, macro, verbose) {
+function defaultVictimPouchAbsorb(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "crushed, torn, and absorbed by your perilous pouch";
   } else if (isGory(macro)) {
@@ -1555,7 +1788,7 @@ function defaultVictimPouchAbsorb(container, macro, verbose) {
   }
 }
 
-function defaultVictimSoulDigest(container, macro, verbose) {
+function defaultVictimSoulDigest(container, macro, verbose, flat) {
   switch(macro.soulVoreType) {
     case "release":
       return "souls freed from your depths";
@@ -1566,7 +1799,7 @@ function defaultVictimSoulDigest(container, macro, verbose) {
   }
 }
 
-function defaultVictimSoulPaw(container, macro, verbose) {
+function defaultVictimSoulPaw(container, macro, verbose, flat) {
   switch(macro.soulVoreType) {
     case "release":
       return "souls briefly trapped in your paws";
@@ -1577,7 +1810,7 @@ function defaultVictimSoulPaw(container, macro, verbose) {
   }
 }
 
-function defaultVictimPawStench(container, macro, verbose) {
+function defaultVictimPawStench(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "corroded and melted alive by the stench of your " + macro.footDesc(true);
   } else if (isGory(macro)) {
@@ -1589,7 +1822,7 @@ function defaultVictimPawStench(container, macro, verbose) {
   }
 }
 
-function defaultVictimAssStench(container, macro, verbose) {
+function defaultVictimAssStench(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "reduced to bubbling flesh by the caustic scent of your ass";
   } else if (isGory(macro)) {
@@ -1601,7 +1834,7 @@ function defaultVictimAssStench(container, macro, verbose) {
   }
 }
 
-function defaultVictimGasBelch(container, macro, verbose) {
+function defaultVictimGasBelch(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dissolved by your rich, acidic belches";
   } else if (isGory(macro)) {
@@ -1613,7 +1846,7 @@ function defaultVictimGasBelch(container, macro, verbose) {
   }
 }
 
-function defaultVictimGasFart(container, macro, verbose) {
+function defaultVictimGasFart(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "burned alive and melted down by your farts";
   } else if (isGory(macro)) {
@@ -1625,7 +1858,7 @@ function defaultVictimGasFart(container, macro, verbose) {
   }
 }
 
-function defaultVictimPiss(container, macro, verbose) {
+function defaultVictimPiss(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "drowned and dissolved in acrid piss";
   } else if (isGory(macro)) {
@@ -1637,7 +1870,7 @@ function defaultVictimPiss(container, macro, verbose) {
   }
 }
 
-function defaultVictimBladderVore(container, macro, verbose) {
+function defaultVictimBladderVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dissolved in a golden-yellow sea of searing piss";
   } else if (isGory(macro)) {
@@ -1649,7 +1882,7 @@ function defaultVictimBladderVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimPissStench(container, macro, verbose) {
+function defaultVictimPissStench(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "rent asunder by the miasma wafting from your piss";
   } else if (isGory(macro)) {
@@ -1661,7 +1894,7 @@ function defaultVictimPissStench(container, macro, verbose) {
   }
 }
 
-function defaultVictimScat(container, macro, verbose) {
+function defaultVictimScat(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "buried alive and dissolved by your acrid shit";
   } else if (isGory(macro)) {
@@ -1673,7 +1906,7 @@ function defaultVictimScat(container, macro, verbose) {
   }
 }
 
-function defaultVictimScatStench(container, macro, verbose) {
+function defaultVictimScatStench(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "melted into slag by the wretched miasma of your scat";
   } else if (isGory(macro)) {
@@ -1685,7 +1918,7 @@ function defaultVictimScatStench(container, macro, verbose) {
   }
 }
 
-function defaultVictimGoo(container, macro, verbose) {
+function defaultVictimGoo(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "shredded and soaked up by your goo";
   } else if (isGory(macro)) {
@@ -1697,7 +1930,7 @@ function defaultVictimGoo(container, macro, verbose) {
   }
 }
 
-function defaultVictimPawVore(container, macro, verbose) {
+function defaultVictimPawVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "broken down and absorbed directly into your " + macro.footOnlyDesc(true);
   } else if (isGory(macro)) {
@@ -1709,7 +1942,7 @@ function defaultVictimPawVore(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathFire(container, macro, verbose) {
+function defaultVictimBreathFire(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "cooked alive and reduced to ash by your flaming breath";
   } else if (isGory(macro)) {
@@ -1721,7 +1954,7 @@ function defaultVictimBreathFire(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathIce(container, macro, verbose) {
+function defaultVictimBreathIce(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "flash-frozen by your breath and shattered into gory dust";
   } else if (isGory(macro)) {
@@ -1733,7 +1966,7 @@ function defaultVictimBreathIce(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathElectric(container, macro, verbose) {
+function defaultVictimBreathElectric(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "blasted into bloody sludge by your shocking breath";
   } else if (isGory(macro)) {
@@ -1745,7 +1978,7 @@ function defaultVictimBreathElectric(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathSmoke(container, macro, verbose) {
+function defaultVictimBreathSmoke(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "cooked alive and cauterized by your smoky breath";
   } else if (isGory(macro)) {
@@ -1757,7 +1990,7 @@ function defaultVictimBreathSmoke(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathRadiation(container, macro, verbose) {
+function defaultVictimBreathRadiation(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "reduced to bubbling, glowing sludge by your radioactive breath";
   } else if (isGory(macro)) {
@@ -1769,7 +2002,7 @@ function defaultVictimBreathRadiation(container, macro, verbose) {
   }
 }
 
-function defaultVictimBreathFoul(container, macro, verbose) {
+function defaultVictimBreathFoul(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "suffocated and slain by thick, miasmic breath";
   } else if (isGory(macro)) {
@@ -1781,7 +2014,7 @@ function defaultVictimBreathFoul(container, macro, verbose) {
   }
 }
 
-function defaultVictimWingsFlap(container, macro, verbose) {
+function defaultVictimWingsFlap(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "ripped asunder by gusts from your mighty wings";
   } else if (isGory(macro)) {
@@ -1793,7 +2026,7 @@ function defaultVictimWingsFlap(container, macro, verbose) {
   }
 }
 
-function defaultVictimWingsVore(container, macro, verbose) {
+function defaultVictimWingsVore(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "shrink-wrapped in your wings and dissolved";
   } else if (isGory(macro)) {
@@ -1810,7 +2043,7 @@ rules["eat"].push({
   "test": function(container, macro) {
     return hasNothing(container);
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You scoop up...nothing. Oh well.";
   }
 });
@@ -1821,7 +2054,7 @@ rules["eat"].push({
      hasLessThan(container, "Person", 6) &&
      macro.height >= 10;
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You pluck up " + container.describe() + " and stuff them into your mouth, swallowing lightly to drag them down to your bubbling guts.";
   }
 });
@@ -1832,7 +2065,7 @@ rules["eat"].push({
      hasExactly(container, "Person", 1) &&
      macro.height < 10;
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You grasp " + container.describe() + " and greedily wolf them down, swallowing forcefully to cram them into your bulging stomach. A crass belch escapes your lips as they curl up in your slimy gut.";
   }
 });
@@ -1843,7 +2076,7 @@ rules["eat"].push({
      hasExactly(container, "Car", 1) &&
      hasLessThan(container, "Person", 5);
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You crush " + container.contents["Car"].describe() + " with your tight throat, washing it down with " + container.contents["Person"].describe();
   }
 });
@@ -1854,10 +2087,10 @@ rules["eat"].push({
      nothingLarger(container, "Small Skyscraper") &&
      macro.height < 500;
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You drop onto your hands and knees, " + macro.jawDesc(true) + " opening wide to envelop the skyscraper. It glides into your throat as your snout touches the ground,\
-    and you suckle on it for a long moment before twisting your head to snap it loose. The entire building, along with " + describe_all(container.contents["Small Skyscraper"].contents, verbose) + "\
-    within, plunge into your roiling guts. You wash it down with some delicious treats you slurped up along with it - " + describe_all(container.contents, verbose, ["Small Skyscraper"]) + ".";
+    and you suckle on it for a long moment before twisting your head to snap it loose. The entire building, along with " + describe_all(container.contents["Small Skyscraper"].contents, verbose, flat) + "\
+    within, plunge into your roiling guts. You wash it down with some delicious treats you slurped up along with it - " + describe_all(container.contents, verbose, flat, ["Small Skyscraper"]) + ".";
   }
 });
 
@@ -1867,12 +2100,12 @@ rules["eat"].push({
      nothingLarger(container, "Small Skyscraper") &&
      macro.height < 750;
   },
-  "desc": function(container, macro, verbose) {
+  "desc": function(container, macro, verbose, flat) {
     return "You drop onto your hands and knees, " + macro.jawDesc(true) + "  opening wide to envelop the skyscraper. It glides into your throat as your snout touches the ground,\
     and you suckle on it for a long moment before twisting your head to snap it loose. Without missing a beat, you rise back up, sloppy tongue slathering over the side \
     of the remaining tower, sucking on its tip and roughly shoving it into your maw. It breaks from its foundation, vanishing past your lips as you use two fingers to shove it \
-    down your sultry throat. Your gut bubbles as " + describe_all(container.contents["Small Skyscraper"].contents, verbose) + " are crunched and crushed within, along with the \
-    " + describe_all(container.contents, verbose, ["Small Skyscraper"]) + " that were unfortunate enough to be caught up by your slimy tongue.";
+    down your sultry throat. Your gut bubbles as " + describe_all(container.contents["Small Skyscraper"].contents, verbose, flat) + " are crunched and crushed within, along with the \
+    " + describe_all(container.contents, verbose, flat, ["Small Skyscraper"]) + " that were unfortunate enough to be caught up by your slimy tongue.";
   }
 });
 
@@ -1884,7 +2117,7 @@ rules["chew"].push({
      hasExactly(container, "Person", 1) &&
      isGory(macro) &&
      macro.height < 5;
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "You tackle a " + container.describe(verbose) + " and dig into your meal, powerful " + macro.jawDesc(true) + "  ripping them to shreds in seconds. You wolf down great mouthfuls \
     of meat, consuming them in a terrifying frenzy that ends with naught but bones lying on the ground.";
   }
@@ -1896,7 +2129,7 @@ rules["chew"].push({
      hasExactly(container, "Person", 1) &&
      isGory(macro) &&
      macro.height >= 5;
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "You snatch up a " + container.describe(verbose) + ", then stuff their lower body into the guillotine that is your ravenous maw - slicing off their legs with \
     a single disgusting <i>crunch</i>, then finishing them off with another ravenous bite that obliterates their torso. Their bleeding head falls from your lips, only to be \
     caught between two fingers and popped back in to be crunched between molars and swallowed.";
@@ -1909,7 +2142,7 @@ rules["stomp"].push({
     return hasOnly(container, ["Person"]) &&
      hasExactly(container, "Person", 1) &&
      isFatal(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your heavy " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing the poor thing like an insect.";
   }
 });
@@ -1919,7 +2152,7 @@ rules["stomp"].push({
     return hasOnly(container, ["Person"]) &&
      hasExactly(container, "Person", 1) &&
      isGory(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your " + macro.footDesc() + " thumps " + container.describe(verbose) + ", shoving your victim to the ground and cracking them open like an egg.";
   }
 });
@@ -1929,7 +2162,7 @@ rules["stomp"].push({
     return hasOnly(container, ["Person"]) &&
      hasExactly(container, "Person", 1) &&
      isGory(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your shadow falls over " + container.describe(verbose) + ", and your " + macro.footDesc() + " follows, crushing their soft body and reducing them to a heap of broken gore.";
   }
 });
@@ -1938,7 +2171,7 @@ rules["stomp"].push({
   "test": function(container, macro) {
     return hasNothingElse(container, ["Person","Cow","Car"]) &&
       isNonFatal(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your " + macro.footDesc() + " smooshes over " + container.describe(verbose) + ". They stick to your " + macro.toeDesc(true) + ", carried along for the ride as you take another few steps before finally\
     falling off.";
   }
@@ -1949,7 +2182,7 @@ rules["stomp"].push({
     return hasOnly(container, ["Person"]) &&
      hasExactly(container, "Person", 1) &&
      isFatal(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your heavy " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing the poor thing like an insect.";
   }
 });
@@ -1959,7 +2192,7 @@ rules["stomp"].push({
     return hasOnly(container, ["Bus"]) &&
      hasExactly(container, "Bus", 1) &&
      isFatal(macro);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your heavy " + macro.footDesc() + " slams down on " + container.describe(verbose) + ", smashing the poor thing like an insect.";
   }
 });
@@ -1970,8 +2203,8 @@ rules["stomp"].push({
     return hasOnly(container, ["Person","Car", "Bus"]) &&
      hasExactly(container, "Bus", 1) &&
      hasLessThan(container, "Car", 10);
-  }, "desc": function(container, macro, verbose) {
-    return "You punt a " + container.contents["Bus"].describe(verbose) + ", sending it tumbling down the road into a " + describe_all(container.contents, verbose, ["Bus"]);
+  }, "desc": function(container, macro, verbose, flat) {
+    return "You punt a " + container.contents["Bus"].describe(verbose) + ", sending it tumbling down the road into a " + describe_all(container.contents, verbose, flat, ["Bus"]);
   }
 });
 
@@ -1982,7 +2215,7 @@ rules["anal-vore"].push({
   "test": function(container, macro) {
     return hasExactly(container, "Person", 1) &&
      hasOnly(container, ["Person"]);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     let adjective = ["musky","winding","churning"][Math.floor(Math.random()*3)];
     return "Your weighty rump slams against the ground. A shock of pleasure runs up your spine as a " + container.describe(verbose) + " slides up your ass," +
     (macro.maleParts ? " grinding against your prostate" : "") + ". A powerful clench drags them deeper into your bowels, sealing them away in your " + adjective + " depths.";
@@ -1993,7 +2226,7 @@ rules["anal-vore"].push({
   "test": function(container, macro) {
     return hasExactly(container, "Car", 1) &&
      hasOnly(container, ["Car"]);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "You ram " + container.describe(verbose) + " up your ass, biting your lip as it" + (macro.maleParts ? " rubs along your prostate" : " slides into velvety depths") + ".\
     You moan and clench hard, yanking it in with a wet <i>shlrrp</i> and abruplty silencing its blaring horn.";
   }
@@ -2003,7 +2236,7 @@ rules["anal-vore"].push({
   "test": function(container, macro) {
     return hasExactly(container, "Bus", 1) &&
      hasOnly(container, ["Bus"]);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "A speeding bus slams on its brakes as you abruptly sit - but it's too late to stop. A gasp flies from your lips as it penetrates your greedy ass, sinking halfway in and coming to a halt. \
     You grunt and squeeze, causing its frame to creak and groan. Two fingers to the back are enough to get it moving again, and it slowly works inside. You shiver and moan, taking it in all the way. \
     Your ass claims " + container.describe(verbose) + ".";
@@ -2014,7 +2247,7 @@ rules["anal-vore"].push({
   "test": function(container, macro) {
     return hasExactly(container, "Train", 1) &&
      hasOnly(container, ["Train"]);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     var cars = container.contents["Train"].contents["Train Car"].count;
     return "Your massive fingers wrap around a train, yanking it from the rails with a tremendous screech of metal-on-metal. You squat down low, eyes rolling back in anticipation as you thrust the locomotive towards your massive ass - and then it hits home. A moan of pleasure shakes the earth, your ravenous pucker spread around the engine and sucking it in with a <i>squelch</i>. Powerful muscles squeeze and grab...and " + container.describe(verbose) + " swiftly vanishes into your bowels, every one of the " + cars + " cars a fresh shock of pleasure as they glide into your musky depths.";
   }
@@ -2024,7 +2257,7 @@ rules["anal-vore"].push({
   "test": function(container, macro) {
     return hasExactly(container, "Planet", 1) &&
      hasOnly(container, ["Planet"]);
-  }, "desc": function(container, macro, verbose) {
+  }, "desc": function(container, macro, verbose, flat) {
     return "Your enormous hands guide a planet towards your cheeks - pressing it firmly into your pucker with a dull, muffled <i>shlph</i>...and " + container.describe(verbose) + " sinks into your bowels, sealed away from the universe...";
   }
 });
