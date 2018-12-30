@@ -4139,6 +4139,12 @@ function updateCustomCharacters() {
 
   let saves = JSON.parse(storage.getItem("custom-characters"));
 
+  let names = Object.entries(saves).map(function([name, contents]) {
+    return name;
+  });
+
+  names.sort(function(x,y) {return x.localeCompare(y); } );
+
   if (Object.keys(saves).length == 0) {
     let none = document.createElement("option");
     none.innerText = "No characters to load";
@@ -4147,7 +4153,7 @@ function updateCustomCharacters() {
 
     return;
   } else {
-    Object.entries(saves).forEach(function([name, contents]) {
+    names.forEach(function (name) {
       let entry = document.createElement("option");
       entry.value = name;
       entry.innerText = name;
