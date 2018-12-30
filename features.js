@@ -959,6 +959,11 @@ options = [
             "id": "cockDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Scale cum with size",
+            "id": "cumScaleWithSize",
+            "type": "checkbox"
           }
         ]
       },
@@ -1060,6 +1065,11 @@ options = [
             "id": "unbirthDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Scale femcum with size",
+            "id": "femcumScaleWithSize",
+            "type": "checkbox"
           }
         ]
       },
@@ -1142,6 +1152,11 @@ options = [
             "id": "breastDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Scale milk with size",
+            "id": "milkScaleWithSize",
+            "type": "checkbox"
           }
         ]
       }
@@ -1213,6 +1228,11 @@ options = [
         "id": "baseGasDigestFactor",
         "type": "float",
         "default": "1"
+      },
+      {
+        "name": "Scale gas with size",
+        "id": "gasScaleWithSize",
+        "type": "checkbox"
       }
     ]
   },
