@@ -4883,7 +4883,7 @@ window.addEventListener('load', function(event) {
   construct_options();
   construct_panels();
 
-  document.querySelector("#save-version").innerText = save_version;
+  document.querySelector("#save-version").value = save_version;
 
   document.querySelectorAll("input[type='number']").forEach(function(x) {
     x.addEventListener("input", function() { updatePreview(x.id); });
