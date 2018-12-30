@@ -1566,24 +1566,24 @@ let macro =
   get describeVagina() {
     let state = "";
     if (!this.arousalEnabled) {
-      state = "unassuming";
+      state = "";
     } else if (this.orgasm) {
-      state = "gushing, quivering";
+      state = " gushing, quivering";
     } else {
       if (this.arousal < 25) {
-        state = "unassuming";
+        state = "";
       } else if (this.arousal < 75) {
-        state = "moist";
+        state = " moist";
       } else if (this.arousal < 100) {
-        state = "glistening";
+        state = " glistening";
       } else if (this.arousal < 150) {
-        state = "dripping";
+        state = " dripping";
       } else if (this.arousal < 200) {
-        state = "dripping, quivering";
+        state = " dripping, quivering";
       }
     }
 
-    return length(this.vaginaLength, unit, true) + " long " + state;
+    return length(this.vaginaLength, unit, true) + " long" + state;
   },
 };
 
