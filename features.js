@@ -686,6 +686,11 @@ options = [
         "default": "15"
       },
       {
+        "name": "Manual digestion",
+        "id": "oralDigestManual",
+        "type": "checkbox"
+      },
+      {
         "name": "Same-size vore",
         "id": "sameSizeVore",
         "type": "checkbox"
@@ -715,6 +720,11 @@ options = [
         "id": "analDigestTime",
         "type": "float",
         "default": "15"
+      },
+      {
+        "name": "Manual digestion",
+        "id": "analDigestManual",
+        "type": "checkbox"
       },
       {
         "name": "Anal vore goes to stomach",
@@ -866,6 +876,11 @@ options = [
             "default": "15"
           },
           {
+            "name": "Manual digestion",
+            "id": "tailDigestManual",
+            "type": "checkbox"
+          },
+          {
             "name": "Tail vore goes to stomach",
             "id": "tailVoreToStomach",
             "type": "checkbox"
@@ -963,6 +978,11 @@ options = [
             "id": "cockDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Manual digestion",
+            "id": "cockDigestManual",
+            "type": "checkbox"
           },
           {
             "name": "Scale cum with size",
@@ -1071,6 +1091,11 @@ options = [
             "default": "15"
           },
           {
+            "name": "Manual digestion",
+            "id": "unbirthDigestManual",
+            "type": "checkbox"
+          },
+          {
             "name": "Scale femcum with size",
             "id": "femcumScaleWithSize",
             "type": "checkbox"
@@ -1156,6 +1181,11 @@ options = [
             "id": "breastDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Manual digestion",
+            "id": "breastDigestManual",
+            "type": "checkbox"
           },
           {
             "name": "Scale milk with size",
@@ -1253,6 +1283,11 @@ options = [
         "default": "15"
       },
       {
+        "name": "Manual digestion",
+        "id": "soulDigestManual",
+        "type": "checkbox"
+      },
+      {
         "type": "radio",
         "id": "soulVoreType",
         "default": "body",
@@ -1325,6 +1360,11 @@ options = [
             "default": "15"
           },
           {
+            "name": "Manual digestion",
+            "id": "bladderDigestManual",
+            "type": "checkbox"
+          },
+          {
             "name": "Scale piss with size",
             "id": "pissScaleWithSize",
             "type": "checkbox"
@@ -1382,6 +1422,11 @@ options = [
             "id": "gooDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Manual digestion",
+            "id": "gooDigestManual",
+            "type": "checkbox"
           }
         ]
       }
@@ -1398,6 +1443,11 @@ options = [
         "id": "pawDigestTime",
         "type": "float",
         "default": "15"
+      },
+      {
+        "name": "Manual digestion",
+        "id": "pawDigestManual",
+        "type": "checkbox"
       }
     ]
   },
@@ -1514,6 +1564,11 @@ options = [
             "id": "wingDigestTime",
             "type": "float",
             "default": "15"
+          },
+          {
+            "name": "Manual digestion",
+            "id": "wingDigestManual",
+            "type": "checkbox"
           },
           {
             "name": "Wing vore goes to stomach",

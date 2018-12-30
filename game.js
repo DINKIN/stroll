@@ -1869,9 +1869,9 @@ function do_digestion(owner, organ, container, active=false) {
       soulLine = "Their " + (soulCount == 1 ? "soul is" : "souls are") + " trapped in your depths!";
     else
       soulLine = "No souls, though...";
-    update([sound,line,summary,soulLine,newline], false);
+    update([sound,line,summary,soulLine,newline], active);
   } else {
-    update([sound,line,summary,newline], false);
+    update([sound,line,summary,newline], active);
   }
 }
 
@@ -3441,7 +3441,7 @@ function gooButtons(molten) {
     setButton("goo_tail_push", molten);
   }
 
-  if (macro.gooDigestTime == 0) {
+  if (macro.gooDigestManual) {
     setButton("digest_goo", molten);
   }
 }
@@ -4348,7 +4348,7 @@ function startGame(e) {
       enable_victim("chew","Chewed");
     }
 
-    if (macro.oralDigestTime == 0) {
+    if (macro.oralDigestManual) {
       enable_button("digest_stomach");
     }
 
@@ -4366,7 +4366,7 @@ function startGame(e) {
     enable_button("anal_vore");
     enable_victim("anal-vore","Anal vore");
 
-    if (macro.analDigestTime == 0) {
+    if (macro.analDigestManual) {
       enable_button("digest_anal");
     }
   }
@@ -4389,7 +4389,7 @@ function startGame(e) {
         enable_button("tail_vore_only");
       }
 
-      if (macro.tailDigestTime == 0) {
+      if (macro.tailDigestManual) {
         enable_button("digest_tail");
       }
     }
@@ -4407,7 +4407,7 @@ function startGame(e) {
       enable_button("cock_vore");
       enable_victim("cock-vore","Cock vore");
 
-      if (macro.cockDigestTime == 0) {
+      if (macro.cockDigestManual) {
         enable_button("digest_cock");
       }
     }
@@ -4467,7 +4467,7 @@ function startGame(e) {
       }
     }
 
-    if (macro.unbirthDigestTime == 0) {
+    if (macro.unbirthDigestManual) {
       enable_button("digest_unbirth");
     }
   }
@@ -4502,7 +4502,7 @@ function startGame(e) {
 
       enable_button("breast_vore");
 
-      if (macro.breastDigestTime == 0) {
+      if (macro.breastDigestManual) {
         enable_button("digest_breast");
       }
     }
@@ -4530,7 +4530,7 @@ function startGame(e) {
     enable_button("soul_vore");
     enable_button("soul_absorb_paw");
 
-    if (macro.soulDigestTime == 0) {
+    if (macro.soulDigestManual) {
       enable_button("digest_soul");
     }
 
@@ -4581,7 +4581,7 @@ function startGame(e) {
 
       enable_victim("bladder-vore","Dissolved into piss");
 
-      if (macro.bladderDigestTime == 0) {
+      if (macro.bladderDigestManual) {
         enable_button("digest_bladder");
       }
     }
@@ -4621,7 +4621,7 @@ function startGame(e) {
 
     enable_victim("paw-vore","Absorbed into paws");
 
-    if (macro.pawDigestTime == 0) {
+    if (macro.pawDigestManual) {
       enable_button("digest_paws");
     }
   }
@@ -4672,7 +4672,7 @@ function startGame(e) {
       enable_button("wings_vore");
       enable_victim("wings-vore");
 
-      if (macro.wingDigestTime == 0) {
+      if (macro.wingDigestManual) {
         enable_button("digest_wings");
       }
     }
