@@ -1055,7 +1055,7 @@ let macro =
       if (verbose || flat) {
         prey = flatten(prey);
       }
-      
+
       if (this.container.count == 0)
         return "Your pouch is empty";
       else
@@ -2968,6 +2968,7 @@ function tail_vore(count)
       totalPrey = totalPrey.merge(prey);
     }
 
+    let line = describe("tails-vore", totalPrey, macro, verbose, flat).replace("$COUNT", macro.tailCount);
     lines.push(line);
   }
 
