@@ -379,6 +379,10 @@ panels = {
             {
                 "name": "Wing Vore",
                 "target": "wings_vore"
+            },
+            {
+                "name": "Digest Wings",
+                "target": "digest_wings"
             }
         ]
     },

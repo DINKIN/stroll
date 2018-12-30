@@ -1915,6 +1915,10 @@ function digest_paws() {
   digest_all(macro.pawsVore, true);
 }
 
+function digest_wings() {
+  digest_all(macro.wings, true);
+}
+
 function crop_swallow()
 {
   digest_all(macro.crop, true);
@@ -4667,6 +4671,10 @@ function startGame(e) {
     if (macro.wingVoreEnabled) {
       enable_button("wings_vore");
       enable_victim("wings-vore");
+
+      if (macro.wingDigestTime == 0) {
+        enable_button("digest_wings");
+      }
     }
   }
 
