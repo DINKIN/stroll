@@ -4853,7 +4853,7 @@ function showStats() {
   if (macro.brutality > 0) {
     lines.splice(0, 0, "Kills:");
   } else {
-    lines.insert(0, 0, "Victims:");
+    lines.splice(0, 0, "Victims:");
   }
 
   lines.push("Total: " + total);
