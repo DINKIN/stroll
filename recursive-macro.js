@@ -49,7 +49,7 @@ var areas =
   "Small Skyscraper": 1000,
   "Large Skyscraper": 2000,
   "Train": 40,
-  "TrainCar": 20,
+  "Train Car": 20,
   "Parking Garage": 750,
   "Town": 1e7,
   "City": 1e9,
@@ -501,7 +501,13 @@ function flatten(thing) {
     list.push(obj);
   });
 
-  list.sort(function(x,y) { return areas[x.name] < areas[y.name] })
+  list.sort(function(x,y) {
+    if (y.area != x.area){
+      return y.area - x.area;
+    } else {
+      return x.name.localeCompare(y.name);
+    }
+  });
 
   return new Container(list);
 }
