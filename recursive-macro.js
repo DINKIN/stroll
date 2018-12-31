@@ -501,6 +501,8 @@ function flatten(thing) {
     list.push(obj);
   });
 
+  list.sort(function(x,y) { return areas[x.name] < areas[y.name] })
+
   return new Container(list);
 }
 
