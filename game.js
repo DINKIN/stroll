@@ -1209,7 +1209,7 @@ let macro =
   },
 
   "fillBreasts": function(self) {
-    self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.wombScale, 3);
+    self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.breastScale, 3);
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit);
