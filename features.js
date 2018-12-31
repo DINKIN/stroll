@@ -1472,6 +1472,13 @@ options = [
     "entries":
     [
       {
+        "name": "Breath area",
+        "id": "baseBreathArea",
+        "type": "float",
+        "default": "10",
+        "unit": "area"
+      },
+      {
         "name": "Fire",
         "id": "breathFire",
         "type": "checkbox"
