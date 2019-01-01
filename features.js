@@ -160,6 +160,22 @@ panels = {
         "name": "Cock",
         "buttons": [
             {
+                "name": "Cockslap",
+                "target": "cockslap"
+            },
+            {
+                "name": "Cock Vore",
+                "target": "cock_vore"
+            },
+            {
+                "name": "Digest",
+                "target": "digest_cock"
+            },
+            {
+                "name": "Ball Smother",
+                "target": "ball_smother"
+            },
+            {
                 "name": "Stuff Sheath",
                 "target": "sheath_stuff"
             },
@@ -190,22 +206,6 @@ panels = {
             {
                 "name": "Absorb Foreskin",
                 "target": "foreskin_absorb"
-            },
-            {
-                "name": "Cockslap",
-                "target": "cockslap"
-            },
-            {
-                "name": "Cock Vore",
-                "target": "cock_vore"
-            },
-            {
-                "name": "Digest",
-                "target": "digest_cock"
-            },
-            {
-                "name": "Ball Smother",
-                "target": "ball_smother"
             }
         ]
     },
