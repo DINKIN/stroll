@@ -5144,6 +5144,8 @@ window.addEventListener('load', function(event) {
   document.getElementById("button-reset-custom").addEventListener("click", resetSettings);
   document.getElementById("button-load-autosave").addEventListener("click", loadAutosave);
 
+  document.getElementById("button-units-options").addEventListener("click", toggle_units_options)
+
   // note to self - the anonymous function is so that
   // loadSettings doesn't receive the mouseEvent!
 
