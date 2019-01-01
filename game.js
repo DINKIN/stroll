@@ -1226,7 +1226,7 @@ let macro =
     self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.breastScale, 3);
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
-      breast_milk(self.milkStorage.amount - self.milkStorage.limit);
+      breast_milk(self.milkStorage.amount - self.milkStorage.limit/2);
     }
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
