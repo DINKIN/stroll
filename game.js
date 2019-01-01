@@ -534,7 +534,7 @@ let macro =
       }
 
       if (prey.count == 0) {
-        return "Your " + this.owner.tailDesc + " are empty.";
+        return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "are" : "is") + " empty.";
       } else {
         if (this.owner.tailVoreToStomach) {
           return "Your " + this.owner.tailDesc + " " + (this.owner.tailCount > 1 ? "clench and squeeze around " : "clenches and squeezes around ") + prey.describeSimple(verbose || flat) + ", working them deeper and deeper inside.";
