@@ -176,6 +176,22 @@ panels = {
                 "target": "sheath_absorb"
             },
             {
+                "name": "Stuff Foreskin",
+                "target": "foreskin_stuff"
+            },
+            {
+                "name": "Squeeze Foreskin",
+                "target": "foreskin_toy"
+            },
+            {
+                "name": "Clench Foreskin",
+                "target": "foreskin_clench"
+            },
+            {
+                "name": "Absorb Foreskin",
+                "target": "foreskin_absorb"
+            },
+            {
                 "name": "Cockslap",
                 "target": "cockslap"
             },
@@ -1000,6 +1016,19 @@ options = [
           {
             "name": "Absorption",
             "id": "sheathAbsorptionEnabled",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "name": "Foreskin",
+        "id": "hasForeskin",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Absorption",
+            "id": "foreskinAbsorptionEnabled",
             "type": "checkbox"
           }
         ]

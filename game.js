@@ -1080,6 +1080,20 @@ let macro =
     }
   },
 
+  "foreskin": {
+    "name": "foreskin",
+    "container": new Container(),
+    get description() {
+      if (this.container.count == 0)
+        return "Your foreskin is wrapped tightly around your shaft.";
+      else
+        return "Your foreskin bulges with " + this.container.describeSimple(verbose || flat);
+    },
+    "add": function(victims) {
+      this.container = this.container.merge(victims);
+    }
+  },
+
   "cleavage": {
     "name": "cleavage",
     "container": new Container(),
@@ -1354,6 +1368,8 @@ let macro =
           this.maleOrgasm(this);
           if (this.sheath.container.count > 0)
             sheath_crush();
+          if (this.foreskin.container.count > 0)
+            foreskin_crush();
         }
         if (this.femaleParts) {
           this.femaleOrgasm(this);
@@ -2669,6 +2685,96 @@ function sheath_absorb()
   let sound = getSound("insert",preyMass);
 
   add_victim_people("sheath-absorb",prey);
+  update([sound,line,linesummary,newline]);
+
+  macro.arouse(45);
+}
+
+function foreskin_stuff()
+{
+  let area = Math.min(macro.handArea, macro.dickArea);
+  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let line = describe("foreskin-stuff", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), false);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("insert",preyMass);
+
+  macro.foreskin.add(prey);
+  update([sound,line,linesummary,newline]);
+
+  macro.arouse(15);
+}
+
+function foreskin_toy()
+{
+  let prey = macro.foreskin.container;
+  let line = describe("foreskin-toy", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), false);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("insert",preyMass);
+
+  update([sound,line,linesummary,newline]);
+  macro.arouse(15);
+}
+
+function foreskin_clench()
+{
+  let prey = macro.foreskin.container;
+  macro.foreskin.container = new Container();
+  let line = describe("foreskin-clench", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("crush",preyMass);
+
+  add_victim_people("foreskin-crush",prey);
+  update([sound,line,linesummary,newline]);
+  macro.arouse(45);
+}
+
+function foreskin_crush()
+{
+  let prey = macro.foreskin.container;
+  macro.foreskin.container = new Container();
+  let line = describe("foreskin-crush", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("crush",preyMass);
+
+  add_victim_people("foreskin-crush",prey);
+  update([sound,line,linesummary,newline]);
+  macro.arouse(45);
+}
+
+function foreskin_absorb()
+{
+  let prey = macro.foreskin.container;
+  macro.foreskin.container = new Container();
+  let line = describe("foreskin-absorb", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("insert",preyMass);
+
+  add_victim_people("foreskin-absorb",prey);
   update([sound,line,linesummary,newline]);
 
   macro.arouse(45);
@@ -4523,6 +4629,20 @@ function startGame(e) {
       enable_button("sheath_stuff");
       enable_button("sheath_toy");
       enable_button("sheath_clench");
+    }
+
+    if (macro.hasForeskin) {
+      enable_victim("foreskin-crush");
+
+      if (macro.foreskinAbsorptionEnabled) {
+        enable_button("foreskin_absorb");
+        enable_victim("foreskin-absorb");
+      }
+
+
+      enable_button("foreskin_stuff");
+      enable_button("foreskin_toy");
+      enable_button("foreskin_clench");
     }
 
     if (macro.arousalEnabled) {

@@ -23,17 +23,18 @@ function getDefault(name) {
 var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore",
 "cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush",
 "breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush",
-"sheath-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt",
+"sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush",
+"foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt",
 "female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw",
 "paw-stench","ass-stench","piss-stench","scat-stench","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk",
 "belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder",
 "soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat",
-"sheath-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push",
+"sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push",
 "goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push",
 "goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer",
 "breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
 
-var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
+var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
@@ -362,6 +363,14 @@ function defaultSheathStuff(container, macro, verbose, flat) {
     return "You pluck " + container.describe(verbose) + " from the ground and slip them into your musky sheath.";
 }
 
+function defaultForeskinStuff(container, macro, verbose, flat) {
+  if (container.count == 0)
+    return "You grab a " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your foreskin...but they won't fit.";
+  else
+    return "You pluck " + container.describe(verbose) + " from the ground and slip them into your musky foreskin.";
+}
+
+
 function defaultBreastToy(container, macro, verbose, flat) {
   if (container.count > 0) {
     return "You smush your breasts together, squeezing " + container.describeSimple(flat) + " between the heavy mounds.";
@@ -433,6 +442,63 @@ function defaultSheathAbsorb(container, macro, verbose, flat) {
     return "You grip your sheath and give it a firm <i>squeeze</i>, abruptly absorbing " + container.describeSimple(flat) + " into your musky body.";
   else
     return defaultSheathToy(container, macro, verbose, flat);
+}
+
+function defaultForeskinToy(container, macro, verbose, flat) {
+  if (container.count > 0) {
+    if (macro.orgasm) {
+      return "You stroke your spurting cock. Anything within your foreskin has been ground away to nothingness by the force of your orgasm.";
+    } else if (macro.arousal < 25) {
+      return "You slip your fingers into your sheath and give your shaft a squeeze, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + " cock.";
+    } else if (macro.arousal < 75) {
+      return "You grip your swelling cock and squeeze, feeling " + container.describeSimple(flat) + " between your " + macro.describeDick + " and your foreskin.";
+    } else if (macro.arousal < 150) {
+      return "You run your fingers down your " + macro.describeDick + " shaft, squeezing it to feel " + container.describeSimple(flat) + " being smothered against your throbbing cock.";
+    } else {
+      return "Trembling with your impending orgasm, your fingers play over your taut foreskin, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + " cock.";
+    }
+  } else {
+    if (macro.orgasm) {
+      return "You stroke your spurting cock. Anything within your foreskin has been ground away to nothingness by the force of your orgasm.";
+    } else if (macro.arousal < 25) {
+      return "You grip your soft foreskin and give it a squeeze.";
+    } else if (macro.arousal < 75) {
+      return "You grip your swelling cock and squeeze.";
+    } else if (macro.arousal < 150) {
+      return "You run your fingers over your " + macro.describeDick + " shaft and grip your taut foreskin, squeezing it gently.";
+    } else {
+      return "Trembling with your impending orgasm, your fingers play over your shaft.";
+    }
+  }
+}
+
+function defaultForeskinClench(container, macro, verbose, flat) {
+  if (container.count == 0)
+    return "You squeeze your foreskin.";
+  else if (isGory(macro))
+    return "You squeeze your foreskin, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your throbbing shaft.";
+  else if (isFatal(macro))
+    return "Your fingers run over your packed foreskin, squeezing on the " + macro.describeDick + " shaft within and smashing " + container.describeSimple(flat);
+  else
+    return "Your squeeze your foreskin, pushing " + container.describeSimple(flat) + " out of your foreskin.";
+}
+
+function defaultForeskinCrush(container, macro, verbose, flat) {
+  if (container.count == 0)
+    return "Your orgasm causes your " + macro.describeDick + " cock to swell and surge.";
+  else if (isGory(macro))
+    return "Your powerful orgasm causes your throbbing " + macro.describeDick + " cock to swell and crush the life from everything in your foreskin, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your spurting shaft.";
+  else if (isFatal(macro))
+    return "Your orgasm causes your " + macro.describeDick + " shaft to throb and swell, smashing " + container.describeSimple(flat) + " trapped in your musky foreskin.";
+  else
+    return "Your orgasm causes your " + macro.describeDick + " cock to swell, squeezing " + container.describeSimple(flat) + " out from your foreskin.";
+}
+
+function defaultForeskinAbsorb(container, macro, verbose, flat) {
+  if (container.count > 0)
+    return "You grip your cock and give it a firm <i>squeeze</i>, abruptly absorbing " + container.describeSimple(flat) + " into your musky foreskin.";
+  else
+    return defaultForeskinToy(container, macro, verbose, flat);
 }
 
 function defaultCockVore(container, macro, verbose, flat) {
@@ -1140,7 +1206,7 @@ function defaultDrool(container, macro, verbose, flat) {
 }
 
 function defaultMagicShrink(container, macro, verbose, flat) {
-  return "You envelop " + container.describe(verbose) + " in swirling tendrils of magic, shrinking " + (container.count == 1 ? "it" : "them") + " down!";
+  return "You envelop " + container.describeSimple(flat) + " in swirling tendrils of magic, shrinking " + (container.count == 1 ? "it" : "them") + " down!";
 }
 
 function defaultWingsFlap(container, macro, verbose, flat) {
@@ -1377,6 +1443,30 @@ function defaultVictimSheathCrush(container, macro, verbose, flat) {
 }
 
 function defaultVictimSheathAbsorb(container, macro, verbose, flat) {
+  if (isSadistic(macro)) {
+    return "dissolved and absorbed into your tight sheath";
+  } else if (isGory(macro)) {
+    return "absorbed by the flesh of your sheath";
+  } else if (isFatal(macro)) {
+    return "absorbed into your sheath";
+  } else if (isNonFatal(macro)) {
+    return "taken into your sheath";
+  }
+}
+
+function defaultVictimForeskinCrush(container, macro, verbose, flat) {
+  if (isSadistic(macro)) {
+    return "crushed and smeared between your shaft and sheath";
+  } else if (isGory(macro)) {
+    return "ground into paste within your sheath";
+  } else if (isFatal(macro)) {
+    return "crushed between your sheath and shaft";
+  } else if (isNonFatal(macro)) {
+    return "squeezed in your sheath";
+  }
+}
+
+function defaultVictimForeskinAbsorb(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
     return "dissolved and absorbed into your tight sheath";
   } else if (isGory(macro)) {
