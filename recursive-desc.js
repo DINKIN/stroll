@@ -20,6 +20,17 @@ function getDefault(name) {
   return window[funcName];
 }
 
+function getDefaultVictim(name) {
+  let tokens = name.split("-");
+  for (let i=0; i<tokens.length; i++) {
+    tokens[i] = tokens[i].charAt(0).toUpperCase() + tokens[i].slice(1);
+  }
+
+  let funcName = "default" + tokens.join("");
+
+  return window[funcName];
+}
+
 var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore",
 "cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush",
 "breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush",
@@ -38,10 +49,6 @@ var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", 
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
-}
-
-for (let i=0; i<victim_keys.length; i++) {
-  rules[victim_keys[i]] = [];
 }
 
 function isNonFatal(macro) {
@@ -135,6 +142,10 @@ function describe(action, container, macro, verbose=true, flat=false) {
   else {
     return getDefault(action)(container, macro, verbose, flat);
   }
+}
+
+function describeVictim(action, macro) {
+  return getDefaultVictim(action)(macro);
 }
 
 // DEFAULTS
@@ -1226,7 +1237,7 @@ function defaultWingsVore(container, macro, verbose, flat) {
 
 }
 
-function defaultVictimCumFlood(container, macro, verbose, flat) {
+function defaultVictimCumFlood(macro) {
   if (isSadistic(macro)) {
     return "drowned in viscous cum";
   } else if (isGory(macro)) {
@@ -1238,7 +1249,7 @@ function defaultVictimCumFlood(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimFemcumFlood(container, macro, verbose, flat) {
+function defaultVictimFemcumFlood(macro) {
   if (isSadistic(macro)) {
     return "drowned in slick femcum";
   } else if (isGory(macro)) {
@@ -1250,7 +1261,7 @@ function defaultVictimFemcumFlood(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimStomped(container, macro, verbose, flat) {
+function defaultVictimStomped(macro) {
   if (isSadistic(macro)) {
     return "crushed into pulp beneath your " + macro.footDesc(true);
   } else if (isGory(macro)) {
@@ -1262,7 +1273,7 @@ function defaultVictimStomped(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimFlexToes(container, macro, verbose, flat) {
+function defaultVictimFlexToes(macro) {
   if (isSadistic(macro)) {
     return "ground to a thick paste between your " + macro.toeDesc(true);
   } else if (isGory(macro)) {
@@ -1274,7 +1285,7 @@ function defaultVictimFlexToes(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimEaten(container, macro, verbose, flat) {
+function defaultVictimEaten(macro) {
   if (isSadistic(macro)) {
     return "devoured and digested down to molten chyme";
   } else if (isGory(macro)) {
@@ -1286,7 +1297,7 @@ function defaultVictimEaten(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimAssCrush(container, macro, verbose, flat) {
+function defaultVictimAssCrush(macro) {
   if (isSadistic(macro)) {
     return "snuffed out under your ass";
   } else if (isGory(macro)) {
@@ -1298,7 +1309,7 @@ function defaultVictimAssCrush(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimAssGround(container, macro, verbose, flat) {
+function defaultVictimAssGround(macro) {
   if (isSadistic(macro)) {
     return "ground out of existence beneath your heavy ass";
   } else if (isGory(macro)) {
@@ -1310,7 +1321,7 @@ function defaultVictimAssGround(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimHumped(container, macro, verbose, flat) {
+function defaultVictimHumped(macro) {
   if (isSadistic(macro)) {
     return "smashed to gory paste by your thrusting hips";
   } else if (isGory(macro)) {
@@ -1322,7 +1333,7 @@ function defaultVictimHumped(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimVomit(container, macro, verbose, flat) {
+function defaultVictimVomit(macro) {
   if (isSadistic(macro)) {
     return "spewed from your caustic depths and left to die";
   } else if (isGory(macro)) {
@@ -1334,7 +1345,7 @@ function defaultVictimVomit(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimChew(container, macro, verbose, flat) {
+function defaultVictimChew(macro) {
   if (isSadistic(macro)) {
     return "chewed to a bloody pulp by your scything " + macro.jawDesc(true);
   } else if (isGory(macro)) {
@@ -1346,7 +1357,7 @@ function defaultVictimChew(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimDrool(container, macro, verbose, flat) {
+function defaultVictimDrool(macro) {
   if (isSadistic(macro)) {
     return "inundated in your drool and drowned";
   } else if (isGory(macro)) {
@@ -1358,7 +1369,7 @@ function defaultVictimDrool(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimAnalVore(container, macro, verbose, flat) {
+function defaultVictimAnalVore(macro) {
   if (isSadistic(macro)) {
     return "crammed into your bowels and obliterated";
   } else if (isGory(macro)) {
@@ -1370,7 +1381,7 @@ function defaultVictimAnalVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimTailSlap(container, macro, verbose, flat) {
+function defaultVictimTailSlap(macro) {
   if (isSadistic(macro)) {
     return "cut down like wheat by your swooping, scything " + macro.tailDesc;
   } else if (isGory(macro)) {
@@ -1382,7 +1393,7 @@ function defaultVictimTailSlap(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimTailVore(container, macro, verbose, flat) {
+function defaultVictimTailVore(macro) {
   if (isSadistic(macro)) {
     return "snapped up and devoured by your ravenous " + macro.tailNoDesc;
   } else if (isGory(macro)) {
@@ -1394,7 +1405,7 @@ function defaultVictimTailVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCockSlap(container, macro, verbose, flat) {
+function defaultVictimCockSlap(macro) {
   if (isSadistic(macro)) {
     return "obliterated beneath your massive, swinging shaft.";
   } else if (isGory(macro)) {
@@ -1406,7 +1417,7 @@ function defaultVictimCockSlap(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCockVore(container, macro, verbose, flat) {
+function defaultVictimCockVore(macro) {
   if (isSadistic(macro)) {
     return "plunged into the depths of your shaft";
   } else if (isGory(macro)) {
@@ -1418,7 +1429,7 @@ function defaultVictimCockVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBallSmother(container, macro, verbose, flat) {
+function defaultVictimBallSmother(macro) {
   if (isSadistic(macro)) {
     return "reduce to broken gore under your massive balls";
   } else if (isGory(macro)) {
@@ -1430,7 +1441,7 @@ function defaultVictimBallSmother(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimSheathCrush(container, macro, verbose, flat) {
+function defaultVictimSheathCrush(macro) {
   if (isSadistic(macro)) {
     return "crushed and smeared between your shaft and sheath";
   } else if (isGory(macro)) {
@@ -1442,7 +1453,7 @@ function defaultVictimSheathCrush(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimSheathAbsorb(container, macro, verbose, flat) {
+function defaultVictimSheathAbsorb(macro) {
   if (isSadistic(macro)) {
     return "dissolved and absorbed into your tight sheath";
   } else if (isGory(macro)) {
@@ -1454,7 +1465,7 @@ function defaultVictimSheathAbsorb(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimForeskinCrush(container, macro, verbose, flat) {
+function defaultVictimForeskinCrush(macro) {
   if (isSadistic(macro)) {
     return "crushed and smeared between your shaft and foreskin";
   } else if (isGory(macro)) {
@@ -1466,7 +1477,7 @@ function defaultVictimForeskinCrush(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimForeskinAbsorb(container, macro, verbose, flat) {
+function defaultVictimForeskinAbsorb(macro) {
   if (isSadistic(macro)) {
     return "dissolved and absorbed into your tight foreskin";
   } else if (isGory(macro)) {
@@ -1478,7 +1489,7 @@ function defaultVictimForeskinAbsorb(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCumFlood(container, macro, verbose, flat) {
+function defaultVictimCumFlood(macro) {
   if (isSadistic(macro)) {
     return "drowned in a caustic flood of cum";
   } else if (isGory(macro)) {
@@ -1490,7 +1501,7 @@ function defaultVictimCumFlood(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimMaleSpurtMusk(container, macro, verbose, flat) {
+function defaultVictimMaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
     return "dissolved in a tide of slick, musky precum";
   } else if (isGory(macro)) {
@@ -1502,7 +1513,7 @@ function defaultVictimMaleSpurtMusk(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimMaleOrgasmMusk(container, macro, verbose, flat) {
+function defaultVictimMaleOrgasmMusk(macro) {
   if (isSadistic(macro)) {
     return "corroded by your caustic, overwhelming masculine musk";
   } else if (isGory(macro)) {
@@ -1514,7 +1525,7 @@ function defaultVictimMaleOrgasmMusk(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimUnbirth(container, macro, verbose, flat) {
+function defaultVictimUnbirth(macro) {
   if (isSadistic(macro)) {
     return "crushed by your overwhelming womb";
   } else if (isGory(macro)) {
@@ -1526,7 +1537,7 @@ function defaultVictimUnbirth(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimFemcumFlood(container, macro, verbose, flat) {
+function defaultVictimFemcumFlood(macro) {
   if (isSadistic(macro)) {
     return "drowned and dissolved in slippery femcum";
   } else if (isGory(macro)) {
@@ -1538,7 +1549,7 @@ function defaultVictimFemcumFlood(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimFemaleSpurtMusk(container, macro, verbose, flat) {
+function defaultVictimFemaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
     return "suffocated by a spurt of corrosive feminine precum";
   } else if (isGory(macro)) {
@@ -1550,7 +1561,7 @@ function defaultVictimFemaleSpurtMusk(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimFemaleOrgasmMusk(container, macro, verbose, flat) {
+function defaultVictimFemaleOrgasmMusk(macro) {
   if (isSadistic(macro)) {
     return "corroded by your caustic, overwhelming feminine musk";
   } else if (isGory(macro)) {
@@ -1562,7 +1573,7 @@ function defaultVictimFemaleOrgasmMusk(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreastCrush(container, macro, verbose, flat) {
+function defaultVictimBreastCrush(macro) {
   if (isSadistic(macro)) {
     return "reduced to broken gore beneath your breasts";
   } else if (isGory(macro)) {
@@ -1574,7 +1585,7 @@ function defaultVictimBreastCrush(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCleavageCrush(container, macro, verbose, flat) {
+function defaultVictimCleavageCrush(macro) {
   if (isSadistic(macro)) {
     return "cracked open like gore-filled nuts between your breasts";
   } else if (isGory(macro)) {
@@ -1586,7 +1597,7 @@ function defaultVictimCleavageCrush(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCleavageAbsorb(container, macro, verbose, flat) {
+function defaultVictimCleavageAbsorb(macro) {
   if (isSadistic(macro)) {
     return "agonizingly absorbed into your greedy bosom";
   } else if (isGory(macro)) {
@@ -1598,7 +1609,7 @@ function defaultVictimCleavageAbsorb(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimCleavageDrop(container, macro, verbose, flat) {
+function defaultVictimCleavageDrop(macro) {
   if (isSadistic(macro)) {
     return "dropped from your cleavage and dashed to bloody bits";
   } else if (isGory(macro)) {
@@ -1610,7 +1621,7 @@ function defaultVictimCleavageDrop(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimMilkFlood(container, macro, verbose, flat) {
+function defaultVictimMilkFlood(macro) {
   if (isSadistic(macro)) {
     return "drenched in and dissolved by your milk";
   } else if (isGory(macro)) {
@@ -1622,7 +1633,7 @@ function defaultVictimMilkFlood(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreastVore(container, macro, verbose, flat) {
+function defaultVictimBreastVore(macro) {
   if (isSadistic(macro)) {
     return "fed into your breasts to be churned and obliterated";
   } else if (isGory(macro)) {
@@ -1634,7 +1645,7 @@ function defaultVictimBreastVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimPouchAbsorb(container, macro, verbose, flat) {
+function defaultVictimPouchAbsorb(macro) {
   if (isSadistic(macro)) {
     return "crushed, torn, and absorbed by your perilous pouch";
   } else if (isGory(macro)) {
@@ -1646,7 +1657,7 @@ function defaultVictimPouchAbsorb(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimSoulDigest(container, macro, verbose, flat) {
+function defaultVictimSoulDigest(macro) {
   switch(macro.soulVoreType) {
     case "release":
       return "souls freed from your depths";
@@ -1657,7 +1668,7 @@ function defaultVictimSoulDigest(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimSoulPaw(container, macro, verbose, flat) {
+function defaultVictimSoulPaw(macro) {
   switch(macro.soulVoreType) {
     case "release":
       return "souls briefly trapped in your paws";
@@ -1668,19 +1679,19 @@ function defaultVictimSoulPaw(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimPawStench(container, macro, verbose, flat) {
+function defaultVictimPawStench(macro) {
   if (isSadistic(macro)) {
     return "corroded and melted alive by the stench of your " + macro.footDesc(true);
   } else if (isGory(macro)) {
     return "suffocated by the powerful stench of your " + macro.footDesc(true);
   } else if (isFatal(macro)) {
-    return "snuffed out by the scent of your" + macro.footDesc(true);
+    return "snuffed out by the scent of your " + macro.footDesc(true);
   } else if (isNonFatal(macro)) {
     return "sickened by the smell of your " + macro.footDesc(true);
   }
 }
 
-function defaultVictimAssStench(container, macro, verbose, flat) {
+function defaultVictimAssStench(macro) {
   if (isSadistic(macro)) {
     return "reduced to bubbling flesh by the caustic scent of your ass";
   } else if (isGory(macro)) {
@@ -1692,7 +1703,7 @@ function defaultVictimAssStench(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimGasBelch(container, macro, verbose, flat) {
+function defaultVictimGasBelch(macro) {
   if (isSadistic(macro)) {
     return "dissolved by your rich, acidic belches";
   } else if (isGory(macro)) {
@@ -1704,7 +1715,7 @@ function defaultVictimGasBelch(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimGasFart(container, macro, verbose, flat) {
+function defaultVictimGasFart(macro) {
   if (isSadistic(macro)) {
     return "burned alive and melted down by your farts";
   } else if (isGory(macro)) {
@@ -1716,7 +1727,7 @@ function defaultVictimGasFart(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimPiss(container, macro, verbose, flat) {
+function defaultVictimPiss(macro) {
   if (isSadistic(macro)) {
     return "drowned and dissolved in acrid piss";
   } else if (isGory(macro)) {
@@ -1728,7 +1739,7 @@ function defaultVictimPiss(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBladderVore(container, macro, verbose, flat) {
+function defaultVictimBladderVore(macro) {
   if (isSadistic(macro)) {
     return "dissolved in a golden-yellow sea of searing piss";
   } else if (isGory(macro)) {
@@ -1740,7 +1751,7 @@ function defaultVictimBladderVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimPissStench(container, macro, verbose, flat) {
+function defaultVictimPissStench(macro) {
   if (isSadistic(macro)) {
     return "rent asunder by the miasma wafting from your piss";
   } else if (isGory(macro)) {
@@ -1752,7 +1763,7 @@ function defaultVictimPissStench(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimScat(container, macro, verbose, flat) {
+function defaultVictimScat(macro) {
   if (isSadistic(macro)) {
     return "buried alive and dissolved by your acrid shit";
   } else if (isGory(macro)) {
@@ -1764,7 +1775,7 @@ function defaultVictimScat(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimScatStench(container, macro, verbose, flat) {
+function defaultVictimScatStench(macro) {
   if (isSadistic(macro)) {
     return "melted into slag by the wretched miasma of your scat";
   } else if (isGory(macro)) {
@@ -1776,7 +1787,7 @@ function defaultVictimScatStench(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimGoo(container, macro, verbose, flat) {
+function defaultVictimGoo(macro) {
   if (isSadistic(macro)) {
     return "shredded and soaked up by your goo";
   } else if (isGory(macro)) {
@@ -1788,7 +1799,7 @@ function defaultVictimGoo(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimPawVore(container, macro, verbose, flat) {
+function defaultVictimPawVore(macro) {
   if (isSadistic(macro)) {
     return "broken down and absorbed directly into your " + macro.footOnlyDesc(true);
   } else if (isGory(macro)) {
@@ -1800,7 +1811,7 @@ function defaultVictimPawVore(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathFire(container, macro, verbose, flat) {
+function defaultVictimBreathFire(macro) {
   if (isSadistic(macro)) {
     return "cooked alive and reduced to ash by your flaming breath";
   } else if (isGory(macro)) {
@@ -1812,7 +1823,7 @@ function defaultVictimBreathFire(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathIce(container, macro, verbose, flat) {
+function defaultVictimBreathIce(macro) {
   if (isSadistic(macro)) {
     return "flash-frozen by your breath and shattered into gory dust";
   } else if (isGory(macro)) {
@@ -1824,7 +1835,7 @@ function defaultVictimBreathIce(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathElectric(container, macro, verbose, flat) {
+function defaultVictimBreathElectric(macro) {
   if (isSadistic(macro)) {
     return "blasted into bloody sludge by your shocking breath";
   } else if (isGory(macro)) {
@@ -1836,7 +1847,7 @@ function defaultVictimBreathElectric(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathSmoke(container, macro, verbose, flat) {
+function defaultVictimBreathSmoke(macro) {
   if (isSadistic(macro)) {
     return "cooked alive and cauterized by your smoky breath";
   } else if (isGory(macro)) {
@@ -1848,7 +1859,7 @@ function defaultVictimBreathSmoke(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathRadiation(container, macro, verbose, flat) {
+function defaultVictimBreathRadiation(macro) {
   if (isSadistic(macro)) {
     return "reduced to bubbling, glowing sludge by your radioactive breath";
   } else if (isGory(macro)) {
@@ -1860,7 +1871,7 @@ function defaultVictimBreathRadiation(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimBreathFoul(container, macro, verbose, flat) {
+function defaultVictimBreathFoul(macro) {
   if (isSadistic(macro)) {
     return "suffocated and slain by thick, miasmic breath";
   } else if (isGory(macro)) {
@@ -1872,7 +1883,7 @@ function defaultVictimBreathFoul(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimWingsFlap(container, macro, verbose, flat) {
+function defaultVictimWingsFlap(macro) {
   if (isSadistic(macro)) {
     return "ripped asunder by gusts from your mighty wings";
   } else if (isGory(macro)) {
@@ -1884,7 +1895,7 @@ function defaultVictimWingsFlap(container, macro, verbose, flat) {
   }
 }
 
-function defaultVictimWingsVore(container, macro, verbose, flat) {
+function defaultVictimWingsVore(macro) {
   if (isSadistic(macro)) {
     return "shrink-wrapped in your wings and dissolved";
   } else if (isGory(macro)) {

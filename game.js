@@ -4646,7 +4646,7 @@ function startGame(e) {
     }
 
     if (macro.arousalEnabled) {
-      enable_victim("cum-flood",describe("victim-cum-flood", null, macro, null, flat));
+      enable_victim("cum-flood");
 
       if (macro.maleMuskEnabled) {
         enable_victim("male-spurt-musk","Inundated in masculine precum musk");
@@ -4949,7 +4949,7 @@ function showStats() {
     if (victims.hasOwnProperty(key)) {
       if (victims[key]["people"] > 0) {
         lines.push([
-          victims[key]["people"] + " " + describe("victim-" + key, null, macro, false, false),
+          victims[key]["people"] + " " + describeVictim("victim-" + key, macro),
           victims[key]["people"]
         ]);
         total += victims[key]["people"];
