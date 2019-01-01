@@ -4121,8 +4121,6 @@ function grow_pick(times) {
       macro.growthPoints -= (times - 1) * 10;
     }
 
-    times /= 10;
-
     switch (button.id.replace("button-growth-", "")) {
       case "body": grow(times); break;
       case "paws": grow_paws(times); break;
