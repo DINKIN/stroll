@@ -1438,7 +1438,7 @@ function defaultVictimSheathCrush(container, macro, verbose, flat) {
   } else if (isFatal(macro)) {
     return "crushed between your sheath and shaft";
   } else if (isNonFatal(macro)) {
-    return "squeezed in your sheath";
+    return "squeezed out from your sheath";
   }
 }
 
@@ -1456,25 +1456,25 @@ function defaultVictimSheathAbsorb(container, macro, verbose, flat) {
 
 function defaultVictimForeskinCrush(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
-    return "crushed and smeared between your shaft and sheath";
+    return "crushed and smeared between your shaft and foreskin";
   } else if (isGory(macro)) {
-    return "ground into paste within your sheath";
+    return "ground into paste within your foreskin";
   } else if (isFatal(macro)) {
-    return "crushed between your sheath and shaft";
+    return "crushed between your foreskin and shaft";
   } else if (isNonFatal(macro)) {
-    return "squeezed in your sheath";
+    return "squeezed out from your foreskin";
   }
 }
 
 function defaultVictimForeskinAbsorb(container, macro, verbose, flat) {
   if (isSadistic(macro)) {
-    return "dissolved and absorbed into your tight sheath";
+    return "dissolved and absorbed into your tight foreskin";
   } else if (isGory(macro)) {
-    return "absorbed by the flesh of your sheath";
+    return "absorbed by the flesh of your foreskin";
   } else if (isFatal(macro)) {
-    return "absorbed into your sheath";
+    return "absorbed into your foreskin";
   } else if (isNonFatal(macro)) {
-    return "taken into your sheath";
+    return "taken into your foreskin";
   }
 }
 
