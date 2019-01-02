@@ -4816,8 +4816,6 @@ function updatePreview(name) {
   if (unitType == undefined)
     return;
 
-  // we might have a second scale to worry about!
-
   if (unitType == "length")
     result = length(value * scale, unit);
   else if (unitType == "area")
