@@ -1031,12 +1031,12 @@ let macro =
       }
 
       if (prey.count == 0) {
-        return "Your don't have anyone trapped in your wings.";
+        return "Your don't have anyone trapped in your " + macro.wingDesc + " wings.";
       } else {
         if (macro.brutality > 0)  {
-          return "Your folded wings bulge as they squeeze in on " + prey.describeSimple(verbose || flat) + ", slowly breaking them down.";
+          return "Your " + macro.wingDesc + " wings bulge as they squeeze in on " + prey.describeSimple(verbose || flat) + ", slowly breaking them down.";
         } else {
-          return "Your wings bulge with " + prey.describeSimple(verbose || flat) + ".";
+          return "Your " + macro.wingDesc + " wings bulge with " + prey.describeSimple(verbose || flat) + ".";
         }
       }
     },

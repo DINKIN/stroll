@@ -823,18 +823,18 @@ function defaultSoulDigest(container, macro, verbose, flat) {
 
 function defaultWings(container, macro, verbose, flat) {
   if (isSadistic(macro))
-    return "Your wings slacken as the " + container.describeSimple(flat) + " within melts into a slurry of meat and wreckage.";
+    return "Your " + macro.wingDesc + " wings slacken as the " + container.describeSimple(flat) + " within melts into a slurry of meat and wreckage.";
   if (isFatal(macro))
-    return "Your wings squeeze tightly as they absorb " + container.describeSimple(flat) + " into your body";
+    return "Your " + macro.wingDesc + " wings squeeze tightly as they absorb " + container.describeSimple(flat) + " into your body";
   else
-    return "Your wings squeeze as they absorb " + container.describeSimple(flat);
+    return "Your " + macro.wingDesc + " wings squeeze as they absorb " + container.describeSimple(flat);
 }
 
 function defaultWingsToStomach(container, macro, verbose, flat) {
   if (isFatal(macro))
-    return "Your wings clench, forcing " + container.describeSimple(flat) + " deeper and into your stomach.";
+    return "Your " + macro.wingDesc + " wings clench, forcing " + container.describeSimple(flat) + " deeper and into your stomach.";
   else
-    return "Your wings squeeze " + container.describeSimple(flat) + " into your belly.";
+    return "Your " + macro.wingDesc + " wings squeeze " + container.describeSimple(flat) + " into your belly.";
 }
 
 function defaultWearShoe(container, macro, verbose, flat) {
@@ -1210,17 +1210,17 @@ function defaultMagicShrink(container, macro, verbose, flat) {
 
 function defaultWingsFlap(container, macro, verbose, flat) {
   if (container.counter == 0) {
-    return "You flap your wings.";
+    return "You flap your " + macro.wingDesc + " wings.";
   } else {
-    return "You flap your wings, blowing away " + container.describe(verbose) + ".";
+    return "You flap your " + macro.wingDesc + " wings, blowing away " + container.describe(verbose) + ".";
   }
 }
 
 function defaultWingsVore(container, macro, verbose, flat) {
   if (container.counter == 0) {
-    return "You flap your wings aggressively.";
+    return "You flap your " + macro.wingDesc + " wings aggressively.";
   } else {
-    return "You spread your wings wide, wrapping them around " + container.describe(verbose) + " and ensnaring them";
+    return "You spread your " + macro.wingDesc + " wings wide, wrapping them around " + container.describe(verbose) + " and ensnaring them";
   }
 
 }
