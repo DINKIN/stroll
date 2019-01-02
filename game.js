@@ -4634,7 +4634,7 @@ function startGame(e) {
   }
 
   if (macro.hasPouch) {
-    if (macro.oralVoreEnabled) {
+    if (macro.oralVore) {
       enable_button("pouch_eat");
     }
   }
