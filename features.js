@@ -708,8 +708,9 @@ options = [
       },
       {
         "name": "Same-size vore",
-        "id": "sameSizeVore",
-        "type": "checkbox"
+        "id": "sameSizeOralVore",
+        "type": "checkbox",
+        "default": true
       },
       {
         "name": "Vomiting",
@@ -741,6 +742,12 @@ options = [
         "name": "Manual digestion",
         "id": "analDigestManual",
         "type": "checkbox"
+      },
+      {
+        "name": "Same-size vore",
+        "id": "sameSizeAnalVore",
+        "type": "checkbox",
+        "default": true
       },
       {
         "name": "Anal vore goes to stomach",
@@ -897,6 +904,12 @@ options = [
             "type": "checkbox"
           },
           {
+            "name": "Same-size vore",
+            "id": "sameSizeTailVore",
+            "type": "checkbox",
+            "default": true
+          },
+          {
             "name": "Tail vore goes to stomach",
             "id": "tailVoreToStomach",
             "type": "checkbox"
@@ -939,12 +952,6 @@ options = [
         "unit": "length"
       },
       {
-        "name": "Cock stretchiness",
-        "id": "dickStretchiness",
-        "type": "float",
-        "default": "1"
-      },
-      {
         "name": "Cock description",
         "id": "dickType",
         "type": "text",
@@ -984,6 +991,12 @@ options = [
         "entries":
         [
           {
+            "name": "Cock stretchiness",
+            "id": "dickStretchiness",
+            "type": "float",
+            "default": "1"
+          },
+          {
             "name": "Cum digestion factor",
             "id": "baseCumDigestFactor",
             "type": "float",
@@ -999,6 +1012,12 @@ options = [
             "name": "Manual digestion",
             "id": "cockDigestManual",
             "type": "checkbox"
+          },
+          {
+            "name": "Same-size vore",
+            "id": "sameSizeCockVore",
+            "type": "checkbox",
+            "default": true
           },
           {
             "name": "Scale cum with size",
@@ -1070,12 +1089,6 @@ options = [
         "unit": "length"
       },
       {
-        "name": "Slit stretchiness",
-        "id": "vaginaStretchiness",
-        "type": "float",
-        "default": "1"
-      },
-      {
         "name": "Womb volume",
         "id": "baseWombVolume",
         "type": "float",
@@ -1108,6 +1121,12 @@ options = [
         "entries":
         [
           {
+            "name": "Slit stretchiness",
+            "id": "vaginaStretchiness",
+            "type": "float",
+            "default": "1"
+          },
+          {
             "name": "Femcum digestion factor",
             "id": "baseFemcumDigestFactor",
             "type": "float",
@@ -1123,6 +1142,12 @@ options = [
             "name": "Manual digestion",
             "id": "unbirthDigestManual",
             "type": "checkbox"
+          },
+          {
+            "name": "Same-size vore",
+            "id": "sameSizeUnbirth",
+            "type": "checkbox",
+            "default": true
           },
           {
             "name": "Scale femcum with size",
@@ -1215,6 +1240,12 @@ options = [
             "name": "Manual digestion",
             "id": "breastDigestManual",
             "type": "checkbox"
+          },
+          {
+            "name": "Same-size vore",
+            "id": "sameSizeBreastVore",
+            "type": "checkbox",
+            "default": true
           },
           {
             "name": "Scale milk with size",
@@ -1394,6 +1425,12 @@ options = [
             "type": "checkbox"
           },
           {
+            "name": "Same-size vore",
+            "id": "sameSizeBladderVore",
+            "type": "checkbox",
+            "default": true
+          },
+          {
             "name": "Scale piss with size",
             "id": "pissScaleWithSize",
             "type": "checkbox"
@@ -1477,6 +1514,12 @@ options = [
         "name": "Manual digestion",
         "id": "pawDigestManual",
         "type": "checkbox"
+      },
+      {
+        "name": "Same-size vore",
+        "id": "sameSizePawVore",
+        "type": "checkbox",
+        "default": true
       }
     ]
   },
@@ -1605,6 +1648,12 @@ options = [
             "name": "Manual digestion",
             "id": "wingDigestManual",
             "type": "checkbox"
+          },
+          {
+            "name": "Same-size vore",
+            "id": "sameSizeWingVore",
+            "type": "checkbox",
+            "default": true
           },
           {
             "name": "Wing vore goes to stomach",

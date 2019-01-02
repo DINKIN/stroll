@@ -2013,7 +2013,7 @@ function crop_swallow()
 function feed()
 {
   let area = macro.handArea;
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area, macro.sameSizeOralVore);
 
   let linesummary = summarize(prey.sum(), false);
 
@@ -2047,7 +2047,7 @@ function feed()
 function chew()
 {
   let area = macro.handArea;
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area, macro.sameSizeOralVore);
 
   let line = describe("chew", prey, macro, verbose, flat);
 
@@ -2296,7 +2296,7 @@ function ass_grind()
 function anal_vore()
 {
   let area = macro.analVoreArea;
-  let prey = getOnePrey(biome, area, macro.sameSizeVore);
+  let prey = getOnePrey(biome, area, macro.sameSizeAnalVore);
 
   let line = describe("anal-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
@@ -2515,7 +2515,7 @@ function breast_vore()
 {
   // todo nipple areas?
   let area = macro.breastStretchArea/4;
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area, macro.sameSizeBreastVore);
   let line = describe("breast-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -2567,7 +2567,7 @@ function breast_milk(vol, active=true)
 function unbirth()
 {
   let area = macro.vaginaStretchArea;
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area, macro.sameSizeUnbirth);
   let line = describe("unbirth", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -2603,7 +2603,7 @@ function slit_toy()
 function sheath_stuff()
 {
   let area = Math.min(macro.handArea, macro.dickArea);
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area);
   let line = describe("sheath-stuff", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -2693,7 +2693,7 @@ function sheath_absorb()
 function foreskin_stuff()
 {
   let area = Math.min(macro.handArea, macro.dickArea);
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area);
   let line = describe("foreskin-stuff", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -2802,7 +2802,7 @@ function cockslap()
 function cock_vore()
 {
   let area = macro.dickStretchGirth;
-  let prey = getPrey(biome, area, macro.sameSizeVore);
+  let prey = getPrey(biome, area, macro.sameSizeCockVore);
   let line = describe("cock-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -3055,7 +3055,7 @@ function tail_vore(count)
   if (count <= 3) {
     for (let i=0; i<count; i++) {
       let area = macro.tailStretchGirth;
-      let prey = getPrey(biome, area, macro.sameSizeVore);
+      let prey = getPrey(biome, area, macro.sameSizeTailVore);
       totalPrey = totalPrey.merge(prey);
       let line = describe("tail-vore", prey, macro, verbose, flat);
       lines.push(line);
@@ -3065,7 +3065,7 @@ function tail_vore(count)
 
     let i = 0;
     for (i = 0; i < 10 && i < count; i++) {
-      let prey = getPrey(biome, area, macro.sameSizeVore);
+      let prey = getPrey(biome, area, macro.sameSizeTailVore);
       for (var key in prey.contents) {
         if (prey.contents.hasOwnProperty(key)) {
           prey.contents[key].multiply(Math.ceil((count - i) / 10));
@@ -3501,7 +3501,7 @@ function piss_stench(area, active=true) {
 }
 
 function bladder_vore() {
-  let prey = getPrey(biome, macro.urethraStretchArea, macro.sameSizeVore);
+  let prey = getPrey(biome, macro.urethraStretchArea, macro.sameSizeBladderVore);
   let line = describe("bladder-vore", prey, macro, verbose, flat);
   let linesummary = summarize(prey.sum(), false);
 
@@ -3804,7 +3804,7 @@ function paw_vore()
 
   if ((!macro.footShoeEnabled || !macro.footShoeWorn) && (!macro.footSockEnabled || !macro.footSockWorn)) {
     let area = macro.pawArea;
-    prey = prey.merge(getPrey(biome, area, macro.sameSizeVore));
+    prey = prey.merge(getPrey(biome, area, macro.sameSizePawVore));
 
     lines.push(describe("paw-vore", prey, macro, verbose, flat));
   }
