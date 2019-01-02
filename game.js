@@ -4273,6 +4273,35 @@ function loadPreset() {
 }
 
 function grabFormData(form, warnings, panels, buttons, stats) {
+
+  // verify that this input box is in something we enabled
+
+
+  let parent = form.parentElement;
+
+
+  while(true) {
+    if (parent.id == "custom-species")
+    {
+      break;
+    }
+
+    if (parent.classList.contains("reveal-if-active"))
+    {
+      let sib = parent.previousSibling.previousSibling;
+
+      if (!sib.checked) {
+        console.log("aborting " + form.id);
+        return;
+      }
+
+    }
+
+    parent = parent.parentElement;
+
+
+  }
+
   if (form.hasAttribute("data-warning")) {
     warnings.push(form.getAttribute("data-warning"));
   }
@@ -4487,7 +4516,6 @@ function enable_victim(category) {
 }
 
 function enable_button(name) {
-  console.log(name);
   document.getElementById("button-action-" + name).style.display = "inline";
 }
 
