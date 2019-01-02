@@ -4681,12 +4681,8 @@ function startGame(e) {
     document.getElementById("edge").style.display = "none";
   }
 
-  if (macro.victimsNoPeople) {
-    contents_remove("Person");
-  }
-
   if (macro.victimsHuman) {
-    // oh god this is bad bad bad bad bad bad BAD BAD BAD BAD BAD
+    // eh this is ok
     things["Person"] = Human;
   }
 
