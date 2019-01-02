@@ -956,6 +956,7 @@ options = [
     "name": "Male Genitals",
     "id": "maleParts",
     "optional": true,
+    "stats": ["cum"],
     "panels": ["dick"],
     "buttons": ["cockslap", "ball_smother"],
     "entries":
@@ -1101,6 +1102,7 @@ options = [
     "name": "Female Genitals",
     "id": "femaleParts",
     "optional": true,
+    "stats": ["femcum"],
     "panels": ["vagina"],
     "buttons": ["slit_toy"],
     "entries":
@@ -1224,6 +1226,7 @@ options = [
         "name": "Lactation",
         "id": "lactationEnabled",
         "type": "subcategory",
+        "stats": ["milk"],
         "buttons": ["breast_milk"],
         "warning": "Lactation is enabled",
         "entries":
@@ -1331,6 +1334,7 @@ options = [
     "name": "Gas",
     "id": "gasEnabled",
     "optional": true,
+    "stats": ["gas"],
     "panels": ["waste"],
     "warning": "Gas is enabled",
     "entries":
@@ -1420,6 +1424,7 @@ options = [
     "name": "Piss",
     "id": "pissEnabled",
     "optional": true,
+    "stats": ["piss"],
     "panels": ["waste"],
     "buttons": ["piss"],
     "warning": "Watersports enabled",
@@ -1495,6 +1500,7 @@ options = [
     "name": "Scat",
     "id": "scatEnabled",
     "optional": true,
+    "stats": ["scat"],
     "panels": ["waste"],
     "buttons": ["scat"],
     "warning": "Scat is enabled",

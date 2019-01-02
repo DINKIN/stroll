@@ -4272,7 +4272,7 @@ function loadPreset() {
   loadSettings(presets[select.selectedIndex]);
 }
 
-function grabFormData(form, warnings, panels, buttons) {
+function grabFormData(form, warnings, panels, buttons, stats) {
   if (form.hasAttribute("data-warning")) {
     warnings.push(form.getAttribute("data-warning"));
   }
@@ -4292,11 +4292,20 @@ function grabFormData(form, warnings, panels, buttons) {
       panels.push(token);
     })
   }
+
+  if (form.hasAttribute("data-stats")) {
+    let text = form.getAttribute("data-stats");
+
+    text.split(",").forEach(function(token) {
+      stats.push(token);
+    })
+  }
 }
 
 function generateSettings() {
   let form = document.forms.namedItem("custom-species-form");
   let settings = {};
+
   let warnings = [];
   let panels = [];
   let buttons = [];
@@ -4312,7 +4321,7 @@ function generateSettings() {
       settings[form[i].name] = form[i].checked;
 
       if (form[i].checked) {
-        grabFormData(form[i], warnings, panels, buttons);
+        grabFormData(form[i], warnings, panels, buttons, stats);
       }
 
 
@@ -4320,12 +4329,12 @@ function generateSettings() {
       let name = form[i].name;
       if (form[i].checked) {
         settings[name] = form[i].value;
-        grabFormData(form[i], warnings, panels, buttons);
+        grabFormData(form[i], warnings, panels, buttons, stats);
       }
 
     } else if (form[i].type == "select-one") {
       settings[form[i].name] = form[i][form[i].selectedIndex].value;
-      grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons);
+      grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons, stats);
     }
   }
 
@@ -4333,7 +4342,8 @@ function generateSettings() {
     "settings": settings,
     "warnings": warnings,
     "panels": panels,
-    "buttons": buttons
+    "buttons": buttons,
+    "stats": stats
   };
 }
 
@@ -4528,6 +4538,10 @@ function startGame(e) {
     enable_button(button);
   });
 
+  info["stats"].forEach(function(stat) {
+    enable_stat(stat);
+  });
+
   for (var key in settings) {
     if (settings.hasOwnProperty(key)) {
       macro[key] = settings[key];
@@ -4630,8 +4644,6 @@ function startGame(e) {
       enable_victim("cock-vore","Cock vore");
     }
 
-    enable_stat("cum");
-
     enable_growth_part("dick");
     enable_growth_part("balls");
 
@@ -4668,7 +4680,6 @@ function startGame(e) {
     if (macro.unbirthEnabled) {
       enable_victim("unbirth","Unbirthed");
     }
-    enable_stat("femcum");
 
     enable_growth_part("slit");
     enable_growth_part("womb");
@@ -4695,8 +4706,6 @@ function startGame(e) {
 
     if (macro.lactationEnabled) {
       enable_victim("milk-flood","Flooded by milk");
-
-      enable_stat("milk");
     }
 
     if (macro.breastVore) {
@@ -4727,7 +4736,6 @@ function startGame(e) {
   }
 
   if (macro.gasEnabled) {
-    enable_stat("gas");
     if (macro.belchEnabled) {
       enable_panel("waste");
       enable_victim("gas-belch","Belched on");
@@ -4750,8 +4758,6 @@ function startGame(e) {
   if (macro.pissEnabled) {
     enable_panel("waste");
 
-    enable_stat("piss");
-
     enable_victim("piss","Pissed away");
 
     if (macro.bladderVore) {
@@ -4764,9 +4770,6 @@ function startGame(e) {
   }
 
   if (macro.scatEnabled) {
-    enable_panel("waste");
-
-    enable_stat("scat");
 
     enable_victim("scat","Shat on");
 
@@ -5350,6 +5353,10 @@ function attach_form_data(element, data) {
 
   if (data.buttons != undefined) {
     element.setAttribute("data-buttons", data.buttons.join(","));
+  }
+
+  if (data.stats != undefined) {
+    element.setAttribute("data-stats", data.stats.join(","));
   }
 }
 
