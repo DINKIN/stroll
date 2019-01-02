@@ -867,6 +867,7 @@ options = [
     "name": "Tail",
     "id": "hasTail",
     "optional": true,
+    "parts": ["tail"],
     "panels": ["tails"],
     "buttons": ["tail_slap"],
     "entries":
@@ -957,6 +958,7 @@ options = [
     "id": "maleParts",
     "optional": true,
     "stats": ["cum"],
+    "parts": ["dick", "balls"],
     "panels": ["dick"],
     "buttons": ["cockslap", "ball_smother"],
     "entries":
@@ -1103,6 +1105,7 @@ options = [
     "id": "femaleParts",
     "optional": true,
     "stats": ["femcum"],
+    "parts": ["slit", "womb"],
     "panels": ["vagina"],
     "buttons": ["slit_toy"],
     "entries":
@@ -1212,6 +1215,7 @@ options = [
     "id": "hasBreasts",
     "optional": true,
     "panels": ["breasts"],
+    "parts": ["breasts"],
     "buttons": ["breast_crush", "breast_toy", "cleavage_stuff", "cleavage_crush", "cleavage_drop", "cleavage_absorb"],
     "entries":
     [

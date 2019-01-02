@@ -4272,7 +4272,7 @@ function loadPreset() {
   loadSettings(presets[select.selectedIndex]);
 }
 
-function grabFormData(form, warnings, panels, buttons, stats) {
+function grabFormData(form, warnings, panels, buttons, stats, parts) {
 
   // verify that this input box is in something we enabled
 
@@ -4329,6 +4329,14 @@ function grabFormData(form, warnings, panels, buttons, stats) {
       stats.push(token);
     })
   }
+
+  if (form.hasAttribute("data-parts")) {
+    let text = form.getAttribute("data-parts");
+
+    text.split(",").forEach(function(token) {
+      parts.push(token);
+    })
+  }
 }
 
 function generateSettings() {
@@ -4339,6 +4347,7 @@ function generateSettings() {
   let panels = [];
   let buttons = [];
   let stats = [];
+  let parts = [];
 
   for (let i=0; i<form.length; i++) {
     let value = form[i].value == "" ? form[i].placeholder : form[i].value;
@@ -4350,7 +4359,7 @@ function generateSettings() {
       settings[form[i].name] = form[i].checked;
 
       if (form[i].checked) {
-        grabFormData(form[i], warnings, panels, buttons, stats);
+        grabFormData(form[i], warnings, panels, buttons, stats, parts);
       }
 
 
@@ -4358,12 +4367,12 @@ function generateSettings() {
       let name = form[i].name;
       if (form[i].checked) {
         settings[name] = form[i].value;
-        grabFormData(form[i], warnings, panels, buttons, stats);
+        grabFormData(form[i], warnings, panels, buttons, stats, parts);
       }
 
     } else if (form[i].type == "select-one") {
       settings[form[i].name] = form[i][form[i].selectedIndex].value;
-      grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons, stats);
+      grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons, stats, parts);
     }
   }
 
@@ -4372,7 +4381,8 @@ function generateSettings() {
     "warnings": warnings,
     "panels": panels,
     "buttons": buttons,
-    "stats": stats
+    "stats": stats,
+    "parts": parts
   };
 }
 
@@ -4570,6 +4580,10 @@ function startGame(e) {
     enable_stat(stat);
   });
 
+  info["parts"].forEach(function(part) {
+    enable_growth_part(part);
+  });
+
   for (var key in settings) {
     if (settings.hasOwnProperty(key)) {
       macro[key] = settings[key];
@@ -4630,7 +4644,6 @@ function startGame(e) {
 
   if (macro.tailCount > 0) {
     enable_panel("tails");
-    enable_growth_part("tail");
 
     if (macro.tailMaw) {
       if (macro.tailCount > 1) {
@@ -4643,22 +4656,6 @@ function startGame(e) {
         enable_button("tail_vore_only");
       }
     }
-  }
-
-  if (macro.maleParts) {
-    enable_growth_part("dick");
-    enable_growth_part("balls");
-  }
-
-  if (macro.femaleParts) {
-
-    enable_growth_part("slit");
-    enable_growth_part("womb");
-
-  }
-
-  if (macro.hasBreasts) {
-    enable_growth_part("breasts");
   }
 
   if (macro.hasPouch) {
@@ -5207,6 +5204,10 @@ function attach_form_data(element, data) {
 
   if (data.stats != undefined) {
     element.setAttribute("data-stats", data.stats.join(","));
+  }
+
+  if (data.parts != undefined) {
+    element.setAttribute("data-parts", data.parts.join(","));
   }
 }
 
