@@ -4505,18 +4505,6 @@ function disable_panel(name) {
   document.getElementById("action-part-" + name).style.display = "none";
 }
 
-function enableWarnings(settings, warns) {
-
-}
-
-function enablePanels(settings) {
-
-}
-
-function enableButtons(settings) {
-
-}
-
 function startGame(e) {
   if (started)
     return;
@@ -4525,8 +4513,19 @@ function startGame(e) {
 
   window.localStorage.setItem('autosave',JSON.stringify(generateSettings()["settings"]));
 
-  let warns = [];
-  let settings = generateSettings()["settings"];
+  let info = generateSettings();
+
+  let settings = info["settings"];
+
+  let warns = info["warnings"];
+
+  info["panels"].forEach(function(panel) {
+    enable_panel(panel);
+  });
+
+  info["buttons"].forEach(function(button) {
+    enable_button(button);
+  });
 
   for (var key in settings) {
     if (settings.hasOwnProperty(key)) {
@@ -4536,10 +4535,6 @@ function startGame(e) {
 
   registerActions();
   registerOptions();
-
-  enableWarnings(settings, warns);
-  enablePanels(settings);
-  enableButtons(settings);
 
   if (!macro.hasTail) {
     macro.tailCount = 0;
