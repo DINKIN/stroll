@@ -648,15 +648,18 @@ options = [
           },
           {
             "name": "Fatal",
-            "value": "1"
+            "value": "1",
+            "warning": "Fatal actions are enabled"
           },
           {
             "name": "Gory",
-            "value": "2"
+            "value": "2",
+            "warning": "Gory actions are enabled"
           },
           {
             "name": "Sadistic",
-            "value": "3"
+            "value": "3",
+            "warning": "Brutal actions are enabled"
           },
         ]
       }
@@ -693,6 +696,9 @@ options = [
     "name": "Oral Vore",
     "id": "oralVore",
     "optional": true,
+    "buttons": [
+      "eat", "chew"
+    ],
     "entries":
     [
       {
@@ -832,6 +838,7 @@ options = [
     "name": "Arousal",
     "id": "arousalEnabled",
     "optional": true,
+    "warning": "Arousal is enabled",
     "entries":
     [
       {

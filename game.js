@@ -4272,9 +4272,36 @@ function loadPreset() {
   loadSettings(presets[select.selectedIndex]);
 }
 
+function grabFormData(form, warnings, panels, buttons) {
+  console.log(form);
+  if (form.hasAttribute("data-warning")) {
+    warnings.push(form.getAttribute("data-warning"));
+  }
+
+  if (form.hasAttribute("data-buttons")) {
+    let text = form.getAttribute("data-buttons");
+
+    text.split(",").forEach(function(token) {
+      buttons.push(token);
+    })
+  }
+
+  if (form.hasAttribute("data-panels")) {
+    let text = form.getAttribute("data-panels");
+
+    text.split(",").forEach(function(token) {
+      panels.push(token);
+    })
+  }
+}
+
 function generateSettings() {
   let form = document.forms.namedItem("custom-species-form");
   let settings = {};
+  let warnings = [];
+  let panels = [];
+  let buttons = [];
+
   for (let i=0; i<form.length; i++) {
     let value = form[i].value == "" ? form[i].placeholder : form[i].value;
     if (form[i].type == "text")
@@ -4283,16 +4310,31 @@ function generateSettings() {
       settings[form[i].name] = parseFloat(value);
     else if (form[i].type == "checkbox") {
       settings[form[i].name] = form[i].checked;
+
+      if (form[i].checked) {
+        grabFormData(form[i], warnings, panels, buttons);
+      }
+
+
     } else if (form[i].type == "radio") {
       let name = form[i].name;
-      if (form[i].checked)
+      if (form[i].checked) {
         settings[name] = form[i].value;
+        grabFormData(form[i], warnings, panels, buttons);
+      }
+
     } else if (form[i].type == "select-one") {
       settings[form[i].name] = form[i][form[i].selectedIndex].value;
+      grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons);
     }
   }
 
-  return settings;
+  return {
+    "settings": settings,
+    "warnings": warnings,
+    "panels": panels,
+    "buttons": buttons
+  };
 }
 
 function clearExport() {
@@ -4300,7 +4342,7 @@ function clearExport() {
 }
 
 function exportSettings() {
-  let settings = generateSettings();
+  let settings = generateSettings()["settings"];
 
   document.getElementById("export-area").value = JSON.stringify(settings);
 }
@@ -4344,7 +4386,7 @@ function updateCustomCharacters() {
 function saveSettings() {
   let storage = window.localStorage;
 
-  let settings = generateSettings();
+  let settings = generateSettings()["settings"];
 
   let saves = JSON.parse(storage.getItem("custom-characters"));
 
@@ -4463,16 +4505,28 @@ function disable_panel(name) {
   document.getElementById("action-part-" + name).style.display = "none";
 }
 
+function enableWarnings(settings, warns) {
+
+}
+
+function enablePanels(settings) {
+
+}
+
+function enableButtons(settings) {
+
+}
+
 function startGame(e) {
   if (started)
     return;
 
   started = true;
 
-  window.localStorage.setItem('autosave',JSON.stringify(generateSettings()));
+  window.localStorage.setItem('autosave',JSON.stringify(generateSettings()["settings"]));
 
   let warns = [];
-  let settings = generateSettings();
+  let settings = generateSettings()["settings"];
 
   for (var key in settings) {
     if (settings.hasOwnProperty(key)) {
@@ -4482,6 +4536,10 @@ function startGame(e) {
 
   registerActions();
   registerOptions();
+
+  enableWarnings(settings, warns);
+  enablePanels(settings);
+  enableButtons(settings);
 
   if (!macro.hasTail) {
     macro.tailCount = 0;
@@ -5051,7 +5109,7 @@ function updatePreview(name) {
 
 function debugLog() {
   console.log("Your character settings:");
-  console.log(JSON.stringify(generateSettings()));
+  console.log(JSON.stringify(generateSettings()["settings"]));
   console.log("Current macro state:");
   console.log(JSON.stringify( macro, function( key, value) {
     if( key == 'owner') { return "owner";}
@@ -5226,6 +5284,8 @@ function render_radio_option(options_div, option) {
     label.setAttribute("for", option.id + "-" + choice.value);
     label.innerText = choice.name;
 
+    attach_form_data(input, choice);
+
     li.appendChild(input);
     li.appendChild(label);
     options_div.appendChild(li);
@@ -5339,6 +5399,8 @@ function render_option(root_div, li, option) {
     render_subcategory_option(li, option);
   }
 
+  attach_form_data(li, option);
+
   root_div.appendChild(li);
 }
 
@@ -5363,6 +5425,9 @@ function render_category(root, category) {
 
     header.classList.add("custom-header");
     header.setAttribute("for", category.id);
+
+    attach_form_data(input, category);
+
   } else {
     header = document.createElement("div");
     header.classList.add("custom-header-static");
@@ -5393,6 +5458,20 @@ function construct_options() {
   options.forEach(function(category) {
     render_category(root, category);
   });
+}
+
+function attach_form_data(element, data) {
+  if (data.warning != undefined) {
+    element.setAttribute("data-warning", data.warning);
+  }
+
+  if (data.panels != undefined) {
+    element.setAttribute("data-panels", data.panels.join(","));
+  }
+
+  if (data.buttons != undefined) {
+    element.setAttribute("data-buttons", data.buttons.join(","));
+  }
 }
 
 function construct_panels() {
