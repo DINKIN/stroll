@@ -4570,10 +4570,6 @@ function startGame(e) {
   enable_growth_part("body");
   enable_growth_part("ass");
 
-  if (macro.brutality > 0) {
-    warns.push("Fatal actions are enabled.");
-  }
-
   if (macro.droolEnabled) {
     enable_victim("drool","Drenched in drool");
   }
@@ -4697,7 +4693,6 @@ function startGame(e) {
     enable_growth_part("breasts");
 
     if (macro.lactationEnabled) {
-      warns.push("Lactation is enabled.");
       enable_victim("milk-flood","Flooded by milk");
 
       enable_stat("milk");
@@ -4719,7 +4714,6 @@ function startGame(e) {
   }
 
   if (macro.soulVoreEnabled) {
-    warns.push("Soul vore is enabled.");
     enable_victim("soul-digest","Souls digested");
     enable_victim("soul-paw","Souls absorbed underfoot");
 
@@ -4727,13 +4721,11 @@ function startGame(e) {
   }
 
   if (macro.stenchEnabled) {
-    warns.push("Stench is enabled.");
     enable_victim("paw-stench","Smothered in paw stench");
     enable_victim("ass-stench","Smothered in rump stench");
   }
 
   if (macro.gasEnabled) {
-    warns.push("Gas is enabled.");
     enable_stat("gas");
     if (macro.belchEnabled) {
       enable_panel("waste");
@@ -4755,7 +4747,6 @@ function startGame(e) {
   }
 
   if (macro.pissEnabled) {
-    warns.push("Watersports are enabled.");
     enable_panel("waste");
 
     enable_stat("piss");
@@ -4772,7 +4763,6 @@ function startGame(e) {
   }
 
   if (macro.scatEnabled) {
-    warns.push("Scat is enabled.");
     enable_panel("waste");
 
     enable_stat("scat");

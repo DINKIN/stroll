@@ -1219,6 +1219,7 @@ options = [
         "id": "lactationEnabled",
         "type": "subcategory",
         "buttons": ["breast_milk"],
+        "warning": "Lactation is enabled",
         "entries":
         [
           {
@@ -1291,6 +1292,7 @@ options = [
     "name": "Stench",
     "id": "stenchEnabled",
     "optional": true,
+    "warning": "Stench is enabled",
     "entries":
     [
       {
@@ -1323,6 +1325,7 @@ options = [
     "name": "Gas",
     "id": "gasEnabled",
     "optional": true,
+    "warning": "Gas is enabled",
     "entries":
     [
       {
@@ -1368,6 +1371,7 @@ options = [
     "id": "soulVoreEnabled",
     "optional": true,
     "buttons": ["soul_vore", "soul_absorb_paw"],
+    "warning": "Soul vore enabled",
     "entries":
     [
       {
@@ -1409,6 +1413,7 @@ options = [
     "id": "pissEnabled",
     "optional": true,
     "buttons": ["piss"],
+    "warning": "Watersports enabled",
     "entries":
     [
       {
@@ -1482,6 +1487,7 @@ options = [
     "id": "scatEnabled",
     "optional": true,
     "buttons": ["scat"],
+    "warning": "Scat is enabled",
     "entries":
     [
       {
