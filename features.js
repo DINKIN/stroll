@@ -890,7 +890,7 @@ options = [
             "name": "Tail stretchiness",
             "id": "tailStretchiness",
             "type": "float",
-            "default": "1"
+            "default": "3"
           },
           {
             "name": "Digestion time",
@@ -994,7 +994,7 @@ options = [
             "name": "Cock stretchiness",
             "id": "dickStretchiness",
             "type": "float",
-            "default": "1"
+            "default": "5"
           },
           {
             "name": "Cum digestion factor",
@@ -1124,7 +1124,7 @@ options = [
             "name": "Slit stretchiness",
             "id": "vaginaStretchiness",
             "type": "float",
-            "default": "1"
+            "default": "5"
           },
           {
             "name": "Femcum digestion factor",
@@ -1222,7 +1222,7 @@ options = [
             "name": "Breast stretchiness",
             "id": "breastStretchiness",
             "type": "float",
-            "default": "1"
+            "default": "3"
           },
           {
             "name": "Milk digestion scale",
