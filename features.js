@@ -697,7 +697,7 @@ options = [
     "id": "oralVore",
     "optional": true,
     "buttons": [
-      "eat", "chew"
+      "feed", "chew"
     ],
     "entries":
     [
@@ -710,7 +710,8 @@ options = [
       {
         "name": "Manual digestion",
         "id": "oralDigestManual",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["digest_stomach"]
       },
       {
         "name": "Same-size vore",
@@ -721,7 +722,9 @@ options = [
       {
         "name": "Vomiting",
         "id": "vomitEnabled",
-        "type": "checkbox"
+        "type": "checkbox",
+        "warning": "Vomiting is enabled",
+        "buttons": ["vomit"]
       }
     ]
   },
@@ -729,6 +732,7 @@ options = [
     "name": "Anal Vore",
     "id": "analVore",
     "optional": true,
+    "buttons": ["anal_vore"],
     "entries":
     [
       {
@@ -747,7 +751,8 @@ options = [
       {
         "name": "Manual digestion",
         "id": "analDigestManual",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["digest_anal"]
       },
       {
         "name": "Same-size vore",
@@ -772,6 +777,7 @@ options = [
         "name": "Socks",
         "id": "footSockEnabled",
         "type": "subcategory",
+        "buttons": ["remove_socks", "wear_socks", "stuff_socks", "dump_socks"],
         "entries":
         [
           {
@@ -796,6 +802,7 @@ options = [
         "name": "Shoes",
         "id": "footShoeEnabled",
         "type": "subcategory",
+        "buttons": ["remove_shoes", "wear_shoes", "stuff_shoes", "dump_shoes"],
         "entries":
         [
           {
@@ -859,6 +866,7 @@ options = [
     "name": "Tail",
     "id": "hasTail",
     "optional": true,
+    "buttons": ["tail_slap"],
     "entries":
     [
       {
@@ -908,7 +916,8 @@ options = [
           {
             "name": "Manual digestion",
             "id": "tailDigestManual",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["digest_tail"]
           },
           {
             "name": "Same-size vore",
@@ -929,12 +938,14 @@ options = [
     "name": "Pouch",
     "id": "hasPouch",
     "optional": true,
+    "buttons": ["pouch_stuff", "pouch_rub"],
     "entries":
     [
       {
         "name": "Absorption",
         "id": "pouchAbsorption",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["pouch_absorb"]
       }
     ]
   },
@@ -942,6 +953,7 @@ options = [
     "name": "Male Genitals",
     "id": "maleParts",
     "optional": true,
+    "buttons": ["cockslap", "ball_smother"],
     "entries":
     [
       {
@@ -995,6 +1007,7 @@ options = [
         "name": "Cock Vore",
         "id": "cockVoreEnabled",
         "type": "subcategory",
+        "buttons": ["cock_vore"],
         "entries":
         [
           {
@@ -1018,7 +1031,8 @@ options = [
           {
             "name": "Manual digestion",
             "id": "cockDigestManual",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["digest_cock"]
           },
           {
             "name": "Same-size vore",
@@ -1037,12 +1051,14 @@ options = [
         "name": "Sheath",
         "id": "hasSheath",
         "type": "subcategory",
+        "buttons": ["sheath_stuff", "sheath_toy", "sheath_clench"],
         "entries":
         [
           {
             "name": "Absorption",
             "id": "sheathAbsorptionEnabled",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["sheath_absorb"]
           }
         ]
       },
@@ -1050,12 +1066,14 @@ options = [
         "name": "Foreskin",
         "id": "hasForeskin",
         "type": "subcategory",
+        "buttons": ["foreskin_stuff", "foreskin_toy", "foreskin_clench"],
         "entries":
         [
           {
             "name": "Absorption",
             "id": "foreskinAbsorptionEnabled",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["foreskin_absorb"]
           }
         ]
       },
@@ -1079,6 +1097,7 @@ options = [
     "name": "Female Genitals",
     "id": "femaleParts",
     "optional": true,
+    "buttons": ["slit_toy"],
     "entries":
     [
       {
@@ -1125,6 +1144,7 @@ options = [
         "name": "Unbirth",
         "id": "unbirthEnabled",
         "type": "subcategory",
+        "buttons": ["unbirth"],
         "entries":
         [
           {
@@ -1148,7 +1168,8 @@ options = [
           {
             "name": "Manual digestion",
             "id": "unbirthDigestManual",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["digest_unbirth"]
           },
           {
             "name": "Same-size vore",
@@ -1183,6 +1204,7 @@ options = [
     "name": "Breasts",
     "id": "hasBreasts",
     "optional": true,
+    "buttons": ["breast_crush", "breast_toy", "cleavage_stuff", "cleavage_crush", "cleavage_drop", "cleavage_absorb"],
     "entries":
     [
       {
@@ -1196,6 +1218,7 @@ options = [
         "name": "Lactation",
         "id": "lactationEnabled",
         "type": "subcategory",
+        "buttons": ["breast_milk"],
         "entries":
         [
           {
@@ -1223,6 +1246,7 @@ options = [
         "name": "Breast Vore",
         "id": "breastVore",
         "type": "subcategory",
+        "buttons": ["breast_vore", "digest_breast"],
         "entries":
         [
           {
@@ -1304,12 +1328,14 @@ options = [
       {
         "name": "Belching",
         "id": "belchEnabled",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["belch"]
       },
       {
         "name": "Farting",
         "id": "fartEnabled",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["fart"]
       },
       {
         "name": "Passive gas production",
@@ -1341,6 +1367,7 @@ options = [
     "name": "Soul Vore",
     "id": "soulVoreEnabled",
     "optional": true,
+    "buttons": ["soul_vore", "soul_absorb_paw"],
     "entries":
     [
       {
@@ -1352,7 +1379,8 @@ options = [
       {
         "name": "Manual digestion",
         "id": "soulDigestManual",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["digest_soul"]
       },
       {
         "type": "radio",
@@ -1380,6 +1408,7 @@ options = [
     "name": "Piss",
     "id": "pissEnabled",
     "optional": true,
+    "buttons": ["piss"],
     "entries":
     [
       {
@@ -1399,6 +1428,7 @@ options = [
         "name": "Bladder Vore",
         "id": "bladderVore",
         "type": "subcategory",
+        "buttons": ["bladder_vore"],
         "entries":
         [
           {
@@ -1429,7 +1459,8 @@ options = [
           {
             "name": "Manual digestion",
             "id": "bladderDigestManual",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["digest_bladder"],
           },
           {
             "name": "Same-size vore",
@@ -1450,6 +1481,7 @@ options = [
     "name": "Scat",
     "id": "scatEnabled",
     "optional": true,
+    "buttons": ["scat"],
     "entries":
     [
       {
@@ -1482,6 +1514,7 @@ options = [
     "name": "Goo",
     "id": "gooEnabled",
     "optional": true,
+    "buttons": ["melt"],
     "entries":
     [
       {
@@ -1509,6 +1542,7 @@ options = [
     "name": "Paw Vore",
     "id": "pawVoreEnabled",
     "optional": true,
+    "buttons": ["paw_vore"],
     "entries":
     [
       {
@@ -1520,7 +1554,8 @@ options = [
       {
         "name": "Manual digestion",
         "id": "pawDigestManual",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["digest_paws"]
       },
       {
         "name": "Same-size vore",
@@ -1534,6 +1569,7 @@ options = [
     "name": "Crop",
     "id": "cropEnabled",
     "optional": true,
+    "buttons": ["crop_swallow"],
     "entries":
     [
       {
@@ -1548,6 +1584,7 @@ options = [
     "name": "Breath",
     "id": "breathEnabled",
     "optional": true,
+    "buttons": ["breath_line", "breath_cone"],
     "entries":
     [
       {
@@ -1560,32 +1597,38 @@ options = [
       {
         "name": "Fire",
         "id": "breathFire",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_fire"]
       },
       {
         "name": "Ice",
         "id": "breathIce",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_ice"]
       },
       {
         "name": "Electric",
         "id": "breathElectric",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_electric"]
       },
       {
         "name": "Smoke",
         "id": "breathSmoke",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_smoke"]
       },
       {
         "name": "Radiation",
         "id": "breathRadiation",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_radiation"]
       },
       {
         "name": "Foul",
         "id": "breathFoul",
-        "type": "checkbox"
+        "type": "checkbox",
+        "buttons": ["breath_foul"]
       },
     ]
   },
@@ -1593,6 +1636,7 @@ options = [
     "name": "Drool",
     "id": "droolEnabled",
     "optional": true,
+    "buttons": ["drool"],
     "entries":
     [
       {
@@ -1610,13 +1654,27 @@ options = [
     "optional": true,
     "entries":
     [
-
+      {
+        "name": "Shrinking magic",
+        "id": "magicShrink",
+        "type": "checkbox",
+        "buttons": ["magic_shrink"],
+        "default": true,
+      },
+      {
+        "name": "Fast digestion",
+        "id": "magicFastDigestion",
+        "type": "checkbox",
+        "buttons": ["magic_fast_digestion"],
+        "default": true,
+      },
     ]
   },
   {
     "name": "Wings",
     "id": "hasWings",
     "optional": true,
+    "buttons": ["wings_flap"],
     "entries":
     [
       {
@@ -1643,6 +1701,7 @@ options = [
         "name": "Wing Vore",
         "id": "wingVoreEnabled",
         "type": "subcategory",
+        "buttons": ["wings_vore"],
         "entries":
         [
           {
@@ -1654,7 +1713,8 @@ options = [
           {
             "name": "Manual digestion",
             "id": "wingDigestManual",
-            "type": "checkbox"
+            "type": "checkbox",
+            "buttons": ["digest_wings"]
           },
           {
             "name": "Same-size vore",

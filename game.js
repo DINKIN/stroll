@@ -4273,7 +4273,6 @@ function loadPreset() {
 }
 
 function grabFormData(form, warnings, panels, buttons) {
-  console.log(form);
   if (form.hasAttribute("data-warning")) {
     warnings.push(form.getAttribute("data-warning"));
   }
@@ -4477,6 +4476,7 @@ function enable_victim(category) {
 }
 
 function enable_button(name) {
+  console.log(name);
   document.getElementById("button-action-" + name).style.display = "inline";
 }
 
@@ -4559,13 +4559,13 @@ function startGame(e) {
   enable_panel("paws");
 
   enable_button("stomp");
+  enable_button("sit");
+  enable_button("grind");
+  enable_button("ass_grind");
 
   if (macro.footType != "hoof")
     enable_button("flex_toes");
 
-  enable_button("sit");
-  enable_button("grind");
-  enable_button("ass_grind");
 
   enable_growth_part("body");
   enable_growth_part("ass");
@@ -4575,14 +4575,11 @@ function startGame(e) {
   }
 
   if (macro.droolEnabled) {
-    enable_button("drool");
     enable_victim("drool","Drenched in drool");
   }
 
   if (macro.magicEnabled) {
     enable_panel("magic");
-    enable_button("magic_shrink");
-    enable_button("magic_fast_digestion");
   }
 
   if (macro.arousalEnabled) {
@@ -4592,40 +4589,24 @@ function startGame(e) {
   }
 
   if (macro.oralVore) {
-    enable_button("feed");
 
     if (macro.brutality > 0) {
       enable_button("chew");
       enable_victim("chew","Chewed");
     }
 
-    if (macro.oralDigestManual) {
-      enable_button("digest_stomach");
-    }
-
-    if (macro.cropEnabled) {
-      enable_button("crop_swallow");
-    }
-
     if (macro.vomitEnabled) {
-      enable_button("vomit");
       enable_victim("vomit");
     }
   }
 
   if (macro.analVore) {
-    enable_button("anal_vore");
     enable_victim("anal-vore","Anal vore");
-
-    if (macro.analDigestManual) {
-      enable_button("digest_anal");
-    }
   }
 
   if (macro.tailCount > 0) {
     enable_panel("tails");
     enable_growth_part("tail");
-    enable_button("tail_slap");
     enable_victim("tail-slap","Tail slapped");
 
     if (macro.tailMaw) {
@@ -4639,10 +4620,6 @@ function startGame(e) {
       } else {
         enable_button("tail_vore_only");
       }
-
-      if (macro.tailDigestManual) {
-        enable_button("digest_tail");
-      }
     }
   }
 
@@ -4652,18 +4629,9 @@ function startGame(e) {
     enable_victim("cock-slap","Cockslapped");
     enable_victim("ball-smother","Smothered under balls");
 
-    enable_button("cockslap");
-
     if (macro.cockVoreEnabled){
-      enable_button("cock_vore");
       enable_victim("cock-vore","Cock vore");
-
-      if (macro.cockDigestManual) {
-        enable_button("digest_cock");
-      }
     }
-
-    enable_button("ball_smother");
 
     enable_stat("cum");
 
@@ -4674,28 +4642,16 @@ function startGame(e) {
       enable_victim("sheath-crush","Crushed in sheath");
 
       if (macro.sheathAbsorptionEnabled) {
-        enable_button("sheath_absorb");
         enable_victim("sheath-absorb","Absorbed by sheath");
       }
-
-
-      enable_button("sheath_stuff");
-      enable_button("sheath_toy");
-      enable_button("sheath_clench");
     }
 
     if (macro.hasForeskin) {
       enable_victim("foreskin-crush");
 
       if (macro.foreskinAbsorptionEnabled) {
-        enable_button("foreskin_absorb");
         enable_victim("foreskin-absorb");
       }
-
-
-      enable_button("foreskin_stuff");
-      enable_button("foreskin_toy");
-      enable_button("foreskin_clench");
     }
 
     if (macro.arousalEnabled) {
@@ -4713,11 +4669,8 @@ function startGame(e) {
     enable_panel("vagina");
 
     if (macro.unbirthEnabled) {
-      enable_button("unbirth");
       enable_victim("unbirth","Unbirthed");
     }
-    enable_button("slit_toy");
-
     enable_stat("femcum");
 
     enable_growth_part("slit");
@@ -4731,10 +4684,6 @@ function startGame(e) {
         enable_victim("female-orgasm-musk","Inundated in feminine cum musk");
       }
     }
-
-    if (macro.unbirthDigestManual) {
-      enable_button("digest_unbirth");
-    }
   }
 
   if (macro.hasBreasts) {
@@ -4745,31 +4694,17 @@ function startGame(e) {
 
     enable_panel("breasts");
 
-    enable_button("breast_crush");
-    enable_button("breast_toy");
-    enable_button("cleavage_stuff");
-    enable_button("cleavage_crush");
-    enable_button("cleavage_drop");
-    enable_button("cleavage_absorb");
-
     enable_growth_part("breasts");
 
     if (macro.lactationEnabled) {
       warns.push("Lactation is enabled.");
       enable_victim("milk-flood","Flooded by milk");
 
-      enable_button("breast_milk");
       enable_stat("milk");
     }
 
     if (macro.breastVore) {
       enable_victim("breast-vore","Stuffed into breasts");
-
-      enable_button("breast_vore");
-
-      if (macro.breastDigestManual) {
-        enable_button("digest_breast");
-      }
     }
   }
 
@@ -4778,11 +4713,9 @@ function startGame(e) {
 
     enable_panel("misc");
 
-    enable_button("pouch_stuff");
-    enable_button("pouch_rub");
-    enable_button("pouch_eat");
-    enable_button("pouch_absorb");
-
+    if (macro.oralVoreEnabled) {
+      enable_button("pouch_eat");
+    }
   }
 
   if (macro.soulVoreEnabled) {
@@ -4791,14 +4724,6 @@ function startGame(e) {
     enable_victim("soul-paw","Souls absorbed underfoot");
 
     enable_panel("souls");
-
-    enable_button("soul_vore");
-    enable_button("soul_absorb_paw");
-
-    if (macro.soulDigestManual) {
-      enable_button("digest_soul");
-    }
-
   }
 
   if (macro.stenchEnabled) {
@@ -4812,12 +4737,10 @@ function startGame(e) {
     enable_stat("gas");
     if (macro.belchEnabled) {
       enable_panel("waste");
-      enable_button("belch");
       enable_victim("gas-belch","Belched on");
     }
     if (macro.fartEnabled) {
       enable_panel("waste");
-      enable_button("fart");
       enable_victim("gas-fart","Farted on");
     }
   }
@@ -4835,20 +4758,12 @@ function startGame(e) {
     warns.push("Watersports are enabled.");
     enable_panel("waste");
 
-    enable_button("piss");
-
     enable_stat("piss");
 
     enable_victim("piss","Pissed away");
 
     if (macro.bladderVore) {
-      enable_button("bladder_vore");
-
       enable_victim("bladder-vore","Dissolved into piss");
-
-      if (macro.bladderDigestManual) {
-        enable_button("digest_bladder");
-      }
     }
 
     if (macro.stenchEnabled) {
@@ -4859,8 +4774,6 @@ function startGame(e) {
   if (macro.scatEnabled) {
     warns.push("Scat is enabled.");
     enable_panel("waste");
-
-    enable_button("scat");
 
     enable_stat("scat");
 
@@ -4874,72 +4787,50 @@ function startGame(e) {
   if (macro.gooEnabled) {
     enable_panel("goo");
 
-    enable_button("melt");
-
     if (macro.gooDigestion) {
       enable_victim("goo","Absorbed into the goo");
     }
   }
 
   if (macro.pawVoreEnabled) {
-    enable_button("paw_vore");
 
     enable_victim("paw-vore","Absorbed into paws");
-
-    if (macro.pawDigestManual) {
-      enable_button("digest_paws");
-    }
   }
 
   if (macro.breathEnabled) {
     enable_panel("breath");
 
-    enable_button("breath_line");
-    enable_button("breath_cone");
-
     if (macro.breathFire) {
-      enable_button("breath_fire");
       enable_victim("breath-fire","Incinerated by fiery breath");
     }
 
     if (macro.breathIce) {
-      enable_button("breath_ice");
       enable_victim("breath-ice","Frozen in icy breath");
     }
 
     if (macro.breathElectric) {
-      enable_button("breath_electric");
       enable_victim("breath-electric","Fried by an electric gale");
     }
 
     if (macro.breathSmoke) {
-      enable_button("breath_smoke");
       enable_victim("breath-smoke","Snuffed out by smoke");
     }
 
     if (macro.breathRadiation) {
-      enable_button("breath_radiation");
       enable_victim("breath-radiation","Vaporized by radioactive power");
     }
 
     if (macro.breathFoul) {
-      enable_button("breath_foul");
       enable_victim("breath-foul","Smothered in humid breath");
     }
   }
 
   if (macro.hasWings) {
     enable_panel("misc");
-    enable_button("wings_flap");
     enable_victim("wings-flap");
 
     if (macro.wingVoreEnabled) {
-      enable_button("wings_vore");
       enable_victim("wings-vore");
-
-      if (macro.wingDigestManual) {
-        enable_button("digest_wings");
-      }
     }
   }
 
@@ -5304,6 +5195,8 @@ function render_checkbox_option(li, option) {
   label.setAttribute("for", option.id);
   label.innerText = option.name;
 
+  attach_form_data(input, option);
+
   li.appendChild(input);
   li.appendChild(label);
 }
@@ -5362,6 +5255,8 @@ function render_subcategory_option(li, option) {
     sub_div_inner.appendChild(li);
   });
 
+  attach_form_data(sub_input, option);
+
   sub_div.appendChild(sub_ul);
 
   li.appendChild(sub_div);
@@ -5393,8 +5288,6 @@ function render_option(root_div, li, option) {
   if (option.type == "subcategory") {
     render_subcategory_option(li, option);
   }
-
-  attach_form_data(li, option);
 
   root_div.appendChild(li);
 }
