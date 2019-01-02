@@ -4300,6 +4300,7 @@ function generateSettings() {
   let warnings = [];
   let panels = [];
   let buttons = [];
+  let stats = [];
 
   for (let i=0; i<form.length; i++) {
     let value = form[i].value == "" ? form[i].placeholder : form[i].value;

@@ -771,6 +771,7 @@ options = [
     "name": "Footwear",
     "id": "footWear",
     "optional": true,
+    "panels": ["shoes"],
     "entries":
     [
       {
@@ -866,6 +867,7 @@ options = [
     "name": "Tail",
     "id": "hasTail",
     "optional": true,
+    "panels": ["tails"],
     "buttons": ["tail_slap"],
     "entries":
     [
@@ -938,6 +940,7 @@ options = [
     "name": "Pouch",
     "id": "hasPouch",
     "optional": true,
+    "panels": ["misc"],
     "buttons": ["pouch_stuff", "pouch_rub"],
     "entries":
     [
@@ -953,6 +956,7 @@ options = [
     "name": "Male Genitals",
     "id": "maleParts",
     "optional": true,
+    "panels": ["dick"],
     "buttons": ["cockslap", "ball_smother"],
     "entries":
     [
@@ -1097,6 +1101,7 @@ options = [
     "name": "Female Genitals",
     "id": "femaleParts",
     "optional": true,
+    "panels": ["vagina"],
     "buttons": ["slit_toy"],
     "entries":
     [
@@ -1204,6 +1209,7 @@ options = [
     "name": "Breasts",
     "id": "hasBreasts",
     "optional": true,
+    "panels": ["breasts"],
     "buttons": ["breast_crush", "breast_toy", "cleavage_stuff", "cleavage_crush", "cleavage_drop", "cleavage_absorb"],
     "entries":
     [
@@ -1325,6 +1331,7 @@ options = [
     "name": "Gas",
     "id": "gasEnabled",
     "optional": true,
+    "panels": ["waste"],
     "warning": "Gas is enabled",
     "entries":
     [
@@ -1370,6 +1377,7 @@ options = [
     "name": "Soul Vore",
     "id": "soulVoreEnabled",
     "optional": true,
+    "panels": ["souls"],
     "buttons": ["soul_vore", "soul_absorb_paw"],
     "warning": "Soul vore enabled",
     "entries":
@@ -1412,6 +1420,7 @@ options = [
     "name": "Piss",
     "id": "pissEnabled",
     "optional": true,
+    "panels": ["waste"],
     "buttons": ["piss"],
     "warning": "Watersports enabled",
     "entries":
@@ -1486,6 +1495,7 @@ options = [
     "name": "Scat",
     "id": "scatEnabled",
     "optional": true,
+    "panels": ["waste"],
     "buttons": ["scat"],
     "warning": "Scat is enabled",
     "entries":
@@ -1520,6 +1530,7 @@ options = [
     "name": "Goo",
     "id": "gooEnabled",
     "optional": true,
+    "panels": ["goo"],
     "buttons": ["melt"],
     "entries":
     [
@@ -1590,6 +1601,7 @@ options = [
     "name": "Breath",
     "id": "breathEnabled",
     "optional": true,
+    "panels": ["breath"],
     "buttons": ["breath_line", "breath_cone"],
     "entries":
     [
@@ -1658,6 +1670,7 @@ options = [
     "name": "Magic",
     "id": "magicEnabled",
     "optional": true,
+    "panels": ["magic"],
     "entries":
     [
       {
@@ -1680,6 +1693,7 @@ options = [
     "name": "Wings",
     "id": "hasWings",
     "optional": true,
+    "panels": ["misc"],
     "buttons": ["wings_flap"],
     "entries":
     [
