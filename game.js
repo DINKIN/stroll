@@ -4555,13 +4555,11 @@ function startGame(e) {
     macro.tailCount = 0;
   }
 
+  victim_keys.forEach(function(key) {
+    enable_victim(key.replace("victim-", ""));
+  });
+
   enable_growth_part("paws");
-  enable_victim("stomped","Stomped");
-  enable_victim("flex-toes","Squished between toes");
-  enable_victim("eaten","Devoured");
-  enable_victim("ass-crush","Sat on");
-  enable_victim("ass-ground","Ground beneath ass");
-  enable_victim("humped","Humped");
 
   document.getElementById("log-area").style.display = 'inline';
   document.getElementById("character-build-area").style.display = 'none';
@@ -4585,10 +4583,6 @@ function startGame(e) {
   enable_growth_part("body");
   enable_growth_part("ass");
 
-  if (macro.droolEnabled) {
-    enable_victim("drool","Drenched in drool");
-  }
-
   if (macro.magicEnabled) {
     enable_panel("magic");
   }
@@ -4603,25 +4597,14 @@ function startGame(e) {
 
     if (macro.brutality > 0) {
       enable_button("chew");
-      enable_victim("chew","Chewed");
     }
-
-    if (macro.vomitEnabled) {
-      enable_victim("vomit");
-    }
-  }
-
-  if (macro.analVore) {
-    enable_victim("anal-vore","Anal vore");
   }
 
   if (macro.tailCount > 0) {
     enable_panel("tails");
     enable_growth_part("tail");
-    enable_victim("tail-slap","Tail slapped");
 
     if (macro.tailMaw) {
-      enable_victim("tail-vore","Tailmaw'd");
       if (macro.tailCount > 1) {
         enable_button("tail_vore_one");
         if (macro.tailCount > 2) {
@@ -4635,197 +4618,36 @@ function startGame(e) {
   }
 
   if (macro.maleParts) {
-    enable_panel("dick");
-
-    enable_victim("cock-slap","Cockslapped");
-    enable_victim("ball-smother","Smothered under balls");
-
-    if (macro.cockVoreEnabled){
-      enable_victim("cock-vore","Cock vore");
-    }
-
     enable_growth_part("dick");
     enable_growth_part("balls");
-
-    if (macro.hasSheath) {
-      enable_victim("sheath-crush","Crushed in sheath");
-
-      if (macro.sheathAbsorptionEnabled) {
-        enable_victim("sheath-absorb","Absorbed by sheath");
-      }
-    }
-
-    if (macro.hasForeskin) {
-      enable_victim("foreskin-crush");
-
-      if (macro.foreskinAbsorptionEnabled) {
-        enable_victim("foreskin-absorb");
-      }
-    }
-
-    if (macro.arousalEnabled) {
-      enable_victim("cum-flood");
-
-      if (macro.maleMuskEnabled) {
-        enable_victim("male-spurt-musk","Inundated in masculine precum musk");
-        enable_victim("male-orgasm-musk","Inundated in masculine cum musk");
-      }
-    }
   }
 
   if (macro.femaleParts) {
 
-    enable_panel("vagina");
-
-    if (macro.unbirthEnabled) {
-      enable_victim("unbirth","Unbirthed");
-    }
-
     enable_growth_part("slit");
     enable_growth_part("womb");
 
-    if (macro.arousalEnabled) {
-      enable_victim("femcum-flood","Flooded by femcum");
-
-      if (macro.femaleMuskEnabled) {
-        enable_victim("female-spurt-musk","Inundated in feminine precum musk");
-        enable_victim("female-orgasm-musk","Inundated in feminine cum musk");
-      }
-    }
   }
 
   if (macro.hasBreasts) {
-    enable_victim("breast-crush","Crushed under breasts");
-    enable_victim("cleavage-crush","Crushed in cleavage");
-    enable_victim("cleavage-absorb","Absorbed by cleavage");
-    enable_victim("cleavage-drop","Dropped from cleavage");
-
-    enable_panel("breasts");
-
     enable_growth_part("breasts");
-
-    if (macro.lactationEnabled) {
-      enable_victim("milk-flood","Flooded by milk");
-    }
-
-    if (macro.breastVore) {
-      enable_victim("breast-vore","Stuffed into breasts");
-    }
   }
 
   if (macro.hasPouch) {
-    enable_victim("pouch-absorb","Absorbed into pouch");
-
-    enable_panel("misc");
-
     if (macro.oralVoreEnabled) {
       enable_button("pouch_eat");
     }
   }
 
-  if (macro.soulVoreEnabled) {
-    enable_victim("soul-digest","Souls digested");
-    enable_victim("soul-paw","Souls absorbed underfoot");
-
-    enable_panel("souls");
-  }
-
-  if (macro.stenchEnabled) {
-    enable_victim("paw-stench","Smothered in paw stench");
-    enable_victim("ass-stench","Smothered in rump stench");
-  }
-
-  if (macro.gasEnabled) {
-    if (macro.belchEnabled) {
-      enable_panel("waste");
-      enable_victim("gas-belch","Belched on");
-    }
-    if (macro.fartEnabled) {
-      enable_panel("waste");
-      enable_victim("gas-fart","Farted on");
-    }
-  }
-
   if (macro.footWear) {
-    enable_panel("shoes");
-
     macro.footShoeWorn = macro.footShoeEnabled;
     macro.footSockWorn = macro.footSockEnabled;
 
     footwearUpdate();
   }
 
-  if (macro.pissEnabled) {
-    enable_panel("waste");
-
-    enable_victim("piss","Pissed away");
-
-    if (macro.bladderVore) {
-      enable_victim("bladder-vore","Dissolved into piss");
-    }
-
-    if (macro.stenchEnabled) {
-      enable_victim("piss-stench","Smothered in piss stench");
-    }
-  }
-
-  if (macro.scatEnabled) {
-
-    enable_victim("scat","Shat on");
-
-    if (macro.stenchEnabled) {
-      enable_victim("scat-stench","Smothered in scat stench");
-    }
-  }
-
   if (macro.gooEnabled) {
-    enable_panel("goo");
-
-    if (macro.gooDigestion) {
-      enable_victim("goo","Absorbed into the goo");
-    }
-  }
-
-  if (macro.pawVoreEnabled) {
-
-    enable_victim("paw-vore","Absorbed into paws");
-  }
-
-  if (macro.breathEnabled) {
-    enable_panel("breath");
-
-    if (macro.breathFire) {
-      enable_victim("breath-fire","Incinerated by fiery breath");
-    }
-
-    if (macro.breathIce) {
-      enable_victim("breath-ice","Frozen in icy breath");
-    }
-
-    if (macro.breathElectric) {
-      enable_victim("breath-electric","Fried by an electric gale");
-    }
-
-    if (macro.breathSmoke) {
-      enable_victim("breath-smoke","Snuffed out by smoke");
-    }
-
-    if (macro.breathRadiation) {
-      enable_victim("breath-radiation","Vaporized by radioactive power");
-    }
-
-    if (macro.breathFoul) {
-      enable_victim("breath-foul","Smothered in humid breath");
-    }
-  }
-
-  if (macro.hasWings) {
-    enable_panel("misc");
-    enable_victim("wings-flap");
-
-    if (macro.wingVoreEnabled) {
-      enable_victim("wings-vore");
-    }
+    macro.gooMolten = false;
   }
 
   document.getElementById("button-option-toggle_arousal").innerHTML = (macro.arousalEnabled ? "Arousal On" : "Arousal Off");
