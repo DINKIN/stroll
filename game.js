@@ -4290,7 +4290,7 @@ function grabFormData(form, warnings, panels, buttons, stats, parts) {
     {
       let sib = parent.previousSibling.previousSibling;
 
-      if (!sib.checked && form.id == "") {
+      if (!sib.checked) {
         return;
       }
     }
