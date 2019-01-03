@@ -86,13 +86,7 @@ body.dark div {
   display:none;
 }
 
-#log {
-  overflow: auto;
-  padding: 25px;
-  box-sizing: border-box;
-}
-
-#react-log {
+.log {
   overflow: auto;
   padding: 25px;
   box-sizing: border-box;
@@ -707,4 +701,38 @@ body.dark .meterLabel {
 
 .intro-text {
   font-size: 18px;
+}
+
+.log::-webkit-scrollbar {
+  width: 3px;
+  height: 2px;
+}
+.log::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.log::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.log::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+.log::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+.log::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.log::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+.log::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+.log::-webkit-scrollbar-corner {
+  background: transparent;
 }
