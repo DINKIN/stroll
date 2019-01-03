@@ -3547,7 +3547,7 @@ function scat(vol, active=true) {
   macro.arouse(50);
 
   if (macro.stenchEnabled && macro.baseScatStenchArea > 0) {
-    scat_stench(area*macro.baseScatStenchArea);
+    scat_stench(area*macro.baseScatStenchArea, active);
   }
 }
 
