@@ -88,10 +88,14 @@ body.dark div {
 
 #log {
   overflow: auto;
+  padding: 25px;
+  box-sizing: border-box;
 }
 
 #react-log {
   overflow: auto;
+  padding: 25px;
+  box-sizing: border-box;
 }
 
 body.light #react-log {
@@ -187,6 +191,7 @@ progress {
   text-align: right;
   min-width: 250px;
   flex: 1;
+  padding: 25px;
 }
 
 .preset-selector {
@@ -698,4 +703,8 @@ body.dark .meterLabel {
 
 #custom-characters {
   font-size: 24px;
+}
+
+.intro-text {
+  font-size: 18px;
 }

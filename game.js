@@ -4290,15 +4290,12 @@ function grabFormData(form, warnings, panels, buttons, stats, parts) {
     {
       let sib = parent.previousSibling.previousSibling;
 
-      if (!sib.checked) {
-        console.log("aborting " + form.id);
+      if (!sib.checked && form.id == "") {
         return;
       }
-
     }
 
     parent = parent.parentElement;
-
 
   }
 
@@ -4955,13 +4952,20 @@ function render_text_option(li, option) {
   li.appendChild(input);
 }
 
-function render_float_option(li, option) {
+function render_number_option(li, option, type) {
   let input = document.createElement("input");
   input.setAttribute("autocomplete", "off");
   input.setAttribute("id", option.id);
   input.setAttribute("name", option.id);
   input.setAttribute("type", "number");
-  input.setAttribute("step", "any");
+
+  if (type == "int") {
+    input.setAttribute("step", "1");
+    input.setAttribute("pattern", "\\d*");
+  } else if (type == "float") {
+    input.setAttribute("step", "any");
+  }
+
 
   if (option.default) {
     input.setAttribute("placeholder", option.default);
@@ -4971,6 +4975,11 @@ function render_float_option(li, option) {
   let label = document.createElement("label");
   label.setAttribute("for", option.id);
   label.innerText = option.name;
+
+  if (option.tooltip != undefined) {
+    label.classList.add("has-tooltip");
+    label.setAttribute("title", option.tooltip);
+  }
 
   li.appendChild(label);
   li.appendChild(input);
@@ -4984,6 +4993,14 @@ function render_float_option(li, option) {
     unit.id = option.id + "Preview";
     li.appendChild(unit);
   }
+}
+
+function render_float_option(li, option) {
+  render_number_option(li, option, "float");
+}
+
+function render_int_option(li, option) {
+  render_number_option(li, option, "int");
 }
 
 function render_radio_option(options_div, option) {
@@ -5032,6 +5049,11 @@ function render_checkbox_option(li, option) {
 
   attach_form_data(input, option);
 
+  if (option.tooltip != undefined) {
+    label.classList.add("has-tooltip");
+    label.setAttribute("title", option.tooltip);
+  }
+
   li.appendChild(input);
   li.appendChild(label);
 }
@@ -5051,6 +5073,11 @@ function render_select_option(li, option) {
 
     select.appendChild(sub_option);
   });
+
+  if (option.tooltip != undefined) {
+    label.classList.add("has-tooltip");
+    label.setAttribute("title", option.tooltip);
+  }
 
   li.appendChild(label);
   li.appendChild(select);
@@ -5104,6 +5131,10 @@ function render_option(root_div, li, option) {
 
   if (option.type == "float") {
     render_float_option(li, option);
+  }
+
+  if (option.type == "int") {
+    render_int_option(li, option);
   }
 
   if (option.type == "radio") {

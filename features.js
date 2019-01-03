@@ -511,7 +511,8 @@ options = [
         "name": "Scale",
         "id": "scale",
         "type": "float",
-        "default": "1"
+        "default": "1",
+        "tooltip": "You start out this many times larger than normal. A good way to build a macro character is to design them at normal size, then adjust the scale to get them to the right height."
       },
       {
         "name": "Height",
@@ -875,7 +876,7 @@ options = [
       {
         "name": "Number of tails",
         "id": "tailCount",
-        "type": "float",
+        "type": "int",
         "default": "1"
       },
       {
@@ -1050,7 +1051,8 @@ options = [
           {
             "name": "Scale cum with size",
             "id": "cumScaleWithSize",
-            "type": "checkbox"
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you produce ten times as much cum when digesting prey"
           }
         ]
       },
@@ -1190,7 +1192,8 @@ options = [
           {
             "name": "Scale femcum with size",
             "id": "femcumScaleWithSize",
-            "type": "checkbox"
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you produce ten times as much femcum when digesting prey"
           }
         ]
       },
@@ -1295,7 +1298,8 @@ options = [
           {
             "name": "Scale milk with size",
             "id": "milkScaleWithSize",
-            "type": "checkbox"
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you produce ten times as much milk when digesting prey"
           }
         ]
       }
@@ -1377,7 +1381,8 @@ options = [
       {
         "name": "Scale gas with size",
         "id": "gasScaleWithSize",
-        "type": "checkbox"
+        "type": "checkbox",
+        "tooltip": "If you're ten times bigger than normal, you produce ten times as much gas when digesting prey"
       }
     ]
   },
@@ -1494,7 +1499,8 @@ options = [
           {
             "name": "Scale piss with size",
             "id": "pissScaleWithSize",
-            "type": "checkbox"
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you produce ten times as much piss when digesting prey"
           }
         ]
       }
@@ -1532,7 +1538,8 @@ options = [
       {
         "name": "Scale scat with size",
         "id": "scatScaleWithSize",
-        "type": "checkbox"
+        "type": "checkbox",
+        "tooltip": "If you're ten times bigger than normal, you produce ten times as much scat when digesting prey"
       }
     ]
   },
