@@ -2089,7 +2089,7 @@ function drool()
 
   let preyMass = prey.sum_property("mass");
 
-  let sound = getSound("liquid",preyMass);
+  let sound = getSound("drip",preyMass);
 
   add_victim_people("drool",prey);
 
@@ -2851,7 +2851,7 @@ function male_spurt(vol, active=true)
 
   let preyMass = prey.sum_property("mass");
 
-  let sound = getSound("liquid",preyMass);
+  let sound = getSound("drip",preyMass);
 
   add_victim_people("cum-flood",prey);
 
@@ -2935,7 +2935,7 @@ function female_spurt(vol, active=true)
 
   let preyMass = prey.sum_property("mass");
 
-  let sound = getSound("liquid",preyMass);
+  let sound = getSound("drip",preyMass);
 
   add_victim_people("femcum-flood",prey);
 

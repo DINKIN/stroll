@@ -3,7 +3,9 @@ let last_used = {};
 let sounds = {
   "crush": [["Thump.", "Thoomp."], ["Crunch."], ["Crrruunch."], ["CRUNCH!"], ["CRRRUNNCH!"], ["SKRRRRUNCH!"], ["SKRRRRRRRSMASH!"]],
   "swallow": [["Ulp.", "Glp.", "Slurp."], ["Glrph.", "Glurk."], ["Gluuuurrkph!", "Glurp - GLK."],["GLRP!", "GULP!", "GLUK!"],["GLRRRRPKH!", "GLUUUURK!"],["GLUUUUURRPKH!", "GLOOOORPH-GLK!"]],
-  "liquid": [["Dribble."],["Splat."],["Splash."],["Sploosh."],["SPLASH!"],["SPLOOSH!"],["SPLOOOOOOSH!"]],
+  "drip":
+  [["Drip."],["Dribble"],["Drip-sploosh"],["Dribble-SPLOOSH!"],["SPLOOOOOSH!!"]],
+  "liquid": [["Sploosh."],["Gush!"],["SPLOOSH!"],["SPLOOSH!"],["SPLOOOOOOSH!"]],
   "insert": [["Slp.", "Shlk."],["Shlp.", "Shlrp."],["Shlllp."],["SHLP!", "SQUELCH!"],["SHLLLLRP!"]],
   "drop": [["Thump."],["Thump!"],["Splat."],["Splat!"],["SPLAT!"]],
   "belch": [["Burp.", "Urp."],["Urph.", "Burph."],["Urrrrrph."],["UuuuuuuRRRRRPPHHHhhhh."],["UUUURRRRPHH!"],["BUUUURRRRRRRRPPPHHH!"]],
