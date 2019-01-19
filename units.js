@@ -198,21 +198,39 @@ function customaryMass(kg, singular=false) {
 }
 
 function approxMass(kg, singular=false) {
-  if (kg < 10000) {
+  if (kg < 4500) {
     let mass = round(kg/1000,2);
     return (singular || mass == 1 ? "a car" : mass + " cars");
-  } else if (kg < 100000) {
+  } else if (kg < 54431) {
     let mass = round(kg/6000,2);
     return (singular || mass == 1 ? "an elephant" : mass + " elephants");
-  } else if (kg < 1000000000) {
+    //this unit almos never gets used and is mostly redundant, perhaps remove it if units are cleaned up
+  } else if (kg < 10000000) {
     let mass = round(kg/54431.1,2);
     return (singular || mass == 1 ? "a tank" : mass + " tanks");
-  } else if (kg < 1e21) {
-    let mass = round(kg/1.01605e8,2);
+  } else if (kg < 5.2e10) {
+    let mass = round(kg/9.7e7,2);
     return (singular || mass == 1 ? "an aircraft carrier" : mass + " aircraft carriers");
-  } else {
+  } else if (kg < 1.5e13) {
+    let mass = round(kg/5.2e10,2);
+    return (singular || mass == 1 ? "the Great Wall of China" : mass + " Great Wall Of Chinas"); 
+  } else if (kg < 5e21) {
+    let mass = round(kg/1.5373768e15,3);
+    return (singular || mass == 1 ? "New York City" : mass + " New York Cities");
+    //this figure includes a lot of underlying bedrock, just the city itself is 1.13587210581190e11 but I needed a good figure to fit in this spot
+  } else if (kg < 6e23) {
+    let mass = round(kg/4.6121304e20,3);
+    return (singular || mass == 1 ? "Australia" : mass + " Australias");
+    //this is a napkin math number based on the land area of Australia, 25km of height and rough desnity or rock
+} else if (kg < 2e27) {
     let mass = round(kg/5.972e24,4);
-    return (singular || mass == 1 ? "the Earth" : mass + " Earths");
+    return (singular || mass == 1 ? "the Earth" : mass + " Earths");  
+} else if (kg < 1.4e39) {
+    let mass = round(kg/1.989e30,4);
+    return (singular || mass == 1 ? "the Sun" : mass + " Suns");
+  } else {
+    let mass = round(kg/1.3923e42,4);
+    return (singular || mass == 1 ? "the Milky Way" : mass + " Milky Ways");
   }
 }
 
@@ -249,23 +267,29 @@ function customaryLength(m, singular=false) {
 }
 
 function approxLength(m, singular=false) {
-  if (m < 1000) {
+  if (m < 30) {
+    let length = round(m/1.905,1);
+    return length + (singular || length == 1 ? " bed" : " beds");
+  } else if (m < 350) {
     let length = round(m/49,1);
     return length + (singular || length == 1 ? " football field" : " football fields");
-  } else if (m < 5000000) {
+  } else if (m < 20000) {
     let length = round(m/449,1);
     return length + (singular || length == 1 ? " Empire State Building" : " Empire State Buildings");
+  } else if (m < 2000000) {
+    let length = round(m/80467.2,1);
+    return length + (singular || length == 1 ? " Panama Canal" : " Panama Canals");
   } else if (m < 3474574*2) {
     let length = round(m/3474574,1);
     return length + (singular || length == 1 ? " moon" : " moons");
-  } else if (m < 12.742e6*100) {
-    let length = round(m/12.742e6,1);
+  } else if (m < 12.742e6*130) {
+    let length = round(m/12.742e6,2);
     return length + (singular || length == 1 ? " earth" : " earths");
   } else if (m < 149.6e12) {
-    let length = round(m/149.6e9,1);
+    let length = round(m/149.6e9,3);
     return length + (singular || length == 1 ? " AU" : " AUs");
   } else if (m < 9.4607e22) {
-    let length = round(m/9.4607e15,4);
+    let length = round(m/9.4607e15,3);
     return length + (singular || length == 1 ? " light year" : " light years");
   } else if (m < 5e26) {
     let length = round(m/9.4607e21,3);
@@ -347,23 +371,32 @@ function customaryVolume(m3, singular=false) {
 }
 
 function approxVolume(m3, singular=false) {
-  if (m3 < 1/10000) {
-    let volume = round(m3*1e6,0);
+  if (m3 < 2/10000) {
+    let volume = round(m3*4e5,0);
     return (singular || volume == 1 ? "a shot" : volume + " shots");
-  } else if (m3 < 1) {
-    let volume = round(m3*2000,0);
+  } else if (m3 < .1) {
+    let volume = round(m3*2254,1);
     return (singular || volume == 1 ? "a glass" : volume + " glasses");
-  } else if (m3 < 10) {
+  } else if (m3 < 100) {
     let volume = round(m3*2.64,1);
     return(singular || volume == 1 ? "a bathtub" : volume + " bathtubs");
-  } else if (m3 < 1e9) {
+  } else if (m3 < 1e5) {
     let volume = round(m3/1000,2);
-    return (singular || volume == 1 ? "an Olympic swimming pool" : volume + " Olympic swimming pools");
+    return (singular || volume == 1 ? "an Olympic swimming pool" : volume + " Olympic swimming pools");  
+  } else if (m3 < 1e9) {
+      let volume = round(m3/3.2e5,2);
+    return (singular || volume == 1 ? "an oil tanker" : volume + " oil tankers");
   } else if (m3 < 1e15) {
     let volume = round(m3/1.8919e10,3);
     return (singular || volume == 1 ? "a Great Salt Lake" : volume + " Great Salt Lakes");
+  } else if (m3 < 1e20){
+      let volume = round(m3/3.547e17, 3);
+      return (singular || volume == 1 ? "an ocean" : volume + " oceans");
+  } else if (m3 < 1e25){
+    let volume = round(m3/1e21, 3);
+    return (singular || volume == 1 ? "Earth's volume" : volume + " Earths");
   } else {
-    let volume = round(m3/3.547e17, 3);
-    return (singular || volume == 1 ? "an ocean" : volume + " oceans");
+    let volume = round(m3/1.4e27, 3);
+  return (singular || volume == 1 ? "Sun's volume" : volume + " Suns");
   }
 }
