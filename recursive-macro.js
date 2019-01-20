@@ -33,6 +33,14 @@ var things =
   "Helicopter": Helicopter,
   "Micro": Micro,
   "Macro": Macro,
+  "Squad": Squad,
+  "Platoon": Platoon,
+  "Company": Company,
+  "Battalion": Battalion,
+  "Brigade": Brigade,
+  "Division": Division,
+  "Tank Division": TankDivision,
+  "Army": Army,
 };
 
 var areas =
@@ -67,6 +75,14 @@ var areas =
   "Helicopter": 8,
   "Micro": 0.05,
   "Macro": 100,
+  "Squad": 20,
+  "Platoon": 100,
+  "Company": 500,
+  "Battalion": 3000,
+  "Brigade": 20000,
+  "Division": 80000,
+  "Tank Division": 100000,
+  "Army": 750000,
 };
 
 var masses =
@@ -101,6 +117,14 @@ var masses =
   "Helicopter": 1500,
   "Micro": 0.01,
   "Macro": 80000,
+  "Squad": 1,
+  "Platoon": 100,
+  "Company": 500,
+  "Battalion": 1000,
+  "Brigade": 1500,
+  "Division": 2000,
+  "Tank Division": 3000,
+  "Army": 5000,
 };
 
 var clusters =
@@ -135,6 +159,14 @@ var clusters =
   "Helicopter": 0,
   "Micro": 10,
   "Macro": 0,
+  "Squad": 20,
+  "Platoon": 2,
+  "Company": 2,
+  "Battalion": 2,
+  "Brigade": 2,
+  "Division": 3,
+  "Tank Division": 1,
+  "Army": 2,
 };
 
 var cluster_chances =
@@ -169,6 +201,14 @@ var cluster_chances =
   "Helicopter": 0,
   "Micro": 10,
   "Macro": 0,
+  "Squad": .1,
+  "Platoon": .1,
+  "Company": .1,
+  "Battalion": .1,
+  "Brigade": .1,
+  "Division": .1,
+  "Tank Division": 0.15,
+  "Army": .1,
 };
 
 var contents =
@@ -202,7 +242,24 @@ var contents =
   "Artillery": [["Soldier",4,6]],
   "Helicopter": [["Soldier",4,16]],
   "Micro": [[]],
-  "Macro": [[]]
+  "Macro": [[]],
+  //Alterante Army Structuring, may be used later
+  //"Squad": [["Soldier",6,9]],
+  // "Platoon": [["Squad",3,4]],
+  //"Company": [["Platoon",3,5],["Squad",0,2]],
+  //"Battalion": [["Company",4,6]],
+  //"Brigade": [["Battalion",2,5],["Company",0,3]],
+  //"Division": [["Brigade",2,4]],
+  //"Tank Division": [["Brigade",2,4],["Tank",250,500]],
+  //"Army": [["Division",3,8],["Tank Division",1,5]],
+  "Squad": [["Soldier",6,9]],
+  "Platoon": [["Soldier",16,44]],
+  "Company": [["Soldier",60,200]],
+  "Battalion": [["Soldier",300,1000]],
+  "Brigade": [["Soldier",1500,3200]],
+  "Division": [["Soldier",10000,16000]],
+  "Tank Division": [["Soldier",8000,1200],["Tank",250,500]],
+  "Army": [["Soldier",40000,75000]],
 };
 
 // replace all instances of from with to
@@ -798,7 +855,7 @@ function Bus(count = 1) {
   this.describeOne = function(verbose=true) {
     var adjective = random_desc(["rusty","brand-new"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
-    var type = random_desc(["bus","double-decker bus","articulating bus"]);
+    var type = random_desc(["bus","school bus","double-decker bus","articulating bus"]);
     return "a " + merge_desc([adjective,color,type]);
   };
 
@@ -924,7 +981,7 @@ function House(count = 1) {
   this.describeOne = function(verbose=true) {
     var size = random_desc(["little","two-story","large"], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
-    var name = random_desc(["house","house","house","house","house","trailer"], 1);
+    var name = random_desc(["house","home","house","house","house","trailer"], 1);
     return "a " + merge_desc([size,color,name]);
   };
 
@@ -953,7 +1010,7 @@ function Barn(count = 1) {
 
   this.describeOne = function(verbose=true) {
     var size = random_desc(["little","big","large"], (verbose ? 0.5 : 0));
-    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green","red"], (verbose ? 0.5 : 0));
     var name = random_desc(["barn","barn","barn","barn","barn","farmhouse"], 1);
     return "a " + merge_desc([size,color,name]);
   };
@@ -1012,7 +1069,7 @@ function LargeSkyscraper(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green","glass"], (verbose ? 0.5 : 0));
     var name = random_desc(["skyscraper","office tower","office building"], 1);
     return "a " + merge_desc(["towering",color,name]);
   };
@@ -1291,3 +1348,160 @@ function Macro(count = 1) {
     return (this.count == 1 ? "a smaller macro" : this.count + " smaller macros");
   };
 }
+
+function Squad(count = 1) {
+    this.name = "Squad";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a squad";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a squad" : this.count + " squads") + " made up of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a squad" : this.count + " squads");
+      }
+    };
+  }
+
+function Platoon(count = 1) {
+    this.name = "Platoon";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a military platoon";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a platoon" : this.count + " platoons") + " consisting of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a platoon" : this.count + " platoons");
+      }
+    };
+  }
+
+function Company(count = 1) {
+    this.name = "Company";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a company of soldiers";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a company" : this.count + " companies") + " of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a company" : this.count + " companies");
+      }
+    };
+  }
+
+function Battalion(count = 1) {
+    this.name = "Battalion";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a battalion";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a battalion" : this.count + " battalions") + " containing " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a battalion" : this.count + " battalions");
+      }
+    };
+  }
+
+function Brigade(count = 1) {
+    this.name = "Brigade";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a brigade";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a brigade" : this.count + " brigades") + " made up of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a brigade" : this.count + " brigades");
+      }
+    };
+  }
+
+function Division(count = 1) {
+    this.name = "Division";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a division";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a division" : this.count + " divisions") + " of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a division" : this.count + " divisions");
+      }
+    };
+  }
+
+function TankDivision(count = 1) {
+    this.name = "Tank Division";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "a tank division";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "a tank division" : this.count + " tank divisions") + " of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "a tank division" : this.count + " tank divisions");
+      }
+    };
+  }
+
+function Army(count = 1) {
+    this.name = "Army";
+    copy_defaults(this,new DefaultEntity());
+    this.count = count;
+    this.contents = initContents(this.name,this.count);
+
+    this.describeOne = function(verbose=true) {
+        return "an army";
+    };
+
+    this.describe = function(verbose = true) {
+      if (verbose) {
+        return (this.count == 1 ? "an army" : this.count + " armies") + " made up of " + describe_all(this.contents, verbose);
+      } else {
+        return (this.count == 1 ? "an army" : this.count + " armies");
+      }
+    };
+  }
+
+        //"Brigade": 20000,
+        //"Division": 80000,
+        //"Tank Division": 100000,
+        //"Army": 750000,
