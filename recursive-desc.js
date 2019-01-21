@@ -2102,6 +2102,17 @@ rules["anal-vore"].push({
 
 rules["anal-vore"].push({
   "test": function(container, macro) {
+    return hasExactly(container, "Business", 1) &&
+     hasOnly(container, ["Business"]);
+  }, "desc": function(container, macro, verbose, flat) {
+    return "You set your weighty rump down on " + container.describe() + " and feel it penerate your hole. Once your weight has settled you clench your sphincter, seperating the building from its foundations with a <i>crCraCHH</i> \
+and pulling it off the groud and inside of your ass. You feel the immense pressure of your anal cavity slowly crushing the building, bringing newfound pleasure with every shift and temour within the structure.";
+  }
+});
+
+
+rules["anal-vore"].push({
+  "test": function(container, macro) {
     return hasExactly(container, "Train", 1) &&
      hasOnly(container, ["Train"]);
   }, "desc": function(container, macro, verbose, flat) {

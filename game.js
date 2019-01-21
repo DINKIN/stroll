@@ -1856,6 +1856,7 @@ function getWeights(region, area) {
       "House": 0.1,
       "Car": 0.07,
       "Bus": 0.02,
+      "Business": 0.075,
       "Parking Garage": 0.003,
       "Small Skyscraper": 0.05,
       "Town": 0.00001,

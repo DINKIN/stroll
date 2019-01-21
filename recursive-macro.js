@@ -11,6 +11,7 @@ var things =
   "Bus": Bus,
   "Tram": Tram,
   "House": House,
+  "Business": Business,
   "Barn": Barn,
   "Small Skyscraper": SmallSkyscraper,
   "Large Skyscraper": LargeSkyscraper,
@@ -53,6 +54,7 @@ var areas =
   "Bus": 12,
   "Tram": 20,
   "House": 150,
+  "Business": 400,
   "Barn": 300,
   "Small Skyscraper": 1000,
   "Large Skyscraper": 2000,
@@ -95,6 +97,7 @@ var masses =
   "Bus": 5000,
   "Tram": 10000,
   "House": 10000,
+  "Business": 50000,
   "Barn": 5000,
   "Small Skyscraper": 10000000,
   "Large Skyscraper": 80000000,
@@ -137,6 +140,7 @@ var clusters =
   "Bus": 1,
   "Tram": 1,
   "House": 5,
+  "Business": 5,
   "Barn": 1,
   "Small Skyscraper": 2,
   "Large Skyscraper": 1,
@@ -179,6 +183,7 @@ var cluster_chances =
   "Bus": 0.25,
   "Tram": 0.2,
   "House": 0.5,
+  "Business": .05,
   "Barn": 0.1,
   "Small Skyscraper": 0.25,
   "Large Skyscraper": 0.25,
@@ -223,13 +228,14 @@ var contents =
   "Train": [["Person",1,4,"engine"],["Train Car",2,10]],
   "Train Car": [["Person",10,40]],
   "House": [["Person",0,8],["Empty Car",0,2]],
+  "Business": [["Person",0,30],["Car",0,20]],
   "Barn": [["Person",0,2],["Cow",30,70]],
   "Small Skyscraper": [["Person",150,750],["Empty Car",10,50]],
   "Large Skyscraper": [["Person",500,1500],["Empty Car",20,100]],
   "Parking Garage": [["Person",10,200],["Empty Car",100,300],["Car",5,30]],
-  "Town": [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25]],
-  "City": [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10]],
-  "Continent": [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250]],
+  "Town": [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25],["Business",500,5000]],
+  "City": [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10],["Business",2000,10000]],
+  "Continent": [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
   "Planet": [["Continent",4,9]],
   "Star": [],
   "Solar System": [["Star",1,1],["Planet",5,15]],
@@ -998,6 +1004,36 @@ function House(count = 1) {
       }
     } else {
       return (this.count > 1 ? this.count + " houses" : "a house");
+    }
+  };
+}
+//might split this into a general business and resutrant categories
+function Business(count = 1) {
+  this.name = "Business";
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var size = random_desc(["little","two-story","large","well-built","run-down","cheap","aging","corner"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green","brick","concrete"], (verbose ? 0.5 : 0));
+    var name = random_desc(["mall","resturant","bank","clinic","shop","post-office","tire shop","chain resturant","grocery store","barber shop","pizza resturant","hardware store","movie theather","gas station"], 1);
+    return "a " + merge_desc([size,color,name]);
+  };
+
+  this.describe = function(verbose = true) {
+    if (verbose) {
+      if (this.count <= 3) {
+        var list = [];
+        for (var i = 0; i < this.count; i++) {
+          list.push(this.describeOne(this.count < 2));
+        }
+        return merge_things(list) + " with " + describe_all(this.contents,verbose);
+      } else {
+        return this.count + " local business with " + describe_all(this.contents,verbose) + "inside";
+      }
+    } else {
+      return (this.count > 1 ? this.count + " buildings" : "a local business");
     }
   };
 }
