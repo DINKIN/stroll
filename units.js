@@ -204,7 +204,7 @@ function approxMass(kg, singular=false) {
   } else if (kg < 54431) {
     let mass = round(kg/6000,2);
     return (singular || mass == 1 ? "an elephant" : mass + " elephants");
-    //this unit almos never gets used and is mostly redundant, perhaps remove it if units are cleaned up
+    //this unit almost never gets used and is mostly redundant, perhaps remove it if units are cleaned up
   } else if (kg < 10000000) {
     let mass = round(kg/54431.1,2);
     return (singular || mass == 1 ? "a tank" : mass + " tanks");
@@ -221,7 +221,7 @@ function approxMass(kg, singular=false) {
   } else if (kg < 6e23) {
     let mass = round(kg/4.6121304e20,3);
     return (singular || mass == 1 ? "Australia" : mass + " Australias");
-    //this is a napkin math number based on the land area of Australia, 25km of height and rough desnity or rock
+    //this is a napkin math number based on the land area of Australia, 25km of height and rough density of rock
 } else if (kg < 2e27) {
     let mass = round(kg/5.972e24,4);
     return (singular || mass == 1 ? "the Earth" : mass + " Earths");  
@@ -267,9 +267,9 @@ function customaryLength(m, singular=false) {
 }
 
 function approxLength(m, singular=false) {
-  if (m < 30) {
-    let length = round(m/1.905,1);
-    return length + (singular || length == 1 ? " bed" : " beds");
+  if (m < 25) {
+    let length = round(m/1.9,1);
+    return length + (singular || length == 1 ? " person" : " people");
   } else if (m < 350) {
     let length = round(m/49,1);
     return length + (singular || length == 1 ? " football field" : " football fields");
