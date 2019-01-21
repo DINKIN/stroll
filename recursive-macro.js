@@ -201,8 +201,8 @@ var cluster_chances =
   "Helicopter": 0,
   "Micro": 10,
   "Macro": 0,
-  "Squad": .1,
-  "Platoon": .1,
+  "Squad": .05,
+  "Platoon": .05,
   "Company": .1,
   "Battalion": .1,
   "Brigade": .1,
@@ -689,7 +689,7 @@ function Person(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function (verbose=true) {
-    var body = random_desc(["skinny","fat","tall","short","stocky","spindly"], (verbose ? 0.6 : 0));
+    var body = random_desc(["skinny","fat","tall","short","stocky","spindly","muscular","fit","multi-colored"], (verbose ? 0.6 : 0));
     var sex = random_desc(["male", "female"], (verbose ? 1 : 0));
     var species = "";
     species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal"]);
@@ -724,7 +724,7 @@ function Human(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function (verbose=true) {
-    var body = random_desc(["skinny","fat","tall","short","stocky","spindly"], (verbose ? 0.6 : 0));
+    var body = random_desc(["skinny","fat","tall","short","stocky","spindly","muscular","fit","tanned"], (verbose ? 0.6 : 0));
     var sex = random_desc(["man", "woman"], 1);
     return "a " + merge_desc([body,sex]);
   };
@@ -790,7 +790,7 @@ function EmptyCar(count = 1) {
 
   this.describeOne = function(verbose=true) {
     var color = random_desc(["black","black","gray","gray","blue","red","tan","white","white"]);
-    var adjective = random_desc(["rusty","brand-new"],0.3);
+    var adjective = random_desc(["rusty","brand-new","luxury","beat-up","dented","restored","classic"],0.3);
     var type = random_desc(["SUV","coupe","sedan","truck","van","convertible"]);
     return "a parked " + merge_desc([adjective,color,type]);
   };
@@ -822,7 +822,7 @@ function Car(count = 1) {
 
   this.describeOne = function(verbose=true) {
     var color = random_desc(["black","black","gray","gray","blue","red","tan","white","white"], (verbose ? 1 : 0));
-    var adjective = random_desc(["rusty","brand-new"], (verbose ? 0.3 : 0));
+    var adjective = random_desc(["rusty","brand-new","luxury","beat-up","dented","restored","classic"], (verbose ? 0.3 : 0));
     var type = random_desc(["SUV","coupe","sedan","truck","van","convertible"]);
     return "a " + merge_desc([adjective,color,type]);
   };
@@ -853,9 +853,9 @@ function Bus(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var adjective = random_desc(["rusty","brand-new"], (verbose ? 0.3 : 0));
+    var adjective = random_desc(["rusty","brand-new","aging","modern"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
-    var type = random_desc(["bus","school bus","double-decker bus","articulating bus"]);
+    var type = random_desc(["bus","school bus","double-decker bus","articulating bus","open-top bus","sleeper bus","intercity bus"]);
     return "a " + merge_desc([adjective,color,type]);
   };
 
@@ -885,7 +885,7 @@ function Tram(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var adjective = random_desc(["rusty","weathered"], (verbose ? 0.3 : 0));
+    var adjective = random_desc(["rusty","weathered","well-maintained",], (verbose ? 0.3 : 0));
     var color = random_desc(["blue","brown","gray"], (verbose ? 1 : 0));
     var type = random_desc(["tram"]);
     return "a " + merge_desc([adjective,color,type]);
@@ -920,7 +920,7 @@ function Train(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var adjective = random_desc(["rusty","brand-new"], (verbose ? 0.3 : 0));
+    var adjective = random_desc(["rusty","brand-new","steam","freshly-painted"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
     var type = random_desc(["train","passenger train","freight train"]);
     return "a " + merge_desc([adjective,color,type]);
@@ -957,8 +957,8 @@ function TrainCar(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var adjective = random_desc(["rusty","brand-new"], (verbose ? 0.3 : 0));
-    var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
+    var adjective = random_desc(["rusty","brand-new","vintage","graffitied","well-maintained"], (verbose ? 0.3 : 0));
+    var color = random_desc(["black","tan","gray","yellow","steel","wooden"], (verbose ? 1 : 0));
     var type = random_desc(["train car","passenger train car","freight train car"]);
     return "a " + merge_desc([adjective,color,type]);
   };
@@ -979,8 +979,8 @@ function House(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var size = random_desc(["little","two-story","large"], (verbose ? 0.5 : 0));
-    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var size = random_desc(["little","two-story","large","well-built","run-down","cheap",], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green","wooden","brick"], (verbose ? 0.5 : 0));
     var name = random_desc(["house","home","house","house","house","trailer"], 1);
     return "a " + merge_desc([size,color,name]);
   };
@@ -1009,7 +1009,7 @@ function Barn(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    var size = random_desc(["little","big","large"], (verbose ? 0.5 : 0));
+    var size = random_desc(["little","big","large","weathered","rotted","new"], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","red"], (verbose ? 0.5 : 0));
     var name = random_desc(["barn","barn","barn","barn","barn","farmhouse"], 1);
     return "a " + merge_desc([size,color,name]);
@@ -1040,7 +1040,7 @@ function SmallSkyscraper(count = 1) {
 
   this.describeOne = function(verbose=true) {
     var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
-    var name = random_desc(["skyscraper","office tower","office building"], 1);
+    var name = random_desc(["skyscraper","office tower","office building","high rise"], 1);
     return "a " + merge_desc([color,name]);
   };
 
