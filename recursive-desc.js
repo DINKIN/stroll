@@ -951,7 +951,7 @@ function defaultScat(container, macro, verbose, flat) {
   } else if (container.count == 0) {
     return "You squat down and let out a $MASS log of shit.";
   } else if (isSadistic(macro)) {
-    let line = "You squat down, letting out a grunt as your rancid bowels force out a $MASS, $LENGTH-long heap of shit. The fatally-pungent scat buries " + container.describe(verbose) + ", ending " + numberRough(sum,"of") + " lives and entombing them in your shit.";
+    let line = "You squat down, letting out a grunt as your rancid bowels force out a $MASS, $LENGTH-long heap of shit. The fatally-pungent scat buries " + container.describe(verbose) + ", ending " + numberRough(sum,"of") + (sum > 1 ? " lives" : " life") + " and entombing them in your shit.";
     if (macro.scatStorage.victims.count > 0) {
       line += " Embedded in the vomit-inducing heap are the mangled, crushed remains of " + listSum(macro.scatStorage.victims.sum()) + ", " + numberRough(get_living_prey(macro.scatStorage.victims.sum()), "of") + " living creatures converted to noxious scat by your disgusting depths.";
     }
