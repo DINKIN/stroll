@@ -200,37 +200,37 @@ function customaryMass(kg, singular=false) {
 function approxMass(kg, singular=false) {
   if (kg < 4500) {
     let mass = round(kg/1000,2);
-    return (singular || mass == 1 ? "a car" : mass + " cars");
+    return mass + (singular || mass == 1 ? "car" : " cars");
   } else if (kg < 54431) {
     let mass = round(kg/6000,2);
-    return (singular || mass == 1 ? "an elephant" : mass + " elephants");
+    return mass + (singular || mass == 1 ? " elephant" : " elephants");
     //this unit almost never gets used and is mostly redundant, perhaps remove it if units are cleaned up
   } else if (kg < 10000000) {
     let mass = round(kg/54431.1,2);
-    return (singular || mass == 1 ? "a tank" : mass + " tanks");
+    return mass + (singular || mass == 1 ? " tank" : " tanks");
   } else if (kg < 5.2e10) {
     let mass = round(kg/9.7e7,2);
-    return (singular || mass == 1 ? "an aircraft carrier" : mass + " aircraft carriers");
+    return mass + (singular || mass == 1 ? " aircraft carrier" : " aircraft carriers");
   } else if (kg < 1.5e13) {
     let mass = round(kg/5.2e10,2);
-    return (singular || mass == 1 ? "the Great Wall of China" : mass + " Great Wall Of Chinas"); 
+    return mass + (singular || mass == 1 ? " Great Wall of China" : " Great Wall Of Chinas"); 
   } else if (kg < 5e21) {
     let mass = round(kg/1.5373768e15,3);
-    return (singular || mass == 1 ? "New York City" : mass + " New York Cities");
+    return mass + (singular || mass == 1 ? " New York City" : mass + " New York Cities");
     //this figure includes a lot of underlying bedrock, just the city itself is 1.13587210581190e11 but I needed a good figure to fit in this spot
   } else if (kg < 6e23) {
     let mass = round(kg/4.6121304e20,3);
-    return (singular || mass == 1 ? "Australia" : mass + " Australias");
+    return mass +(singular || mass == 1 ? " Australia" : mass + " Australias");
     //this is a napkin math number based on the land area of Australia, 25km of height and rough density of rock
 } else if (kg < 2e27) {
     let mass = round(kg/5.972e24,4);
-    return (singular || mass == 1 ? "the Earth" : mass + " Earths");  
+    return mass + (singular || mass == 1 ? " Earth" : mass + " Earths");  
 } else if (kg < 1.4e39) {
     let mass = round(kg/1.989e30,4);
-    return (singular || mass == 1 ? "the Sun" : mass + " Suns");
+    return mass + (singular || mass == 1 ? " Sun" : mass + " Suns");
   } else {
     let mass = round(kg/1.3923e42,4);
-    return (singular || mass == 1 ? "the Milky Way" : mass + " Milky Ways");
+    return mass + (singular || mass == 1 ? " Milky Way" : mass + " Milky Ways");
   }
 }
 
@@ -373,30 +373,30 @@ function customaryVolume(m3, singular=false) {
 function approxVolume(m3, singular=false) {
   if (m3 < 2/10000) {
     let volume = round(m3*4e5,0);
-    return (singular || volume == 1 ? "a shot" : volume + " shots");
+    return volume + (singular || volume == 1 ? " shot" : " shots");
   } else if (m3 < .1) {
     let volume = round(m3*2254,1);
-    return (singular || volume == 1 ? "a glass" : volume + " glasses");
+    return volume + (singular || volume == 1 ? " glass" : " glasses");
   } else if (m3 < 100) {
     let volume = round(m3*2.64,1);
-    return(singular || volume == 1 ? "a bathtub" : volume + " bathtubs");
+    return volume + (singular || volume == 1 ? " bathtub" : " bathtubs");
   } else if (m3 < 1e5) {
     let volume = round(m3/1000,2);
-    return (singular || volume == 1 ? "an Olympic swimming pool" : volume + " Olympic swimming pools");  
+    return volume + (singular || volume == 1 ? " Olympic swimming pool" : " Olympic swimming pools");  
   } else if (m3 < 1e9) {
       let volume = round(m3/3.2e5,2);
-    return (singular || volume == 1 ? "an oil tanker" : volume + " oil tankers");
+    return volume + (singular || volume == 1 ? " oil tanker" : " oil tankers");
   } else if (m3 < 1e15) {
     let volume = round(m3/1.8919e10,3);
-    return (singular || volume == 1 ? "a Great Salt Lake" : volume + " Great Salt Lakes");
+    return volume + (singular || volume == 1 ? " Great Salt Lake" : " Great Salt Lakes");
   } else if (m3 < 1e20){
       let volume = round(m3/3.547e17, 3);
-      return (singular || volume == 1 ? "an ocean" : volume + " oceans");
+      return volume + (singular || volume == 1 ? " ocean" : " oceans");
   } else if (m3 < 1e25){
     let volume = round(m3/1e21, 3);
-    return (singular || volume == 1 ? "Earth's volume" : volume + " Earths");
+    return volume + (singular || volume == 1 ? "Earth" : " Earths");
   } else {
     let volume = round(m3/1.4e27, 3);
-  return (singular || volume == 1 ? "Sun's volume" : volume + " Suns");
+  return volume + (singular || volume == 1 ? "Sun" : " Suns");
   }
 }
