@@ -618,18 +618,15 @@ options = [
         "type": "radio",
         "id": "difficulty",
         "default": "0",
-        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
             "name": "Sandbox",
-            "value": "0",
-            "tooltip": "Grow how you want, when you want.",
+            "value": "0"
           },
           {
             "name": "Stompvival",
-            "value": "1",
-            "tooltip": "Actions earn you growth points, which are used to grow bigger.",
+            "value": "1"
           }
         ]
       }
@@ -677,14 +674,12 @@ options = [
       {
         "name": "Human prey",
         "id": "victimsHuman",
-        "type": "checkbox",
-        "tooltip": "When checked, your prey is humans. By default your prey is a wide array of anthros."
+        "type": "checkbox"
       },
       {
         "name": "Military",
         "id": "victimsMilitary",
-        "type": "checkbox",
-        "tooltip": "When checked, you can prey on military units like soldiers, tanks, helicopeter, up to destroying entire armies."
+        "type": "checkbox"
       },
       {
         "name": "Macros",
@@ -1701,7 +1696,6 @@ options = [
         "type": "checkbox",
         "buttons": ["magic_shrink"],
         "default": true,
-        "tooltip": "Allows you to shrink a wide area(relative to your size) into a smaller area, allowing you to devour prey much bigger than you are."
       },
       {
         "name": "Fast digestion",
@@ -1709,7 +1703,6 @@ options = [
         "type": "checkbox",
         "buttons": ["magic_fast_digestion"],
         "default": true,
-        "tooltip": "Fast Digestion allows you to speed up your digestion for a short duration."
       },
     ]
   },

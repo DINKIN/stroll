@@ -2908,11 +2908,7 @@ function male_orgasm(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-    if (macro.verbose == true){
-    let line = describe("male-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
-  } else {
-    let line = describe("male-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,true));
-  }
+  let line = describe("male-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
