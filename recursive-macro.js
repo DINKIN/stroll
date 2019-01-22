@@ -1017,7 +1017,7 @@ function Business(count = 1) {
   this.describeOne = function(verbose=true) {
     var size = random_desc(["little","two-story","large","well-built","run-down","cheap","aging","corner"], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","brick","concrete"], (verbose ? 0.5 : 0));
-    var name = random_desc(["mall","resturant","bank","clinic","shop","post-office","tire shop","chain resturant","grocery store","barber shop","pizza resturant","hardware store","movie theather","gas station"], 1);
+    var name = random_desc(["mall","resturant","bank","clinic","shop","post office","tire shop","chain resturant","grocery store","barber shop","pizza resturant","hardware store","movie theather","gas station"], 1);
     return "a " + merge_desc([size,color,name]);
   };
 
@@ -1536,8 +1536,3 @@ function Army(count = 1) {
       }
     };
   }
-
-        //"Brigade": 20000,
-        //"Division": 80000,
-        //"Tank Division": 100000,
-        //"Army": 750000,

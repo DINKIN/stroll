@@ -1829,7 +1829,7 @@ function getOnePrey(biome, area, sameSize = true)
   else
     return new Container();
 }
-
+//set weights(how often a thing is encountered)
 function getWeights(region, area) {
   let weights = {};
 
