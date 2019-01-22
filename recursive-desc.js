@@ -2299,4 +2299,48 @@ rules["ball-smother"].push({
   }
 });
 
-//Balls Weigh 1e12 kg or less  note:use craters
+//Balls Weigh 1e12 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky before coming to rest on " + container.describe() + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack push the ground aside to form two massive craters.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+      resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you you heave your sack off the ground, two massive craters have formed at the impact site.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with peices of debris floating in them.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with bones and peices of debris floating in them.";
+  }
+});
