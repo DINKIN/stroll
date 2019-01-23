@@ -2308,7 +2308,7 @@ rules["ball-smother"].push({
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky before coming to rest on " + container.describe() + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack push the ground aside to form two massive craters.";
+    return "Your " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky before coming to rest on " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack push the ground aside to form two massive craters.";
   }
 });
 rules["ball-smother"].push({
@@ -2318,7 +2318,7 @@ rules["ball-smother"].push({
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
       resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you you heave your sack off the ground, two massive craters have formed at the impact site.";
   }
 });
@@ -2329,7 +2329,7 @@ rules["ball-smother"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
 resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with peices of debris floating in them.";
   }
 });
@@ -2340,7 +2340,152 @@ rules["ball-smother"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe() + " with little \
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
 resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with bones and peices of debris floating in them.";
+  }
+});
+
+//Balls Weigh 1e15 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over " + container.describe(verbose) + " before settling into the terrain with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your gigantic orbs shovel out a spot for themselves with their mass alone.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, true) + " destroying all in its path. As the initial impact subsides you feel your \
+enormous balls shift away from each other as they furrow into the landscape.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, false) + " tossing people into the air and drestroying all in its path. As the \
+initial impact subsides you feel your enormous balls shift away from each other as they furrow into the landscape and over the people that attempted to flee.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, false) + " tossing people into the air and drestroying all in its path. As the \
+initial impact subsides you feel your enormous balls shift away from each other as they furrow into the landscape and over the people that attempted to flee. The ground is stained red with blood and gore.";
+  }
+});
+
+//cause night to fall over
+
+//Balls Weigh 1e20 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each titanic testicle weighing " + mass(macro.ballMass, unit, false) + " . The craters left by each orb will scar the planet until its destruction.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing shrapnel in every direction. The craters left by your gonads will scar the planet until its destruction.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing shrapnel in every direction. The craters left by your gonads quickly fill with various fluids, leaving two lakes forever on the planet.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing rubble, bodies, and shrapnel in every direction. The craters left by your gonads quickly fill with various fluids, leaving two lakes forever on the planet.";
+  }
+});
+
+//Balls Weigh 1e25 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e25 &&
+     macro.ballMass > 1e20 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, false) + " . The impact of your manhood creating mountains and shaking earth";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e25 &&
+     macro.ballMass > 1e20 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e25 &&
+     macro.ballMass > 1e20 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+  }
+});
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e25 &&
+     macro.ballMass > 1e20 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area. \
+      You smell the tang of copper in the air, and know that the next rainfall with be red with the blood of those you have slaughtered.";
   }
 });
