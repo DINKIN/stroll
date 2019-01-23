@@ -1,14 +1,14 @@
 
 .light {
   color: #000;
-  background: #eee;
+  background: #dbdbdb;
   font-family: Arial;
 }
 
 .dark {
   color: #eee;
+  font-family: Arial; 
   background: #111;
-  font-family: Arial;
 }
 
 #character-presets {
@@ -23,25 +23,32 @@
 body.dark input {
   color: #eee;
   background: #444;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 body.dark select {
   color: #eee;
   background: #444;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 body.light button {
   color: #000;
   background: #ddd;
+  border-width: 1px;
+  border-color: #000;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 body.dark button {
   color: #eee;
   background: #111;
+  border-width: 1px;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 body.dark div {
-  background: #111;
+  background-color: transparent;
 }
 
 .game-area {
@@ -94,37 +101,37 @@ body.dark div {
 
 body.light #react-log {
   color: #000;
-  background-color: #e7e7e7;
+  background-color: rgba(240, 240, 255, 0.3);
 }
 
 body.light #react-log div {
-  background-color: #e7e7e7;
+  background-color: transparent;
 }
 
 body.dark #react-log {
   color: #eee;
-  background-color: #151515;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 body.dark #react-log div {
-  background-color: #151515;
+  background-color: transparent;
 }
-body.light #react-log {
+body.light #log {
   color: #000;
-  background-color: #e7e7e7;
+  background-color: rgba(240, 240, 255, 0.3);
 }
 
 body.light #log div {
-  background-color: #e7e7e7;
+  background-color: transparent;
 }
 
 body.dark #log {
   color: #eee;
-  background-color: #151515;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 body.dark #log div {
-  background-color: #151515;
+  background-color: transparent;
 }
 
 .stat-header-self {
@@ -218,6 +225,7 @@ progress {
 
 #action-panel {
   display: none;
+
 }
 
 .option-button {
@@ -253,10 +261,12 @@ progress {
 
 body.light .action-button-disabled {
   color: #777 !important;
+  background-color: rgba(150, 0, 0, 0.25);
 }
 
 body.dark .action-button-disabled {
   color: #aaa !important;
+  background-color: rgba(150, 0, 0, 0.25);
 }
 
 #victim-table {
@@ -308,15 +318,19 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
 
 body.light .custom-category {
   background: #ddd;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 body.dark .custom-category {
   background: #222;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 body.dark .custom-category div {
   background: #222;
+  background-color: transparent;
 }
+
 .custom-header-static {
   user-select: none;
   font-size: 250%;
@@ -348,12 +362,19 @@ body.dark .custom-header-static {
 
 body.light .custom-header {
   color: #aaa;
-  background: #ddd;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-width: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-color: #000;
 }
 
 body.dark .custom-header {
   color: #555;
-  background: #222;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 body.light input[type="checkbox"]:checked+
@@ -361,7 +382,7 @@ body.light input[type="checkbox"]:checked+
   color: #000;
   border-style: solid;
   margin: 10px;
-  background: #bbb;
+  background-color: rgba(230, 230, 230, 0.3);
 }
 
 body.dark input[type="checkbox"]:checked+
@@ -369,7 +390,7 @@ body.dark input[type="checkbox"]:checked+
   color: #fff;
   border-style: solid;
   margin: 10px;
-  background: #444;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .custom-header-checkbox {
@@ -462,7 +483,7 @@ body.light a {
 }
 
 body.light a:visited {
-  color: #0000AA;
+  color: #0000ff;
 }
 
 body.light a:hover {
