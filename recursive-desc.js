@@ -2451,7 +2451,7 @@ rules["ball-smother"].push({
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, false) + " . The impact of your manhood creating mountains and shaking earth";
+    return "The Gravatational pull of your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, f) + " . The impact of your manhood creating mountains and shaking earth";
   }
 });
 rules["ball-smother"].push({
@@ -2462,7 +2462,7 @@ rules["ball-smother"].push({
 
   }, "desc": function(container, macro, verbose, flat) {
     return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
-      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
   }
 });
 rules["ball-smother"].push({
@@ -2473,7 +2473,7 @@ rules["ball-smother"].push({
 
   }, "desc": function(container, macro, verbose, flat) {
     return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
-      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
   }
 });
 
@@ -2485,7 +2485,52 @@ rules["ball-smother"].push({
 
   }, "desc": function(container, macro, verbose, flat) {
     return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
-      You feel the Earth twang and vibrate with the imapct. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area. \
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area. \
       You smell the tang of copper in the air, and know that the next rainfall with be red with the blood of those you have slaughtered.";
+  }
+});
+
+
+
+//Balls Weigh more than 1e24 kg
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, smushing them firmly against your " + length(macro.ballDiameter, unit, true) + " wide balls. ";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, crushing " + (container.count == 1 ? "it" : "them") + " firmly against your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs tearing " + (container.count == 1 ? "it" : "them") + " asunder, spreading the debris across \
+your sack, flattening and grinding until nothing remains but your colossal manhood.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, obliterating " + (container.count == 1 ? "it" : "them") + " with your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs tearing " + (container.count == 1 ? "it" : "them") + " asunder. The many fragments of the collision \
+expand outward before being pulled back against your groin. The debris spread across your sack, flattening and grinding until nothing remains but your colossal manhood.";
+  }
+});
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, decimating " + (container.count == 1 ? "it" : "them") + " with your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs ripping and tearing " + (container.count == 1 ? "it" : "them") + " asunder. The many fragments of the collision \
+expand outward before being pulled back against your groin. The debris spread across your sack, flattening and grinding until nothing remains but your colossal manhood.";
   }
 });
