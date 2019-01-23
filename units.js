@@ -281,10 +281,10 @@ function approxLength(m, singular=false) {
     return length + (singular || length == 1 ? " Panama Canal" : " Panama Canals");
   } else if (m < 3474574*2) {
     let length = round(m/3474574,1);
-    return length + (singular || length == 1 ? " moon" : " moons");
+    return length + (singular || length == 1 ? " Moon" : " moons");
   } else if (m < 12.742e6*130) {
     let length = round(m/12.742e6,2);
-    return length + (singular || length == 1 ? " earth" : " earths");
+    return length + (singular || length == 1 ? " Earth" : " earths");
   } else if (m < 149.6e12) {
     let length = round(m/149.6e9,3);
     return length + (singular || length == 1 ? " AU" : " AUs");
@@ -394,9 +394,9 @@ function approxVolume(m3, singular=false) {
       return volume + (singular || volume == 1 ? " ocean" : " oceans");
   } else if (m3 < 1e25){
     let volume = round(m3/1e21, 3);
-    return volume + (singular || volume == 1 ? "Earth" : " Earths");
+    return volume + (singular || volume == 1 ? " Earth" : " Earths");
   } else {
     let volume = round(m3/1.4e27, 3);
-  return volume + (singular || volume == 1 ? "Sun" : " Suns");
+  return volume + (singular || volume == 1 ? " Sun" : " Suns");
   }
 }
