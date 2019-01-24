@@ -2442,11 +2442,11 @@ rules["ball-smother"].push({
   }
 });
 
-//Balls Weigh 1e25 kg or less
+//Balls Weigh 1e24 kg or less
 
 rules["ball-smother"].push({
   "test": function(container, macro) {
-     return macro.ballMass <= 1e25 &&
+     return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
      isNonFatal(macro);
 
@@ -2456,7 +2456,7 @@ rules["ball-smother"].push({
 });
 rules["ball-smother"].push({
   "test": function(container, macro) {
-     return macro.ballMass <= 1e25 &&
+     return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
      isFatal(macro);
 
@@ -2467,7 +2467,7 @@ rules["ball-smother"].push({
 });
 rules["ball-smother"].push({
   "test": function(container, macro) {
-     return macro.ballMass <= 1e25 &&
+     return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
      isGory(macro);
 
@@ -2479,7 +2479,7 @@ rules["ball-smother"].push({
 
 rules["ball-smother"].push({
   "test": function(container, macro) {
-     return macro.ballMass <= 1e25 &&
+     return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
      isSadistic(macro);
 
