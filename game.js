@@ -1445,7 +1445,7 @@ let macro =
 
       if (spurt == this.cumVolume) {
         let excess = this.cumStorage.amount - this.cumVolume;
-        spurt += excess / 5;
+        spurt += excess * 3 / 4;
       }
       this.cumStorage.amount -= spurt;
       male_orgasm(spurt, false);
@@ -1462,7 +1462,7 @@ let macro =
 
       if (spurt == this.femcumVolume) {
         let excess = this.femcumStorage.amount - this.femcumVolume;
-        spurt += excess / 5;
+        spurt += excess * 3 / 4;
       }
 
       this.femcumStorage.amount -= spurt;
