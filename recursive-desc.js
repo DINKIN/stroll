@@ -1419,7 +1419,7 @@ function defaultVictimCockVore(macro) {
 
 function defaultVictimBallSmother(macro) {
   if (isSadistic(macro)) {
-    return "reduce to broken gore under your massive balls";
+    return "reduced to broken gore under your massive balls";
   } else if (isGory(macro)) {
     return "snuffed out by your crushing balls";
   } else if (isFatal(macro)) {
@@ -2136,24 +2136,27 @@ rules["anal-vore"].push({
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1000 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your giant balls impact the ground with a <i>thud</i> pinning " + container.describe(verbose) + " between your weighty orbs.";
+    return "Your giant balls impact the ground with a <i>thud</i>, pinning " + container.describe(verbose) + " between your weighty orbs.";
   }
 });
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1000 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your " + mass(macro.ballMass, unit, true) + " balls impact the ground with a <i>thud</i> crushing " + container.describe(verbose) + ".";
+    return "Your " + mass(macro.ballMass, unit, true) + " balls impact the ground with a <i>thud</i>, crushing " + container.describe(verbose) + ".";
   }
 });
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1000 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2163,6 +2166,7 @@ rules["ball-smother"].push({
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1000 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2176,6 +2180,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 50000 &&
      macro.ballMass > 1000 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2186,7 +2191,8 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 50000 &&
      macro.ballMass > 1000 &&
-     isFatal(macro); 
+     container.count > 0 &&
+     isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
     return "Your " + length(macro.ballDiameter, unit, true) + " wide balls swing down and into " + container.describe(verbose) + " destroying everything in their path and leaving a gouge in the ground.";
@@ -2196,6 +2202,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 50000 &&
      macro.ballMass > 1000 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2206,6 +2213,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 50000 &&
      macro.ballMass > 1000 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2219,6 +2227,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 5000000 &&
      macro.ballMass > 50000 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2229,6 +2238,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 5000000 &&
      macro.ballMass > 50000 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2239,6 +2249,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 5000000 &&
      macro.ballMass > 50000 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2249,6 +2260,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 5000000 &&
      macro.ballMass > 50000 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2262,6 +2274,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e9 &&
      macro.ballMass > 5000000 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2272,6 +2285,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e9 &&
      macro.ballMass > 5000000 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2282,6 +2296,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e9 &&
      macro.ballMass > 5000000 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2292,6 +2307,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e9 &&
      macro.ballMass > 5000000 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2305,6 +2321,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e12 &&
      macro.ballMass > 1e9 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2315,6 +2332,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e12 &&
      macro.ballMass > 1e9 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2326,6 +2344,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e12 &&
      macro.ballMass > 1e9 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2337,6 +2356,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e12 &&
      macro.ballMass > 1e9 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2351,6 +2371,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e15 &&
      macro.ballMass > 1e12 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2361,6 +2382,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e15 &&
      macro.ballMass > 1e12 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2373,6 +2395,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e15 &&
      macro.ballMass > 1e12 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2385,6 +2408,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e15 &&
      macro.ballMass > 1e12 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2402,6 +2426,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e20 &&
      macro.ballMass > 1e15 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2412,6 +2437,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e20 &&
      macro.ballMass > 1e15 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2423,6 +2449,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e20 &&
      macro.ballMass > 1e15 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2434,6 +2461,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e20 &&
      macro.ballMass > 1e15 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2448,16 +2476,18 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
-    return "The Gravatational pull of your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, f) + " . The impact of your manhood creating mountains and shaking earth";
+    return "The Gravatational pull of your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, false) + " . The impact of your manhood creating mountains and shaking earth";
   }
 });
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2469,6 +2499,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2481,6 +2512,7 @@ rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass <= 1e24 &&
      macro.ballMass > 1e20 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2497,6 +2529,7 @@ rules["ball-smother"].push({
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass > 1e24 &&
+     container.count > 0 &&
      isNonFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2506,6 +2539,7 @@ rules["ball-smother"].push({
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass > 1e24 &&
+     container.count > 0 &&
      isFatal(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2516,6 +2550,7 @@ your sack, flattening and grinding until nothing remains but your colossal manho
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass > 1e24 &&
+     container.count > 0 &&
      isGory(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
@@ -2527,6 +2562,7 @@ expand outward before being pulled back against your groin. The debris spread ac
 rules["ball-smother"].push({
   "test": function(container, macro) {
      return macro.ballMass > 1e24 &&
+     container.count > 0 &&
      isSadistic(macro);
 
   }, "desc": function(container, macro, verbose, flat) {
