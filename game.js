@@ -1633,7 +1633,7 @@ let macro =
       state = "erect, throbbing, pre-soaked";
       }
     }
-    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType;
+    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType + " cock";
   },
 
   get describeVagina() {
