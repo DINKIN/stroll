@@ -529,18 +529,32 @@ options = [
         "unit": "mass"
       },
       {
-        "name": "Paw area",
-        "id": "basePawArea",
+        "name": "Paw length",
+        "id": "basePawLength",
         "type": "float",
-        "default": "0.1",
-        "unit": "area"
+        "default": "0.15",
+        "unit": "length"
       },
       {
-        "name": "Hand area",
-        "id": "baseHandArea",
+        "name": "Paw width",
+        "id": "basePawWidth",
         "type": "float",
-        "default": "0.1",
-        "unit": "area"
+        "default": "0.15",
+        "unit": "length"
+      },
+      {
+        "name": "Hand length",
+        "id": "baseHandLength",
+        "type": "float",
+        "default": "0.25",
+        "unit": "length"
+      },
+      {
+        "name": "Hand width",
+        "id": "baseHandWidth",
+        "type": "float",
+        "default": "0.15",
+        "unit": "length"
       },
       {
         "name": "Ass area",
