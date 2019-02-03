@@ -3,7 +3,7 @@
 /*jshint browser: true*/
 /*jshint devel: true*/
 
-let version = "v0.7.4";
+let version = "v1.0.0 beta";
 
 let save_version = 0;
 
@@ -4450,15 +4450,9 @@ function exportSettings() {
 }
 
 function importSettings() {
-  let imported = JSON.parse(document.getElementById("export-area").value);
+  let settings = JSON.parse(document.getElementById("export-area").value);
 
   resetSettings();
-
-  let settings = generateSettings();
-
-  Object.entries(imported).forEach(([key, value]) => {
-    settings[key] = imported[key]
-  });
 
   loadSettings(settings);
 }
