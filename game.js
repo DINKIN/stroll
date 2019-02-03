@@ -4450,11 +4450,21 @@ function exportSettings() {
 }
 
 function importSettings() {
-  let settings = JSON.parse(document.getElementById("export-area").value);
+  try {
+    let text = document.getElementById("export-area").value;
 
-  resetSettings();
+    if (text == "") {
+      return;
+    }
+    
+    let settings = JSON.parse(text);
 
-  loadSettings(settings);
+    resetSettings();
+
+    loadSettings(settings);
+  } catch(err) {
+    alert("Bad character data!");
+  }
 }
 
 function updateCustomCharacters() {
