@@ -4362,7 +4362,10 @@ function grabFormData(form, warnings, panels, buttons, stats, parts) {
   }
 }
 
-function generateSettings() {
+// if diff is true, only record settings that are
+// different from the defaults!
+
+function generateSettings(diff=false) {
   let form = document.forms.namedItem("custom-species-form");
   let settings = {};
 
@@ -4397,6 +4400,13 @@ function generateSettings() {
       settings[form[i].name] = form[i][form[i].selectedIndex].value;
       grabFormData(form[i][form[i].selectedIndex], warnings, panels, buttons, stats, parts);
     }
+
+  }
+
+  if (diff) {
+    options.forEach(panel => {
+      recurseDeletePanel(settings, panel);
+    })
   }
 
   return {
@@ -4409,18 +4419,46 @@ function generateSettings() {
   };
 }
 
+function recurseDeletePanel(settings, panel) {
+  if (panel.id && panel.optional && !settings[panel.id]) {
+    delete settings[panel.id];
+  }
+  panel.entries.forEach(option => {
+    if (option.type == "subcategory") {
+      if (!settings[option.id]) {
+        delete settings[option.id];
+      }
+      recurseDeletePanel(settings, option);
+    } else if (settings[option.id] == undefined) {
+      delete settings[option.id];
+    } else if (option.type == "checkbox" && !settings[option.id]) {
+      delete settings[option.id];
+    } else if (settings[option.id] == option.default && option.id != "name") {
+      delete settings[option.id];
+    }
+  })
+
+}
 function clearExport() {
   document.getElementById("export-area").value = "";
 }
 
 function exportSettings() {
-  let settings = generateSettings()["settings"];
+  let settings = generateSettings(true)["settings"];
 
   document.getElementById("export-area").value = JSON.stringify(settings);
 }
 
 function importSettings() {
-  let settings = JSON.parse(document.getElementById("export-area").value);
+  let imported = JSON.parse(document.getElementById("export-area").value);
+
+  resetSettings();
+
+  let settings = generateSettings();
+
+  Object.entries(imported).forEach(([key, value]) => {
+    settings[key] = imported[key]
+  });
 
   loadSettings(settings);
 }

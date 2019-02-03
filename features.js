@@ -585,6 +585,7 @@ options = [
         "name": "Foot type",
         "id": "footType",
         "type": "select",
+        "default": "paw",
         "choices":
         [
           {
@@ -609,6 +610,7 @@ options = [
         "name": "Mouth type",
         "id": "jawType",
         "type": "select",
+        "default": "jaw",
         "choices":
         [
           {
@@ -804,6 +806,7 @@ options = [
             "name": "Sock type",
             "id": "footSock",
             "type": "select",
+            "default": "sock",
             "choices":
             [
               {
@@ -829,6 +832,7 @@ options = [
             "name": "Shoe type",
             "id": "footShoe",
             "type": "select",
+            "default": "shoe",
             "choices":
             [
               {
