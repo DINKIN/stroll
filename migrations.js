@@ -2,7 +2,7 @@
 
 migrations = [
   (save) => {
-    save.version = 1;
+    // does nothing
   }
 ];
 

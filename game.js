@@ -3,9 +3,7 @@
 /*jshint browser: true*/
 /*jshint devel: true*/
 
-let version = "v1.0.0 beta";
-
-let save_version = 0;
+let version = "v1.0.0";
 
 let errored = false;
 
@@ -4456,7 +4454,7 @@ function importSettings() {
     if (text == "") {
       return;
     }
-    
+
     let settings = JSON.parse(text);
 
     resetSettings();
@@ -4939,7 +4937,7 @@ window.addEventListener('load', function(event) {
   construct_options();
   construct_panels();
 
-  document.querySelector("#save-version").setAttribute("placeholder", save_version);
+  document.querySelector("#save-version").setAttribute("placeholder", migrations.length);
 
   document.querySelectorAll("input[type='number']").forEach(function(x) {
     x.addEventListener("input", function() { updatePreview(x.id); });
