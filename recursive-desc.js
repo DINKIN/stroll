@@ -951,7 +951,7 @@ function defaultScat(container, macro, verbose, flat) {
   } else if (container.count == 0) {
     return "You squat down and let out a $MASS log of shit.";
   } else if (isSadistic(macro)) {
-    let line = "You squat down, letting out a grunt as your rancid bowels force out a $MASS, $LENGTH-long heap of shit. The fatally-pungent scat buries " + container.describe(verbose) + ", ending " + numberRough(sum,"of") + " lives and entombing them in your shit.";
+    let line = "You squat down, letting out a grunt as your rancid bowels force out a $MASS, $LENGTH-long heap of shit. The fatally-pungent scat buries " + container.describe(verbose) + ", ending " + numberRough(sum,"of") + (sum > 1 ? " lives" : " life") + " and entombing them in your shit.";
     if (macro.scatStorage.victims.count > 0) {
       line += " Embedded in the vomit-inducing heap are the mangled, crushed remains of " + listSum(macro.scatStorage.victims.sum()) + ", " + numberRough(get_living_prey(macro.scatStorage.victims.sum()), "of") + " living creatures converted to noxious scat by your disgusting depths.";
     }
@@ -2102,6 +2102,17 @@ rules["anal-vore"].push({
 
 rules["anal-vore"].push({
   "test": function(container, macro) {
+    return hasExactly(container, "Business", 1) &&
+     hasOnly(container, ["Business"]);
+  }, "desc": function(container, macro, verbose, flat) {
+    return "You set your weighty rump down on " + container.describe() + " and feel it penerate your hole. Once your weight has settled you clench your sphincter, seperating the building from its foundations with a <i>crCraCHH</i> \
+and pulling it off the groud and inside of your ass. You feel the immense pressure of your anal cavity slowly crushing the building, bringing newfound pleasure with every shift and temour within the structure.";
+  }
+});
+
+
+rules["anal-vore"].push({
+  "test": function(container, macro) {
     return hasExactly(container, "Train", 1) &&
      hasOnly(container, ["Train"]);
   }, "desc": function(container, macro, verbose, flat) {
@@ -2116,5 +2127,410 @@ rules["anal-vore"].push({
      hasOnly(container, ["Planet"]);
   }, "desc": function(container, macro, verbose, flat) {
     return "Your enormous hands guide a planet towards your cheeks - pressing it firmly into your pucker with a dull, muffled <i>shlph</i>...and " + container.describe(verbose) + " sinks into your bowels, sealed away from the universe...";
+  }
+});
+
+
+//Ball Smother
+  //Balls weigh 1,000kg or less
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1000 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your giant balls impact the ground with a <i>thud</i> pinning " + container.describe(verbose) + " between your weighty orbs.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1000 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + " balls impact the ground with a <i>thud</i> crushing " + container.describe(verbose) + ".";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1000 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + " balls impact the ground with a <i>thud</i> trapping " + container.describe(verbose) + " and grinding them into the pavement. They briefly struggle to escape before succumbing to the weight bearing down on them.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1000 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + " balls impact the ground with a <i>thud</i> trapping " + container.describe(verbose) + " and grinding them into the pavement. They briefly struggle to escape before being crushed into a gory mess that leaves a slick of blood on your swinging sack.";
+  }
+});
+
+//Balls weigh  50,000kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 50000 &&
+     macro.ballMass > 1000 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls impact the ground with a <i>thump</i>. They spread over " + container.describe(verbose) + " and settle into the ground.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 50000 &&
+     macro.ballMass > 1000 &&
+     isFatal(macro); 
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls swing down and into " + container.describe(verbose) + " destroying everything in their path and leaving a gouge in the ground.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 50000 &&
+     macro.ballMass > 1000 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls swing down and into " + container.describe(verbose) + " with the force of a wrecking ball. The momentum of the swing destroying everything in their path and leaving a trail of destruction.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 50000 &&
+     macro.ballMass > 1000 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls swing down and into " + container.describe(verbose) + " with the force of a wrecking ball. The momentum of your mighty sack destroying everything in its path and leaving a trail of destruction. Your balls swing back through the remains of your prey, the massive weight converting everything remaining into unidentifiable detritus.";
+  }
+});
+
+//Balls weigh  5,000,000kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 5000000 &&
+     macro.ballMass > 50000 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast a shadow over " + container.describe(verbose) + " for a few seconds before coming to rest. You feel your sack shift as it settles into the landscape";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 5000000 &&
+     macro.ballMass > 50000 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast a shadow over " + container.describe(verbose) + " for a few seconds before slamming into the earth with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift as it slowly pulverizes everything unfortunate enough to be trapped beneath it. When you heave your weighty orbs off the ground, only rubble remains.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 5000000 &&
+     macro.ballMass > 50000 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast a shadow over " + container.describe(verbose) + " for a few seconds before slamming into the earth with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift and settle as it slowly pulverizes everything unfortunate enough to be trapped beneath it. After you heave your weighty orbs off the ground all that remains of your victims is gore streaked rubble and twisted steel.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 5000000 &&
+     macro.ballMass > 50000 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast a shadow over " + container.describe(verbose) + " for a few seconds before slamming into the earth with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift and settle as it slowly pulverizes everything unfortunate enough to be trapped beneath it. After you heave your weighty orbs off the ground you see that those that were trapped beneath your cum factories are nothing but crumpled bodies lying amist the rubble.";
+  }
+});
+
+//Balls Weigh 1e9 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e9 &&
+     macro.ballMass > 5000000 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls briefly eclipse the sun before coming to rest on " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift as it spreads over the terrain and forms two noticable indents.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e9 &&
+     macro.ballMass > 5000000 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls briefly eclipse the sun before crushing " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift as it slowly pulverizes everything unfortunate enough to be trapped beneath it. When you finally heave your mighty manhood off the ground, you notice 2 massive divots in the terrain; testimony of your immense power.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e9 &&
+     macro.ballMass > 5000000 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls briefly eclipse the sun before pulverizing " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack shift and settle as it slowly pulverizes everything unfortunate enough to be trapped beneath it. When you finally heave your mighty manhood off the ground, you notice 2 massive divots filled with rubble and gore in the terrain; testimony of your immense power.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e9 &&
+     macro.ballMass > 5000000 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls briefly eclipse the sun before pulverizing " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack move and shudder as it's immense bulk flattens everything unfortunate enough to be trapped beneath it. When you finally heave your mighty manhood off the ground, you notice 2 massive divots filled with rubble and gore in the terrain; a fitting grave for those lesser than you.";
+  }
+});
+
+//Balls Weigh 1e12 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky before coming to rest on " + container.describe(verbose) + " with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your sack push the ground aside to form two massive craters.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
+      resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you you heave your sack off the ground, two massive craters have formed at the impact site.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
+resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with peices of debris floating in them.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e12 &&
+     macro.ballMass > 1e9 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " diameter balls blot out the sky as they approach your target. The unstoppable force of your gigantic testicles <i>CRASHES</i> through " + container.describe(verbose) + " with little \
+resistance, pancaking them into the ground. The violent impact generates a shockwave that bowls over surrounding trees and buildings. As you heave your sack off the ground, two massive craters have formed at the impact site. A pool of blood and musk is rapidly forming at the bottom of each crater, with bones and peices of debris floating in them.";
+  }
+});
+
+//Balls Weigh 1e15 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over " + container.describe(verbose) + " before settling into the terrain with the weight of " + mass(macro.ballMass, unit, false) + " each. You feel your gigantic orbs shovel out a spot for themselves with their mass alone.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, true) + " destroying all in its path. As the initial impact subsides you feel your \
+enormous balls shift away from each other as they furrow into the landscape.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, false) + " tossing people into the air and drestroying all in its path. As the \
+initial impact subsides you feel your enormous balls shift away from each other as they furrow into the landscape and over the people that attempted to flee.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e15 &&
+     macro.ballMass > 1e12 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls cast darkness over the land as they swing low and right through " + container.describe(verbose) + " like a hot knife through butter. \
+      You shudder as you feel the force of the impact travel through the entirety of your testicles. The shockwave travels for " + length(macro.ballDiameter, unit, false) + " tossing people into the air and drestroying all in its path. As the \
+initial impact subsides you feel your enormous balls shift away from each other as they furrow into the landscape and over the people that attempted to flee. The ground is stained red with blood and gore.";
+  }
+});
+
+//cause night to fall over
+
+//Balls Weigh 1e20 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each titanic testicle weighing " + mass(macro.ballMass, unit, false) + " . The craters left by each orb will scar the planet until its destruction.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing shrapnel in every direction. The craters left by your gonads will scar the planet until its destruction.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing shrapnel in every direction. The craters left by your gonads quickly fill with various fluids, leaving two lakes forever on the planet.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e20 &&
+     macro.ballMass > 1e15 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " thick balls cause night to fall over the land. As they contact earth, they obliterate " + container.describe(verbose) + " with a dull <i>booOOOOooOOM</i>. \
+      The immesive forces involved cause your cum factories to bounce up into the air before coming down on the same spot. The second impact drives your titanic balls deep into the ground while throwing rubble, bodies, and shrapnel in every direction. The craters left by your gonads quickly fill with various fluids, leaving two lakes forever on the planet.";
+  }
+});
+
+//Balls Weigh 1e24 kg or less
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e24 &&
+     macro.ballMass > 1e20 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The Gravatational pull of your " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall before they come to rest on" + container.describe(verbose) + " . Each monstrous testicle weighing " + mass(macro.ballMass, unit, f) + " . The impact of your manhood creating mountains and shaking earth";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e24 &&
+     macro.ballMass > 1e20 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e24 &&
+     macro.ballMass > 1e20 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area.";
+  }
+});
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass <= 1e24 &&
+     macro.ballMass > 1e20 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "Your " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " across balls cause night to fall over the land. As they slam into the earth, they obliterate " + container.describe(verbose) + " with a thunderous <i>BOOOOOOM</i>. \
+      You feel the Earth twang and vibrate with the impact. The crater kicks up enough dust to throw off the seasons. Those that survived the blast are deafened as windows shatter around them and buildings shake on the verge of collapse. Large fissures spread away from your privates in all directions, while the aftershocks of the impact alter and destroy the geology of the surrounding area. \
+      You smell the tang of copper in the air, and know that the next rainfall with be red with the blood of those you have slaughtered.";
+  }
+});
+
+
+
+//Balls Weigh more than 1e24 kg
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, smushing them firmly against your " + length(macro.ballDiameter, unit, true) + " wide balls. ";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, crushing " + (container.count == 1 ? "it" : "them") + " firmly against your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs tearing " + (container.count == 1 ? "it" : "them") + " asunder, spreading the debris across \
+your sack, flattening and grinding until nothing remains but your colossal manhood.";
+  }
+});
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, obliterating " + (container.count == 1 ? "it" : "them") + " with your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs tearing " + (container.count == 1 ? "it" : "them") + " asunder. The many fragments of the collision \
+expand outward before being pulled back against your groin. The debris spread across your sack, flattening and grinding until nothing remains but your colossal manhood.";
+  }
+});
+
+rules["ball-smother"].push({
+  "test": function(container, macro) {
+     return macro.ballMass > 1e24 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, verbose, flat) {
+    return "The gravitational pull of your " + mass(macro.ballMass, unit, true) + " balls draw " + container.describe(verbose) + " into your sack, decimating " + (container.count == 1 ? "it" : "them") + " with your " + length(macro.ballDiameter, unit, true) + " wide balls.  The gravity each of your orbs ripping and tearing " + (container.count == 1 ? "it" : "them") + " asunder. The many fragments of the collision \
+expand outward before being pulled back against your groin. The debris spread across your sack, flattening and grinding until nothing remains but your colossal manhood.";
   }
 });

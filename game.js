@@ -1829,7 +1829,7 @@ function getOnePrey(biome, area, sameSize = true)
   else
     return new Container();
 }
-
+//set weights(how often a thing is encountered)
 function getWeights(region, area) {
   let weights = {};
 
@@ -1856,6 +1856,7 @@ function getWeights(region, area) {
       "House": 0.1,
       "Car": 0.07,
       "Bus": 0.02,
+      "Business": 0.075,
       "Parking Garage": 0.003,
       "Small Skyscraper": 0.05,
       "Town": 0.00001,
@@ -1873,12 +1874,33 @@ function getWeights(region, area) {
     }
 
     if (macro.victimsMilitary) {
-      weights["Soldier"] = 0.01;
-      weights["Tank"] = 0.0005;
-      weights["Artillery"] = 0.0001;
-      weights["Helicopter"] = 0.00005;
+      if (macro.height < 500){
+        weights["Soldier"] = 0.08;
+        weights["Tank"] = 0.07;
+        weights["Artillery"] = 0.06;
+        weights["Helicopter"] = 0.05,
+        weights["Squad"]= .04;
+        weights["Platoon"]= .4,
+        weights["Company"]= .5,
+        weights["Battalion"]= .6,
+        weights["Brigade"]= .7;
+      } else if (macro.height < 5000){
+        weights["Tank"] = 0.0002;
+        weights["Artillery"] = 0.001;
+        weights["Squad"]= .0001;
+        weights["Platoon"]= .005,
+        weights["Company"]= .01,
+        weights["Battalion"]= .02,
+        weights["Brigade"]= .03;
+        weights["Division"]= .02,
+        weights["Tank Division"]= .01,
+        weights["Army"]= .01;
+      } else {
+        weights["Division"]= .02,
+        weights["Tank Division"]= .01,
+        weights["Army"]= .01;
+      }
     }
-
     if (macro.victimsMicros) {
       weights["Micro"] = 1;
     }
