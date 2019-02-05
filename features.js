@@ -1245,6 +1245,13 @@ options = [
             "default": "1"
           },
           {
+            "name": "Vagina autogrowth factor",
+            "id": "vaginaGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+          },
+          {
             "name": "Womb autogrowth factor",
             "id": "wombGrowthFactor",
             "type": "float",
@@ -1682,7 +1689,7 @@ options = [
     [
     {
         "name": "Paw autogrowth factor",
-        "id": "PawGrowthFactor",
+        "id": "pawGrowthFactor",
         "type": "float",
         "default": "0.01",
         "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
