@@ -1030,7 +1030,7 @@ function Business(count = 1) {
         }
         return merge_things(list) + " with " + describe_all(this.contents,verbose);
       } else {
-        return this.count + " local business with " + describe_all(this.contents,verbose) + "inside";
+        return this.count + " local business containing " + describe_all(this.contents,verbose);
       }
     } else {
       return (this.count > 1 ? this.count + " buildings" : "a local business");

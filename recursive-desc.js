@@ -391,13 +391,13 @@ function defaultSheathToy(container, macro, verbose, flat) {
     if (macro.orgasm) {
       return "You stroke your spurting cock, then reach down to give your sheath a firm <i>squeeze</i>. Anything within has been ground away to nothingness by the force of your orgasm.";
     } else if (macro.arousal < 25) {
-      return "You grip your soft sheath and give it a squeeze, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + " cock.";
+      return "You grip your soft sheath and give it a squeeze, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + ".";
     } else if (macro.arousal < 75) {
-      return "You grip your swelling sheath and squeeze, feeling " + container.describeSimple(flat) + " within grind against your " + macro.describeDick + " cock.";
+      return "You grip your swelling sheath and squeeze, feeling " + container.describeSimple(flat) + " within grind against your " + macro.describeDick + ".";
     } else if (macro.arousal < 150) {
-      return "You run your fingers down your " + macro.describeDick + " shaft and grip your sheath, squeezing it to feel " + container.describeSimple(flat) + " being smothered against the musky walls by your throbbing cock.";
+      return "You run your fingers down your " + macro.describeDick + " and grip your sheath, squeezing it to feel " + container.describeSimple(flat) + " being smothered against the musky walls by your throbbing cock.";
     } else {
-      return "Trembling with your impending orgasm, your fingers play over your sheath, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + " cock.";
+      return "Trembling with your impending orgasm, your fingers play over your sheath, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + ".";
     }
   } else {
     if (macro.orgasm) {
@@ -407,7 +407,7 @@ function defaultSheathToy(container, macro, verbose, flat) {
     } else if (macro.arousal < 75) {
       return "You grip your swelling sheath and squeeze.";
     } else if (macro.arousal < 150) {
-      return "You run your fingers down your " + macro.describeDick + " shaft and grip your sheath, squeezing it gently.";
+      return "You run your fingers down your " + macro.describeDick + " and grip your sheath, squeezing it gently.";
     } else {
       return "Trembling with your impending orgasm, your fingers play over your sheath.";
     }
@@ -420,20 +420,20 @@ function defaultSheathClench(container, macro, verbose, flat) {
   else if (isGory(macro))
     return "You squeeze your packed sheath, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your throbbing shaft.";
   else if (isFatal(macro))
-    return "Your fingers run over your packed sheath, squeezing on the " + macro.describeDick + " shaft within and smashing " + container.describeSimple(flat);
+    return "Your fingers run over your packed sheath, squeezing on the " + macro.describeDick + " within and smashing " + container.describeSimple(flat);
   else
     return "Your squeeze your sheath, pushing " + container.describeSimple(flat) + " out of your sheath.";
 }
 
 function defaultSheathCrush(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your orgasm causes your " + macro.describeDick + " cock to swell and surge.";
+    return "Your orgasm causes your " + macro.describeDick + " to swell and surge.";
   else if (isGory(macro))
-    return "Your powerful orgasm causes your throbbing " + macro.describeDick + " cock to swell and crush the life from everything in your sheath, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your spurting shaft.";
+    return "Your powerful orgasm causes your throbbing " + macro.describeDick + " to swell and crush the life from everything in your sheath, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your spurting shaft.";
   else if (isFatal(macro))
-    return "Your orgasm causes your " + macro.describeDick + " shaft to throb and swell, smashing " + container.describeSimple(flat) + " trapped in your musky sheath.";
+    return "Your orgasm causes your " + macro.describeDick + " to throb and swell, smashing " + container.describeSimple(flat) + " trapped in your musky sheath.";
   else
-    return "Your orgasm causes your " + macro.describeDick + " cock to swell, squeezing " + container.describeSimple(flat) + " out from your sheath.";
+    return "Your orgasm causes your " + macro.describeDick + " to swell, squeezing " + container.describeSimple(flat) + " out from your sheath.";
 }
 
 function defaultSheathAbsorb(container, macro, verbose, flat) {
@@ -452,7 +452,7 @@ function defaultForeskinToy(container, macro, verbose, flat) {
     } else if (macro.arousal < 75) {
       return "You grip your swelling cock and squeeze, feeling " + container.describeSimple(flat) + " between your " + macro.describeDick + " and your foreskin.";
     } else if (macro.arousal < 150) {
-      return "You run your fingers down your " + macro.describeDick + " shaft, squeezing it to feel " + container.describeSimple(flat) + " being smothered against your throbbing cock.";
+      return "You run your fingers down your " + macro.describeDick + ", squeezing it to feel " + container.describeSimple(flat) + " being smothered against your throbbing cock.";
     } else {
       return "Trembling with your impending orgasm, your fingers play over your taut foreskin, feeling " + container.describeSimple(flat) + " within rub against your " + macro.describeDick + " cock.";
     }
@@ -464,7 +464,7 @@ function defaultForeskinToy(container, macro, verbose, flat) {
     } else if (macro.arousal < 75) {
       return "You grip your swelling cock and squeeze.";
     } else if (macro.arousal < 150) {
-      return "You run your fingers over your " + macro.describeDick + " shaft and grip your taut foreskin, squeezing it gently.";
+      return "You run your fingers over your " + macro.describeDick + " and grip your taut foreskin, squeezing it gently.";
     } else {
       return "Trembling with your impending orgasm, your fingers play over your shaft.";
     }
@@ -477,20 +477,20 @@ function defaultForeskinClench(container, macro, verbose, flat) {
   else if (isGory(macro))
     return "You squeeze your foreskin, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your throbbing shaft.";
   else if (isFatal(macro))
-    return "Your fingers run over your packed foreskin, squeezing on the " + macro.describeDick + " shaft within and smashing " + container.describeSimple(flat);
+    return "Your fingers run over your packed foreskin, squeezing on the " + macro.describeDick + " within and smashing " + container.describeSimple(flat);
   else
     return "Your squeeze your foreskin, pushing " + container.describeSimple(flat) + " out of your foreskin.";
 }
 
 function defaultForeskinCrush(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your orgasm causes your " + macro.describeDick + " cock to swell and surge.";
+    return "Your orgasm causes your " + macro.describeDick + " to swell and surge.";
   else if (isGory(macro))
-    return "Your powerful orgasm causes your throbbing " + macro.describeDick + " cock to swell and crush the life from everything in your foreskin, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your spurting shaft.";
+    return "Your powerful orgasm causes your throbbing " + macro.describeDick + " to swell and crush the life from everything in your foreskin, reducing " + container.describeSimple(flat) + " to a gory paste that slickens your spurting shaft.";
   else if (isFatal(macro))
-    return "Your orgasm causes your " + macro.describeDick + " shaft to throb and swell, smashing " + container.describeSimple(flat) + " trapped in your musky foreskin.";
+    return "Your orgasm causes your " + macro.describeDick + " to throb and swell, smashing " + container.describeSimple(flat) + " trapped in your musky foreskin.";
   else
-    return "Your orgasm causes your " + macro.describeDick + " cock to swell, squeezing " + container.describeSimple(flat) + " out from your foreskin.";
+    return "Your orgasm causes your " + macro.describeDick + " to swell, squeezing " + container.describeSimple(flat) + " out from your foreskin.";
 }
 
 function defaultForeskinAbsorb(container, macro, verbose, flat) {
@@ -511,9 +511,9 @@ function defaultCockslap(container, macro, verbose, flat) {
   if (container.count == 0)
     return "Your " + macro.describeDick + " swings through the air. Lewd!";
   else if (isFatal(macro))
-    return "Your swaying " + macro.describeDick + " cock crushes " + container.describe(verbose) + ". ";
+    return "Your swaying " + macro.describeDick + " crushes " + container.describe(verbose) + ". ";
   else
-    return "You smack " + container.describe(verbose) + " with your " + macro.describeDick + " shaft.";
+    return "You smack " + container.describe(verbose) + " with your " + macro.describeDick + ".";
 }
 
 function defaultBallSmother(container, macro, verbose, flat) {
@@ -527,20 +527,20 @@ function defaultBallSmother(container, macro, verbose, flat) {
 
 function defaultMaleSpurt(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your " + macro.describeDick + " cock spews $VOLUME of bitter precum.";
+    return "Your " + macro.describeDick + " spews $VOLUME of bitter precum.";
   else if (isFatal(macro))
-    return "Your " + macro.describeDick + " cock spurts out bitter precum, drowning " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
+    return "Your " + macro.describeDick + " spurts out bitter precum, drowning " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
   else
-    return "Your " + macro.describeDick + " shaft spurts precum, splooging " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
+    return "Your " + macro.describeDick + " spurts precum, splooging " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
 }
 
 function defaultMaleOrgasm(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your " + macro.describeDick + " cock spurts, gushing out a $VOLUME glob of cum.";
+    return "Your " + macro.describeDick + " spurts, gushing out a $VOLUME glob of cum.";
   else if (isFatal(macro))
-    return "You're cumming! Your " + macro.describeDick + " cock erupts, obliterating " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
+    return "You're cumming! Your " + macro.describeDick + " erupts, obliterating " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
   else
-    return "You're cumming! Your " + macro.describeDick + " shaft spews a thick rope of seed, splooging " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
+    return "You're cumming! Your " + macro.describeDick + " spews a thick rope of seed, splooging " + container.describe(verbose) + " in a $VOLUME-torrent of cum.";
 }
 
 function defaultFemaleSpurt(container, macro, verbose, flat) {
@@ -904,11 +904,11 @@ function defaultDumpSock(container, macro, verbose, flat) {
 function defaultPiss(container, macro, verbose, flat) {
   if (macro.maleParts) {
     if (container.count == 0) {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + " cock.";
+      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + ".";
     } else if (isSadistic(macro)) {
-      return "You sigh with relief as $VOLUME of hot, rancid piss erupts from your " + macro.describeDick + " cock, inundating " + container.describe(verbose) + " in a disgusting tide of yellow death."
+      return "You sigh with relief as $VOLUME of hot, rancid piss erupts from your " + macro.describeDick + ", inundating " + container.describe(verbose) + " in a disgusting tide of yellow death."
     } else {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + " cock, spraying down " + container.describe(verbose) + " in a shower of golden, musky fluid.";
+      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + ", spraying down " + container.describe(verbose) + " in a shower of golden, musky fluid.";
     }
   } else if (macro.femaleParts) {
     if (container.count == 0) {
@@ -935,7 +935,7 @@ function defaultBladderVore(container, macro, verbose, flat) {
   }
   else {
     if (macro.maleParts) {
-      return "You snatch up " + container.describe(verbose) + " and stuff them into your " + macro.describeDick + " cock, grinding them to its base and forcing them into your musky bladder.";
+      return "You snatch up " + container.describe(verbose) + " and stuff them into your " + macro.describeDick + ", grinding them to its base and forcing them into your musky bladder.";
     } else if (macro.femaleParts) {
       return "You snatch " + container.describe(verbose) + " in your iron grip, grinding them against your " + macro.describeVagina + " slit before stuffing them into your urethra, sealing them away in your musky bladder.";
     } else {
