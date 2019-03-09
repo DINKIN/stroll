@@ -655,7 +655,7 @@ options = [
         "entries":
         [
           {
-            "name": "Automatic Growth",
+            "name": "Automatic growth",
             "id": "automaticGrowthEnabled",
             "type": "checkbox",
             "default": false,
@@ -663,11 +663,17 @@ options = [
             "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass.",
           },
           {
-            "name": "Prey Growth Factor",
-            "id": "preyGrowthFactor",
+            "name": "Prey growth factor",
+            "id": "basePreyGrowthFactor",
             "type": "float",
             "default": "0.8",
             "tooltip": "How much of what you eat gets automatically added to your body. Setting this to [0] disables it. To add half of your prey mass to your own, set to [.5]."
+          },
+          {
+            "name": "Scale growth with size",
+            "id": "growthScaleWithSize",
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
           }
         ]
       }
@@ -1828,6 +1834,7 @@ options = [
     "id": "hasWings",
     "optional": true,
     "panels": ["misc"],
+    //"parts": ["wings"],
     "buttons": ["wings_flap"],
     "entries":
     [
