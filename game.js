@@ -298,6 +298,19 @@ let macro =
     }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
+    "teethDesc": function(plural=false,capital=false) {
+    let result = "";
+
+    switch(this.jawType) {
+      case "jaw":
+        result = plural ? "fangs" : "fang";
+        break;
+      case "beak":
+        result = "beak";
+        break;
+    }
+    return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
+  },
 
   get preyGrowthFactor() {
     if (macro.growthScaleWithSize) {

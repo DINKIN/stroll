@@ -1929,12 +1929,21 @@ rules["eat"].push({
 
 rules["eat"].push({
   "test": function(container, macro) {
-    return hasOnly(container, ["Person","Car"]) &&
-     hasExactly(container, "Car", 1) &&
-     hasLessThan(container, "Person", 5);
+    return hasExactly(container, "Car", 1);
   },
   "desc": function(container, macro, verbose, flat) {
-    return "You crush " + container.contents["Car"].describe() + " with your tight throat, washing it down with " + container.contents["Person"].describe();
+    return "You crush " + container.describe(verbose) + " with your tight throat, washing it down with its former passengers."
+  }
+});
+
+rules["eat"].push({
+  "test": function(container, macro) {
+    return hasExactly(container, "Macro", 1) &&
+     nothingLarger(container, "Macro");
+  },
+  "desc": function(container, macro, verbose, flat) {
+    return "You spot a smaller macro " + ("staring up at you in awe"||"terrorizing the area"||"running from you"||"that is unaware of your presence") + " and decide it will make a suitable meal. You grab them and stuff them into your " + macro.jawDesc(true) + ". As you slurp\
+       them down, you feel them " + ("catch in your throat for a brief moment before being swallowed"||"grab at your tounge for purchase before going down your throat"||"breifly struggle, then go limp"||"pound on the indside of your throat") + ". ";
   }
 });
 
@@ -1992,6 +2001,18 @@ rules["chew"].push({
     caught between two fingers and popped back in to be crunched between molars and swallowed.";
   }
 });
+
+rules["chew"].push({
+  "test": function(container, macro) {
+    return hasExactly(container, "Car", 1);
+  },
+  "desc": function(container, macro, verbose, flat) {
+    return "You lean down and open your "  + macro.jawDesc(true) + " wide, catching "+ container.describe(verbose) + ". Holding onto the car with only your " + macro.teethDesc(true) + ", you tilt your head back, opening wider \
+    to let the vehicle fall further your mouth, Once the car settles, you start slowly closing your jaw, feeling glass shatter, metal grind, and tires burst as those trapped inside try to escape. Every time your chew you feel your \
+    " + macro.teethDesc(true) + " " + macro.biteDesc(false) + " the vehicle into a smaller and smaller lump. After you are satisfied, you tilt your head back and swallow the debries in a single fluid gulp.";
+  }
+});
+
 // STOMPING
 
 rules["stomp"].push({
@@ -2065,6 +2086,16 @@ rules["stomp"].push({
   }
 });
 
+rules["stomp"].push({
+  "test": function(container, macro) {
+    return hasExactly(container, "Parking Garage", 1) &&
+     nothingLarger(container, "Parking Garage");
+  }, "desc": function(container, macro, verbose, flat) {
+    return ("You bring your " + macro.footDesc() + " down on "||"You kick your " + macro.footDesc() + " through ") + container.describe(verbose) +" collapsing the structure and setting off car alarms. As the alarms blare, you reposition your " + macro.footDesc() + 
+        " over the structure, and slam it down; silencing the alarms, and completely demolishing the building.";
+  }
+});
+
 
 // ANAL VORE
 
@@ -2106,7 +2137,7 @@ rules["anal-vore"].push({
      hasOnly(container, ["Business"]);
   }, "desc": function(container, macro, verbose, flat) {
     return "You set your weighty rump down on " + container.describe() + " and feel it penerate your hole. Once your weight has settled you clench your sphincter, seperating the building from its foundations with a <i>crCraCHH</i> \
-and pulling it off the groud and inside of your ass. You feel the immense pressure of your anal cavity slowly crushing the building, bringing newfound pleasure with every shift and temour within the structure.";
+    pulling it off the groud and inside of your ass. You feel the immense pressure of your anal cavity slowly crushing the building, bringing newfound pleasure with every shift and tremour within the structure.";
   }
 });
 
