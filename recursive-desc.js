@@ -71,6 +71,13 @@ function hasLessThan(container, thing, amount) {
   return false;
 }
 
+function hasAtleast(container, thing, amount) { //this function does not trigger in situations where you have a single object(..., 1 [thing], ...) nested inside of a larger group. If you have a case where that can feasibly happen it is reccomended to put a parent ofject of the one you want as an and condition. 
+  if (container.contents.hasOwnProperty(thing))
+    if (container.contents[thing].count >= amount)
+      return true;
+  return false;
+}
+
 function hasExactly(container, thing, amount) {
   if (!container.contents.hasOwnProperty(thing) && amount == 0)
     return true;
@@ -110,11 +117,11 @@ function nothingLarger(container, thing) {
   return true;
 }
 
-function describe(action, container, macro, verbose=true, flat=false) {
+function describe(action, container, macro, verbose=true, flat=false, extra1=0) {
   var options = [];
 
   for (var i = 0; i < rules[action].length; i++) {
-    if(rules[action][i].test(container,macro)) {
+    if(rules[action][i].test(container, macro, extra1)) {
       options.push(rules[action][i].desc);
     }
   }
@@ -125,10 +132,10 @@ function describe(action, container, macro, verbose=true, flat=false) {
 
   if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
     let choice = Math.floor(Math.random() * options.length);
-    return options[choice](container, macro, verbose, flat);
+    return options[choice](container, macro, verbose, flat, extra1);
   }
   else {
-    return getDefault(action)(container, macro, verbose, flat);
+    return getDefault(action)(container, macro, verbose, flat, extra1);
   }
 }
 
@@ -136,6 +143,11 @@ function describeVictim(action, macro) {
   return getDefaultVictim(action)(macro);
 }
 
+function pickString(...array){
+    var strings = array;
+    var pick = strings[~~(Math.random() * strings.length)];
+    return pick;
+}
 // DEFAULTS
 
 function defaultEat(container, macro, verbose, flat) {
