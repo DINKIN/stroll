@@ -234,6 +234,86 @@ let macro =
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
 
+    "soleNoShoeDesc": function(plural=false,capital=false) {
+    let result = "";
+
+    if (!this.footSockWorn) {
+      return this.soleOnlyDesc(plural,capital);
+    } else if (this.footSockWorn) {
+      switch(this.footSock) {
+        case "sock":
+          result = "socked " + this.soleOnlyDesc(plural,false);
+      }
+    }
+
+    return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
+  },
+
+  "soleOnlyDesc": function(plural=false,capital=false) {
+    let result = "";
+
+    switch(this.footType) {
+      case "paw":
+        result = plural ? "pads" : "pads";
+        break;
+      case "hoof":
+        result = plural ? pickString("frogs","soles"):pickString("frog","sole");
+        break;
+      case "foot":
+        result = plural ? "soles" : "sole";
+        break;
+      case "avian":
+        result = plural ? "pads" : "pads";
+        break;
+      }
+    return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
+  },
+
+  "soleDesc": function(plural=false,capital=false,possessive=false) {
+    let result = "";
+    if (!this.footWear) {
+      return this.soleOnlyDesc(plural,capital);
+    }
+    if (!this.footSockWorn && !this.footShoeWorn) {
+      return this.soleOnlyDesc(plural,capital);
+    } else if (this.footShoeWorn) {
+      switch(this.footShoe) {
+        case "shoe":
+          result = plural ? "heels" : "heel";
+          break;
+        case "boot":
+          result = plural ? "heels" : "heel";
+          break;
+        case "trainer":
+          result = plural ? "heels" : "heel";
+          break;
+        case "sandal":
+          result = plural ? "heels" : "heel";
+          break;
+        case "heel":
+          return plural ? "soles" : "sole";
+          break;
+        case "croc":
+          return plural ? "heels" : "heel";
+          break;
+      }
+    } else if (this.footSockWorn) {
+      switch(this.footSock) {
+        case "sock":
+          result = "socked " + this.soleOnlyDesc(plural,false);
+          break;
+        case "stocking":
+          result = "stocking-wrapped " + this.soleOnlyDesc(plural, false);
+          break;
+      }
+    }
+
+    if(possessive) {
+      result = "your " + result;
+    }
+    return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
+  },
+
   "shoeDesc": function(plural,capital) {
     let result = "";
     switch(this.footShoe) {
@@ -1558,9 +1638,9 @@ let macro =
     }
     if (this.maleParts) {
       if (this.hasSheath && this.arousal < 75) {
-        line = "Your " + this.describeDick + " cock is hidden away in your bulging sheath, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
+        line = "Your " + this.describeDick + " is hidden away in your bulging sheath, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
       } else {
-        line = "Your " + this.describeDick + " cock hangs from your hips, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
+        line = "Your " + this.describeDick + " hangs from your hips, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
       }
       result.push(line);
       result.push(macro.balls.description);
@@ -1599,7 +1679,7 @@ let macro =
       result.push(this.pouch.description);
     }
 
-    line = "Your two " + this.footDesc(true) + " shake the earth.";
+    line = "Your two " + length(macro.pawLength, unit, true) + " by " + length(macro.pawWidth, unit, true) + " " + this.footDesc(true) + " shake the earth.";
 
     if (this.footShoeWorn && this.shoe.container.count > 0) {
       line += " Within " + (this.shoe.container.count > 1 ? "are" : "is") + " " + this.shoe.container.describeSimple(verbose || flat);
@@ -1651,10 +1731,7 @@ let macro =
       }
     }
 
-    let descDickArray = ["cock", "shaft", "rod"]; 
-    let randomDescDick = descDickArray[(Math.random() * descDickArray.length) | 0];
-
-    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType + " " + randomDescDick;
+    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType + " " + pickString("cock", "shaft", "rod", "member", "dick");
   },
 
   get describeVagina() {
@@ -1690,13 +1767,26 @@ function look()
   if (macro.height > 1e12)
     line2 = "You're pretty much everywhere at once.";
   else if (macro.height > 1e6)
-    line2 = "You're standing...on pretty much everything at once.";
+    line2 = "You're " + (strolling ? "strolling" : "standing") + "...on pretty much everything at once.";
   else
     switch(biome) {
-      case "rural": line2 = "You're standing amongst rural farmhouses and expansive ranches. Cattle are milling about at your feet."; break;
-      case "suburb": line2 = "You're striding through the winding roads of a suburb."; break;
-      case "city": line2 = "You're terrorizing the streets of a city. Heavy traffic, worsened by your rampage, is everywhere."; break;
-      case "downtown": line2 = "You're lurking amongst the skyscrapers of downtown. The streets are packed, and the buildings are practically begging you to knock them over.";
+      case "rural": line2 = "You're " + (strolling ? "strolling" : "standing") + " amongst rural farmhouses and expansive ranches. Cattle are milling about at your feet."; break;
+      case "suburb": line2 = "You're " + (strolling ? "striding" : "standing") + " through the winding roads of a suburb."; break;
+      case "city":
+        if (macro.height < 6) {
+            line2 = "You are " + (strolling ? "Strolling" : "Standing") + " in the street of a city. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
+        } else if (macro.height < 24) {
+          line2 = "Your broad frame fills the street of the city you are terrorizing. Your presence has caused a pileup of vehicles trying to escape."; break; 
+        } else if (macro.height < 100){
+          line2 = "You are too large for the city streets you are " + (strolling ? "strolling through." : "standing in.") + " Your hulking frame scrapes against building after building, leaving a clear indicator of your path. Gridlock is starting to set in, with people honking and trying to drive away on the sidewalks."; break;
+        } else if (macro.height < 500){
+          line2 = "You are " + (strolling ? "strolling through" : "looming over") + " a bustling city. Your mammoth frame is on par with the few nearby skyscrapers, You forge your own path, leaving a swath of demolished buildings. Panic has fully gripped the city; the streets are filled with vehicles, all immobile."; break;
+        } else if (macro.height < 2500){
+          line2 = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the couple of remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc + ". Traffic is gridlocked as far as you can see, and farther." ; break;
+        } else {
+          line2 = "You're terrorizing the streets of a city. Heavy traffic, worsened by your rampage, is everywhere."; break;
+        }
+      case "downtown": line2 = "You're lurking amongst the skyscrapers of downtown. The streets are packed, and the buildings are practically begging you to knock them over."; break;
     }
 
   desc = desc.concat([newline,line2,newline]);
@@ -2945,7 +3035,7 @@ function male_orgasm(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("male-orgasm", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,true));
+  let line = describe("male-orgasm", prey, macro, verbose, flat, vol).replace("$VOLUME",volume(vol,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
@@ -4271,7 +4361,8 @@ function grow(factor=1, simpleCalc=true){
   let heightDelta = macro.height - oldHeight;
   let massDelta = macro.mass - oldMass;
 
-  update(["Power surges through you as you grow " + length(heightDelta, unit) + " taller and gain " + mass(massDelta, unit) + " of mass.",newline]);
+  update([pickString("Power surges through you","Your body surges upward","Your muscles fight for space","Energy flows into you","You feel your body expand","Your surroundings appear to shink","Your muscles tense","You almost lose your balance","A warm sensation fills you","You feel \
+  a buzz of power") + " as you grow " + length(heightDelta, unit) + " taller and gain " + mass(massDelta, unit) + " of mass.",newline]);
 }
 
 function grow_paws(factor, simpleCalc=true){
@@ -4290,7 +4381,8 @@ function grow_paws(factor, simpleCalc=true){
 
   let areaDelta = macro.pawArea - oldArea;
 
-  update(["Power surges through you as your " + macro.footDesc(true) + " grow, gaining " + area(areaDelta, unit, false) + " of area.",newline]);
+  update([(pickString("Power surges through you","Energy flows into you","You feel your " + macro.footDesc(true) + " expand","Your muscles tense","A warm sensation fills you","You feel a buzz of power")) + " as your \
+  " + macro.footOnlyDesc(true) + pickString(" grow,"," push the ground apart,"," sink deeper into the soil,") + " gaining " + area(areaDelta, unit, false) + " of area.",newline]);
 }
 
 function grow_tail(factor, simpleCalc=true) {
@@ -4310,7 +4402,7 @@ function grow_tail(factor, simpleCalc=true) {
   let lengthDelta = macro.tailLength - oldLength;
   let massDelta = macro.tailMass - oldMass;
 
-  update(["Power surges through you as your " + macro.tailType + " tail grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel your tail twitch","Your muscles tense","Your balance shifts","A warm sensation fills you","You feel a buzz of power") + " as your " + macro.tailType + " tail grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
 }
 
 function grow_dick(factor, simpleCalc=true) {
@@ -4330,7 +4422,7 @@ function grow_dick(factor, simpleCalc=true) {
   let lengthDelta = macro.dickLength - oldLength;
   let massDelta = macro.dickMass - oldMass;
 
-  update(["Power surges through you as your " + macro.dickType + " cock grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel your cock throb","Your muscles tense","You feel your loins buzz with energy","A warm sensation fills you","You feel a buzz of power") + " as your " + macro.dickType + " cock grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
 }
 
 function grow_balls(factor, simpleCalc=true) {
@@ -4350,7 +4442,7 @@ function grow_balls(factor, simpleCalc=true) {
   let diameterDelta = macro.ballDiameter - oldDiameter;
   let massDelta = macro.ballMass - oldMass;
 
-  update(["Power surges through you as your balls swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel an unfamiliar weight in your sack","You sack pushes your thighs further apart","Your muscles tense","You feel your loins buzz with energy","You feel a buzz of power","A warm sensation fills you") + " as your balls swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
 }
 
 function grow_breasts(factor, simpleCalc=true) {
@@ -4370,7 +4462,7 @@ function grow_breasts(factor, simpleCalc=true) {
   let diameterDelta = macro.breastDiameter - oldDiameter;
   let massDelta = macro.breastMass - oldMass;
 
-  update(["Power surges through you as your breasts swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel an unfamilliar weight on your chest","Your balance shifts","Your muscles tense","You feel a buzz of power","A warm sensation fills you") + " as your breasts swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
 }
 
 function grow_vagina(factor, simpleCalc=true) {
@@ -4388,7 +4480,7 @@ function grow_vagina(factor, simpleCalc=true) {
 
   let lengthDelta = macro.vaginaLength - oldLength;
 
-  update(["Power surges through you as your moist slit expands by by " + length(lengthDelta, unit, false) + ".",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel your loins buzz with energy","Your muscles tense","You feel a buzz of power","A warm sensation fills you") + " as your moist slit expands by " + length(lengthDelta, unit, false) + ".",newline]);
 }
 
 function grow_womb(factor, simpleCalc=true) {
@@ -4406,7 +4498,7 @@ function grow_womb(factor, simpleCalc=true) {
 
   let volumeDelta = macro.wombVolume - oldVolume;
 
-  update(["Power surges through you as your womb grows larger, gaining " + volume(volumeDelta, unit, false) + " of capacity.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel your loins buzz with energy","You feel your muscles tense","You feel a buzz of power","A warm sensation fills you") + " as your womb grows larger, gaining " + volume(volumeDelta, unit, false) + " of capacity.",newline]);
 }
 
 function grow_ass(factor, simpleCalc=true) {
@@ -4429,7 +4521,7 @@ function grow_ass(factor, simpleCalc=true) {
 
   let diameterDelta = Math.pow(macro.assArea,1/2) - oldDiameter;
 
-  update(["Power surges through you as your ass swells by " + length(diameterDelta, unit, false) + ".",newline]);
+  update([pickString("Power surges through you","Energy flows into you","You feel your rear fill with power","You feel your rear plump out","You feel your rear expand","Your muscles tense","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your ass swells by " + length(diameterDelta, unit, false) + ".",newline]);
 }
 
 function grow_wings(factor, simpleCalc=true){
@@ -4444,7 +4536,7 @@ function grow_wings(factor, simpleCalc=true){
 
   let lengthDelta = macro.wingLength - oldLength;
 
-  update(["Power surges through you as your " + macro.wingDesc(true) + " grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","Your back muscles fight for space","Your muscles tense","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your " + macro.wingDesc(true) + " grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
 }
 
 function resetSettings() {
