@@ -1139,7 +1139,7 @@ function ParkingGarage(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a parking garage" : this.count + " parking garages") + " with " + describe_all(this.contents, verbose) + " inside";
+      return (this.count == 1 ? "a parking garage" : this.count + " parking garages") + " with " + describe_all(this.contents, verbose);
     } else {
       return (this.count == 1 ? "a parking garage" : this.count + " parking garages");
     }
@@ -1322,7 +1322,7 @@ function Tank(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a tank" : this.count + " tanks") + " with " + describe_all(this.contents, verbose) + " trapped inside.";
+      return (this.count == 1 ? "a tank" : this.count + " tanks") + " with " + describe_all(this.contents, verbose) + " trapped inside";
     } else {
       return (this.count == 1 ? "a tank" : this.count + " tanks");
     }
@@ -1338,7 +1338,7 @@ function Artillery(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units") + " with " + describe_all(this.contents, verbose) + " trapped inside.";
+      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units") + " with " + describe_all(this.contents, verbose) + " trapped inside";
     } else {
       return (this.count == 1 ? "an artillery unit" : this.count + " artillery units");
     }
@@ -1354,7 +1354,7 @@ function Helicopter(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a helicopter" : this.count + " helicopters") + " with " + describe_all(this.contents, verbose) + " riding inside.";
+      return (this.count == 1 ? "a helicopter" : this.count + " helicopters") + " with " + describe_all(this.contents, verbose) + " riding inside";
     } else {
       return (this.count == 1 ? "a helicopter" : this.count + " helicopters");
     }
