@@ -1995,21 +1995,21 @@ function getWeights(region, area) {
         weights["Artillery"] = 0.06;
         weights["Helicopter"] = 0.05,
         weights["Squad"]= .04;
-        weights["Platoon"]= .4,
-        weights["Company"]= .5,
-        weights["Battalion"]= .6,
-        weights["Brigade"]= .7;
+        weights["Platoon"]= .2,
+        weights["Company"]= .3,
+        weights["Battalion"]= .4,
+        weights["Brigade"]= .5;
       } else if (macro.height < 5000){
         weights["Tank"] = 0.0002;
         weights["Artillery"] = 0.001;
         weights["Squad"]= .0001;
-        weights["Platoon"]= .005,
-        weights["Company"]= .01,
-        weights["Battalion"]= .02,
-        weights["Brigade"]= .03;
-        weights["Division"]= .02,
-        weights["Tank Division"]= .01,
-        weights["Army"]= .01;
+        weights["Platoon"]= .0005,
+        weights["Company"]= .001,
+        weights["Battalion"]= .002,
+        weights["Brigade"]= .003;
+        weights["Division"]= .002,
+        weights["Tank Division"]= .001,
+        weights["Army"]= .001;
       } else {
         weights["Division"]= .02,
         weights["Tank Division"]= .01,
