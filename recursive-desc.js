@@ -132,10 +132,10 @@ function describe(action, container, macro, verbose=true, flat=false, extra1=0) 
 
   if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
     let choice = Math.floor(Math.random() * options.length);
-    return options[choice](container, macro, verbose, flat, extra1);
+    return options[choice](container, macro, extra1);
   }
   else {
-    return getDefault(action)(container, macro, verbose, flat, extra1);
+    return getDefault(action)(container, macro, extra1);
   }
 }
 
@@ -582,9 +582,9 @@ function defaultGrind(container, macro, verbose, flat) {
   var end = macro.arousalEnabled ? " to fuel your lust." : ".";
   var desc = container.count > 0 ? container.describe(verbose) + mid + end : "the ground.";
   if (macro.maleParts && macro.femaleParts) {
-    return "You grind your " + macro.describeDick + " cock and " + macro.describeVagina + " slit against " + desc;
+    return "You grind your " + macro.describeDick + "  and " + macro.describeVagina + " slit against " + desc;
   } else if (macro.maleParts && !macro.femaleParts) {
-    return "You grind your " + macro.describeDick + " shaft against " + desc;
+    return "You grind your " + macro.describeDick + "  against " + desc;
   } else if (!macro.maleParts && macro.femaleParts) {
     return "You grind your " + macro.describeVagina + " slit against " + desc;
   } else {
@@ -2261,7 +2261,7 @@ rules["stomp"].push({
 rules["stomp"].push({
   "test": function(container, macro) {
     return macro.pawArea <= 1e7 &&
-     macro.pawArea > 1000 
+     macro.pawArea > 1000 &&
      isNonFatal(macro);
   }, "desc": function(container, macro, verbose, flat) {
     return "You lift your your colossal " + macro.footDesc() + " up and over " + container.describe(verbose) + ". With a sudden swiftness, you <i>SLAM</i> it down. Your " + macro.footDesc() + " shakes the ground and releases an audible <i>BOOOOM</i>.\
@@ -2272,7 +2272,7 @@ rules["stomp"].push({
 rules["stomp"].push({
   "test": function(container, macro) {
     return macro.pawArea <= 1e7 &&
-     macro.pawArea > 1000 
+     macro.pawArea > 1000 &&
      isFatal(macro);
   }, "desc": function(container, macro, verbose, flat) {
     return "You lift your your colossal " + macro.footDesc() + " up and over " + container.describe(verbose) + ". With a sudden swiftness, you <i>SLAM</i> it down. Your " + macro.footDesc() + " shakes the ground and releases an audible <i>BOOOOM</i>.\
@@ -2284,7 +2284,7 @@ rules["stomp"].push({
 rules["stomp"].push({
   "test": function(container, macro) {
     return macro.pawArea <= 1e7 &&
-     macro.pawArea > 1000 
+     macro.pawArea > 1000 &&
      isGory(macro);
   }, "desc": function(container, macro, verbose, flat) {
     return "You lift your your colossal " + macro.footDesc() + " up and over " + container.describe(verbose) + ". With a sudden swiftness, you <i>SLAM</i> it down. Your " + macro.footDesc() + " shakes the ground and releases an audible <i>BOOOOM</i>.\
@@ -2296,7 +2296,7 @@ rules["stomp"].push({
 rules["stomp"].push({
   "test": function(container, macro) {
     return macro.pawArea <= 1e7 &&
-     macro.pawArea > 1000 
+     macro.pawArea > 1000 &&
      isSadistic(macro);
   }, "desc": function(container, macro, verbose, flat) {
     return "You lift your your colossal " + macro.footDesc() + " up and over " + container.describe(verbose) + ". With a sudden swiftness, you <i>SLAM</i> it down. Your " + macro.footDesc() + " shakes the ground and releases an audible <i>BOOOOM</i>.\
@@ -2613,9 +2613,9 @@ rules["cock-vore"].push({
      container.count > 0;
 
   }, "desc": function(container, macro, verbose, flat) {
-      return "You lay your " + length(macro.dickDiameter, unit, true) + " across member on the terrain and begin using your mammoth dick muscles to create a mighty wind, pulling in the surrounding landscape, ripping up the terrain and pulling it within your " + macro.describeDick + ". The colossal slit at the tip of your staff opens wide as buildings, trees, and everything else gets sucked inside\
-    . You feel the prey sliding down your cock rub against your utethra as they pass through. You can even see some of the larger buildings as small, quick moving bulges within your manhood. After several minutes of sucking, your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls are filled by " + container.describe(verbose) + ". As you shift you cock off the ground, you \
-    the satisfying weight of your prey bounce and jiggle within your sack.";
+      return "You lay your " + length(macro.dickDiameter, unit, true) + " across member on the terrain and begin using your mammoth dick muscles to create a mighty wind, pulling in the surrounding landscape, ripping up the terrain and pulling it within your " + macro.describeDick + ". The colossal slit at the tip of your staff opens wide as buildings, trees, and everything else gets sucked inside.\
+      You feel the prey sliding down your cock rub against your utethra as they pass through. You can even see some of the larger buildings as small, quick moving bulges within your manhood. After several minutes of sucking, your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls are filled by " + container.describe(verbose) + ". As you shift you cock off the ground, you \
+      the satisfying weight of your prey bounce and jiggle within your sack.";
   }
 });
 
@@ -2627,8 +2627,8 @@ rules["cock-vore"].push({
      container.count > 0;
 
   }, "desc": function(container, macro, verbose, flat) {
-      return "You lay your " + length(macro.dickDiameter, unit, true) + " across member on the planet and begin using your enourmous dick muscles to create a gigantic vacuum, pulling in the surrounding landscape, ripping up  huge chunks of the terrain and pulling them inside your " + macro.describeDick + ". The ginormous gaping slit at the tip of your colossal dick opens wide as cities, rivers, lakes, and mountains vanish into your depths. \
-    A steady stream of steady unbroken friction rubs against the inside of your mammoth tool, almost causing you to black out from pleasure. As your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls fill, you start slowing down your enormous contractions, until you have " + container.describe(verbose) + " captive within your stretched sack.";
+      return "You lay your " + length(macro.dickDiameter, unit, true) + " across member on the planet and begin using your enourmous dick muscles to vacuum in the surrounding landscape, ripping up  huge chunks of the terrain and pulling them inside your " + macro.describeDick + ". The ginormous gaping slit at the tip of your colossal dick opens wide as cities, rivers, lakes, and mountains vanish into your depths. \
+    A steady stream of unbroken friction rubs against the inside of your mammoth tool, almost causing you to black out from pleasure. As your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls fill, you start slowing down your enormous contractions, until you have " + container.describe(verbose) + " captive within your stretched sack.";
   }
 });
 
@@ -2640,7 +2640,7 @@ rules["cock-vore"].push({
     macro.dickGirth <= 2.5e14;
 
   }, "desc": function(container, macro, verbose, flat) {
-      return "You shove your " + length(macro.dickDiameter, unit, true) + " wide throbbing cockhead against the planet as your greedy slit stretches wide. The globe shudders and begins to slowly enters your stretched hole. As you get closer and closer to covering an entire hemisphere with \
+      return "You shove your " + length(macro.dickDiameter, unit, true) + " wide throbbing cockhead against the planet as your greedy slit stretches wide. The globe shudders and begins to slowly enter your stretched hole. As you get closer and closer to covering an entire hemisphere with \
       your " + macro.describeDick + ", you feel the pressure rise. Shoving the planet inside your cock takes more and more effort, until with a final shove, you feel your tip of your dick pass the center of the sphere, and hold it snug. You stop to squeeze your shaft, and feel how far it has been stretched outward.\
       You begin flexing your cock to bring the world fully inside your enourmous prick, and after a few  more gulps, light ceases to fall on Earth. You help your cock along with its planetary feast by grabbing it and slowly pulling down the shaft, lodging the planet deeper, and deeper, and deeper within you.\
       After what seems like a lifetime of pleasure, the world finally reaches the base of your thick cock, and squeezes down into your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls. You reach down and touch your sack, feeling it digest " + container.describe(verbose) + ".";
@@ -3147,6 +3147,8 @@ Their form falls lifeless on the ground once your cumshot has ended.";
   }
 });
 
+//more than 5 and less than 50
+
 rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
      return spurtVolume <= 50 &&
@@ -3193,6 +3195,8 @@ rules["male-orgasm"].push({
   }
 });
 
+//less than 5e2
+
 rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
      return spurtVolume <= 500 &&
@@ -3238,6 +3242,8 @@ rules["male-orgasm"].push({
       your cum severs limbs and crumples steel. As your cumshot ends, a thick stream of pink frothing fluids pours into nearby sewer drains, filling and clogging them.";
   }
 });
+
+//less than 5e3
 
 rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
@@ -3286,6 +3292,8 @@ rules["male-orgasm"].push({
   }
 });
 
+//less than 1e6
+
 rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
      return spurtVolume <= 1e6 &&
@@ -3333,6 +3341,8 @@ rules["male-orgasm"].push({
   }
 });
 
+//less than 1e9
+
 rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
      return spurtVolume <= 1e9 &&
@@ -3363,7 +3373,7 @@ rules["male-orgasm"].push({
 
   }, "desc": function(container, macro, spurtVolume) {
       return "You're cumming! Your " + macro.describeDick + " swells while your cumslit spews a massive unbroken river of semen. The twitching of your gargantuan cock sends your load in all directions. The mighty spurt of cum smashes apart " + container.describe(verbose) + " as \
-      it flies through air. Those caught in its path are smashed to pieces and dragged away the intense currents. The sheer volume of fluid overwelmes the sewers; you see cum spew from manholes and strom drains for several blocks.";
+      it flies through air. Those caught in its path are smashed to pieces and dragged away by the intense current. The sheer volume of fluid overwelmes the sewers; you see cum spew from manholes and strom drains for several blocks.";
   }
 });
 
@@ -3375,13 +3385,291 @@ rules["male-orgasm"].push({
 
   }, "desc": function(container, macro, spurtVolume) {
       return "You're cumming! Your " + macro.describeDick + " swells while your cumslit spews a massive unbroken river of semen. The twitching of your gargantuan cock sends your load in all directions. The mighty spurt of cum smashes apart " + container.describe(verbose) + " as \
-      it flies through air. Those caught in its path are smashed to pieces and dragged away the intense currents. The sheer volume of fluid overwelmes the sewers; you see cum, gore, glass, and steel spew from manholes and strom drains for several blocks.";
+      it flies through air. Those caught in its path are smashed to pieces and dragged away by the intense current. The sheer volume of fluid overwelmes the sewers; you see cum, gore, glass, and steel spew from manholes and strom drains for several blocks.";
   }
 });
 
-//--------TODO LIST-----
+//less than 1e12
 
-//cum for skyscraper cum for single macro
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " throbs as it fires $VOLUMEs of jizz into the sky. An enoumous sea of cum crashes out of the sky and onto " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " throbs as it fires $VOLUMEs of jizz into the sky. An enoumous sea of cum crashes out of the sky and splashes over " + container.describe(verbose) + " with more ferocity than the flood from a broken dam. \
+      After the massive barrage lands, its viscously sloshes down the natural contours of the land, dragging trees and buildings deep into a nearby valley. The sheer volume of dirt and detritus that it picks up darkens the fluid into an opaque tide of frothing brown.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " throbs as it fires $VOLUMEs of jizz into the sky. An enoumous sea of cum crashes out of the sky and splashes over " + container.describe(verbose) + " with more ferocity than the flood from a broken dam. \
+      After the massive barrage lands, its viscously sloshes down the natural contours of the land, dragging trees, people, animals, and buildings deep into a nearby valley. The sheer volume of dirt and detritus that it picks up darkens the fluid into an opaque tide of \
+      frothing brown. You watch as the sticky mess flows away from you, leaving only the foundations of buildings and rocks in its bed.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " throbs as it fires $VOLUMEs of jizz into the sky. An enoumous sea of cum crashes out of the sky and splashes over " + container.describe(verbose) + " with more ferocity than the flood from a broken dam. \
+      After the massive barrage lands, its viscously sloshes down the natural contours of the land, dragging trees, people, animals, and buildings deep into a nearby valley. The sheer volume of dirt and detritus that it picks up darkens the fluid into an opaque tide of \
+      frothing brown. You watch as the sticky mess flows away from you, leaving only the foundations of buildings and rocks in its bed. The retreating semen also reveals the mangeled and drowned corpses of your victims.";
+  }
+});
+
+//less than 1e16
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e16 &&
+     spurtVolume > 1e12 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " jerks upawrds as it spews $VOLUMEs of semen in a wide arc that clips a nearby cloud. A white tsunami envelopes " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e16 &&
+     spurtVolume > 1e12 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " jerks upawrds as it spews $VOLUMEs of semen in a wide arc that clips a nearby cloud. A white tsunami wipes out " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e16 &&
+     spurtVolume > 1e12 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " jerks upawrds as it spews $VOLUMEs of semen in a wide arc that clips a nearby cloud. A white tsunami wipes out " + container.describe(verbose) + ". As the mighty wave crashes through city grids, it \
+      moves with surprising speed, catching up to and destroying fleeing vehicles.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e16 &&
+     spurtVolume > 1e12 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " jerks upawrds as it spews $VOLUMEs of semen in a wide arc that anniliates a flock of birds. A white tsunami wipes out " + container.describe(verbose) + ". As the mighty wave crashes through city grids, it \
+      moves with surprising speed, catching up to and destroying fleeing vehicles. Your cum smashes dams, bridges, and erodes the land as it travels, cutting a deep channel the local rivers begin flowing into.";
+  }
+});
+
+//less than 5e19
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 5e19 &&
+     spurtVolume > 1e16 &&
+     !hasAtleast(container, "Planet", 1) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum lands, it washes over " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 5e19 &&
+     spurtVolume > 1e16 &&
+     !hasAtleast(container, "Planet", 1) &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e19 &&
+     spurtVolume > 1e16 &&
+     !!hasAtleast(container,"Planet", 1) &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      is basted to smithereens as it carves a deep chasm. The destroyed buildings and people it swept along are deposited at the sides of the chasm, forming an unstable wall of gore and rubble.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 5e19 &&
+     spurtVolume > 1e16 &&
+     !hasAtleast(container,"Planet", 1) &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      is basted to smithereens as it carves a deep gore lined chasm that extends from where it landed to the ocean. As it hits the ocean the resulting wave reverses the tide, dashes ships, and turns the water into an inhabitable murky soup. The destroyed \
+      buildings and people it swept along are deposited at the bottom of the bay.";
+  }
+});
+
+//less than 1e25
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e25 &&
+     spurtVolume > 5e19 &&
+     !hasAtleast(container,"Planet", 1) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! You open your " + macro.jawDesc(true) + " wide; letting out an earth-shattering roar while $VOLUMEs of cum explode out of your " + macro.describeDick + ". The colossal load sprays down on" + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e25 &&
+     spurtVolume > 5e19 &&
+     !hasAtleast(container,"Planet", 1) &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! You open your " + macro.jawDesc(true) + " wide; letting out an earth-shattering roar while $VOLUMEs of cum explode out of your " + macro.describeDick + ". The colossal load punches through " + container.describe(verbose) + " without \
+      even slowing down. Runing out of land to wash over, it sloshes to an ocean, sending huge waves of cum and seawater hundereds of feet into the sky.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e25 &&
+     spurtVolume > 5e19 &&
+     !hasAtleast(container,"Planet", 1) &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! You open your " + macro.jawDesc(true) + " wide; letting out an earth-shattering roar while $VOLUMEs of cum explode out of your " + macro.describeDick + ". The colossal load punches through " + container.describe(verbose) + " without \
+      even slowing down. Runing out of land to wash over, it sloshes to an ocean, sending huge waves of cum and seawater hundereds of feet into the sky. As the thick goopy mix settles down, the increased volume causes tsunamis and floods over the entire globe.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e25 &&
+     spurtVolume > 5e19 &&
+     !hasAtleast(container,"Planet", 1) &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! You open your " + macro.jawDesc(true) + " wide; letting out an earth-shattering roar while $VOLUMEs of cum explode out of your " + macro.describeDick + ". The colossal load punches through " + container.describe(verbose) + " without \
+      even slowing down. Runing out of land to wash over, it sloshes to an ocean, sending huge waves of cum and seawater hundereds of feet into the sky. Every ship sailing on that ocean is overwhelmed by the force and capsizes. As the thick goopy mix \
+      settles down, the increased volume causes tsunamis and floods over the entire globe. The sticky white surface is coveved by dead marine life; schools of bloated tuna, giant squid, sharks, and whales.";
+  }
+});
+
+//cum envelops planet
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasExactly(container, "Planet", 1) &&
+     hasOnly(container, ["Planet"]) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your reach down and aim your " + macro.describeDick + " at a nearby planet. $VOLUMEs of semen are flung into space, where they contact and completly cover " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasExactly(container, "Planet", 1) &&
+     hasOnly(container, ["Planet"]) &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your reach down and aim your " + macro.describeDick + " at a nearby planet. $VOLUMEs of semen wash over " + container.describe(verbose) + ". The once green globe is now a sloshing white ocean of sticky cum.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasExactly(container, "Planet", 1) &&
+     hasOnly(container, ["Planet"]) &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your reach down and aim your " + macro.describeDick + " at a nearby planet. $VOLUMEs of semen wash over " + container.describe(verbose) + ". When your seed splashes over the surface, it instantly crushes and \
+      wipes away an entire civilization. The once green globe is now a sloshing white ocean of sticky cum.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasExactly(container, "Planet", 1) &&
+     hasOnly(container, ["Planet"]) &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your reach down and aim your " + macro.describeDick + " at a nearby planet. $VOLUMEs of semen wash over " + container.describe(verbose) + ". Your seed crashes into the center of the globe and creads outward, \
+      slowly enveloping the world. As it spreads through the oceans and continents in a " + length((Math.pow(spurtVolume, 1/3)*.5), unit, true) + " high wave, it instantly crushes and wipes away an entire civilization. The once green globe \
+      is now a sloshing white ocean of sticky cum.";
+  }
+});
+
+//cum larger than planet
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return (hasAtleast(container, "Star", 1) ||
+     hasAtleast(container, "Solar System", 1)) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " expells a $VOLUME cumshot into deep space. As it floats away, the gravity it generates pulls " + container.describe(verbose) + " inside of the sticky fluid.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return (hasAtleast(container, "Star", 1) ||
+     hasAtleast(container, "Solar System", 1)) &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " expells a $VOLUME cumshot into deep space. As it floats away, the gravity it generates traps " + container.describe(verbose) + " inside of the sticky fluid forever.";
+  }
+});
+
+
+//--------TODO LIST-----
 
 //precum
 
@@ -3390,8 +3678,6 @@ rules["male-orgasm"].push({
 //boobs 
 
 //waste
-
-//reduce military presence
 
 //more interactions for donning/doffing shoes
 
@@ -3407,4 +3693,8 @@ rules["male-orgasm"].push({
 
 //more objects on city/town continent scale(maybe countries)
 
+//clean up growth with make/break sphere, circle, rect, and cube
+
 //make unit prefrencerance a saved value
+
+//cum for skyscraper : cum for single macro
