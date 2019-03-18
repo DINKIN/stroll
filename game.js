@@ -2993,7 +2993,7 @@ function male_spurt(vol, active=true)
   let area = Math.pow(vol, 2/3);
 
   let prey = getPrey(biome, area);
-  let line = describe("male-spurt", prey, macro, verbose, flat).replace("$VOLUME",volume(vol,unit,false));
+  let line = describe("male-spurt", prey, macro, verbose, flat, vol).replace("$VOLUME",volume(vol,unit,true));
   let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());

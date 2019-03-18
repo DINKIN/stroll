@@ -539,11 +539,11 @@ function defaultBallSmother(container, macro, verbose, flat) {
 
 function defaultMaleSpurt(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your " + macro.describeDick + " spews $VOLUME of bitter precum.";
+    return "Your " + macro.describeDick + " spews $VOLUMEs of bitter precum.";
   else if (isFatal(macro))
-    return "Your " + macro.describeDick + " spurts out bitter precum, drowning " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
+    return "Your " + macro.describeDick + " spurts out bitter precum, drowning " + container.describe(verbose) + " in $VOLUMEs of slick musky fluid.";
   else
-    return "Your " + macro.describeDick + " spurts precum, splooging " + container.describe(verbose) + " in $VOLUME of slick musky fluid.";
+    return "Your " + macro.describeDick + " spurts precum, splooging " + container.describe(verbose) + " in $VOLUMEs of slick musky fluid.";
 }
 
 function defaultMaleOrgasm(container, macro, verbose, flat) {
@@ -3117,6 +3117,17 @@ rules["male-orgasm"].push({
   "test": function(container, macro, spurtVolume) {
      return hasOnly(container, ["Person"]) &&
      hasExactly(container, "Person", 1) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You're cumming! Your " + macro.describeDick + " erupts, hosing down " + container.describe(verbose) + " with $VOLUME of your seed.";
+  }
+});
+
+rules["male-orgasm"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
      isFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
@@ -3668,10 +3679,59 @@ rules["male-orgasm"].push({
   }
 });
 
+//precum-male
+//contians a person
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of precum sprays from your " + macro.describeDick + ". The musky stream covers " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of precum leaks from your " + macro.describeDick + ". The musky stream covers " + container.describe(verbose) + ", drowing them.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of precum leaks from your " + macro.describeDick + ". The musky stream falls over the shoulders of " + container.describe(verbose) + ", knocking them unconsious. They fall face down in the puddle and slowly drown in your pre.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return hasOnly(container, ["Person"]) &&
+     hasExactly(container, "Person", 1) &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "You grab " + container.describe(verbose) + " and hold their face against your " + length(macro.dickDiameter,unit, true) + " wide cockhead. $VOLUMEs of precum leaks from your " + macro.describeDick + " and down their streched throat. The musky \
+      discarge fills their lungs and stomach, until your precum runs out of room and begins to leak out of your victim's nose and eyeballs. You drop your toy, watching them fall to the ground and try to cough up the suffocating fluid. Pre pours from their \
+      mouth, while they slump over and die.";
+  }
+});
+
 
 //--------TODO LIST-----
 
-//precum
+//precum  "male-spurt"
 
 //musk 
 
@@ -3697,4 +3757,4 @@ rules["male-orgasm"].push({
 
 //make unit prefrencerance a saved value
 
-//cum for skyscraper : cum for single macro
+//cum text for skyscraper : cum text for single macro
