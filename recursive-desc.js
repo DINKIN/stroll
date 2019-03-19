@@ -3737,7 +3737,7 @@ rules["male-spurt"].push({
      isNonFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes over " + container.describe(verbose) + ".";
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes over " + container.describe(verbose) + ".";
   }
 });
 
@@ -3748,7 +3748,7 @@ rules["male-spurt"].push({
      isFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ".";
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ".";
   }
 });
 
@@ -3759,7 +3759,7 @@ rules["male-spurt"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes down the street and \
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes down the street and \
       pours into a nearby stromdrain.";
   }
 });
@@ -3771,8 +3771,8 @@ rules["male-spurt"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes broken glass and \
-      " + pickSting("intestines","gore","organs") + " down the street and into a nearby stromdrain.";
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes broken glass and \
+      " + pickSting("intestines","gore","organs") + " down the street and into a nearby stormdrain.";
   }
 });
 
@@ -3807,8 +3807,8 @@ rules["male-spurt"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "$VOLUMEs of precum flow out of your urethra, trapping " + container.describe(verbose) + " within a pond of your pre-ejaculate. Those unlucky enough to be in the way are crushed by the sudden sweLl of the fluid. Their floating \
-      corpses dyeing the fluid a dark red.";
+      return "$VOLUMEs of precum flow out of your urethra, trapping " + container.describe(verbose) + " within a pond of your pre-ejaculate. Those unlucky enough to be in the way are crushed by the sudden swell of the fluid. Their floating \
+      corpses dye the fluid a dark red.";
   }
 });
 
@@ -3819,7 +3819,7 @@ rules["male-spurt"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "$VOLUMEs of precum flow out of your urethra, trapping " + container.describe(verbose) + " within a pond of your pre-ejaculate. Those unlucky enough to be in the way are crushed by the sudden sweLl of the fluid. Their floating \
+      return "$VOLUMEs of precum flow out of your urethra, trapping " + container.describe(verbose) + " within a pond of your pre-ejaculate. Those unlucky enough to be in the way are crushed by the sudden swell of the fluid. Their floating \
       corpses slowly break apart; dyeing the fluid a dark red.";
   }
 });
