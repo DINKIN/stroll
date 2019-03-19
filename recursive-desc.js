@@ -1996,7 +1996,7 @@ rules["chew"].push({
      isGory(macro) &&
      macro.height < 5;
   }, "desc": function(container, macro, verbose, flat) {
-    return "You tackle a " + container.describe(verbose) + " and dig into your meal, powerful " + macro.jawDesc(true) + "  ripping them to shreds in seconds. You wolf down great mouthfuls \
+    return "You tackle " + container.describe(verbose) + " and dig into your meal, powerful " + macro.jawDesc(true) + "  ripping them to shreds in seconds. You wolf down great mouthfuls \
     of meat, consuming them in a terrifying frenzy that ends with naught but bones lying on the ground.";
   }
 });
@@ -2008,7 +2008,7 @@ rules["chew"].push({
      isGory(macro) &&
      macro.height >= 5;
   }, "desc": function(container, macro, verbose, flat) {
-    return "You snatch up a " + container.describe(verbose) + ", then stuff their lower body into the guillotine that is your ravenous maw - slicing off their legs with \
+    return "You snatch up " + container.describe(verbose) + ", then stuff their lower body into the guillotine that is your ravenous maw - slicing off their legs with \
     a single disgusting <i>crunch</i>, then finishing them off with another ravenous bite that obliterates their torso. Their bleeding head falls from your lips, only to be \
     caught between two fingers and popped back in to be crunched between molars and swallowed.";
   }
@@ -3725,6 +3725,54 @@ rules["male-spurt"].push({
       return "You grab " + container.describe(verbose) + " and hold their face against your " + length(macro.dickDiameter,unit, true) + " wide cockhead. $VOLUMEs of precum leaks from your " + macro.describeDick + " and down their streched throat. The musky \
       discarge fills their lungs and stomach, until your precum runs out of room and begins to leak out of your victim's nose and eyeballs. You drop your toy, watching them fall to the ground and try to cough up the suffocating fluid. Pre pours from their \
       mouth, while they slump over and die.";
+  }
+});
+
+//more than 5 and less than 50
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 50 &&
+     spurtVolume > 5 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.dickDiameter() + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes over " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 50 &&
+     spurtVolume > 5 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.dickDiameter() + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 50 &&
+     spurtVolume > 5 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.dickDiameter() + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes down the street and \
+      pours into an nearby stromdrain.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 50 &&
+     spurtVolume > 5 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.dickDiameter() + "wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes broken glass and \
+      " + pickSting("intestines","gore","organs") + " down the street and into an nearby stromdrain.";
   }
 });
 
