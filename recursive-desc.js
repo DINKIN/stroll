@@ -3837,6 +3837,39 @@ rules["male-spurt"].push({
   }
 });
 
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e4 &&
+     spurtVolume > 5e2 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.describeDick + " spews $VOLUMEs of precum, smothering " + container.describe(verbose) + " with your emmisions.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e4 &&
+     spurtVolume > 5e2 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.describeDick + " spews $VOLUMEs of precum, smothering " + container.describe(verbose) + " with your emmisions. The slick fluid doesn't instanstly kill your prey; they attmept to crawl out of it while gasping and choking.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e4 &&
+     spurtVolume > 5e2 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + macro.describeDick + " spews $VOLUMEs of precum, smothering " + container.describe(verbose) + " with your emmisions. The slick fluid ozzes over your prey, soaking and shoving them into the mud. \
+      You watch as they gasp and choke inside their liquid prison; unsucessefully attempting to crawl out.";
+  }
+});
 //less than 1e6
 
 rules["male-spurt"].push({
@@ -3847,6 +3880,53 @@ rules["male-spurt"].push({
 
   }, "desc": function(container, macro, spurtVolume) {
       return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e6 &&
+     spurtVolume > 1e4 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e6 &&
+     spurtVolume > 1e4 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      pre ensures that the area where it lands is obliterated.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e6 &&
+     spurtVolume > 1e4 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      pre ensures that the area where it lands is converted to a musky mudpit filled with rubble and corpses.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e6 &&
+     spurtVolume > 1e4 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      pre ensures that the area where it lands is converted to a musky mudpit filled with rubble and corpses. A mix of pre-ejaculate, blood, and nuggest of flesh flow away from the area; a grisly warning that shows what happens to those in your way.";
   }
 });
 
@@ -3879,3 +3959,7 @@ rules["male-spurt"].push({
 //make unit prefrencerance a saved value
 
 //cum text for skyscraper : cum text for single macro
+
+//powerplants factories
+
+//anal vore test "ring seals to the ground and pulls in" usde weight of rear to pull in mroe mass
