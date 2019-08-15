@@ -2588,7 +2588,7 @@ rules["cock-vore"].push({
 
   }, "desc": function(container, macro, verbose, flat) {
     return "You lay the " + length(macro.dickDiameter, unit, true) + " wide tip of your cock on the ground and thrust forward, filling your cock with " + container.describe(verbose) + ". The tip of your member bulges with its cargo. As you slowly clench to drag your prey into your bulging dick, the sensation of them rubbing against the inside of your cock causes you to release a glob of precum that lubricates your stretched passage. \
-    After several more powerful clenches, you feel the bulge pass the halfway mark of your " + macro.describeDick + ". The speed of the bulge picks up, as the entirery of your captive prey has been thoughly lubricated. You feel them slide through your utethra, and shudder with anticipation as they approach your \
+    After several more powerful clenches, you feel the bulge pass the halfway mark of your " + macro.describeDick + ". The speed of the bulge picks up, as the entirety of your captive prey has been thoughly lubricated. You feel them slide through your utethra, and shudder with anticipation as they approach your \
       " + pickString("throbbing","churning","eager","awaiting","heavy","mammoth") + " balls. Finally your meal reaches your body, and drops into your cum factories.";
   }
 });
@@ -2601,7 +2601,7 @@ rules["cock-vore"].push({
 
   }, "desc": function(container, macro, verbose, flat) {
     return "You lay the " + length(macro.dickDiameter, unit, true) + " wide tip of your cock on the ground and grind it along the earth, ripping up the terrain and giving all in your path nowhere to go; except into your " + macro.describeDick + ". The colossal tip of your member bulges with " + container.describe(verbose) + ". As you slowly clench your mighty rod, you feel your prey shift and slide along the inside of your cum channel. \
-    After a few more moments of pure pleasure, you feel the bulge pass the halfway mark of your tool. The speed of the bulge picks up, as the entirery of your captive prey has been compacted and lubricated by their journey. With every pull, a shudder of ecstasy goes up your spine, until those inside your cock finally reach their ultimate destination, \
+    After a few more moments of pure pleasure, you feel the bulge pass the halfway mark of your tool. The speed of the bulge picks up, as the entirety of your captive prey has been compacted and lubricated by their journey. With every pull, a shudder of ecstasy goes up your spine, until those inside your cock finally reach their ultimate destination, \
     your " + pickString("throbbing","churning","eager","awaiting","heavy", "mammoth") + " balls.";
   }
 });
@@ -3772,7 +3772,7 @@ rules["male-spurt"].push({
 
   }, "desc": function(container, macro, spurtVolume) {
       return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead throbs, releasing $VOLUMEs of pre. The pungent glob spashes onto the street; crushing " + container.describe(verbose) + ". The bloodstained pool of precum washes broken glass and \
-      " + pickSting("intestines","gore","organs") + " down the street and into a nearby stormdrain.";
+      " + pickString("intestines","gore","organs") + " down the street and into a nearby stormdrain.";
   }
 });
 
@@ -3870,6 +3870,7 @@ rules["male-spurt"].push({
       You watch as they gasp and choke inside their liquid prison; unsucessefully attempting to crawl out.";
   }
 });
+
 //less than 1e6
 
 rules["male-spurt"].push({
@@ -3879,18 +3880,7 @@ rules["male-spurt"].push({
      isNonFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ".";
-  }
-});
-
-rules["male-spurt"].push({
-  "test": function(container, macro, spurtVolume) {
-     return spurtVolume <= 1e6 &&
-     spurtVolume > 1e4 &&
-     isNonFatal(macro);
-
-  }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ".";
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe() + ".";
   }
 });
 
@@ -3901,7 +3891,7 @@ rules["male-spurt"].push({
      isFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe() + ". The speed and sheer mass of the falling \
       pre ensures that the area where it lands is obliterated.";
   }
 });
@@ -3913,7 +3903,7 @@ rules["male-spurt"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe() + ". The speed and sheer mass of the falling \
       pre ensures that the area where it lands is converted to a musky mudpit filled with rubble and corpses.";
   }
 });
@@ -3925,8 +3915,57 @@ rules["male-spurt"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe(verbose) + ". The speed and sheer mass of the falling \
+      return "Your " + length(macro.dickDiameter, unit, true) + " wide cockhead bulges as it pushes out $VOLUMEs of precum, tossing the clear fluid over " + container.describe() + ". The speed and sheer mass of the falling \
       pre ensures that the area where it lands is converted to a musky mudpit filled with rubble and corpses. A mix of pre-ejaculate, blood, and nuggest of flesh flow away from the area; a grisly warning that shows what happens to those in your way.";
+  }
+});
+
+//less than 1e9
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e9 &&
+     spurtVolume > 1e6 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, slicking your " + macro.describeDick + " and raining on " + container.describe() + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e9 &&
+     spurtVolume > 1e6 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, slicking your " + macro.describeDick + " and flooding out " + container.describe() + ". Each massive drop of your fluid creates a crater and resulting lake when they land,\
+      saturating the area with the proof of your passion.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e9 &&
+     spurtVolume > 1e6 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, slicking your " + macro.describeDick + " and flooding out " + container.describe() + ". Each massive drop of your fluid crushes buildings, creating a crater and resulting lake \
+      when they land, saturating the rubble with the signs of your passion.";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e9 &&
+     spurtVolume > 1e6 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, slicking your " + macro.describeDick + " and flooding out " + container.describe() + ". Each massive drop of your fluid crushes buildings and creats a crater when they land, \
+      saturating the rubble with a lake of your passion. Those that narrowly escaped the initial splash flail about helplessly in the slick mud until they eventually tire out and suffocate.";
   }
 });
 

@@ -400,3 +400,19 @@ function approxVolume(m3, singular=false) {
   return volume + (singular || volume == 1 ? " Sun" : " Suns");
   }
 }
+
+
+function makeSphere(input=0, diameter=false) {
+  if (diameter = true) {
+    input = input/2;
+  }
+  return (4/3)*Math.PI*(Math.pow(input, 3));
+}
+
+function breakSphere(input=0, diameter=false) {
+  let output = math.pow((3*input)/(4*Math.PI), 1/3)
+  if (diameter=true) {
+    output = output*2;
+  }
+  return output;
+}
