@@ -647,6 +647,35 @@ options = [
             "tooltip": "Actions earn you growth points, which are used to grow bigger.",
           }
         ]
+      },
+      {
+        "name": "Automatic Growth",
+        "id": "automaticGrowth",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+            "name": "Automatic growth",
+            "id": "automaticGrowthEnabled",
+            "type": "checkbox",
+            "default": false,
+            "warning": "Automatic Growth is enabled",
+            "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass.",
+          },
+          {
+            "name": "Prey growth factor",
+            "id": "basePreyGrowthFactor",
+            "type": "float",
+            "default": "0.8",
+            "tooltip": "How much of what you eat gets automatically added to your body. Setting this to [0] disables it. To add half of your prey mass to your own, set to [.5]."
+          },
+          {
+            "name": "Scale growth with size",
+            "id": "growthScaleWithSize",
+            "type": "checkbox",
+            "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
+          }
+        ]
       }
     ]
   },
@@ -768,6 +797,13 @@ options = [
         "id": "analDigestTime",
         "type": "float",
         "default": "15"
+      },
+      {
+        "name": "Anal autogrowth factor",
+        "id": "assGrowthFactor",
+        "type": "float",
+        "default": "0.01",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
       },
       {
         "name": "Manual digestion",
@@ -934,6 +970,13 @@ options = [
             "default": "3"
           },
           {
+            "name": "Tail autogrowth factor",
+            "id": "tailGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+          },
+          {
             "name": "Digestion time",
             "id": "tailDigestTime",
             "type": "float",
@@ -1032,6 +1075,20 @@ options = [
         "id": "cumStorageScale",
         "type": "float",
         "default": "1"
+      },
+      {
+        "name": "Cock autogrowth factor",
+        "id": "cockGrowthFactor",
+        "type": "float",
+        "default": "0.01",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+      },
+      {
+        "name": "Balls autogrowth factor",
+        "id": "ballGrowthFactor",
+        "type": "float",
+        "default": "0.01",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
       },
       {
         "name": "Cock Vore",
@@ -1194,6 +1251,20 @@ options = [
             "default": "1"
           },
           {
+            "name": "Vagina autogrowth factor",
+            "id": "vaginaGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+          },
+          {
+            "name": "Womb autogrowth factor",
+            "id": "wombGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+          },
+          {
             "name": "Digestion time",
             "id": "unbirthDigestTime",
             "type": "float",
@@ -1299,6 +1370,13 @@ options = [
             "id": "baseMilkDigestFactor",
             "type": "float",
             "default": "1"
+          },
+          {
+            "name": "Breast autogrowth factor",
+            "id": "breastGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
             "name": "Digestion time",
@@ -1417,6 +1495,13 @@ options = [
     "warning": "Soul vore enabled",
     "entries":
     [
+      {
+        "name": "Souls autogrowth factor",
+        "id": "soulGrowthFactor",
+        "type": "float",
+        "default": "0.25",
+        "tooltip": "How much you grow when absorbing souls. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
+      },
       {
         "name": "Digestion time",
         "id": "soulDigestTime",
@@ -1580,6 +1665,13 @@ options = [
         "entries":
         [
           {
+            "name": "Goo autogrowth factor",
+            "id": "gooGrowthFactor",
+            "type": "float",
+            "default": "0.8",
+            "tooltip": "How much you grow when absorbing people via goo. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
+          },
+          {
             "name": "Digestion time",
             "id": "gooDigestTime",
             "type": "float",
@@ -1601,6 +1693,13 @@ options = [
     "buttons": ["paw_vore"],
     "entries":
     [
+    {
+        "name": "Paw autogrowth factor",
+        "id": "pawGrowthFactor",
+        "type": "float",
+        "default": "0.01",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+      },
       {
         "name": "Digestion time",
         "id": "pawDigestTime",
@@ -1735,6 +1834,7 @@ options = [
     "id": "hasWings",
     "optional": true,
     "panels": ["misc"],
+    //"parts": ["wings"],
     "buttons": ["wings_flap"],
     "entries":
     [
@@ -1765,6 +1865,13 @@ options = [
         "buttons": ["wings_vore"],
         "entries":
         [
+          {
+            "name": "Wing autogrowth factor",
+            "id": "wingGrowthFactor",
+            "type": "float",
+            "default": "0.01",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+          },
           {
             "name": "Digestion time",
             "id": "wingDigestTime",

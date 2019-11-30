@@ -69,6 +69,9 @@ let macro =
   "dickDensity": 1000,
   "ballDensity": 1000,
   "breastDensity": 1000,
+  "assDensity": 1000,  //this is only used for automatic growth function 
+  "wombDensity":1000, //this is only used for automatic growth function 
+  "pawDensity":1000, //this is only used for automatic growth function 
 
   "breathStyle": "cone",
 
@@ -295,7 +298,28 @@ let macro =
     }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
   },
+    "teethDesc": function(plural=false,capital=false) {
+    let result = "";
 
+    switch(this.jawType) {
+      case "jaw":
+        result = plural ? "fangs" : "fang";
+        break;
+      case "beak":
+        result = "beak";
+        break;
+    }
+    return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
+  },
+
+  get preyGrowthFactor() {
+    if (macro.growthScaleWithSize) {
+        return this.basePreyGrowthFactor * Math.pow(this.scale, 1);
+      //this breaks once you get to the size of a planet
+  } else {
+      return this.basePreyGrowthFactor;
+    }
+  },
   get tailLength() {
     return this.scaling(this.baseTailLength * this.tailScale, this.scale, 1);
   },
@@ -326,26 +350,21 @@ let macro =
   get tailNoDesc() {
     return (this.tailCount > 1 ? "tails" : "tail");
   },
-
-  get dickLength() {
+  get arousalDickFactor() {
+      //this scales the size of the dick based on arousal, and is not directly related to arousalFactor(muiltiplier on arousal you gain from actions)
     let factor = 1;
     if (!this.arousalEnabled || this.arousal < 25) {
       factor = 0.5;
     } else if (this.arousal < 75) {
       factor = 0.5 + (this.arousal - 25) / 100;
     }
-
-    return this.scaling(this.baseDickLength * this.dickScale * factor, this.scale, 1);
+    return factor;
+  },
+  get dickLength() {
+    return this.scaling(this.baseDickLength * this.dickScale * this.arousalDickFactor, this.scale, 1);
   },
   get dickDiameter() {
-    let factor = 1;
-    if (!this.arousalEnabled || this.arousal < 25) {
-      factor = 0.5;
-    } else if (this.arousal < 75) {
-      factor = 0.5 + (this.arousal - 25) / 100;
-    }
-
-    return this.scaling(this.baseDickDiameter * this.dickScale * factor, this.scale, 1);
+    return this.scaling(this.baseDickDiameter * this.dickScale * this.arousalDickFactor, this.scale, 1);
   },
   get dickGirth() {
     return Math.pow((this.dickDiameter/ 2),2) * Math.PI;
@@ -354,7 +373,7 @@ let macro =
     return this.dickGirth * this.dickStretchiness * this.dickStretchiness;
   },
   get dickArea() {
-    return this.dickLength * this.dickDiameter* Math.PI / 2;
+    return this.dickLength * this.dickDiameter * Math.PI / 2;
   },
   get dickVolume() {
     return this.dickLength * Math.pow(this.dickDiameter/2,2) * Math.PI;
@@ -1631,7 +1650,11 @@ let macro =
       state = "erect, throbbing, pre-soaked";
       }
     }
-    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType + " cock";
+
+    let descDickArray = ["cock", "shaft", "rod"]; 
+    let randomDescDick = descDickArray[(Math.random() * descDickArray.length) | 0];
+
+    return length(this.dickLength, unit, true) + " long " + state + " " + this.dickType + " " + randomDescDick;
   },
 
   get describeVagina() {
@@ -1955,7 +1978,7 @@ function do_digestion(owner, organ, container, active=false) {
     update([line, summary, newline], active);
     return;
   }
-
+  grow_automatic(container.sum_property("mass"), organ.name);
   let digested = container.sum();
   for (let key in victims[organ.name]) {
     if (victims[organ.name].hasOwnProperty(key) && digested.hasOwnProperty(key) ) {
@@ -2492,6 +2515,10 @@ function cleavage_absorb()
   update([sound,line,linesummary,newline]);
 
   macro.arouse((preyMass > 0 ? 15 : 5));
+
+  if (preyMass > 0){
+    grow_automatic(preyMass, "breasts");
+  }
 }
 
 function breast_toy()
@@ -2711,6 +2738,10 @@ function sheath_absorb()
   add_victim_people("sheath-absorb",prey);
   update([sound,line,linesummary,newline]);
 
+  if (preyMass > 0){
+    grow_automatic(preyMass, "cock");
+  }
+
   macro.arouse(45);
 }
 
@@ -2801,6 +2832,10 @@ function foreskin_absorb()
   add_victim_people("foreskin-absorb",prey);
   update([sound,line,linesummary,newline]);
 
+  if (preyMass > 0){
+    grow_automatic(preyMass, "cock");
+  }
+     
   macro.arouse(45);
 }
 
@@ -3852,7 +3887,12 @@ function paw_vore()
   }
 
   if (lines.length == 0) {
-    update(["Nothing happens...",newline]);
+    if (macro.footSockWorn){
+      update(["Your " + macro.footOnlyDesc(true) + " have no prey to absorb in your socks.",newline]);
+  } else if (macro.footShoeWorn){
+      update(["Your " + macro.footOnlyDesc(true) + " have no prey to absorb in your " + macro.footDesc(true) + ".",newline]);
+    }
+    else {update(["Nothing happens...",newline]);}
     return;
   }
 
@@ -4128,7 +4168,62 @@ function pick_move()
 
   stomp();
 }
+//Growth
+  //Automatic Growth
 
+function grow_automatic(preyMass, part) {
+    if (macro.automaticGrowthEnabled == true){
+      let preyMassBody = (preyMass * macro.preyGrowthFactor);
+
+      if (part === "tail" && macro.tailGrowthFactor > 0) {
+        preyMassBody = ((1 - macro.tailGrowthFactor) * macro.preyGrowthFactor * preyMass); //if growth factor is greater than 1, this function will behave oddly
+        grow_tail((macro.tailGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "cock" && macro.cockGrowthFactor > 0) {
+        preyMassBody = ((1 - macro.cockGrowthFactor) * macro.preyGrowthFactor * preyMass); //if growth factor is greater than 1, this function will behave oddly
+        grow_dick((macro.cockGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "balls" && macro.ballGrowthFactor > 0) {
+        preyMassBody = (1 - macro.ballGrowthFactor) * macro.preyGrowthFactor * preyMass; //if growth factor is greater than 1, this function will behave oddly
+        grow_balls((macro.ballGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "bowels" && macro.assGrowthFactor > 0) { 
+        preyMassBody = (1 - macro.assGrowthFactor) * macro.preyGrowthFactor * preyMass; //if growth factor is greater than 1, this function will behave oddly
+        grow_ass((macro.assGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "breasts" && macro.breastGrowthFactor > 0) {
+        let preyMassBody = (1 - macro.breastGrowthFactor) * macro.preyGrowthFactor * preyMass; //if growth factor is greater than 1, this function will behave oddly
+        grow_breasts((macro.breastGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "womb") {
+        if (macro.wombGrowthFactor > 0){
+          preyMassBody = ((1 - macro.wombGrowthFactor) * macro.preyGrowthFactor * preyMass); //if growth factor is greater than 1, this function will behave oddly
+          grow_womb((macro.wombGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+      
+      } if (macro.vaginaGrowthFactor > 0){
+          preyMassBody = ((1 - macro.vaginaGrowthFactor) * macro.preyGrowthFactor * preyMassBody); //if growth factor is greater than 1, this function will behave oddly 
+          grow_vagina((macro.vaginaGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+          }
+    } else if (part === "paws" && macro.pawGrowthFactor > 0) {
+        preyMassBody = ((1 - macro.pawGrowthFactor) * macro.preyGrowthFactor * preyMassBody); // if growth factor is greater than 1, this function will behave oddly 
+        grow_paws((macro.pawGrowthFactor * macro.preyGrowthFactor * preyMass), false);
+
+    } else if (part === "souls" && macro.soulGrowthFactor > 0) {
+        preyMassBody = 0; //keeps body growth from running
+        grow((preyMass * macro.soulGrowthFactor), false);
+
+    } else if (part === "goo" && macro.gooGrowthFactor > 0) {
+        preyMassBody = 0; //keeps body growth from running
+        grow((preyMass * macro.gooGrowthFactor), false);
+
+    //Body, runs after organ specific growth so organ specific growth factor kicks in. Doesn't run after goo or soul related growth
+    } if (preyMassBody > 0){
+        grow(preyMassBody, false);
+    }
+  } 
+}
+
+  //Manual Growth
 function grow_part_pick(id) {
   document.querySelector(".growth-part-active").classList.remove("growth-part-active");
   document.querySelector("#" + id).classList.add("growth-part-active");
@@ -4157,130 +4252,199 @@ function grow_pick(times) {
       case "slit": grow_vagina(times); break;
       case "womb": grow_womb(times); break;
       case "breasts": grow_breasts(times); break;
+      case "wings": grow_wings(times); break;
     }
   }
 }
 
-function grow(factor=1)
-{
+function grow(factor=1, simpleCalc=true){
 
   let oldHeight = macro.height;
   let oldMass = macro.mass;
 
-  macro.scale *= factor;
+  if (simpleCalc == true){
+    macro.scale *= factor;
+} else {
+    macro.scale = Math.pow(((macro.mass + factor) / macro.baseMass), 1/3);
+    }
 
-  let newHeight = macro.height;
-  let newMass = macro.mass;
+  let heightDelta = macro.height - oldHeight;
+  let massDelta = macro.mass - oldMass;
 
-  let heightDelta = newHeight - oldHeight;
-  let massDelta = newMass - oldMass;
-
-  let heightStr = length(heightDelta, unit);
-  let massStr = mass(massDelta, unit);
-
-  update(["Power surges through you as you grow " + heightStr + " taller and gain " + massStr + " of mass",newline]);
+  update(["Power surges through you as you grow " + length(heightDelta, unit) + " taller and gain " + mass(massDelta, unit) + " of mass.",newline]);
 }
 
-function grow_paws(factor)
-{
+function grow_paws(factor, simpleCalc=true){
 
   let oldArea = macro.pawArea;
 
-  macro.pawScale *= factor;
+  if (simpleCalc == true){
+    macro.pawScale *= factor;
+} else {
+    let volumeChangerPart = (((Math.pow(macro.pawWidth, 2) * macro.pawLength * macro.pawDensity) + factor) / (3 *macro.pawDensity));
+    //mass = volume*density. Since we know what we want our mass to be, we can figure out how much volume the final paw should have
+    let scaleChangerPart = ((3 * volumeChangerPart)/(Math.pow(macro.basePawWidth, 2) * macro.basePawLength));
+    macro.pawScale = (Math.pow(scaleChangerPart, 1/3)/macro.scale);
+    // volume = 1/3 basewidth^2 * baselength *scale^3 *pawscale^3
+    }
 
   let areaDelta = macro.pawArea - oldArea;
 
-  let areaStr = area(areaDelta, unit, false);
-
-  update(["Power surges through you as your " + macro.footDesc(true) + " grow, gaining " + areaStr + " of area.",newline]);
+  update(["Power surges through you as your " + macro.footDesc(true) + " grow, gaining " + area(areaDelta, unit, false) + " of area.",newline]);
 }
 
-function grow_tail(factor)
-{
+function grow_tail(factor, simpleCalc=true) {
 
   let oldLength = macro.tailLength;
   let oldMass = macro.tailMass;
 
-  macro.tailScale *= factor;
+  if (simpleCalc == true){
+    macro.tailScale *= factor;
+} else {
+    let volumeChangerPart = (macro.tailMass + (factor/macro.tailCount)) / macro.tailDensity;
+    let scaleChangerPart = (volumeChangerPart/((Math.pow(macro.baseTailDiameter/2, 2)) * Math.PI * macro.baseTailLength * (Math.pow(macro.scale, 3))));
+    macro.tailScale = Math.pow(scaleChangerPart, 1/3);
+    // (tailVolume/((macro.baseTailDiameter/2)^2 * Math.PI * macro.baseTailLength * macro.scale^3)) = macro.tailScale^3
+    }
 
   let lengthDelta = macro.tailLength - oldLength;
   let massDelta = macro.tailMass - oldMass;
-  update(["Power surges through you as your " + macro.tailType + " tail grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass",newline]);
+
+  update(["Power surges through you as your " + macro.tailType + " tail grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
 }
 
-function grow_dick(factor)
-{
+function grow_dick(factor, simpleCalc=true) {
 
   let oldLength = macro.dickLength;
   let oldMass = macro.dickMass;
 
-  macro.dickScale *= factor;
+  if (simpleCalc == true){
+    macro.dickScale *= factor;
+} else {
+    let volumeChangerPart = ((macro.dickMass + factor) / macro.dickDensity);
+    let scaleChangerPart = (volumeChangerPart /( Math.pow(macro.baseDickDiameter/2, 2) *Math.PI * Math.pow(macro.scale, 3) * macro.baseDickLength * Math.pow(macro.arousalDickFactor, 3)));
+    macro.dickScale = Math.pow(scaleChangerPart, 1/3);
+    // dickScale^3 = volume/ pi * baseDickRadius^2 * macro.scale^3 * baseDickLength * arousalDickFactor^3
+    }
 
   let lengthDelta = macro.dickLength - oldLength;
   let massDelta = macro.dickMass - oldMass;
-  update(["Power surges through you as your " + macro.dickType + " cock grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass",newline]);
+
+  update(["Power surges through you as your " + macro.dickType + " cock grows " + length(lengthDelta, unit, false) + " longer and gains " + mass(massDelta, unit, false) + " of mass.",newline]);
 }
 
-function grow_balls(factor)
-{
+function grow_balls(factor, simpleCalc=true) {
 
   let oldDiameter = macro.ballDiameter;
   let oldMass = macro.ballMass;
 
-  macro.ballScale *= factor;
+  if (simpleCalc == true){
+    macro.ballScale *= factor;
+} else {
+    let volumeChangerPart = (macro.ballMass + factor) / macro.ballDensity;
+    let scaleChangerPart = Math.pow((6 * volumeChangerPart/ Math.PI), 1/3)
+    macro.ballScale = scaleChangerPart/(macro.baseBallDiameter * macro.scale);
+    // (6 * volume / pi)^1/3 = base ball diam * scale *ballScale
+    }
 
   let diameterDelta = macro.ballDiameter - oldDiameter;
   let massDelta = macro.ballMass - oldMass;
-  update(["Power surges through you as your balls swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece",newline]);
+
+  update(["Power surges through you as your balls swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
 }
 
-function grow_breasts(factor)
-{
+function grow_breasts(factor, simpleCalc=true) {
 
   let oldDiameter = macro.breastDiameter;
   let oldMass = macro.breastMass;
 
-  macro.breastScale *= factor;
+  if (simpleCalc == true){
+    macro.breastScale *= factor;
+} else {
+    let volumeChangerPart = (factor + macro.breastMass) / macro.breastDensity;
+    let scaleChangerPart = Math.pow((6 * volumeChangerPart/ Math.PI), 1/3)
+    macro.breastScale = scaleChangerPart/(macro.baseBreastDiameter * macro.scale);
+    // (6 * volume / pi)^1/3 = base ball diam * scale * ballScale
+    }
 
   let diameterDelta = macro.breastDiameter - oldDiameter;
   let massDelta = macro.breastMass - oldMass;
-  update(["Power surges through you as your breasts swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece",newline]);
+
+  update(["Power surges through you as your breasts swell by " + length(diameterDelta, unit, false) + ", gaining " + mass(massDelta, unit, false) + " of mass apiece.",newline]);
 }
 
-function grow_vagina(factor)
-{
+function grow_vagina(factor, simpleCalc=true) {
 
   let oldLength = macro.vaginaLength;
 
-  macro.vaginaScale *= factor;
+  if (simpleCalc == true){
+    macro.vaginaScale *= factor;
+} else {
+    let volumeChangerPart = ((macro.vaginaVolume * macro.wombDensity) + factor) / macro.wombDensity;
+    let scaleChangerPart = (volumeChangerPart/(Math.pow(macro.baseVaginaWidth, 2) * macro.baseVaginaLength));
+    macro.vaginaScale = (Math.pow(scaleChangerPart, 1/3)/macro.scale);
+    //vaginaVolume = baseVaginaWidth^2 * baseVaginaLength * (vaginaScale * macro.scale)^3
+    }
 
   let lengthDelta = macro.vaginaLength - oldLength;
 
-  update(["Power surges through you as your moist slit expands by by " + length(lengthDelta, unit, false),newline]);
+  update(["Power surges through you as your moist slit expands by by " + length(lengthDelta, unit, false) + ".",newline]);
 }
 
-function grow_womb(factor)
-{
+function grow_womb(factor, simpleCalc=true) {
 
   let oldVolume = macro.wombVolume;
 
-  macro.wombScale *= factor;
+  if (simpleCalc == true){
+    macro.wombScale *= factor;
+} else {
+    let volumeChangerPart = ((macro.wombVolume * macro.wombDensity) + factor) / macro.wombDensity;
+    let scaleChangerPart = (volumeChangerPart/macro.baseWombVolume);
+    macro.wombScale = (Math.pow(scaleChangerPart, 1/3)/macro.scale);
+    //wombVolume = baseWombVolume * (wombScale * macro.scale)^3
+    }
 
   let volumeDelta = macro.wombVolume - oldVolume;
 
-  update(["Power surges through you as your womb grows larger, gaining " + volume(volumeDelta, unit, false) + " of capacity",newline]);
+  update(["Power surges through you as your womb grows larger, gaining " + volume(volumeDelta, unit, false) + " of capacity.",newline]);
 }
 
-
-function grow_ass(factor)
-{
+function grow_ass(factor, simpleCalc=true) {
 
   let oldDiameter = Math.pow(macro.assArea,1/2);
 
-  macro.assScale *= factor;
+  if (simpleCalc == true){
+    macro.assScale *= factor;
+} else {
+    macro.assScale = (macro.assScale + (factor/macro.mass)); //this is a hack, but the commented out block below doesn't work
+
+    //This Code is broken and I dont know why:
+      //let radiusPart = Math.pow((macro.assArea/(4 * Math.PI)), 1/2);
+      //let volumeChangerPart = (preyMassPart + (((4 * Math.PI)/3) * Math.pow(radiusPart, 3) * macro.assDensity) / macro.assDensity);
+    //volume=(mass1+mass2)/density. Mass2 is calcualted from volume*density   this is modeling the ass as a sphere(2 hemispheres)
+      //let scaleChangerPart = ((Math.pow(((3/(4 * Math.PI)) * volumeChangerPart), 2/3) * 4 * Math.PI) / (macro.baseAssArea * Math.pow(macro.scale, 2)));
+      //macro.assScale = scaleChangerPart;
+    //V=4/3((baseassArea*scale^2*AssScale)/4pi)^3/2
+    }
 
   let diameterDelta = Math.pow(macro.assArea,1/2) - oldDiameter;
-  update(["Power surges through you as your ass swells by " + length(diameterDelta, unit, false),newline]);
+
+  update(["Power surges through you as your ass swells by " + length(diameterDelta, unit, false) + ".",newline]);
+}
+
+function grow_wings(factor, simpleCalc=true){
+
+  let oldLength = macro.wingLength;
+
+  if (simpleCalc == true){
+    macro.pawScale *= factor;
+} else {
+    macro.wingScale = (macro.wingScale + (factor/macro.mass))
+    }
+
+  let lengthDelta = macro.wingLength - oldLength;
+
+  update(["Power surges through you as your " + macro.wingDesc(true) + " grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
 }
 
 function resetSettings() {
