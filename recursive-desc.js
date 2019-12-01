@@ -3680,7 +3680,7 @@ rules["male-orgasm"].push({
 });
 
 //precum-male
-//contians a person
+//contains a person
 
 rules["male-spurt"].push({
   "test": function(container, macro, spurtVolume) {
@@ -3920,7 +3920,9 @@ rules["male-spurt"].push({
   }
 });
 
-//less than 1e9
+
+
+//less than 1e12
 
 rules["male-spurt"].push({
   "test": function(container, macro, spurtVolume) {
@@ -3929,7 +3931,7 @@ rules["male-spurt"].push({
      isNonFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "$VOLUMEs of pre sloshes out of your gaping cockslit, slicking your " + macro.describeDick + " and raining on " + container.describe() + ".";
+      return "$VOLUMEs of pre rages out of your cavernous urethra, slicking your " + macro.describeDick + " and raining on " + container.describe() + ".";
   }
 });
 
@@ -3969,6 +3971,55 @@ rules["male-spurt"].push({
   }
 });
 
+//less than 1e12
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isNonFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, lubricating your " + macro.describeDick + " and splashing over " + container.describe() + ".";
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isFatal(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, lubricating your " + macro.describeDick + " and engulfing " 
+      + container.describe() + ". Waves of your pre carve out new canyons and " + pickString("overwhelm a dam in the distance.","swell the rivers into a frothy tide.","form a lake of lust");
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isGory(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, lubricating your " + macro.describeDick + " and engulfing " 
+      + container.describe() + ". Waves of your pre carve out new canyons and " + pickString("overwhelm a dam, flooding a town with a soup of mud, pre, bodies, and rubble.","swell the rivers into a frothy tide that smashes boats and buildings apart.","turn a farming valley into a lake of of gore and lust");
+  }
+});
+
+rules["male-spurt"].push({
+  "test": function(container, macro, spurtVolume) {
+     return spurtVolume <= 1e12 &&
+     spurtVolume > 1e9 &&
+     isSadistic(macro);
+
+  }, "desc": function(container, macro, spurtVolume) {
+      return "$VOLUMEs of pre sloshes out of your gaping cockslit, lubricating your " + macro.describeDick + " and engulfing " 
+      + container.describe() + ". As your fluid flows across the land, small splashes of red along its edge mark bodies being pulverized.";
+  }
+});
+
 //--------TODO LIST-----
 
 //precum  "male-spurt"
@@ -4001,4 +4052,4 @@ rules["male-spurt"].push({
 
 //powerplants factories
 
-//anal vore test "ring seals to the ground and pulls in" usde weight of rear to pull in mroe mass
+//anal vore test "ring seals to the ground and pulls in" usde weight of rear to pull in more mass
