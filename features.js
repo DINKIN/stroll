@@ -626,14 +626,15 @@ options = [
     ]
   },
   {
-    "name": "Difficulty",
+    "name": "Gameplay",
     "optional": false,
     "entries":
     [
-      {
+      { 
         "type": "radio",
         "id": "difficulty",
         "default": "0",
+        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
@@ -676,7 +677,13 @@ options = [
             "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
           }
         ]
-      }
+      },
+      {
+        "name": "Walk to other locations",
+        "id": "changingBiomes",
+        "type": "checkbox",
+        "tooltip": "When checked, walking will sometimes change your location."
+      },
     ]
   },
   {

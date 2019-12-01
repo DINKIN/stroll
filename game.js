@@ -34,6 +34,10 @@ let autoVerbose = true;
 
 let biome = "city";
 
+let biomeSize = 3000;
+
+let position = 0;
+
 let newline = "&nbsp;";
 
 let victims = {};
@@ -431,7 +435,7 @@ let macro =
     return (this.tailCount > 1 ? "tails" : "tail");
   },
   get arousalDickFactor() {
-      //this scales the size of the dick based on arousal, and is not directly related to arousalFactor(muiltiplier on arousal you gain from actions)
+      //this scales the size of the dick based on arousal, and is not directly related to arousalFactor(multiplier on arousal you gain from actions)
     let factor = 1;
     if (!this.arousalEnabled || this.arousal < 25) {
       factor = 0.5;
@@ -1758,10 +1762,31 @@ let macro =
   },
 };
 
-function look()
-{
-  let desc = macro.description;
+function updateBiome()
+{  
+   if(macro.height > 1e12){ //stops function from running once it stops being relevant
+   return
+   }
+   let strideSize = macro.height*.4;
+   position += strideSize;
 
+   if (position > biomeSize){
+     position=0;
+     biomeSize = ((Math.random()*4000)+1000);
+     let oldBiome = biome;
+     biome = pickString("rural","suburb","city","downtown");
+     if (oldBiome == biome){}
+     else {
+       look(true);
+     }  
+   } 
+   //update(["Your position is " + position + ".",newline]);
+}
+
+function look(onlyBiome=false)
+{
+
+  let desc = macro.description;
   let line2 = "";
 
   if (macro.height > 1e12)
@@ -1774,7 +1799,7 @@ function look()
       case "suburb": line2 = "You're " + (strolling ? "striding" : "standing") + " through the winding roads of a suburb."; break;
       case "city":
         if (macro.height < 6) {
-            line2 = "You are " + (strolling ? "Strolling" : "Standing") + " in the street of a city. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
+            line2 = "You are " + (strolling ? "strolling" : "standing") + " in the street of a city. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
         } else if (macro.height < 24) {
           line2 = "Your broad frame fills the street of the city you are terrorizing. Your presence has caused a pileup of vehicles trying to escape."; break; 
         } else if (macro.height < 100){
@@ -1782,15 +1807,20 @@ function look()
         } else if (macro.height < 500){
           line2 = "You are " + (strolling ? "strolling through" : "looming over") + " a bustling city. Your mammoth frame is on par with the few nearby skyscrapers, You forge your own path, leaving a swath of demolished buildings. Panic has fully gripped the city; the streets are filled with vehicles, all immobile."; break;
         } else if (macro.height < 2500){
-          line2 = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the couple of remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc + ". Traffic is gridlocked as far as you can see, and farther." ; break;
+          line2 = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the couple of remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc(true) + ". Traffic is gridlocked as far as you can see, and farther." ; break;
         } else {
           line2 = "You're terrorizing the streets of a city. Heavy traffic, worsened by your rampage, is everywhere."; break;
         }
       case "downtown": line2 = "You're lurking amongst the skyscrapers of downtown. The streets are packed, and the buildings are practically begging you to knock them over."; break;
     }
 
-  desc = desc.concat([newline,line2,newline]);
-  update(desc);
+
+   if (onlyBiome == true){   
+     update([line2]);
+ } else {
+     desc = desc.concat([newline,line2,newline]);
+     update(desc);
+  }
 }
 
 function toggle_auto(e)
@@ -2098,6 +2128,7 @@ function do_digestion(owner, organ, container, active=false) {
   }
 }
 
+
 function digest_stomach() {
   digest_all(macro.stomach, true);
 }
@@ -2253,6 +2284,8 @@ function stomp()
   add_victim_people("stomped",prey);
 
   update([sound,line,linesummary,newline]);
+
+  updateBiome(false);
 
   macro.arouse(5);
 
@@ -5325,6 +5358,7 @@ function render_int_option(li, option) {
   render_number_option(li, option, "int");
 }
 
+//sets up style for "radio" in features.js
 function render_radio_option(options_div, option) {
   option.choices.forEach(function(choice) {
     let li = document.createElement("li");
@@ -5353,6 +5387,7 @@ function render_radio_option(options_div, option) {
   });
 }
 
+//sets up style for "checkbox" in features.js
 function render_checkbox_option(li, option) {
 
   let input = document.createElement("input");
