@@ -19,7 +19,13 @@ window.onerror = function(msg, source, lineno, colno, error) {
 
 let started = false;
 
-let strolling = false;
+const strollingEnum = {
+    Standing: 0,
+    Strolling: 1,
+    Jogging: 2,
+    Running: 4};
+
+let strolling = strollingEnum.Standing;
 
 let unit = "metric";
 
@@ -47,6 +53,7 @@ let macro =
   "shrunkPrey": null,
   "fastDigestFactor": 1,
   "fastDigestTimer": null,
+  "walkSpeed": 1,
 
   "growthPoints": 0,
 
@@ -1825,12 +1832,35 @@ function look(onlyBiome=false)
 
 function toggle_auto(e)
 {
-  strolling = !strolling;
-  e.target.innerText = "Status: " + (strolling ? "Strolling" : "Standing");
-  if (strolling)
-    update(["You start walking.",newline]);
-  else
-    update(["You stop walking.",newline]);
+  switch(strolling) { //Changes how fast player is moving, if player is running, sets player back to standing
+    case strollingEnum.Standing:
+        strolling = strollingEnum.Strolling;
+        e.target.innerText = "Status: Strolling";
+        update(["You start walking.",newline]);
+        break;
+    case strollingEnum.Strolling:
+        strolling = strollingEnum.Jogging;
+        e.target.innerText = "Status: Jogging";
+        update(["You start jogging.",newline]);
+        break;
+    case strollingEnum.Jogging:
+        strolling = strollingEnum.Running;
+        e.target.innerText = "Status: Running";
+        update(["You start running.",newline]);
+        break;
+    case strollingEnum.Running:
+        strolling = strollingEnum.Standing;
+        e.target.innerText = "Status: Standing";
+        update(["You stop running..",newline]);
+        break;
+    }
+  //  strolling = !strolling;
+  //  e.target.innerText = "Status: " + (strolling ? "Strolling" : "Standing");
+  //if (strolling)
+  //  update(["You start walking.",newline]);
+  //else
+  //  update(["You stop walking.",newline]);
+  //this is the old code where strolling is defined as true and false(strolling is now referencing an Enum) should probably be ripped out if this ever makes it onto the main Repo
 }
 
 function toggle_units(e)
@@ -4284,8 +4314,28 @@ function stylePercentage(name, storage) {
 
 function pick_move()
 {
-  setTimeout(pick_move, 1500 * (1 + Math.log10(macro.scale)));
-  if (!strolling) {
+    let moving = false;
+    let walkSpeed = macro.walkSpeed;
+    let stepTime = 0;
+    switch(strolling){
+    case strollingEnum.Standing:
+        moving = false;
+        break;
+    case strollingEnum.Strolling:
+        stepTime = (1* (1/walkSpeed) * 2000 * (1 + Math.log10(macro.scale)))
+        moving = true;
+        break;
+    case strollingEnum.Jogging:
+        stepTime = (1/2* (1/walkSpeed) * 2000 * (1 + Math.log10(macro.scale)))
+        moving = true;
+        break;
+    case strollingEnum.Running:
+        stepTime = (1/3* (1/walkSpeed) * 2000 * (1 + Math.log10(macro.scale)))
+        moving = true;
+        break;
+    };
+  setTimeout(pick_move, stepTime);
+  if (!moving) {
     return;
   }
 
