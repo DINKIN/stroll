@@ -515,6 +515,13 @@ options = [
         "tooltip": "You start out this many times larger than normal. A good way to build a macro character is to design them at normal size, then adjust the scale to get them to the right height."
       },
       {
+        "name": "Walk Speed",
+        "id": "walkSpeed",
+        "type": "float",
+        "default": "1",
+        "tooltip": "How quickly you move while walking, jogging, or running."
+      },
+      {
         "name": "Height",
         "id": "baseHeight",
         "type": "float",
@@ -626,14 +633,15 @@ options = [
     ]
   },
   {
-    "name": "Difficulty",
+    "name": "Gameplay",
     "optional": false,
     "entries":
     [
-      {
+      { 
         "type": "radio",
         "id": "difficulty",
         "default": "0",
+        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
@@ -676,7 +684,13 @@ options = [
             "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
           }
         ]
-      }
+      },
+      {
+        "name": "Walk to other locations",
+        "id": "changingBiomes",
+        "type": "checkbox",
+        "tooltip": "When checked, walking will sometimes change your location."
+      },
     ]
   },
   {
