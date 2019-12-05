@@ -1823,7 +1823,7 @@ function look(onlyBiome=false)
 
 
    if (onlyBiome == true){   
-     update([line2]);
+     update([line2,newline]);
  } else {
      desc = desc.concat([newline,line2,newline]);
      update(desc);
