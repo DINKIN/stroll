@@ -5286,7 +5286,17 @@ window.addEventListener('load', function(event) {
 
   document.querySelector("#scale").addEventListener("input", updateAllPreviews);
 
-  presets.sort(function(x,y) {return x.name.localeCompare(y.name); } );
+  presets.sort(function(x,y) {
+    let xp = x.priority === undefined ? 0 : x.priority;
+    let yp = y.priority === undefined ? 0 : y.priority;
+    
+    if (xp != yp) {
+      return yp - xp;
+    } else {
+      return x.name.localeCompare(y.name);
+    }
+    
+  } );
 
   let list = document.getElementById("character-presets");
 
