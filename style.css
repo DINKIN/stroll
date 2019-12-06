@@ -56,23 +56,59 @@ body.dark div {
   margin: auto;
 }
 
-@media (max-aspect-ratio: 16/9){
+@media (max-aspect-ratio: 1/1){
   .game-area {
     width: 100%
     height: 60%;
   }
+  #stat-container {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    max-width: 50%;
+    max-height: 50%;
+  }
+  #action-panel {
+    position: fixed;
+    right: 0%;
+    top: 0%;
+    max-width: 33%;
+    max-height: 50%;
+  }
   #log {
-    height: 80vh;
-    max-height: 50vh;
+    position: fixed;
+    left: 0%;
+    bottom: 0%;
+    width: 50%;
+    height: 50%;
+    max-height: 50%;
     margin: 0 0 1vh 0;
   }
   #react-log {
+    position: fixed;
+    right: 0%;
+    bottom: 0%;
+    width: 50%;
+    height: 50%;
+    max-height: 50%;
     margin: 1vh 0 0 0;
     height: 40vh;
   }
+  .growth-part {
+    width: 100px !important;
+  }
+  .growth-amount {
+    width: 100px !important;
+  }
+  .action-part-button {
+    width: 100px !important;
+  }
+  .action-button {
+    width: 100px !important;
+  }
 }
 
-@media (min-aspect-ratio: 16/10){
+@media (min-aspect-ratio: 1/1){
   .game-area {
     width: 90%
   }
