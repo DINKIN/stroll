@@ -527,10 +527,12 @@ let macro = //macro controls every customizable part of the players body
     return this.scaling(this.droolBaseVolume / 1000 , this.scale, 3);
   },
 
-  "digest": function(owner, organ, time=15) {
+  "digest": function(owner, organ, time=15, auto=true) {
 
-    // ignore if using manual digestion
-    if (time != 0) {
+    // we now have an explicit no-auto-digest flag, but
+    // some saves will wind up a time of 0 anyway, so I'll
+    // just leave this here to keep that from breaking things
+    if (auto && time != 0) {
       setTimeout(function() { owner.digest(owner, organ, time); }, time * 1000 / organ.stages / macro.fastDigestFactor);
     }
 
@@ -560,7 +562,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.oralDigestTime);
+      owner.digest(owner, this, owner.oralDigestTime, owner.oralDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -609,7 +611,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.tailDigestTime);
+      owner.digest(owner, this, owner.tailDigestTime, owner.tailDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -664,7 +666,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.analDigestTime);
+      owner.digest(owner, this, owner.analDigestTime, owner.analDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -724,7 +726,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.unbirthDigestTime);
+      owner.digest(owner, this, owner.unbirthDigestTime, owner.unbirthDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -778,7 +780,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.cockDigestTime);
+      owner.digest(owner, this, owner.cockDigestTime, owner.cockDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -832,7 +834,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.breastDigestTime);
+      owner.digest(owner, this, owner.breastDigestTime, owner.breastDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -887,7 +889,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.bladderDigestTime);
+      owner.digest(owner, this, owner.bladderDigestTime, owner.bladderDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -933,7 +935,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.soulDigestTime);
+      owner.digest(owner, this, owner.soulDigestTime, owner.soulDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -979,7 +981,7 @@ let macro = //macro controls every customizable part of the players body
         this.contents.push(new Container());
 
       if (owner.gooDigestion) {
-        owner.digest(owner, this, owner.gooDigestTime);
+        owner.digest(owner, this, owner.gooDigestTime, owner.gooDigestAuto);
       }
 
     },
@@ -1028,7 +1030,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.pawDigestTime);
+      owner.digest(owner, this, owner.pawDigestTime, owner.pawDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -1068,7 +1070,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.cropTransferTime);
+      owner.digest(owner, this, owner.cropTransferTime, owner.cropTransferAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);
@@ -1111,7 +1113,7 @@ let macro = //macro controls every customizable part of the players body
       this.owner = owner;
       for (let i = 0; i < this.stages; i++)
         this.contents.push(new Container());
-      owner.digest(owner, this, owner.wingDigestTime);
+      owner.digest(owner, this, owner.wingDigestTime, owner.wingDigestAuto);
     },
     "feed": function(prey) {
       this.feedFunc(prey,this,this.owner);

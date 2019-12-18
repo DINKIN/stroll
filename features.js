@@ -843,11 +843,20 @@ options = [
     "entries":
     [
       {
-        "name": "Digestion time",
-        "id": "oralDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic digestion",
+        "id": "oralDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "oralDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },      
       {
         "name": "Manual digestion",
         "id": "oralDigestManual",
@@ -884,11 +893,20 @@ options = [
         "unit": "length"
       },
       {
-        "name": "Digestion time",
-        "id": "analDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic digestion",
+        "id": "analDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "analDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Anal autogrowth factor",
         "id": "assGrowthFactor",
@@ -1068,11 +1086,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "tailDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "tailDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "tailDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "tailDigestManual",
@@ -1201,11 +1228,20 @@ options = [
             "default": "1"
           },
           {
-            "name": "Digestion time",
-            "id": "cockDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "cockDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "cockDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "cockDigestManual",
@@ -1356,11 +1392,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "unbirthDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "unbirthDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "unbirthDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "unbirthDigestManual",
@@ -1470,11 +1515,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "breastDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "breastDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "breastDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "breastDigestManual",
@@ -1594,11 +1648,20 @@ options = [
         "tooltip": "How much you grow when absorbing souls. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
       },
       {
-        "name": "Digestion time",
-        "id": "soulDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic digestion",
+        "id": "soulDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "soulDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Manual digestion",
         "id": "soulDigestManual",
@@ -1677,11 +1740,20 @@ options = [
             "default": "1"
           },
           {
-            "name": "Digestion time",
-            "id": "bladderDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "bladderDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "bladderDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "bladderDigestManual",
@@ -1763,11 +1835,20 @@ options = [
             "tooltip": "How much you grow when absorbing people via goo. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
           },
           {
-            "name": "Digestion time",
-            "id": "gooDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "gooDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "gooDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "gooDigestManual",
@@ -1792,11 +1873,20 @@ options = [
         "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
       },
       {
-        "name": "Digestion time",
-        "id": "pawDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic digestion",
+        "id": "pawDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "pawDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Manual digestion",
         "id": "pawDigestManual",
@@ -1819,11 +1909,20 @@ options = [
     "entries":
     [
       {
-        "name": "Transfer time",
-        "id": "cropTransferTime",
-        "type": "float",
-        "default": "10"
-      }
+        "name": "Automatic transfer",
+        "id": "cropTransferAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "cropTransferTime",
+            "type": "float",
+            "default": "10"
+          }
+        ]
+      },  
     ]
   },
   {
@@ -1964,11 +2063,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "wingDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic digestion",
+            "id": "wingDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "wingDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "wingDigestManual",
