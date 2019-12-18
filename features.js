@@ -1187,6 +1187,7 @@ options = [
         "type": "float",
         "default": "0.01",
         "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Cum storage factor",
@@ -1350,7 +1351,8 @@ options = [
         "id": "baseFemcumProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Femcum storage factor",
@@ -1478,7 +1480,8 @@ options = [
             "id": "baseLactationProduction",
             "type": "float",
             "default": "0.001",
-            "unit": "volume"
+            "unit": "volume",
+            "tooltip": "The fraction of your maximum capacity produced every second"
           },
           {
             "name": "Milk storage scale",
@@ -1609,7 +1612,8 @@ options = [
         "id": "baseGasProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Gas storage scale",
@@ -1705,7 +1709,8 @@ options = [
         "id": "basePissProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Piss storage scale",
@@ -1797,7 +1802,8 @@ options = [
         "id": "baseScatProduction",
         "type": "float",
         "default": "0.001",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Scat storage scale",
