@@ -7,7 +7,7 @@ let version = "v1.0.1";
 
 let errored = false;
 
-window.onerror = function(msg, source, lineno, colno, error) {
+window.onerror = function(msg, source, lineno, colno, error) { //opens a popup if the game encounters an error
   if (!errored) {
     errored = true;
 
@@ -16,14 +16,14 @@ window.onerror = function(msg, source, lineno, colno, error) {
     console.log(navigator.userAgent);
   }
 };
-
+//generates initial conditions and sets up variables
 let started = false;
 
 const strollingEnum = {
     Standing: 0,
     Strolling: 1,
     Jogging: 2,
-    Running: 4};
+    Running: 3};
 
 let strolling = strollingEnum.Standing;
 
@@ -38,17 +38,13 @@ let text_verbosity = "verbose";
 
 let autoVerbose = true;
 
-let biome = "city";
 
-let biomeSize = 3000;
-
-let position = 0;
 
 let newline = "&nbsp;";
 
 let victims = {};
 
-let macro =
+let macro = //macro controls every customizable part of the players body
 {
   "shrunkPrey": null,
   "fastDigestFactor": 1,
@@ -1769,63 +1765,144 @@ let macro =
   },
 };
 
-function updateBiome()
+//
+//------END OF MACRO FUCTION-----------------------------------------------------------------------------------------------
+//
+
+const biomeEnum = {
+    City: {
+        enabled: "cityEnabled",
+        biomeSize: [1000,5000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
+        biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
+           "House": 0.1,
+           "Car": 0.07,
+           "Bus": 0.02,
+           "Business": 0.075,
+           "Parking Garage": 0.003,
+           "Small Skyscraper": 0.05,
+           "City": 0.00005
+        }},
+    Downtown: { 
+        enabled: "downtownEnabled",
+        biomeSize: [1000,5000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
+        biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
+           "Car": 0.1,
+           "Bus": 0.05,
+           "Business": 0.075,
+           "Parking Garage": 0.003,
+           "Small Skyscraper": 0.06,
+           "City": 0.00005
+        }},
+    Rural: {
+        enabled: "ruralEnabled",
+        biomeSize: [4000,8000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
+        biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
+           "Cow": 0,
+           "House": 0.1,
+           "Barn": 0.08,
+           "Car": 0.1,
+           "Business": 0.075,
+           "Town": 0.00001
+        }},
+    Suburb: {
+        enabled: "suburbEnabled",
+        biomeSize: [2000,7000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
+        biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
+           "House": 0.1,
+           "Car": 0.07,
+           "Bus": 0.01,
+           "Town": 0.00001
+        }}};
+
+let biome = biomeEnum.City; //starting biome(this will be overwritten by player selection as soon as game starts)
+let biomeSize = 3000; // size of starting biome(this will be overwritten by player selection as soon as game starts)
+let position = 0; //declares variable and starts player at 0 as they have not taken a step yet
+
+
+function updateBiome(forceNew=false, specifyBiome)//handles stepping between biomes
 {  
-   if(macro.height > 1e12){ //stops function from running once it stops being relevant
+   if(macro.height > 1e12 || macro.changingBiomes==false){ //stops function from running once it stops being relevant
    return
    }
-   let strideSize = macro.height*.4;
-   position += strideSize;
+   let strideSize = macro.height*.4; //adjust step size based on height
+   position += strideSize; //adds distance from step into total disance traveled through biome
 
-   if (position > biomeSize){
+   if (position > biomeSize || forceNew==true){ //if player steps out of biome, generates a new one
      position=0;
-     biomeSize = ((Math.random()*4000)+1000);
      let oldBiome = biome;
-     biome = pickString("rural","suburb","city","downtown");
-     if (oldBiome == biome){}
-     else {
-       look(true);
+     let biomeTemp = biome; //defines biomeTemp for latrer use, what it is set to does not matter
+     if (specifyBiome == undefined){
+        biomeTemp = pickString(biomeEnum.City,biomeEnum.Suburb,biomeEnum.Rural,biomeEnum.Downtown); //if a biome is not force into this function, it picks a random biome
+    }else{ //otherwise it sets the new biome to the selected one
+        biomeTemp = specifyBiome;}
+     if (macro[(biomeTemp.enabled)] == false){ //checks that the biome selected is actually enabled and if it is not, reruns the function
+        updateBiome(true); //side effect of this order is that if the user selects an invalid biome 
+         return;     
+     }
+     biome = biomeTemp //if biome passes all checks to allow creation, sets it as biome player is in
+     generateBiome(); //assigns a size to new biome
+
+     if (oldBiome !== biome){//only alerts player if the biome type actually changed
+        look(true);
      }  
    } 
-   //update(["Your position is " + position + ".",newline]);
 }
 
-function look(onlyBiome=false)
+function generateBiome(){ //creates the biome in accordance with its specific settings(only controls size now but needs to be a seperate function due to way game starts)
+     let offset = biome.biomeSize[0] //Math.random generates a random value from 0-1. biome.biomeSize denotes min and max size for each type of biome
+     let multiplier = (biome.biomeSize[1]-offset) //if Math.random generated 0, we need the min value, so min value becomes offset. if it is 1, we need 
+     biomeSize = ((Math.random()*multiplier)+offset); // max value so we multiply 1 by the (maxvalue - minvalue)+minvalue to cap out at max value. 
+    }
+
+function look(onlyBiome=false) //onlyBiome means don't include player description when looking at surroundings
 {
 
-  let desc = macro.description;
-  let line2 = "";
+  let playerDesc = macro.description;
+  let areaDesc = "";
 
   if (macro.height > 1e12)
-    line2 = "You're pretty much everywhere at once.";
+    areaDesc = "You're pretty much everywhere at once.";
   else if (macro.height > 1e6)
-    line2 = "You're " + (strolling ? "strolling" : "standing") + "...on pretty much everything at once.";
+    areaDesc = "You're " + (strolling ? "strolling" : "standing") + "...on pretty much everything at once.";
   else
     switch(biome) {
-      case "rural": line2 = "You're " + (strolling ? "strolling" : "standing") + " amongst rural farmhouses and expansive ranches. Cattle are milling about at your feet."; break;
-      case "suburb": line2 = "You're " + (strolling ? "striding" : "standing") + " through the winding roads of a suburb."; break;
-      case "city":
+      case biomeEnum.Rural: areaDesc = "You're " + (strolling ? "strolling" : "standing") + " amongst rural farmhouses and expansive ranches. Cattle are milling about at your feet."; break;
+      case biomeEnum.Suburb: areaDesc = "You're " + (strolling ? "striding" : "standing") + " through the winding roads of a suburb."; break;
+      case biomeEnum.City:
         if (macro.height < 6) {
-            line2 = "You are " + (strolling ? "strolling" : "standing") + " in the street of a city. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
+          areaDesc = "You are " + (strolling ? "strolling" : "standing") + " in the street of a city. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
         } else if (macro.height < 24) {
-          line2 = "Your broad frame fills the street of the city you are terrorizing. Your presence has caused a pileup of vehicles trying to escape."; break; 
+          areaDesc = "Your broad frame fills the street of the city you are terrorizing. Your presence has caused a pileup of vehicles trying to escape."; break; 
         } else if (macro.height < 100){
-          line2 = "You are too large for the city streets you are " + (strolling ? "strolling through." : "standing in.") + " Your hulking frame scrapes against building after building, leaving a clear indicator of your path. Gridlock is starting to set in, with people honking and trying to drive away on the sidewalks."; break;
+          areaDesc = "You are too large for the city streets you are " + (strolling ? "strolling through." : "standing in.") + " Your hulking frame scrapes against building after building, leaving a clear indicator of your path. Gridlock is starting to set in, with people honking and trying to drive away on the sidewalks."; break;
         } else if (macro.height < 500){
-          line2 = "You are " + (strolling ? "strolling through" : "looming over") + " a bustling city. Your mammoth frame is on par with the few nearby skyscrapers, You forge your own path, leaving a swath of demolished buildings. Panic has fully gripped the city; the streets are filled with vehicles, all immobile."; break;
+          areaDesc = "You are " + (strolling ? "strolling through" : "looming over") + " a bustling city. Your mammoth frame is on par with the few nearby skyscrapers. You forge your own path, leaving a swath of demolished buildings. Panic has fully gripped the city; the streets are filled with vehicles, all immobile."; break;
         } else if (macro.height < 2500){
-          line2 = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the couple of remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc(true) + ". Traffic is gridlocked as far as you can see, and farther." ; break;
+          areaDesc = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the couple of remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc(true) + ". Traffic is gridlocked as far as you can see." ; break;
         } else {
-          line2 = "You're terrorizing the streets of a city. Heavy traffic, worsened by your rampage, is everywhere."; break;
+          areaDesc = "You're terrorizing the streets of a city. Heavy traffic, worsened by your rampage, is everywhere."; break;
         }
-      case "downtown": line2 = "You're lurking amongst the skyscrapers of downtown. The streets are packed, and the buildings are practically begging you to knock them over."; break;
+      case biomeEnum.Downtown: 
+        if (macro.height < 6) {
+          areaDesc = "You are " + (strolling ? "strolling" : "standing") + " in packed downtown streets. Several " + (macro.victimsHuman ? "humans" : "people") + " have noticed your intimidating presence and are beginning to run."; break;
+        } else if (macro.height < 24) {
+          areaDesc = "Your broad frame fills the street of the city center. Your presence has caused a pileup of vehicles trying to escape."; break; 
+        } else if (macro.height < 100){
+          areaDesc = "You are too large for the city streets you are " + (strolling ? "strolling through." : "standing in.") + " Your hulking frame scrapes against building after building, leaving a clear indicator of your path. Gridlock is starting to set in, with people honking and trying to drive away on the sidewalks."; break;
+        } else if (macro.height < 500){
+          areaDesc = "You are " + (strolling ? "strolling through" : "looming over") + " a bustling city. Your mammoth frame is on par with the glittering skyscrapers that surround you. You forge your own path, leaving a swath of demolished buildings. Panic has fully gripped the city; the streets are filled with vehicles, all immobile."; break;
+        } else if (macro.height < 2500){
+          areaDesc = "You are " + (strolling ? "strolling over" : "looming over") + " a city in the midst of chaos. Your colossal bulk blots out the sky, and makes the remaining skyscrapers look small in comparison. You can clearly see the imprints of your " + macro.footDesc(true) + ". Traffic is gridlocked as far as you can see, and farther." ; break;
+        } else {
+          areaDesc = "You're lurking amongst the skyscrapers of downtown. The streets are packed, and the buildings are practically begging you to knock them over."; break;
+        }
     }
 
 
    if (onlyBiome == true){   
-     update([line2]);
+     update([areaDesc,newline]);
  } else {
-     desc = desc.concat([newline,line2,newline]);
+     let desc = playerDesc.concat([newline,areaDesc,newline]);
      update(desc);
   }
 }
@@ -2026,20 +2103,25 @@ function getWeights(region, area) {
       "Continent": 0.5,
     };
   }
-  else {
-    weights = {
-      "House": 0.1,
-      "Car": 0.07,
-      "Bus": 0.02,
-      "Business": 0.075,
-      "Parking Garage": 0.003,
-      "Small Skyscraper": 0.05,
-      "Town": 0.00001,
-      "City": 0.00005,
-      "Continent": 0.0005,
-      "Planet": 0.0001
-    };
-
+  else{ 
+    try{
+    weights = region.biomeWeights
+    }
+    catch(err){
+        weights = {
+        "House": 0.1,
+        "Car": 0.07,
+        "Bus": 0.02,
+        "Business": 0.075,
+        "Parking Garage": 0.003,
+        "Small Skyscraper": 0.05,
+        "Town": 0.00001,
+        "City": 0.00005,
+        "Continent": 0.0005,
+        "Planet": 0.0001
+      };
+    }
+    
     if (!macro.victimsNoPeople) {
       if (macro.victimsHuman) {
         weights["Human"] = 0.017;
@@ -5095,6 +5177,23 @@ function startGame(e) {
   }
 
   macro.init();
+
+  switch(macro.defaultBiome) { //sets starting biome as defined by player
+      case "City":
+        biome = biomeEnum.City;
+        break;
+      case "Downtown":
+        biome = biomeEnum.Downtown;
+        break;
+      case "Suburb":
+        biome = biomeEnum.Suburb;
+        break;
+      case "Rural":
+        biome = biomeEnum.Rural;
+        break;
+      }
+
+  generateBiome();
 
   update(warns);
 
