@@ -662,12 +662,6 @@ options = [
         ]
       },
       {
-       "name": "Scale growth with size",
-       "id": "growthScaleWithSize",
-       "type": "checkbox",
-       "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
-      },
-      {
         "name": "Automatic Growth",
         "id": "automaticGrowth",
         "type": "subcategory",
