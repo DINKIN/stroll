@@ -5640,6 +5640,15 @@ function render_subcategory_option(li, option) {
   li.appendChild(sub_div);
 }
 
+function render_label(li, option) {
+  let div = document.createElement("div");
+  div.classList.add("custom-label");
+
+  div.textContent = option.name;
+
+  li.appendChild(div);
+}
+
 function render_option(root_div, li, option) {
   if (option.type == "text") {
     render_text_option(li, option);
@@ -5669,6 +5678,10 @@ function render_option(root_div, li, option) {
 
   if (option.type == "subcategory") {
     render_subcategory_option(li, option);
+  }
+
+  if (option.type == "label") {
+    render_label(li, option);
   }
 
   root_div.appendChild(li);

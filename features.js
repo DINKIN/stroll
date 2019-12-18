@@ -657,6 +657,12 @@ options = [
         ]
       },
       {
+       "name": "Scale growth with size",
+       "id": "growthScaleWithSize",
+       "type": "checkbox",
+       "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
+      },
+      {
         "name": "Automatic Growth",
         "id": "automaticGrowth",
         "type": "subcategory",
@@ -728,46 +734,37 @@ options = [
             ]
           },
           {
-          "name": "Available Biomes",
-          "id": "biomes",
-          "type": "subcategory",
-          "entries":
-            [
-            {
-            "name": "City",
-            "id": "cityEnabled",
-            "type": "checkbox",
-            "default": true,
-            "tooltip": "The normal city enviroment you are used to.",
-            },
-            {
-            "name": "Downtown",
-            "id": "downtownEnabled",
-            "type": "checkbox",
-            "default": true,
-            "tooltip": "A dense city center.",
-            },
-            {
-            "name": "Suburb",
-            "id": "suburbEnabled",
-            "type": "checkbox",
-            "default": true,
-            "tooltip": "The perfect place to start a family, or eat one.",
-            },
-            {
-            "name": "Rural",
-            "id": "ruralEnabled",
-            "type": "checkbox",
-            "default": true,
-            "tooltip": "Is that a cow?",
-            }
-            ]
+          "name": "Enabled biomes:",
+          "id": "",
+          "type": "label",
           },
           {
-           "name": "Scale growth with size",
-           "id": "growthScaleWithSize",
-           "type": "checkbox",
-           "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
+          "name": "City",
+          "id": "cityEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "The normal city enviroment you are used to.",
+          },
+          {
+          "name": "Downtown",
+          "id": "downtownEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "A dense city center.",
+          },
+          {
+          "name": "Suburb",
+          "id": "suburbEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "The perfect place to start a family, or eat one.",
+          },
+          {
+          "name": "Rural",
+          "id": "ruralEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "Is that a cow?",
           }
         ]
       },

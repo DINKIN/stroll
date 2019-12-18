@@ -793,3 +793,11 @@ body.dark .meterLabel {
 .log::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.custom-label {
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
