@@ -804,9 +804,12 @@ body.dark .meterLabel {
   user-select: none;
 }
 
-#log > div,
-#react-log > div {
-  animation: log-fade 10s linear;
+.log {
+  --fade-animation: none;
+}
+
+.log > div {
+  animation: var(--fade-animation);
   animation-fill-mode: forwards;
 }
 

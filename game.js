@@ -38,6 +38,7 @@ let text_verbosity = "verbose";
 
 let autoVerbose = true;
 
+let textFade = false;
 
 
 let newline = "&nbsp;";
@@ -5329,6 +5330,19 @@ function updatePreview(name) {
     result = mass(value * scale * scale * scale, unit);
 
   document.getElementById(name + "Preview").innerHTML = result;
+}
+
+function toggleTextFade() {
+  const button = document.querySelector("#button-option-toggleTextFade");
+  if (textFade) {
+    document.querySelectorAll(".log").forEach(log => log.style.setProperty("--fade-animation", "none"));
+    button.textContent = "Text Stays"
+  } else {
+    document.querySelectorAll(".log").forEach(log => log.style.setProperty("--fade-animation", "log-fade 10s linear"));
+    button.textContent = "Text Fades"
+  }
+
+  textFade = !textFade;
 }
 
 function debugLog() {

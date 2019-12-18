@@ -487,6 +487,11 @@ panels = {
                 "default": true
             },
             {
+                "name": "Text Stays",
+                "target": "toggleTextFade",
+                "default": true
+            },
+            {
                 "name": "Debug Log",
                 "target": "debugLog",
                 "default": true
