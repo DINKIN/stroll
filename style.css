@@ -813,7 +813,7 @@ body.dark .meterLabel {
   animation-fill-mode: forwards;
 }
 
-@keyframes log-fade {
+@keyframes log-dim {
   0% {
     opacity: 1;
   }
@@ -822,5 +822,23 @@ body.dark .meterLabel {
   }
   100% {
     opacity: 0.6;
+  }
+}
+
+@keyframes log-fade {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+    height: auto;
+  }
+  99% {
+    opacity: 0;
+    height: auto;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
   }
 }

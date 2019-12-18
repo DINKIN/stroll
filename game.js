@@ -38,7 +38,25 @@ let text_verbosity = "verbose";
 
 let autoVerbose = true;
 
-let textFade = false;
+const textFadeChoices = {
+  stays: {
+    name: "Text Stays",
+    animation: "none",
+    next: "dims"
+  },
+  dims: {
+    name: "Text Dims",
+    animation: "log-dim 10s linear",
+    next: "fades"
+  },
+  fades: {
+    name: "Text Fades",
+    animation: "log-fade 10s linear",
+    next: "stays"
+  }
+};
+
+let textFade = textFadeChoices["stays"];
 
 
 let newline = "&nbsp;";
@@ -5333,16 +5351,13 @@ function updatePreview(name) {
 }
 
 function toggleTextFade() {
-  const button = document.querySelector("#button-option-toggleTextFade");
-  if (textFade) {
-    document.querySelectorAll(".log").forEach(log => log.style.setProperty("--fade-animation", "none"));
-    button.textContent = "Text Stays"
-  } else {
-    document.querySelectorAll(".log").forEach(log => log.style.setProperty("--fade-animation", "log-fade 10s linear"));
-    button.textContent = "Text Fades"
-  }
+  textFade = textFadeChoices[textFade.next];
 
-  textFade = !textFade;
+  const button = document.querySelector("#button-option-toggleTextFade");
+  button.innerText = textFade.name;
+
+  document.querySelectorAll(".log").forEach(log => log.style.setProperty("--fade-animation", textFade.animation));
+
 }
 
 function debugLog() {
