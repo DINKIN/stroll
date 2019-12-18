@@ -347,7 +347,7 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
 .custom-category-sub {
   text-align: center;
   margin: 10px;
-  width: 400px;
+  width: 100%;
   padding: 0px;
   margin: 0px 50px;
 }
@@ -449,7 +449,7 @@ body.dark input[type="checkbox"]:checked+
 .flex-outer input[type="radio"] + label:not(.custom-header),
 .flex-outer input[type="checkbox"] + label:not(.custom-header) {
   user-select: none;
-  flex: 1 0 400px;
+  flex: 1 0 100%;
   font-size: 24px;
 }
 
@@ -498,7 +498,8 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 400px;
+  margin: auto;
+  width: 90%;
 }
 
 body.light .has-tooltip {
