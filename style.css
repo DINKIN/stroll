@@ -803,3 +803,21 @@ body.dark .meterLabel {
   padding-bottom: 6px;
   user-select: none;
 }
+
+#log > div,
+#react-log > div {
+  animation: log-fade 10s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes log-fade {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
