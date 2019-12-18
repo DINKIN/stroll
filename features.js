@@ -1018,16 +1018,24 @@ options = [
     "entries":
     [
       {
+        "name": "Help",
+        "id": "",
+        "type": "label",
+        "tooltip": "Most actions increase arousal, as does digestion and being overfilled.\nEdging occurs when you're near orgasm, and increases the total volume of the orgasm."
+      },
+      {
         "name": "Arousal multiplier",
         "id": "arousalFactor",
         "type": "float",
-        "default": "1"
+        "default": "1",
+        "tooltip": "How quickly arousal and orgasm builds."
       },
       {
         "name": "Edge multiplier",
         "id": "edgeFactor",
         "type": "float",
-        "default": "1"
+        "default": "1",
+        "tooltip": "How quickly edge builds up."
       }
     ]
   },

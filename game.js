@@ -5652,6 +5652,11 @@ function render_label(li, option) {
 
   div.textContent = option.name;
 
+  if (option.tooltip != undefined) {
+    div.classList.add("has-tooltip");
+    div.setAttribute("title", option.tooltip);
+  }
+
   li.appendChild(div);
 }
 
