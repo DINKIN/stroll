@@ -4850,7 +4850,7 @@ function recurseDeletePanel(settings, panel) {
       recurseDeletePanel(settings, option);
     } else if (settings[option.id] == undefined) {
       delete settings[option.id];
-    } else if (option.type == "checkbox" && !settings[option.id]) {
+    } else if (option.type == "checkbox" && !settings[option.id] && option.default === undefined) {
       delete settings[option.id];
     } else if (settings[option.id] == option.default && option.id != "name") {
       delete settings[option.id];
