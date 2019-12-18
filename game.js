@@ -4844,7 +4844,7 @@ function recurseDeletePanel(settings, panel) {
   }
   panel.entries.forEach(option => {
     if (option.type == "subcategory") {
-      if (!settings[option.id]) {
+      if (settings[option.id] == option.default || (!settings[option.id] && option.default === undefined)) {
         delete settings[option.id];
       }
       recurseDeletePanel(settings, option);
@@ -5611,6 +5611,10 @@ function render_subcategory_option(li, option) {
   sub_input.id = option.id;
   sub_input.setAttribute("name", option.id);
   sub_input.setAttribute("type", "checkbox");
+
+  if (option.default === true) {
+    sub_input.setAttribute("checked", true);
+  }
 
   let sub_label = document.createElement("label");
   sub_label.classList.add("custom-header");
