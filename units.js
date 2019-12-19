@@ -471,13 +471,13 @@ function metricSymVolume(m3, singular=false) {
     return volume + " L";
   } else if (m3 < 1000000) {
     let volume = round(m3, 0);
-    return volume + " m" + "3".sup();
+    return volume + " m" + "³";
   } else if (m3 < 1e12){
     let volume = round(m3/1e9, 3);
-    return volume + " km" + "3".sup();
+    return volume + " km" + "³";
   } else {
     let volume = round(m3/1e9, 0);
-    return volume + " km" + "3".sup();
+    return volume + " km" + "³";
   }
 }
 
