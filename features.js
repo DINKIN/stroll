@@ -1192,9 +1192,9 @@ options = [
         "name": "Passive cum production",
         "id": "baseCumProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Cum storage factor",
@@ -1357,9 +1357,9 @@ options = [
         "name": "Passive femcum production",
         "id": "baseFemcumProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Femcum storage factor",
@@ -1486,9 +1486,9 @@ options = [
             "name": "Passive milk production",
             "id": "baseLactationProduction",
             "type": "float",
-            "default": "0.001",
-            "unit": "volume",
-            "tooltip": "The fraction of your maximum capacity produced every second"
+            "default": "0.1",
+            "unit": "percentage",
+            "tooltip": "How much you fill up every second"
           },
           {
             "name": "Milk storage scale",
@@ -1618,9 +1618,9 @@ options = [
         "name": "Passive gas production",
         "id": "baseGasProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Gas storage scale",
@@ -1716,9 +1716,9 @@ options = [
         "name": "Passive piss production",
         "id": "basePissProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Piss storage scale",
@@ -1809,9 +1809,9 @@ options = [
         "name": "Passive scat production",
         "id": "baseScatProduction",
         "type": "float",
-        "default": "0.001",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "0.1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Scat storage scale",

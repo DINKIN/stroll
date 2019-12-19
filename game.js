@@ -1336,7 +1336,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.scaling(self.baseCumProduction / 10 / 1000, self.scale * self.ballScale, 3);
+    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction / 10 / 100;
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
     setTimeout(function () { self.fillCum(self); }, 100);
@@ -1344,7 +1344,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.scaling(self.baseFemcumProduction / 10 / 1000, self.scale * self.wombScale, 3);
+    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction / 10 / 100;
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, 100);
@@ -1352,7 +1352,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillBreasts": function(self) {
-    self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.breastScale, 3);
+    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction / 10 / 100;
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit/2);
@@ -1366,7 +1366,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillGas": function(self) {
-    self.gasStorage.amount += self.scaling(self.baseGasProduction / 10 / 1000, self.scale, 3);
+    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction / 10 / 100;
 
     let ratio = self.gasStorage.amount / self.gasStorage.limit;
 
@@ -1399,7 +1399,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillPiss": function(self) {
-    self.pissStorage.amount += self.scaling(self.basePissProduction / 10 / 1000, self.scale, 3);
+    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction / 10 / 100;
 
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
@@ -1408,7 +1408,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillScat": function(self) {
-    self.scatStorage.amount += self.scaling(self.baseScatProduction / 10 / 1000, self.scale, 3);
+    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction / 10 / 100;
 
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
@@ -5355,7 +5355,8 @@ function updatePreview(name) {
     result = volume(value * scale * scale * scale / 1000, unit);
   else if (unitType == "mass")
     result = mass(value * scale * scale * scale, unit);
-
+  else if (unitType == "percentage")
+    result = value + "%";
   document.getElementById(name + "Preview").innerHTML = result;
 }
 
