@@ -128,9 +128,7 @@ function number_prefix(value) {
 function mass(kg, type="metric", singular=false) {
   switch(type) {
     case "metric": return metricMass(kg, singular);
-    case "SI": return metricSymMass(kg, singular);
     case "customary": return customaryMass(kg, singular);
-    case "US": return customarySymMass(kg, singular);
     case "approx": return approxMass(kg, singular);
   }
 }
@@ -138,9 +136,7 @@ function mass(kg, type="metric", singular=false) {
 function length(m, type="metric", singular=false) {
   switch(type) {
     case "metric": return metricLength(m, singular);
-    case "SI": return metricSymLength(m, singular);
     case "customary": return customaryLength(m, singular);
-    case "US": return customarySymLength(m, singular);
     case "approx": return approxLength(m, singular);
   }
 }
@@ -148,9 +144,7 @@ function length(m, type="metric", singular=false) {
 function area(m2, type="metric", singular=false) {
   switch(type) {
     case "metric": return metricArea(m2, singular);
-    case "SI": return metricSymArea(m2, singular);
     case "customary": return customaryArea(m2, singular);
-    case "US": return customarySymArea(m2, singular);
     case "approx": return approxArea(m2, singular);
   }
 }
@@ -158,9 +152,7 @@ function area(m2, type="metric", singular=false) {
 function volume(m3, type="metric", singular=false) {
   switch(type) {
     case "metric": return metricVolume(m3, singular);
-    case "SI": return metricSymVolume(m3, singular);
     case "customary": return customaryVolume(m3, singular);
-    case "US": return customarySymVolume(m3, singular);
     case "approx": return approxVolume(m3, singular);
   }
 }
@@ -190,31 +182,6 @@ function metricMass(kg, singular=false) {
   }
 }
 
-function metricSymMass(kg, singular=false) {
-  if (kg < 1/1000) {
-    let mass = round(kg * 1e6,0);
-    return mass + " mg";
-  } else if (kg < 1) {
-    let mass = round(kg * 1000,0);
-    return mass + " g";
-  } else if (kg < 5000) {
-    let mass = round(kg,0);
-    return mass + " kg";
-  } else if (kg < 5000000) {
-    let mass = round(kg / 1000,1);
-    return mass + " t";
-  } else if (kg < 5000000000) {
-    let mass = round(kg / 1000000,1);
-    return mass + " kt";
-  } else if (kg < 5000000000000) {
-    let mass = round(kg / 1000000000,1);
-    return mass + " mt";
-  } else {
-    let mass = round(kg / 1000000000000,1);
-    return mass + " gt";
-  }
-}
-
 function customaryMass(kg, singular=false) {
   let lbs = kg * 2.2;
 
@@ -224,21 +191,6 @@ function customaryMass(kg, singular=false) {
   } else if (lbs < 2000) {
     let mass = round(lbs,0);
     return mass + (singular || mass == 1 ? " pound" : " pounds");
-  } else {
-    let mass = round(lbs / 2000,1);
-    return mass + (singular || mass == 1 ? " ton" : " tons");
-  }
-}
-
-function customarySymMass(kg, singular=false) {
-  let lbs = kg * 2.2;
-
-  if (lbs < 1) {
-    let mass = round(lbs * 16,0);
-    return mass + " oz";
-  } else if (lbs < 2000) {
-    let mass = round(lbs,0);
-    return mass + (singular || mass == 1 ? " lb" : " lbs");
   } else {
     let mass = round(lbs / 2000,1);
     return mass + (singular || mass == 1 ? " ton" : " tons");
@@ -298,22 +250,6 @@ function metricLength(m, singular=false) {
   }
 }
 
-function metricSymLength(m, singular=false) {
-  if (m < 1/100) {
-    let length = round(m * 1000,2);
-    return length + " mm";
-  } else if (m < 1) {
-    let length = round(m * 100,0);
-    return length + " cm";
-  } else if (m < 500) {
-    let length = round(m,2);
-    return length + " m";
-  } else {
-    let length = round(m / 1000,1);
-    return length + " km";
-  }
-}
-
 function customaryLength(m, singular=false) {
   let ft = m * 3.28084;
 
@@ -327,22 +263,6 @@ function customaryLength(m, singular=false) {
   } else {
     let length = round(ft/5280,1);
     return length + (singular || length == 1 ? " mile" : " miles");
-  }
-}
-
-function customarySymLength(m, singular=false) {
-  let ft = m * 3.28084;
-
-  if (ft < 1) {
-    let length = round(ft * 12,0);
-    return length + "\"";
-  } else if (ft < 5280) {
-    let end = customarySymLength((ft - Math.floor(ft))/3.28084, singular);
-    let length = Math.floor(ft);
-    return length + "'" + " " + end;
-  } else {
-    let length = round(ft/5280,1);
-    return length + " mi";
   }
 }
 
@@ -393,19 +313,6 @@ function metricArea(m2, singular=false) {
   }
 }
 
-function metricSymArea(m2, singular=false) {
-  if (m2 < 1/10) {
-    let area = round(m2 * 10000,2);
-    return area + " cm" + "2".sup();
-  } else if (m2 < 100000) {
-    let area = round(m2,2);
-    return area + " m" + "2".sup();
-  } else {
-    let area = round(m2 / 1e6,2);
-    return area + " km" + "2".sup();
-  }
-}
-
 function customaryArea(m2, singular=false) {
   let ft2 = m2 * 3.28084 * 3.28084;
 
@@ -418,19 +325,6 @@ function customaryArea(m2, singular=false) {
   } else {
     let area = round(ft2 / 5280 / 5280,1);
     return area + (singular || area == 1 ? " square mile" : " square miles");
-  }
-}
-
-function customarySymArea(m2, singular=false) {
-  if (m2 < 1/10) {
-    let area = round(m2 * 10000,2);
-    return area + " in" + "2".sup();
-  } else if (m2 < 100000) {
-    let area = round(m2,2);
-    return area + " ft" + "2".sup();
-  } else {
-    let area = round(m2 / 1e6,2);
-    return area + " mi" + "2".sup();
   }
 }
 
@@ -450,25 +344,6 @@ function metricVolume(m3, singular=false) {
   } else {
     let volume = round(m3/1e9, 0);
     return volume + (singular || volume == 1 ? " cubic kilometer" : " cubic kilometers");
-  }
-}
-
-function metricSymVolume(m3, singular=false) {
-  if (m3 < 1/1000) {
-    let volume = round(m3*1e6, 0);
-    return volume + " mL";
-  } else if (m3 < 1) {
-    let volume = round(m3*1000, 1);
-    return volume + " L";
-  } else if (m3 < 1000000) {
-    let volume = round(m3, 0);
-    return volume + " m" + "3".sup();
-  } else if (m3 < 1e12){
-    let volume = round(m3/1e9, 3);
-    return volume + " km" + "3".sup();
-  } else {
-    let volume = round(m3/1e9, 0);
-    return volume + " km" + "3".sup();
   }
 }
 
@@ -492,29 +367,6 @@ function customaryVolume(m3, singular=false) {
   } else {
     let volume = round(gallons,0);
     return volume + (singular || volume == 1 ? " gallon" : " gallons");
-  }
-}
-
-function customarySymVolume(m3, singular=false) {
-  let gallons = m3 * 264.172;
-  if (gallons < 1/16) {
-    let volume = round(gallons*128,0);
-    return volume + " fl oz";
-  } else if (gallons < 1/4) {
-    let volume = round(gallons*16,1);
-    return volume + (singular || volume == 1 ? " cp" : " cps");
-  } else if (gallons < 1/2) {
-    let volume = round(gallons*8,1);
-    return volume + " pt";
-  } else if (gallons < 1) {
-    let volume = round(gallons*4,1);
-    return volume + " qt";
-  } else if (gallons < 100) {
-    let volume = round(gallons,1);
-    return volume + " g";
-  } else {
-    let volume = round(gallons,0);
-    return volume + " g";
   }
 }
 
