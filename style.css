@@ -806,6 +806,8 @@ body.dark .meterLabel {
 
 .log {
   --fade-animation: none;
+  scrollbar-color: #e1e1e1 #888;
+  scrollbar-width: thin;
 }
 
 .log > div {
