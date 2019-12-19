@@ -5594,6 +5594,8 @@ function render_checkbox_option(li, option) {
   label.setAttribute("for", option.id);
   label.innerText = option.name;
 
+  label.classList.add("solo");
+
   attach_form_data(input, option);
 
   if (option.tooltip != undefined) {
@@ -5651,6 +5653,8 @@ function render_subcategory_option(li, option) {
   sub_label.classList.add("custom-header");
   sub_label.setAttribute("for", option.id);
   sub_label.innerText = option.name;
+
+  sub_label.classList.add("solo");
 
   let sub_div_inner = document.createElement("div");
 
