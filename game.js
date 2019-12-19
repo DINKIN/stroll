@@ -1342,7 +1342,6 @@ let macro = //macro controls every customizable part of the players body
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
     setTimeout(function () { self.fillCum(self); }, fillPeriod);
-    update();
   },
 
   "fillFemcum": function(self) {
@@ -1350,7 +1349,6 @@ let macro = //macro controls every customizable part of the players body
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, fillPeriod);
-    update();
   },
 
   "fillBreasts": function(self) {
@@ -1364,7 +1362,6 @@ let macro = //macro controls every customizable part of the players body
       self.milkStorage.amount = self.milkStorage.limit;
     }
     setTimeout(function () { self.fillBreasts(self); }, fillPeriod);
-    update();
   },
 
   "fillGas": function(self) {
@@ -1387,7 +1384,6 @@ let macro = //macro controls every customizable part of the players body
 
     }
     setTimeout(function () { self.fillGas(self); }, fillPeriod);
-    update();
   },
 
   get urethraDiameter() {
@@ -1406,7 +1402,6 @@ let macro = //macro controls every customizable part of the players body
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
     setTimeout(function () { self.fillPiss(self); }, fillPeriod);
-    update();
   },
 
   "fillScat": function(self) {
@@ -1415,7 +1410,6 @@ let macro = //macro controls every customizable part of the players body
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
     setTimeout(function () { self.fillScat(self); }, fillPeriod);
-    update();
   },
 
   "cumStorage": {
@@ -1529,7 +1523,6 @@ let macro = //macro controls every customizable part of the players body
       this.arousal = 0;
       this.afterglow = false;
     }
-    update();
   },
 
   "quenchExcess": function(self) {
@@ -1552,7 +1545,6 @@ let macro = //macro controls every customizable part of the players body
           female_spurt(macro.femcumVolume * (0.1 + Math.random() / 10), false);
           self.femaleSpurt = 0;
         }
-        update();
       } else if (self.orgasm) {
         self.quench(1);
       } else if (self.afterglow) {
@@ -5047,8 +5039,6 @@ function add_victim_people(category, prey) {
   victims[category]["people"] += get_living_prey(prey.sum());
 
   macro.growthPoints += get_living_prey(prey.sum()) * 100 / (1 + Math.log10(macro.scale));
-
-  update();
 }
 
 function enable_victim(category) {
@@ -5253,8 +5243,14 @@ function startGame(e) {
   document.getElementById("actions-body").style.display = 'flex';
   document.getElementById("stat-container").style.display = 'flex';
 
+  repeatUpdate();
 
   window.scroll(0,0);
+}
+
+function repeatUpdate() {
+  update();
+  setTimeout(repeatUpdate, fillPeriod);
 }
 
 function actionTab(e) {
