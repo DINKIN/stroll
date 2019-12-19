@@ -45,7 +45,7 @@ function number(value, type="full", precision=3) {
   switch(type) {
     case "full":
       if (Math.log(value) / Math.log(10) < 10) {
-        return val.toString();
+        return val.toFixed(2);
       }
 
     case "scientific": return val.toExponential(precision).toString();
@@ -90,9 +90,9 @@ function number_words_repeated(value) {
     return "a lot of";
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toString();
+    return value.toFixed(2);
   switch(scale) {
-    case 0: return value.toString();
+    case 0: return value.toFixed(2);
     case 1: return Math.round(value / 1e3).toString() + " thousand";
     case 2: return Math.round(value / 1e6).toString() + " million";
     case 3: return Math.round(value / 1e9).toString() + " billion";
@@ -111,9 +111,9 @@ function number_words_repeated(value) {
 function number_prefix(value) {
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toString();
+    return value.toFixed(2);
   switch(scale) {
-    case 0: return value.toString();
+    case 0: return value.toFixed(2);
     case 1: return Math.round(value / 1e3).toString() + "K";
     case 2: return Math.round(value / 1e6).toString() + "M";
     case 3: return Math.round(value / 1e9).toString() + "G";
