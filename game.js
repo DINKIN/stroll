@@ -1666,9 +1666,11 @@ let macro = //macro controls every customizable part of the players body
     }
     if (this.maleParts) {
       if (this.hasSheath && this.arousal < 75) {
-        line = "Your " + this.describeDick + " is hidden away in your bulging sheath, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
+
+        line = "Your " + this.describeDick + " cock is hidden away in your bulging sheath, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls hanging beneath.";
       } else {
-        line = "Your " + this.describeDick + " hangs from your hips, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + "-wide balls hanging beneath.";
+        line = "Your " + this.describeDick + " cock hangs from your hips, with two " + mass(macro.ballMass, unit, true) + ", " + length(macro.ballDiameter, unit, true) + " wide balls hanging beneath.";
+
       }
       result.push(line);
       result.push(macro.balls.description);
@@ -1681,7 +1683,7 @@ let macro = //macro controls every customizable part of the players body
     }
 
     if (this.hasBreasts) {
-      line = "You have two " + length(this.breastDiameter, unit, true) + "-wide breasts that weigh " + mass(macro.breastMass, unit) + " apiece.";
+      line = "You have two " + length(this.breastDiameter, unit, true) + " wide breasts that weigh " + mass(macro.breastMass, unit) + " apiece.";
 
       if (this.lactationEnabled) {
         line += " They slosh with " + volume(this.milkStorage.amount, unit, false) + " of creamy milk.";
@@ -1736,7 +1738,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   get describeTail() {
-    return (this.tailCount > 1 ? this.tailCount + " " : "") + length(this.tailLength, unit, true) + "-long " + this.tailType;
+    return (this.tailCount > 1 ? this.tailCount + " " : "") + length(this.tailLength, unit, true) + " long " + this.tailType;
   },
 
   get describeDick() {
@@ -1964,12 +1966,14 @@ function toggle_auto(e)
 function toggle_units(e)
 {
   switch(unit) {
-    case "metric": unit = "customary"; break;
-    case "customary": unit = "approx"; break;
+    case "metric": unit = "SI"; break;
+    case "SI": unit = "customary"; break;
+    case "customary": unit = "US"; break;
+    case "US": unit = "approx"; break;
     case "approx": unit = "metric"; break;
   }
 
-  e.target.innerText = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
+  e.target.innerText = "Units:\n" + unit.charAt(0).toUpperCase() + unit.slice(1);
 
   update();
 }
@@ -1977,11 +1981,13 @@ function toggle_units(e)
 function toggle_units_options(e)
 {
   switch(unit) {
-    case "metric": unit = "customary"; break;
-    case "customary": unit = "metric"; break;
+    case "metric": unit = "SI"; break;
+    case "SI": unit = "customary"; break;
+    case "customary": unit = "US"; break;
+    case "US": unit = "metric"; break;
   }
 
-  e.target.innerText = "Units: " + unit.charAt(0).toUpperCase() + unit.slice(1);
+  e.target.innerText = "Units:\n" + unit.charAt(0).toUpperCase() + unit.slice(1);
 
   updateAllPreviews();
 }
@@ -5186,6 +5192,8 @@ function startGame(e) {
     document.getElementById("edge").style.display = "none";
   }
 
+  document.getElementById("button-option-toggle_units").innerText = "Units:\n" + unit.charAt(0).toUpperCase() + unit.slice(1); //sets units button to display selected unit on start
+
   if (macro.victimsHuman) {
     // eh this is ok
     things["Person"] = Human;
@@ -5224,6 +5232,7 @@ function startGame(e) {
 
   document.getElementById("actions-body").style.display = 'flex';
   document.getElementById("stat-container").style.display = 'flex';
+
 
   window.scroll(0,0);
 }
