@@ -442,6 +442,25 @@ function customarySymArea(m2, singular=false) {
   }
 }
 
+function approxArea(m2, singular=false) {
+  if (m2 < 20000) {
+    let area = round(m2/5341.85,1);
+    return area + (singular || area == 1 ? " football field" : " football fields");
+  } else if (m2 < 3.7920361e+13) {
+    let area = round(m2/10117.1,1);
+    return area + (singular || area == 1 ? " block" : " blocks");
+  } else if (m2 < 9.4800902e+18) {
+    let area = round(m2/9.4800902e+12,1);
+    return area + (singular || area == 1 ? " moon" : " moons");
+  } else if (m2 < 2.8118957330513e+42) {
+    let area = round(m2/6.4900004e+28,1);
+    return area + (singular || area == 1 ? " solar system" : " solar systems");
+  } else {
+    let area = round(m2/2.8118957330513e+42,1);
+    return area + (singular || area == 1 ? " milky way" : " milky ways");
+  }
+}
+
 function metricVolume(m3, singular=false) {
   if (m3 < 1/1000) {
     let volume = round(m3*1e6, 0);
