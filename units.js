@@ -40,24 +40,33 @@ function numberRough(value,suffix="") {
     }
   }
 }
-function number(value, type="full", precision=3) {
+
+function fixedIfDecimal(num, fixed) {
+  if (fixed === undefined)
+    return num.toString();
+  else;
+    return num.toFixed(fixed);
+}
+
+function number(value, type="full", fixed) {
+  console.log(value)
   var val = parseFloat(value);
   switch(type) {
     case "full":
       if (Math.log(value) / Math.log(10) < 10) {
-        return val.toFixed(2);
+        return fixedIfDecimal(val, fixed);
       }
 
-    case "scientific": return val.toExponential(precision).toString();
-    case "words": return number_words_repeated(val);
-    case "prefix": return number_prefix(val);
+    case "scientific": return val.toExponential(3, fixed).toString();
+    case "words": return number_words_repeated(val, fixed);
+    case "prefix": return number_prefix(val, fixed);
   }
 }
 
 function number_words(value) {
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0) {
-    return value.toString();
+    return fixedIfDecimal(value, fixed);
   }
   switch(scale) {
     case 0: return value.toString();
@@ -85,14 +94,14 @@ function number_words(value) {
   }
 }
 
-function number_words_repeated(value) {
+function number_words_repeated(value, fixed) {
   if (value == Infinity)
     return "a lot of";
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toFixed(2);
+    return fixedIfDecimal(value, fixed);
   switch(scale) {
-    case 0: return value.toFixed(2);
+    case 0: return fixedIfDecimal(value, fixed);
     case 1: return Math.round(value / 1e3).toString() + " thousand";
     case 2: return Math.round(value / 1e6).toString() + " million";
     case 3: return Math.round(value / 1e9).toString() + " billion";
@@ -108,12 +117,12 @@ function number_words_repeated(value) {
   }
 }
 
-function number_prefix(value) {
+function number_prefix(value, fixed) {
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toFixed(2);
+    return fixedIfDecimal(value, fixed);
   switch(scale) {
-    case 0: return value.toFixed(2);
+    case 0: return fixedIfDecimal(value, fixed);
     case 1: return Math.round(value / 1e3).toString() + "K";
     case 2: return Math.round(value / 1e6).toString() + "M";
     case 3: return Math.round(value / 1e9).toString() + "G";

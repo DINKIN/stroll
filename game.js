@@ -4349,9 +4349,9 @@ function cooldown_end(category) {
     });
 }
 
-function transformNumbers(line)
+function transformNumbers(line, fixed=undefined)
 {
-  return line.toString().replace(/[0-9]+(\.[0-9]+)?(e\+[0-9]+)?/g, function(text) { return number(text, numbers); });
+  return line.toString().replace(/[0-9]+(\.[0-9]+)?(e\+[0-9]+)?/g, function(text) { return number(text, numbers, fixed); });
 }
 
 function update(lines = [], active=true)
@@ -4410,7 +4410,7 @@ function applyPercentage(name, meterPos) {
 }
 
 function stylePercentage(name, storage) {
-  document.getElementById(name).innerHTML = name + ": " + transformNumbers(volume(storage.amount,unit,false));
+  document.getElementById(name).innerHTML = name + ": " + transformNumbers(volume(storage.amount,unit,false), 2);
   let meterPos = 150 - storage.amount / storage.limit * 150;
   applyPercentage(name, meterPos);
 }
