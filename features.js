@@ -842,7 +842,7 @@ options = [
     "entries":
     [
       {
-        "name": "Automatic digestion",
+        "name": "Automatic Digestion",
         "id": "oralDigestAuto",
         "type": "subcategory",
         "default": true,
@@ -892,7 +892,7 @@ options = [
         "unit": "length"
       },
       {
-        "name": "Automatic digestion",
+        "name": "Automatic Digestion",
         "id": "analDigestAuto",
         "type": "subcategory",
         "default": true,
@@ -1093,7 +1093,7 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "tailDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1236,7 +1236,7 @@ options = [
             "default": "1"
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "cockDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1401,7 +1401,7 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "unbirthDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1525,7 +1525,7 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "breastDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1659,7 +1659,7 @@ options = [
         "tooltip": "How much you grow when absorbing souls. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
       },
       {
-        "name": "Automatic digestion",
+        "name": "Automatic Digestion",
         "id": "soulDigestAuto",
         "type": "subcategory",
         "default": true,
@@ -1752,7 +1752,7 @@ options = [
             "default": "1"
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "bladderDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1848,7 +1848,7 @@ options = [
             "tooltip": "How much you grow when absorbing people via goo. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "gooDigestAuto",
             "type": "subcategory",
             "default": true,
@@ -1886,7 +1886,7 @@ options = [
         "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
       },
       {
-        "name": "Automatic digestion",
+        "name": "Automatic Digestion",
         "id": "pawDigestAuto",
         "type": "subcategory",
         "default": true,
@@ -2076,7 +2076,7 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Automatic digestion",
+            "name": "Automatic Digestion",
             "id": "wingDigestAuto",
             "type": "subcategory",
             "default": true,
