@@ -1336,7 +1336,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction / 10 / 100;
+    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction / 10;
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
     setTimeout(function () { self.fillCum(self); }, 100);
@@ -1344,7 +1344,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction / 10 / 100;
+    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction / 10;
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, 100);
@@ -1352,7 +1352,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillBreasts": function(self) {
-    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction / 10 / 100;
+    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction / 10;
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit/2);
@@ -1366,7 +1366,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillGas": function(self) {
-    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction / 10 / 100;
+    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction / 10;
 
     let ratio = self.gasStorage.amount / self.gasStorage.limit;
 
@@ -1399,7 +1399,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillPiss": function(self) {
-    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction / 10 / 100;
+    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction / 10;
 
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
@@ -1408,7 +1408,7 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillScat": function(self) {
-    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction / 10 / 100;
+    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction / 10;
 
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
@@ -4825,8 +4825,13 @@ function generateSettings(diff=false) {
     let value = form[i].value == "" ? form[i].placeholder : form[i].value;
     if (form[i].type == "text")
       settings[form[i].name] = value;
-    else if (form[i].type == "number")
-      settings[form[i].name] = parseFloat(value);
+    else if (form[i].type == "number") {
+      if (form[i].dataset.unit == "percentage") {
+        settings[form[i].name] = parseFloat(value) / 100;
+      } else {
+        settings[form[i].name] = parseFloat(value);
+      }
+    }
     else if (form[i].type == "checkbox") {
       settings[form[i].name] = form[i].checked;
 
@@ -4879,8 +4884,15 @@ function recurseDeletePanel(settings, panel) {
       delete settings[option.id];
     } else if (option.type == "checkbox" && !settings[option.id] && option.default === undefined) {
       delete settings[option.id];
-    } else if (settings[option.id] == option.default && option.id != "name") {
-      delete settings[option.id];
+    } else {
+      if (option.unit == "percentage") {
+        if (settings[option.id] * 100 == option.default)
+          delete settings[option.id];
+      }
+        
+      else if (settings[option.id] == option.default && option.id != "name") {
+        delete settings[option.id];
+      }
     }
   })
 
@@ -5003,8 +5015,14 @@ function loadSettings(settings = null) {
     if (settings[form[i].name] != undefined) {
       if (form[i].type == "text")
         form[i].value = settings[form[i].name];
-      else if (form[i].type == "number")
-        form[i].value = settings[form[i].name];
+      else if (form[i].type == "number") {
+        if (form[i].dataset.unit == "percentage") {
+          form[i].value = settings[form[i].name] * 100;
+        } else {
+          form[i].value = settings[form[i].name];
+        }
+      }
+        
       else if (form[i].type == "checkbox") {
         form[i].checked = settings[form[i].name];
       } else if (form[i].type == "radio") {
