@@ -49,7 +49,6 @@ function fixedIfDecimal(num, fixed) {
 }
 
 function number(value, type="full", fixed) {
-  console.log(value)
   var val = parseFloat(value);
   switch(type) {
     case "full":
