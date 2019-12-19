@@ -1679,26 +1679,27 @@ options = [
         "type": "checkbox",
         "buttons": ["digest_soul"]
       },
-      {
-        "type": "radio",
+      { 
+        "name":"Soul vore type",
+        "type": "select",
         "id": "soulVoreType",
         "default": "body",
         "choices":
         [
           {
-            "name": "Released",
-            "value": "release"
+          "name": "Released",
+          "value": "release",
           },
           {
-            "name": "Trapped",
-            "value": "body"
+          "name": "Trapped",
+          "value": "body",
           },
           {
-            "name": "Digested",
-            "value": "oblivion"
-          }
-        ]
-      }
+          "name": "Digested",
+          "value": "oblivion",
+          },
+       ]
+     },
     ]
   },
   {

@@ -5613,6 +5613,7 @@ function render_select_option(li, option) {
   label.innerText = option.name;
 
   let select = document.createElement("select");
+  select.setAttribute("id", option.id);
   select.setAttribute("name", option.id);
 
   option.choices.forEach(function(choice) {
@@ -5620,6 +5621,9 @@ function render_select_option(li, option) {
     sub_option.innerText = choice.name;
     sub_option.setAttribute("value", choice.value);
 
+    if (option.default == choice.value) {
+      sub_option.defaultSelected = true;
+    }
     select.appendChild(sub_option);
   });
 
