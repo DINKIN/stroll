@@ -5578,6 +5578,13 @@ function render_radio_option(options_div, option) {
     label.setAttribute("for", option.id + "-" + choice.value);
     label.innerText = choice.name;
 
+    label.classList.add("solo")
+
+    if (choice.tooltip) {
+      label.classList.add("has-tooltip")
+      label.title = choice.tooltip;
+    }
+
     attach_form_data(input, choice);
 
     li.appendChild(input);

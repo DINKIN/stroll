@@ -646,7 +646,6 @@ options = [
         "type": "radio",
         "id": "difficulty",
         "default": "0",
-        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
@@ -782,22 +781,26 @@ options = [
         [
           {
             "name": "Non-fatal",
-            "value": "0"
+            "value": "0",
+            "tooltip": "All actions are explicitly safe."
           },
           {
             "name": "Fatal",
             "value": "1",
-            "warning": "Fatal actions are enabled"
+            "warning": "Fatal actions are enabled",
+            "tooltip": "Actions can have fatal consequences, but don't go into detail."
           },
           {
             "name": "Gory",
             "value": "2",
-            "warning": "Gory actions are enabled"
+            "warning": "Gory actions are enabled",
+            "tooltip": "Descriptions are violent, but not excessively so."
           },
           {
             "name": "Sadistic",
             "value": "3",
-            "warning": "Brutal actions are enabled"
+            "warning": "Brutal actions are enabled",
+            "tooltip": "Cronch."
           },
         ]
       }
