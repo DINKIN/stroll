@@ -481,6 +481,9 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   background: #afa;
 }
 
+.flex-outer {
+  user-select: none;
+}
 .flex-outer label {
   flex: 0 1 40%;
   text-align: right;
@@ -524,13 +527,13 @@ body.dark .flex-outer-sub .flex-outer-sub {
 body.light .has-tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted #777;
 }
 
 body.dark .has-tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted white;
+  border-bottom: 1px dotted #777;
 }
 
 body.light a {
