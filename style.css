@@ -349,7 +349,6 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
   margin: 10px;
   width: 100%;
   padding: 0px;
-  margin: 0px 50px;
 }
 
 body.light .custom-category {
@@ -512,6 +511,14 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   align-items: center;
   margin: 5px auto;
   width: 90%;
+}
+
+body.dark .flex-outer-sub {
+  background: #181818;
+}
+
+body.dark .flex-outer-sub .flex-outer-sub {
+  background: #222;
 }
 
 body.light .has-tooltip {
