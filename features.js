@@ -1922,7 +1922,7 @@ options = [
     "entries":
     [
       {
-        "name": "Automatic transfer",
+        "name": "Automatic Transfer",
         "id": "cropTransferAuto",
         "type": "subcategory",
         "default": true,
