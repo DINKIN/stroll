@@ -19,6 +19,8 @@ window.onerror = function(msg, source, lineno, colno, error) { //opens a popup i
 //generates initial conditions and sets up variables
 let started = false;
 
+const fillPeriod = 1000 / 60;
+
 const strollingEnum = {
     Standing: 0,
     Strolling: 1,
@@ -1336,23 +1338,23 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction / 10;
+    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction * fillPeriod / 1000;
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
-    setTimeout(function () { self.fillCum(self); }, 100);
+    setTimeout(function () { self.fillCum(self); }, fillPeriod);
     update();
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction / 10;
+    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000;
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
-    setTimeout(function () { self.fillFemcum(self); }, 100);
+    setTimeout(function () { self.fillFemcum(self); }, fillPeriod);
     update();
   },
 
   "fillBreasts": function(self) {
-    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction / 10;
+    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction * fillPeriod / 1000;
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit/2);
@@ -1361,12 +1363,12 @@ let macro = //macro controls every customizable part of the players body
     if (self.milkStorage.amount > self.milkStorage.limit) {
       self.milkStorage.amount = self.milkStorage.limit;
     }
-    setTimeout(function () { self.fillBreasts(self); }, 100);
+    setTimeout(function () { self.fillBreasts(self); }, fillPeriod);
     update();
   },
 
   "fillGas": function(self) {
-    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction / 10;
+    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction * fillPeriod / 1000;
 
     let ratio = self.gasStorage.amount / self.gasStorage.limit;
 
@@ -1384,7 +1386,7 @@ let macro = //macro controls every customizable part of the players body
       }
 
     }
-    setTimeout(function () { self.fillGas(self); }, 100);
+    setTimeout(function () { self.fillGas(self); }, fillPeriod);
     update();
   },
 
@@ -1399,20 +1401,20 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillPiss": function(self) {
-    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction / 10;
+    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction * fillPeriod / 1000;
 
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
-    setTimeout(function () { self.fillPiss(self); }, 100);
+    setTimeout(function () { self.fillPiss(self); }, fillPeriod);
     update();
   },
 
   "fillScat": function(self) {
-    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction / 10;
+    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction * fillPeriod / 1000;
 
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
-    setTimeout(function () { self.fillScat(self); }, 100);
+    setTimeout(function () { self.fillScat(self); }, fillPeriod);
     update();
   },
 
