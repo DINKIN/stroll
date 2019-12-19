@@ -3,21 +3,28 @@
 var things =
 {
   "Container": Container,
+
+//Creatures
   "Person": Person,
   "Human": Human,
   "Cow": Cow,
+  "Micro": Micro,
+  "Macro": Macro,
+//Vehicles
   "Empty Car": EmptyCar,
   "Car": Car,
   "Bus": Bus,
   "Tram": Tram,
+  "Train": Train,
+  "Train Car": TrainCar,
+//Buildings
   "House": House,
   "Business": Business,
   "Barn": Barn,
   "Small Skyscraper": SmallSkyscraper,
   "Large Skyscraper": LargeSkyscraper,
-  "Train": Train,
-  "Train Car": TrainCar,
   "Parking Garage": ParkingGarage,
+//Places
   "Town": Town,
   "City": City,
   "Continent": Continent,
@@ -28,12 +35,11 @@ var things =
   "Cluster": Cluster,
   "Universe": Universe,
   "Multiverse": Multiverse,
+//Military
   "Soldier": Soldier,
   "Tank": Tank,
   "Artillery": Artillery,
   "Helicopter": Helicopter,
-  "Micro": Micro,
-  "Macro": Macro,
   "Squad": Squad,
   "Platoon": Platoon,
   "Company": Company,
@@ -47,20 +53,26 @@ var things =
 var areas =
 {
   "Container": 0,
+//Creatures
   "Person": 0.33,
   "Human": 0.33,
   "Cow": 2,
+  "Micro": 0.05,
+  "Macro": 100,
+//Vehicles
   "Car": 4,
   "Bus": 12,
   "Tram": 20,
+  "Train": 40,
+  "Train Car": 20,
+//Buildings
   "House": 150,
   "Business": 400,
   "Barn": 300,
   "Small Skyscraper": 1000,
   "Large Skyscraper": 2000,
-  "Train": 40,
-  "Train Car": 20,
   "Parking Garage": 750,
+//Places
   "Town": 1e7,
   "City": 1e9,
   "Continent": 1.5e13,
@@ -71,12 +83,11 @@ var areas =
   "Cluster": 2e49,
   "Universe": 7e53,
   "Multiverse": 5e56,
+//Military
   "Soldier": 1,
   "Tank": 10,
   "Artillery": 12,
   "Helicopter": 8,
-  "Micro": 0.05,
-  "Macro": 100,
   "Squad": 20,
   "Platoon": 100,
   "Company": 500,
@@ -90,20 +101,26 @@ var areas =
 var masses =
 {
   "Container": 0,
+//Creatures
   "Person": 80,
   "Human": 80,
   "Cow": 300,
+  "Micro": 0.01,
+  "Macro": 80000,
+//Vehicles
   "Car": 1000,
   "Bus": 5000,
   "Tram": 10000,
+  "Train": 50000,
+  "Train Car": 7500,
+//Buildings
   "House": 10000,
   "Business": 50000,
   "Barn": 5000,
   "Small Skyscraper": 10000000,
   "Large Skyscraper": 80000000,
-  "Train": 50000,
-  "Train Car": 7500,
   "Parking Garage": 10000000,
+//Places
   "Town": 1,
   "City": 1,
   "Continent": 1e21,
@@ -114,12 +131,11 @@ var masses =
   "Cluster": 1,
   "Universe": 1,
   "Multiverse": 1,
+//Military
   "Soldier": 80,
   "Tank": 5000,
   "Artillery": 7000,
   "Helicopter": 1500,
-  "Micro": 0.01,
-  "Macro": 80000,
   "Squad": 1,
   "Platoon": 100,
   "Company": 500,
@@ -133,20 +149,26 @@ var masses =
 var clusters =
 {
   "Container": 0,
+//Creatures
   "Person": 5,
   "Human": 5,
   "Cow": 15,
+  "Micro": 10,
+  "Macro": 0,
+//Vehicles
   "Car": 3,
   "Bus": 1,
   "Tram": 1,
+  "Train": 2,
+  "Train Car": 1,
+//Buildings
   "House": 5,
   "Business": 5,
   "Barn": 1,
   "Small Skyscraper": 2,
   "Large Skyscraper": 1,
-  "Train": 2,
-  "Train Car": 1,
   "Parking Garage": 1,
+//Places
   "Town": 5,
   "City": 1,
   "Continent": 5,
@@ -157,12 +179,11 @@ var clusters =
   "Cluster": 1,
   "Universe": 1,
   "Multiverse": 1,
+//Military
   "Soldier": 0,
   "Tank": 0,
   "Artillery": 0,
   "Helicopter": 0,
-  "Micro": 10,
-  "Macro": 0,
   "Squad": 20,
   "Platoon": 2,
   "Company": 2,
@@ -176,20 +197,26 @@ var clusters =
 var cluster_chances =
 {
   "Container": 0,
+//Creatures
   "Person": 0.8,
   "Human": 0.8,
   "Cow": 0.5,
+  "Micro": 10,
+  "Macro": 0,
+//Vehicles
   "Car": 0.5,
   "Bus": 0.25,
   "Tram": 0.2,
+  "Train": 0.1,
+  "Train Car": 0.05,
+//Buildings
   "House": 0.5,
   "Business": .05,
   "Barn": 0.1,
   "Small Skyscraper": 0.25,
   "Large Skyscraper": 0.25,
-  "Train": 0.1,
-  "Train Car": 0.05,
   "Parking Garage": 0.1,
+//Places
   "Town": 0.1,
   "City": 0.2,
   "Continent": 0.5,
@@ -200,12 +227,11 @@ var cluster_chances =
   "Cluster": 1,
   "Universe": 1,
   "Multiverse": 1,
+//Military
   "Soldier": 0,
   "Tank": 0,
   "Artillery": 0,
   "Helicopter": 0,
-  "Micro": 10,
-  "Macro": 0,
   "Squad": .05,
   "Platoon": .05,
   "Company": .1,
@@ -219,20 +245,26 @@ var cluster_chances =
 var contents =
 {
   "Container": [],
+//Creatures
   "Person": [],
   "Human": [],
   "Cow": [],
+  "Micro": [[]],
+  "Macro": [[]],
+//Vehicles
   "Car": [["Person",1,4]],
   "Bus": [["Person",2,30]],
   "Tram": [["Person",10,50]],
   "Train": [["Person",1,4,"engine"],["Train Car",2,10]],
   "Train Car": [["Person",10,40]],
+//Buildings
   "House": [["Person",0,8],["Empty Car",0,2]],
   "Business": [["Person",0,30],["Car",0,20]],
   "Barn": [["Person",0,2],["Cow",30,70]],
   "Small Skyscraper": [["Person",150,750],["Empty Car",10,50]],
   "Large Skyscraper": [["Person",500,1500],["Empty Car",20,100]],
   "Parking Garage": [["Person",10,200],["Empty Car",100,300],["Car",5,30]],
+//Places
   "Town": [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25],["Business",500,5000]],
   "City": [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10],["Business",2000,10000]],
   "Continent": [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
@@ -243,12 +275,11 @@ var contents =
   "Cluster": [["Galaxy",200,5000]],
   "Universe": [["Cluster",1.5e9,2.5e9]],
   "Multiverse": [["Universe",100,1000]],
+//Military
   "Soldier": [],
   "Tank": [["Soldier",3,5]],
   "Artillery": [["Soldier",4,6]],
   "Helicopter": [["Soldier",4,16]],
-  "Micro": [[]],
-  "Macro": [[]],
   //Alterante Army Structuring, may be used later
   //"Squad": [["Soldier",6,9]],
   // "Platoon": [["Squad",3,4]],
@@ -861,7 +892,7 @@ function Bus(count = 1) {
   this.describeOne = function(verbose=true) {
     var adjective = random_desc(["rusty","brand-new","aging","modern"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
-    var type = random_desc(["bus","school bus","double-decker bus","articulating bus","open-top bus","sleeper bus","intercity bus"]);
+    var type = random_desc(["bus","double-decker bus","articulating bus","open-top bus","sleeper bus","intercity bus"]);
     return "a " + merge_desc([adjective,color,type]);
   };
 
@@ -1139,7 +1170,7 @@ function ParkingGarage(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a parking garage" : this.count + " parking garages") + " with " + describe_all(this.contents, verbose) + " inside";
+      return (this.count == 1 ? "a parking garage" : this.count + " parking garages") + " with " + describe_all(this.contents, verbose);
     } else {
       return (this.count == 1 ? "a parking garage" : this.count + " parking garages");
     }
@@ -1322,7 +1353,7 @@ function Tank(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a tank" : this.count + " tanks") + " with " + describe_all(this.contents, verbose) + " trapped inside.";
+      return (this.count == 1 ? "a tank" : this.count + " tanks") + " with " + describe_all(this.contents, verbose) + " trapped inside";
     } else {
       return (this.count == 1 ? "a tank" : this.count + " tanks");
     }
@@ -1338,7 +1369,7 @@ function Artillery(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units") + " with " + describe_all(this.contents, verbose) + " trapped inside.";
+      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units") + " with " + describe_all(this.contents, verbose) + " trapped inside";
     } else {
       return (this.count == 1 ? "an artillery unit" : this.count + " artillery units");
     }
@@ -1354,7 +1385,7 @@ function Helicopter(count = 1) {
 
   this.describe = function(verbose = true) {
     if (verbose) {
-      return (this.count == 1 ? "a helicopter" : this.count + " helicopters") + " with " + describe_all(this.contents, verbose) + " riding inside.";
+      return (this.count == 1 ? "a helicopter" : this.count + " helicopters") + " with " + describe_all(this.contents, verbose) + " riding inside";
     } else {
       return (this.count == 1 ? "a helicopter" : this.count + " helicopters");
     }

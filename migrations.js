@@ -1,9 +1,42 @@
 // bumps save versions
 
 migrations = [
-  (save) => {
-    // does nothing
+  // 0 -> 1
+  
+  // does nothing
+  save => {
+  },
+  // 1 -> 2
+
+  // automatic digestion is now a subcategory, so anyone with
+  // a digest time of 0 should have that unset
+  save => {
+    if (save.oralDigestTime == 0)
+      save.oralDigestAuto = false;
+    if (save.analDigestTime == 0)
+      save.analDigestAuto = false;
+    if (save.tailDigestTime == 0)
+      save.tailDigestAuto = false;
+    if (save.cockDigestTime == 0)
+      save.cockDigestAuto = false;
+    if (save.unbirthDigestTime == 0)
+      save.unbirthDigestAuto = false;
+    if (save.breastDigestTime == 0)
+      save.breastDigestAuto = false;
+    if (save.soulDigestTime == 0)
+      save.soulDigestAuto = false;
+    if (save.bladderDigestTime == 0)
+      save.bladderDigestAuto = false;
+    if (save.gooDigestTime == 0)
+      save.gooDigestAuto = false;
+    if (save.pawDigestTime == 0)
+      save.pawDigestAuto = false;
+    if (save.cropTransferTime == 0)
+      save.cropTransferAuto = false;
+    if (save.wingDigestTime == 0)
+      save.wingDigestAuto = false;
   }
+
 ];
 
 function migrate(save, target=null) {
@@ -29,6 +62,7 @@ function migrate(save, target=null) {
     for (let x = version; x < target; x++) {
       migrations[x](save);
     }
+    save.version = target;
   } else {
     return false;
   }

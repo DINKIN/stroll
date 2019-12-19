@@ -215,22 +215,22 @@ function approxMass(kg, singular=false) {
     let mass = round(kg/5.2e10,2);
     return mass + (singular || mass == 1 ? " Great Wall of China" : " Great Wall Of Chinas"); 
   } else if (kg < 5e21) {
-    let mass = round(kg/1.5373768e15,3);
-    return mass + (singular || mass == 1 ? " New York City" : mass + " New York Cities");
+    let mass = round(kg/1.5e15,2);
+    return mass + (singular || mass == 1 ? " New York City" : " New York Cities");
     //this figure includes a lot of underlying bedrock, just the city itself is 1.13587210581190e11 but I needed a good figure to fit in this spot
   } else if (kg < 6e23) {
-    let mass = round(kg/4.6121304e20,3);
-    return mass +(singular || mass == 1 ? " Australia" : mass + " Australias");
-    //this is a napkin math number based on the land area of Australia, 25km of height and rough density of rock
+    let mass = round(kg/4.6e20,2);
+    return mass + (singular || mass == 1 ? " Australia" : " Australias");
+    //this is a napkin math number based on the land area of Australia, 25km of height, and rough density of rock
 } else if (kg < 2e27) {
-    let mass = round(kg/5.972e24,4);
-    return mass + (singular || mass == 1 ? " Earth" : mass + " Earths");  
+    let mass = round(kg/6e24,2);
+    return mass + (singular || mass == 1 ? " Earth" :" Earths");  
 } else if (kg < 1.4e39) {
-    let mass = round(kg/1.989e30,4);
-    return mass + (singular || mass == 1 ? " Sun" : mass + " Suns");
+    let mass = round(kg/2e30,2);
+    return mass + (singular || mass == 1 ? " Sun" :" Suns");
   } else {
-    let mass = round(kg/1.3923e42,4);
-    return mass + (singular || mass == 1 ? " Milky Way" : mass + " Milky Ways");
+    let mass = round(kg/1.4e42,2);
+    return mass + (singular || mass == 1 ? " Milky Way" :" Milky Ways");
   }
 }
 
@@ -399,4 +399,20 @@ function approxVolume(m3, singular=false) {
     let volume = round(m3/1.4e27, 3);
   return volume + (singular || volume == 1 ? " Sun" : " Suns");
   }
+}
+
+
+function makeSphere(input=0, diameter=false) {
+  if (diameter = true) {
+    input = input/2;
+  }
+  return (4/3)*Math.PI*(Math.pow(input, 3));
+}
+
+function breakSphere(input=0, diameter=false) {
+  let output = math.pow((3*input)/(4*Math.PI), 1/3)
+  if (diameter=true) {
+    output = output*2;
+  }
+  return output;
 }
