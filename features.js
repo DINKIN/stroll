@@ -487,6 +487,11 @@ panels = {
                 "default": true
             },
             {
+                "name": "Text Stays",
+                "target": "toggleTextFade",
+                "default": true
+            },
+            {
                 "name": "Debug Log",
                 "target": "debugLog",
                 "default": true
@@ -513,6 +518,13 @@ options = [
         "type": "float",
         "default": "1",
         "tooltip": "You start out this many times larger than normal. A good way to build a macro character is to design them at normal size, then adjust the scale to get them to the right height."
+      },
+      {
+        "name": "Walk Speed",
+        "id": "walkSpeed",
+        "type": "float",
+        "default": "1",
+        "tooltip": "How quickly you move while walking, jogging, or running."
       },
       {
         "name": "Height",
@@ -626,14 +638,15 @@ options = [
     ]
   },
   {
-    "name": "Difficulty",
+    "name": "Gameplay",
     "optional": false,
     "entries":
     [
-      {
+      { 
         "type": "radio",
         "id": "difficulty",
         "default": "0",
+        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
@@ -676,7 +689,84 @@ options = [
             "tooltip": "If you're ten times bigger than normal, you gain ten times as much mass when digesting prey"
           }
         ]
-      }
+      },
+      {
+        "name": "Biomes",
+        "id": "biomes",
+        "type": "subcategory",
+        "entries":
+        [
+          {
+          "name": "Walk to other locations",
+          "id": "changingBiomes",
+          "type": "checkbox",
+          "tooltip": "When checked, walking will sometimes change your location."
+          },
+          { 
+             "name":"Default Biome",
+             "type": "select",
+             "id": "defaultBiome",
+             "default": "City",
+             "tooltip": "Where you start, if you have \"Walk to other locations\" disabled, you will be stuck here.",
+             "choices":
+             [
+             {
+             "name": "City",
+             "value": "City",
+             "tooltip": "The normal city enviroment you are used to.",
+             },
+             {
+             "name": "Downtown",
+             "value": "Downtown",
+             "tooltip": "A dense city center.",
+             },
+             {
+            "name": "Suburb",
+            "value": "Suburb",
+            "tooltip": "The perfect place to start a family, or eat one.",
+            },
+            {
+            "name": "Rural",
+            "value": "Rural",
+            "tooltip": "Is that a cow?",
+            }
+            ]
+          },
+          {
+          "name": "Enabled biomes:",
+          "id": "",
+          "type": "label",
+          },
+          {
+          "name": "City",
+          "id": "cityEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "The normal city enviroment you are used to.",
+          },
+          {
+          "name": "Downtown",
+          "id": "downtownEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "A dense city center.",
+          },
+          {
+          "name": "Suburb",
+          "id": "suburbEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "The perfect place to start a family, or eat one.",
+          },
+          {
+          "name": "Rural",
+          "id": "ruralEnabled",
+          "type": "checkbox",
+          "default": true,
+          "tooltip": "Is that a cow?",
+          }
+        ]
+      },
     ]
   },
   {
@@ -752,11 +842,20 @@ options = [
     "entries":
     [
       {
-        "name": "Digestion time",
-        "id": "oralDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic Digestion",
+        "id": "oralDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "oralDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },      
       {
         "name": "Manual digestion",
         "id": "oralDigestManual",
@@ -793,11 +892,20 @@ options = [
         "unit": "length"
       },
       {
-        "name": "Digestion time",
-        "id": "analDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic Digestion",
+        "id": "analDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "analDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Anal autogrowth factor",
         "id": "assGrowthFactor",
@@ -909,16 +1017,24 @@ options = [
     "entries":
     [
       {
+        "name": "Help",
+        "id": "",
+        "type": "label",
+        "tooltip": "Most actions increase arousal, as does digestion and being overfilled.\nEdging occurs when you're near orgasm, and increases the total volume of the orgasm."
+      },
+      {
         "name": "Arousal multiplier",
         "id": "arousalFactor",
         "type": "float",
-        "default": "1"
+        "default": "1",
+        "tooltip": "How quickly arousal and orgasm builds."
       },
       {
         "name": "Edge multiplier",
         "id": "edgeFactor",
         "type": "float",
-        "default": "1"
+        "default": "1",
+        "tooltip": "How quickly edge builds up."
       }
     ]
   },
@@ -977,11 +1093,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "tailDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "tailDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "tailDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "tailDigestManual",
@@ -1069,6 +1194,7 @@ options = [
         "type": "float",
         "default": "0.01",
         "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Cum storage factor",
@@ -1110,11 +1236,20 @@ options = [
             "default": "1"
           },
           {
-            "name": "Digestion time",
-            "id": "cockDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "cockDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "cockDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "cockDigestManual",
@@ -1223,7 +1358,8 @@ options = [
         "id": "baseFemcumProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Femcum storage factor",
@@ -1265,11 +1401,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "unbirthDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "unbirthDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "unbirthDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "unbirthDigestManual",
@@ -1342,7 +1487,8 @@ options = [
             "id": "baseLactationProduction",
             "type": "float",
             "default": "0.001",
-            "unit": "volume"
+            "unit": "volume",
+            "tooltip": "The fraction of your maximum capacity produced every second"
           },
           {
             "name": "Milk storage scale",
@@ -1379,11 +1525,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "breastDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "breastDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "breastDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "breastDigestManual",
@@ -1464,7 +1619,8 @@ options = [
         "id": "baseGasProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Gas storage scale",
@@ -1503,37 +1659,47 @@ options = [
         "tooltip": "How much you grow when absorbing souls. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
       },
       {
-        "name": "Digestion time",
-        "id": "soulDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic Digestion",
+        "id": "soulDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "soulDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Manual digestion",
         "id": "soulDigestManual",
         "type": "checkbox",
         "buttons": ["digest_soul"]
       },
-      {
-        "type": "radio",
+      { 
+        "name":"Soul vore type",
+        "type": "select",
         "id": "soulVoreType",
         "default": "body",
         "choices":
         [
           {
-            "name": "Released",
-            "value": "release"
+          "name": "Released",
+          "value": "release",
           },
           {
-            "name": "Trapped",
-            "value": "body"
+          "name": "Trapped",
+          "value": "body",
           },
           {
-            "name": "Digested",
-            "value": "oblivion"
-          }
-        ]
-      }
+          "name": "Digested",
+          "value": "oblivion",
+          },
+       ]
+     },
     ]
   },
   {
@@ -1551,7 +1717,8 @@ options = [
         "id": "basePissProduction",
         "type": "float",
         "default": "0.01",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Piss storage scale",
@@ -1586,11 +1753,20 @@ options = [
             "default": "1"
           },
           {
-            "name": "Digestion time",
-            "id": "bladderDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "bladderDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "bladderDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "bladderDigestManual",
@@ -1634,7 +1810,8 @@ options = [
         "id": "baseScatProduction",
         "type": "float",
         "default": "0.001",
-        "unit": "volume"
+        "unit": "volume",
+        "tooltip": "The fraction of your maximum capacity produced every second"
       },
       {
         "name": "Scat storage scale",
@@ -1672,11 +1849,20 @@ options = [
             "tooltip": "How much you grow when absorbing people via goo. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
           },
           {
-            "name": "Digestion time",
-            "id": "gooDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "gooDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "gooDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "gooDigestManual",
@@ -1701,11 +1887,20 @@ options = [
         "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
       },
       {
-        "name": "Digestion time",
-        "id": "pawDigestTime",
-        "type": "float",
-        "default": "15"
-      },
+        "name": "Automatic Digestion",
+        "id": "pawDigestAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "pawDigestTime",
+            "type": "float",
+            "default": "15"
+          }
+        ]
+      },  
       {
         "name": "Manual digestion",
         "id": "pawDigestManual",
@@ -1728,11 +1923,20 @@ options = [
     "entries":
     [
       {
-        "name": "Transfer time",
-        "id": "cropTransferTime",
-        "type": "float",
-        "default": "10"
-      }
+        "name": "Automatic Transfer",
+        "id": "cropTransferAuto",
+        "type": "subcategory",
+        "default": true,
+        "entries":
+        [
+          {
+            "name": "Digestion time",
+            "id": "cropTransferTime",
+            "type": "float",
+            "default": "10"
+          }
+        ]
+      },  
     ]
   },
   {
@@ -1873,11 +2077,20 @@ options = [
             "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
           },
           {
-            "name": "Digestion time",
-            "id": "wingDigestTime",
-            "type": "float",
-            "default": "15"
-          },
+            "name": "Automatic Digestion",
+            "id": "wingDigestAuto",
+            "type": "subcategory",
+            "default": true,
+            "entries":
+            [
+              {
+                "name": "Digestion time",
+                "id": "wingDigestTime",
+                "type": "float",
+                "default": "15"
+              }
+            ]
+          },  
           {
             "name": "Manual digestion",
             "id": "wingDigestManual",
