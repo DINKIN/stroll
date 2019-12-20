@@ -446,9 +446,12 @@ function approxArea(m2, singular=false) {
   if (m2 < 20000) {
     let area = round(m2/5341.85,1);
     return area + (singular || area == 1 ? " football field" : " football fields");
-  } else if (m2 < 3.7920361e+13) {
+  } else if (m2 < 9.36e+15) {
     let area = round(m2/10117.1,1);
     return area + (singular || area == 1 ? " block" : " blocks");
+  } else if (m2 < 3.7920361e+13) {
+    let area = round(m2/9.36e+8,1);
+    return area + (singular || area == 1 ? " city" : " cities");
   } else if (m2 < 9.4800902e+18) {
     let area = round(m2/9.4800902e+12,1);
     return area + (singular || area == 1 ? " moon" : " moons");
