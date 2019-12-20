@@ -3,7 +3,7 @@
 /*jshint browser: true*/
 /*jshint devel: true*/
 
-let version = "v1.0.1";
+let version = "v1.1.0";
 
 let errored = false;
 
