@@ -72,7 +72,7 @@ body.dark div {
     position: fixed;
     right: 0%;
     top: 0%;
-    max-width: 33%;
+    max-width: 50%;
     max-height: 50%;
   }
   #log {
@@ -101,7 +101,7 @@ body.dark div {
     width: 100px !important;
   }
   .action-part-button {
-    width: 100px !important;
+    width: 33% !important;
   }
   .action-button {
     width: 100px !important;
@@ -597,6 +597,12 @@ ul {
   width: 50%;
   height: 70px;
   display: none;
+}
+
+@media (max-aspect-ratio: 1) {
+  .action-part-button {
+    width: 33%;
+  }
 }
 
 .action-part-button.active {
