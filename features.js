@@ -662,17 +662,15 @@ options = [
       },
       {
         "name": "Automatic Growth",
-        "id": "automaticGrowth",
+        "id": "automaticGrowthEnabled",
         "type": "subcategory",
         "entries":
         [
           {
-            "name": "Automatic growth",
-            "id": "automaticGrowthEnabled",
-            "type": "checkbox",
-            "default": false,
-            "warning": "Automatic Growth is enabled",
-            "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass.",
+            "name": "Help",
+            "id": "",
+            "type": "label",
+            "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass."
           },
           {
             "name": "Prey growth factor",
