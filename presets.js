@@ -717,5 +717,32 @@ let presets = [
     "maleMuskEnabled": true,
     "baseMaleMuskArea": 1,
     "droolEnabled": true
+  },
+  {
+    "version": 3,
+    "name": "Rai",
+    "scale": 1.65,
+    "baseMass": 33,
+    "basePawLength": 0.19,
+    "basePawWidth": 0.19,
+    "baseHandLength": 0.2,
+    "baseHandWidth": 0.2,
+    "baseAssArea": 1,
+    "species": "Wolf",
+    "victimsHuman": true,
+    "victimsMilitary": true,
+    "victimsMicros": true,
+    "oralVore": true,
+    "analVoreToStomach": true,
+    "hasTail": true,
+    "tailType": "Fluffy",
+    "hasBreasts": true,
+    "baseBreastDiameter": 0.12,
+    "soulVoreEnabled": true,
+    "soulVoreType": "oblivion",
+    "breathEnabled": true,
+    "breathElectric": true,
+    "droolEnabled": true,
+    "magicEnabled": true
   }
 ]
