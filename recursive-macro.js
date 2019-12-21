@@ -727,9 +727,9 @@ function Person(count = 1) {
 
   this.describeOne = function (verbose=true) {
     var body = random_desc(["skinny","fat","tall","short","stocky","spindly","muscular","fit","multi-colored"], (verbose ? 0.6 : 0));
-    var sex = random_desc(["male", "female"], (verbose ? 1 : 0));
+    var sex = random_desc(["male", "female"], (verbose ? 0.75 : 0));
     var species = "";
-    species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal"]);
+    species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal","coyote","rabbit","lizard","avian"]);
     return "a " + merge_desc([body,sex,species]);
   };
 

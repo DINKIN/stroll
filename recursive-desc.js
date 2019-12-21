@@ -132,10 +132,10 @@ function describe(action, container, macro, verbose=true, flat=false, extra1=0) 
 
   if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
     let choice = Math.floor(Math.random() * options.length);
-    return options[choice](container, macro, extra1);
+    return options[choice](container, macro, verbose, flat, extra1);
   }
   else {
-    return getDefault(action)(container, macro, extra1);
+    return getDefault(action)(container, macro, verbose, flat, extra1);
   }
 }
 
@@ -151,10 +151,11 @@ function pickString(...array){
 // DEFAULTS
 
 function defaultEat(container, macro, verbose, flat) {
+  console.log(verbose);
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else
-    return [
+    return pickString([
       "You",
       pickString("snatch up", "grab", "pluck up", "seize", "catch"),
       container.describe(verbose) + ",",
@@ -162,7 +163,13 @@ function defaultEat(container, macro, verbose, flat) {
       pickString("swallow", "devour", "consume"),
       (container.count > 1 ? "them" : "it"),
       "whole."
-    ].join(" ");
+    ], [
+      "Your maw envelops",
+      container.describe(verbose),
+      "in a tight embrace of flesh.",
+      (container.count > 1 ? "They sink" : "Your victim sinks"),
+      "down deep with a little <i>gulp</i>."
+    ]).join(" ");
 }
 
 function defaultChew(container, macro, verbose, flat) {
