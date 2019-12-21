@@ -2397,7 +2397,8 @@ function drool()
 
   update([sound,line,linesummary,newline]);
 }
-function stomp()
+
+function stomp(active=true)
 {
   if (macro.gooMolten && !macro.footShoeWorn && !macro.footSockWorn) {
     stomp_goo();
@@ -2417,20 +2418,20 @@ function stomp()
 
   add_victim_people("stomped",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   updateBiome(false);
 
   macro.arouse(5);
 
-  stomp_wedge();
+  stomp_wedge(active);
 
   if (macro.stenchEnabled && macro.basePawStenchArea > 0) {
-    paw_stench();
+    paw_stench(active);
   }
 }
 
-function stomp_wedge() {
+function stomp_wedge(active=true) {
   if (macro.footType == "hoof")
     return;
 
@@ -2461,7 +2462,7 @@ function stomp_wedge() {
 
   add_victim_people("stomped",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 }
 
 function stomp_goo() {
@@ -4443,7 +4444,7 @@ function pick_move()
     return;
   }
 
-  stomp();
+  stomp(false);
 }
 //Growth
   //Automatic Growth
