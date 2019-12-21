@@ -1346,6 +1346,7 @@ let macro = //macro controls every customizable part of the players body
 
   "fillFemcum": function(self) {
     self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000;
+    console.log(self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000);
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, fillPeriod);
@@ -4822,6 +4823,8 @@ function generateSettings(diff=false) {
     else if (form[i].type == "number") {
       if (form[i].dataset.unit == "percentage") {
         settings[form[i].name] = parseFloat(value) / 100;
+      } else if (form[i].dataset.unit == "volume") {
+        settings[form[i].name] = parseFloat(value) / 1000;
       } else {
         settings[form[i].name] = parseFloat(value);
       }
@@ -4881,6 +4884,11 @@ function recurseDeletePanel(settings, panel) {
     } else {
       if (option.unit == "percentage") {
         if (settings[option.id] * 100 == option.default)
+          delete settings[option.id];
+      } 
+
+      else if (option.unit == "volume") {
+        if (settings[option.id] * 1000 == option.default)
           delete settings[option.id];
       }
         
@@ -5012,6 +5020,8 @@ function loadSettings(settings = null) {
       else if (form[i].type == "number") {
         if (form[i].dataset.unit == "percentage") {
           form[i].value = settings[form[i].name] * 100;
+        } else if (form[i].dataset.unit == "volume") {
+          form[i].value = settings[form[i].name] * 1000;
         } else {
           form[i].value = settings[form[i].name];
         }
