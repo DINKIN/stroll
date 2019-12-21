@@ -516,12 +516,20 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   width: 90%;
 }
 
+body.light .flex-outer-sub {
+  background: #c8c8c8;
+}
+
+body.light .flex-outer-sub .flex-outer-sub {
+  background: #c0c0c0;
+}
+
 body.dark .flex-outer-sub {
   background: #181818;
 }
 
 body.dark .flex-outer-sub .flex-outer-sub {
-  background: #222;
+  background: #202020;
 }
 
 body.light .has-tooltip {
@@ -605,10 +613,14 @@ ul {
   }
 }
 
-.action-part-button.active {
-  background: #555;
+
+body.light .action-part-button.active {
+  background: #ccc;
 }
 
+body.dark .action-part-button.active {
+  background: #555;
+}
 /* SRC: https://stackoverflow.com/questions/29738787/filling-water-animation/29740828 */
 
 .meter {
