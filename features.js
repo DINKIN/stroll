@@ -558,7 +558,7 @@ options = [
         "name": "Hand length",
         "id": "baseHandLength",
         "type": "float",
-        "default": "0.25",
+        "default": "0.2",
         "unit": "length"
       },
       {
@@ -572,7 +572,7 @@ options = [
         "name": "Ass area",
         "id": "baseAssArea",
         "type": "float",
-        "default": "0.2",
+        "default": "0.1",
         "unit": "area"
       },
       {
@@ -890,7 +890,7 @@ options = [
         "name": "Anus diameter",
         "id": "baseAnalVoreDiameter",
         "type": "float",
-        "default": "0.2",
+        "default": "0.1",
         "unit": "length"
       },
       {
