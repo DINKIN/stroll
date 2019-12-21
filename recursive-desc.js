@@ -2011,7 +2011,8 @@ rules["eat"].push({
     container.contents["Planet"].count,
     "of them within your cosmic body."
   ].join(" ")
-})
+});
+
 
 // CHEWING
 
@@ -2049,6 +2050,17 @@ rules["chew"].push({
     to let the vehicle fall further your mouth, Once the car settles, you start slowly closing your jaw, feeling glass shatter, metal grind, and tires burst as those trapped inside try to escape. Every time your chew you feel your \
     " + macro.teethDesc(true) + " " + macro.biteDesc(false) + " the vehicle into a smaller and smaller lump. After you are satisfied, you tilt your head back and swallow the debries in a single fluid gulp.";
   }
+});
+
+rules["chew"].push({
+  test: (container, macro) => hasExactly(container, "Planet", 1) && nothingLarger(container, "Planet") && isFatal(macro),
+  desc: (container, macro, verbose, flat) => [
+    "A shadow falls over your next meal - your ",
+    macro.jawDesc(true),
+    "closing around the rocky sphere like bolt cutters around a chain-link...and then, with a sharp clench, they split the planet in twain. The heat of the planet's core spills out, the homeworld of billions rent asunder by your almighty",
+    macro.jawDesc(true) + ".",
+    "A few more chews and crunches reduce it to chunky, glowing rubble...and with a flick of your head, the planet's remains are lost to your hunger."
+  ].join(" ")
 });
 
 // STOMPING
