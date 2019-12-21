@@ -1987,6 +1987,32 @@ rules["eat"].push({
   }
 });
 
+rules["eat"].push({
+  test: (container, macro) => {
+    return hasExactly(container, "Planet", 1) && nothingLarger(container, "Planet");
+  },
+  desc: (container, macro, verbose, flat) => {
+    return [
+      "Your colossal",
+      macro.jawDesc(true),
+      "yawn wide as you drift towards the planet, blotting out the sun in the shadow of your terrifying maw. Your tongue curls along the underside of your snack's crust, slathering it in drool and gently tugging it towards you. Cracks and quakes rock the fragile crust; your body's overwhelming gravity alone is enough to stretch and warp the planet. Before long, it is entombed within your",
+      macro.jawDesc(true),
+      "and, a heartbeat later, a massive GLURKH drags it into your gullet."
+    ].join(" ")
+  }
+})
+
+rules["eat"].push({
+  test: (container, macro) => hasAtleast(container, "Planet", 3) && hasLessThan(container, "Planet", 15) && nothingLarger(container, "Planet"),
+  desc: (container, macro, verbose, flat) => [
+    "You scoop up a plethora of planets, popping them into your",
+    macro.jawDesc(true),
+    "like the finger-food they've become, tugging each one into your gullet - and on an irreversible one-way journey to your gut - with little gluks and gulps, sealing away all",
+    container.contents["Planet"].count,
+    "of them within your cosmic body."
+  ].join(" ")
+})
+
 // CHEWING
 
 rules["chew"].push({

@@ -2108,9 +2108,9 @@ function getWeights(region, area) {
 
   if (area > areas["Planet"]) {
     weights = {
-      "Planet": 1.47e-10,
-      "Star": 1.7713746e-12,
-      "Solar System": 4e-10,
+      "Planet": 1.47e-3,
+      "Star": 1.7713746e-3,
+      "Solar System": 4e-4,
       "Galaxy": 0.1,
       "Cluster": 0.5,
       "Universe": 1,

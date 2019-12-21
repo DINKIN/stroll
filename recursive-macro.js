@@ -172,7 +172,7 @@ var clusters =
   "Town": 5,
   "City": 1,
   "Continent": 5,
-  "Planet": 1,
+  "Planet": 9,
   "Star": 1,
   "Solar System": 1,
   "Galaxy": 1,
