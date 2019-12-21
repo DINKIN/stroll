@@ -97,6 +97,9 @@ body.dark div {
   .growth-part {
     width: 100px !important;
   }
+  #growth-part-select {
+    width: 100px !important;
+  }
   .growth-amount {
     width: 100px !important;
   }
@@ -748,6 +751,7 @@ body.dark .meterLabel {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  text-align: left;
   flex: 0 1 400px;
 }
 
@@ -761,8 +765,10 @@ body.dark .meterLabel {
   height: 100%;
 }
 
-#growth-box-right {
-  height: 100%;
+#growth-part-select {
+  display: block;
+  height: 100px;
+  font-size: 20px;
 }
 
 .growth-part {
