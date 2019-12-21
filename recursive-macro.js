@@ -153,7 +153,7 @@ var clusters =
   "Person": 5,
   "Human": 5,
   "Cow": 15,
-  "Micro": 10,
+  "Micro": 50,
   "Macro": 0,
 //Vehicles
   "Car": 3,
@@ -201,7 +201,7 @@ var cluster_chances =
   "Person": 0.8,
   "Human": 0.8,
   "Cow": 0.5,
-  "Micro": 10,
+  "Micro": 1,
   "Macro": 0,
 //Vehicles
   "Car": 0.5,

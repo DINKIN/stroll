@@ -2181,7 +2181,7 @@ function getWeights(region, area) {
       }
     }
     if (macro.victimsMicros) {
-      weights["Micro"] = 1;
+      weights["Micro"] = 0.001;
     }
 
     if (macro.victimsMacros) {
