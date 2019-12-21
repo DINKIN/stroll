@@ -11,7 +11,8 @@ const synonyms = {
   cosmic: ["cosmic", "utterly colossal", "star-spanning"],
   gulp: ["gulp", "gluk", "glrk", "glp"],
   swallow: ["swallow", "gulp"],
-  looming: ["looming", "imposing", "awe-inspiring", "menacing"]
+  looming: ["looming", "imposing", "awe-inspiring", "menacing"],
+  putrid: ["putrid", "foul", "wretched", "choking", "rancid", "utterly foul", "miasma-shrouded", "eye-wateringly foul"]
 }
 
 function plural(quantity, singular, plural) {
@@ -233,6 +234,7 @@ function defaultStomp(container, macro, verbose, flat) {
       container.describe(verbose),
       pickString("under", "beneath", "with"),
       "your",
+      (macro.stenchEnabled ? pickString(...synonyms.putrid) + "," : ""),
       pickStringChance(0.4, ...synonyms.looming),
       macro.footDesc(false,false,true) + "."
     ], [
@@ -241,7 +243,7 @@ function defaultStomp(container, macro, verbose, flat) {
       pickString("crushed", "flattened"),
       pickString("under", "beneath"),
       "your",
-      pickString("heavy", "weighty", "powerful"),
+      (macro.stenchEnabled ? pickString(...synonyms.putrid) : pickString("heavy", "weighty", "powerful")),
       macro.footDesc(false,false,true) + "."
     ], [
       "A swift stroke of your",
@@ -260,8 +262,9 @@ function defaultStompWedge(container, macro, verbose, flat) {
     pickString("wedged", "trapped", "left stuck", "jammed"),
     pickString("in", "between", "within"),
     "your",
+    (macro.stenchEnabled ? pickString(...synonyms.putrid) : ""),
     macro.toeDesc(true)
-  ].join(" ")
+  ].filter(Boolean).join(" ")
 }
 
 function defaultFlexToes(container, macro, verbose, flat) {
