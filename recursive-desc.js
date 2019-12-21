@@ -813,13 +813,41 @@ function defaultFart(container, macro, verbose, flat) {
 
 function defaultStomach(container, macro, verbose, flat) {
   if (isSadistic(macro))
-    return "Your churning guts crushes your prey into a gory paste, annihilating " + container.describeSimple(flat) + " and reducing everything to rancid chyme.";
+    return [
+      "Your",
+      pickString("churning gut", "graveyard of a stomach", "fatal belly"),
+      pickString("crushes", "grinds", "mulches"),
+      "your prey into a gory paste,",
+      pickStringChance(0.5, "utterly", "completely"),
+      "annihilating",
+      container.describeSimple(flat),
+      "and",
+      pickStringChance(0.5, "swiftly"),
+      "reducing everything within to",
+      pickString("rancid", "putrid", "horrifying"),
+      pickString("sludge.", "slop.")
+    ].filter(Boolean).join(" ");
   else if (isGory(macro))
-    return "Your caustic stomach grinds " + container.describeSimple(flat) + " to a gory pulp.";
+    return [
+      "Your caustic stomach",
+      pickString("crushes", "grinds"),
+      container.describeSimple(flat),
+      "to a gory pulp."
+    ].filter(Boolean).join(" ");
   else if (isFatal(macro))
-    return "Your stomach gurgles as it digests " + container.describeSimple(flat) + ".";
+    return [
+      "Your stomach",
+      pickString("gurgles", "snarls", "sloshes"),
+      "as it digests",
+      container.describeSimple(flat) + "."
+    ].filter(Boolean).join(" ");
   else
-    return "Your stomach groans and abosrbs " + container.describeSimple(flat) + ".";
+    return [
+      "Your stomach",
+      pickString("squeezes", "groans", "shifts"),
+      "and absorbs",
+      container.describeSimple(flat) + "."
+    ].filter(Boolean).join(" ");
 }
 
 function defaultTail(container, macro, verbose, flat) {
