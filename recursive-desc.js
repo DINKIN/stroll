@@ -9,6 +9,10 @@ function plural(quantity, singular, plural) {
   return quantity > 1 ? plural : singular;
 }
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function getDefault(name) {
   let tokens = name.split("-");
   for (let i=0; i<tokens.length; i++) {
@@ -205,7 +209,27 @@ function defaultStomp(container, macro, verbose, flat) {
   else if (isSadistic(macro))
     return "Your " + macro.footDesc(false) + " comes down on " + container.describe(verbose) + ", crushing your prey into gore and rubble with ease as your " + macro.toeDesc(true) + " shear bone and snap metal.";
   else if (isFatal(macro))
-    return "You crush " + container.describe(verbose) + " under" + macro.footDesc(false,false,true) + ".";
+    return pickString([
+      "You",
+      pickString("crush", "smash", "flatten"),
+      container.describe(verbose),
+      pickString("under", "beneath", "with"),
+      "your",
+      macro.footDesc(false,false,true) + "."
+    ], [
+      capitalize(container.describe(verbose)),
+      (container.count > 1 ? "are" : "is"),
+      pickString("crushed", "flattened"),
+      pickString("under", "beneath"),
+      "your",
+      pickString("heavy", "weighty", "powerful"),
+      macro.footDesc(false,false,true) + "."
+    ], [
+      "A swift stroke of your",
+      macro.footDesc(false,false,true),
+      pickString("crushes", "smashes", "flattens"),
+      container.describe(verbose)
+    ]).join(" ");
   else
     return "You step on " + container.describe(verbose) + ".";
 }
@@ -2306,7 +2330,7 @@ rules["stomp"].push({
      macro.pawArea > 50 &&
      isGory(macro);
   }, "desc": function(container, macro, verbose, flat) {
-    return "You bring your " + length(macro.pawWidth, unit, true) + " wide " + macro.footDesc() + " " + macro.footDesc() + " down on " + container.describe(verbose) + ". As your " + macro.footDesc() + " impacts its target, you feel its weight sink through buildings and into the \
+    return "You bring your " + length(macro.pawWidth, unit, true) + " wide " + macro.footDesc() + " down on " + container.describe(verbose) + ". As your " + macro.footDesc() + " impacts its target, you feel its weight sink through buildings and into the \
      ground. After you lift your " + macro.soleDesc() + ", a deep indent full of rubble and mangled corpses is revealed.";
   }
 });
