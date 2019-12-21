@@ -5,6 +5,15 @@
 var rules = {};
 var defaults = {};
 
+const synonyms = {
+  heavy: ["heavy", "weighty"],
+  huge: ["huge", "massive", "gigantic", "large"],
+  cosmic: ["cosmic", "utterly colossal", "star-spanning"],
+  gulp: ["gulp", "gluk", "glrk", "glp"],
+  swallow: ["swallow", "gulp"],
+  looming: ["looming", "imposing", "awe-inspiring", "menacing"]
+}
+
 function plural(quantity, singular, plural) {
   return quantity > 1 ? plural : singular;
 }
@@ -134,7 +143,7 @@ function describe(action, container, macro, verbose=true, flat=false, extra1=0) 
     container = flatten(container);
   }
 
-  if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
+  if (options.length > 0 && Math.random() > (1 / (2 + options.length))) {
     let choice = Math.floor(Math.random() * options.length);
     return options[choice](container, macro, verbose, flat, extra1);
   }
@@ -152,6 +161,15 @@ function pickString(...array){
     var pick = strings[~~(Math.random() * strings.length)];
     return pick;
 }
+
+function pickStringChance(chance, ...array) {
+  if (Math.random() < chance) {
+    return pickString(...array);
+  } else {
+    return ""
+  }
+}
+
 // DEFAULTS
 
 function defaultEat(container, macro, verbose, flat) {
@@ -215,6 +233,7 @@ function defaultStomp(container, macro, verbose, flat) {
       container.describe(verbose),
       pickString("under", "beneath", "with"),
       "your",
+      pickStringChance(0.4, ...synonyms.looming),
       macro.footDesc(false,false,true) + "."
     ], [
       capitalize(container.describe(verbose)),
@@ -229,21 +248,20 @@ function defaultStomp(container, macro, verbose, flat) {
       macro.footDesc(false,false,true),
       pickString("crushes", "smashes", "flattens"),
       container.describe(verbose)
-    ]).join(" ");
+    ]).filter(Boolean).join(" ");
   else
     return "You step on " + container.describe(verbose) + ".";
 }
 
 function defaultStompWedge(container, macro, verbose, flat) {
-  if (container.count == 1) {
-    let line = container.describe(verbose);
-    line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " is wedged in your " + macro.toeDesc(true);
-  } else {
-    let line = container.describe(verbose);
-    line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " are wedged in your " + macro.toeDesc(true);
-  }
+  return [
+    capitalize(container.describe(verbose)),
+    (container.count > 1 ? "are" : "is"),
+    pickString("wedged", "trapped", "left stuck", "jammed"),
+    pickString("in", "between", "within"),
+    "your",
+    macro.toeDesc(true)
+  ].join(" ")
 }
 
 function defaultFlexToes(container, macro, verbose, flat) {
