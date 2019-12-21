@@ -4507,9 +4507,8 @@ function grow_part_pick(id) {
 }
 
 function grow_pick(times) {
-
-  let button = document.querySelector(".growth-part-active");
-
+  const select = document.querySelector("#growth-part-select");
+  const chosenPart = select.value;
   if (macro.difficulty > 0 && macro.growthPoints < (times - 1) * 10) {
     update(["You need " + times*10 + " growth points to grow that much.",newline]);
   } else {
@@ -4519,7 +4518,7 @@ function grow_pick(times) {
 
     times /= 10;
 
-    switch (button.id.replace("button-growth-", "")) {
+    switch (chosenPart) {
       case "body": grow(times); break;
       case "paws": grow_paws(times); break;
       case "tail": grow_tail(times); break;
@@ -5074,7 +5073,7 @@ function enable_stat(name) {
 }
 
 function enable_growth_part(name) {
-  document.querySelector("#button-growth-" + name).style.display = 'block';
+  document.querySelector("#option-growth-" + name).style.display = 'block';
 }
 
 function disable_button(name) {
@@ -5482,7 +5481,7 @@ window.addEventListener('load', function(event) {
 
   document.getElementById("button-dark-mode-options").addEventListener("click",toggleDarkMode);
   document.querySelectorAll(".growth-part").forEach(function (button) {
-    button.addEventListener("click", function() { grow_part_pick(button.id); });
+    button.addEventListener("select", function() { grow_part_pick(button.id); });
   });
 
   document.getElementById("button-growth-1.1").addEventListener("click",function() { grow_pick(11); });
