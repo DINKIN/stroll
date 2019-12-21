@@ -154,7 +154,15 @@ function defaultEat(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else
-    return "You scoop up " + container.describe(verbose) + " and swallow " + (container.count > 1 ? "them" : "it") + " whole.";
+    return [
+      "You",
+      pickString("snatch up", "grab", "pluck up", "seize", "catch"),
+      container.describe(verbose) + ",",
+      "then",
+      pickString("swallow", "devour", "consume"),
+      (container.count > 1 ? "them" : "it"),
+      "whole."
+    ].join(" ");
 }
 
 function defaultChew(container, macro, verbose, flat) {
