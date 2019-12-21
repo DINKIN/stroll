@@ -634,7 +634,7 @@ body.dark .action-part-button.active {
 }
 
 body.light .meter {
-  background: #ddd !important;
+  background: #ccc !important;
 }
 
 body.dark .meter {
