@@ -255,14 +255,14 @@ function defaultAnalVore(container, macro, verbose, flat) {
         container.describe(false) + ". ",
         (container.count > 1 ? "They slide" : "It slides"),
         "inside with ease."
-      ].join(" "), [
+      ], [
         "You grab",
         container.describe(false) + ",",
         "shoving",
         (container.count > 1 ? "your victims" : "your victim"),
         "right up your rear with a muffled <i>shlrkh</i>."
-      ].join(" ")
-    );
+      ]
+    ).join(" ");
 
 }
 
