@@ -79,20 +79,19 @@ body.dark div {
     position: fixed;
     left: 0%;
     bottom: 0%;
-    width: 50%;
+    width: 48%;
     height: 50%;
     max-height: 50%;
-    margin: 0 0 1vh 0;
+    margin-left: 1vw;
   }
   #react-log {
     position: fixed;
     right: 0%;
     bottom: 0%;
-    width: 50%;
+    width: 48%;
     height: 50%;
     max-height: 50%;
-    margin: 1vh 0 0 0;
-    height: 40vh;
+    margin-right: 1vw;
   }
   .growth-part {
     width: 100px !important;
