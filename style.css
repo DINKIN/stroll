@@ -58,7 +58,7 @@ body.dark div {
 
 @media (max-aspect-ratio: 1/1){
   .game-area {
-    width: 100%
+    width: 100%;
     height: 60%;
   }
   #stat-container {
@@ -390,7 +390,7 @@ body.dark .custom-header-static {
   display: inline-block;
   border-style: dotted;
   border-width: 1px;
-  border-length: 5px;
+  border-radius: 5px;
 }
 
 .custom-category-sub .custom-header {
@@ -422,7 +422,6 @@ body.light input[type="checkbox"]:checked+
 .custom-header {
   color: #000;
   border-style: solid;
-  margin: 10px;
   background-color: rgba(230, 230, 230, 0.3);
 }
 
@@ -430,7 +429,6 @@ body.dark input[type="checkbox"]:checked+
 .custom-header {
   color: #fff;
   border-style: solid;
-  margin: 10px;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
