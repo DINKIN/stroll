@@ -410,11 +410,19 @@ function defaultCleavageAbsorb(container, macro, verbose, flat) {
 
 function defaultBreastCrush(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your thump your breasts against the ground.";
+    return "Your let your breasts thump against the ground.";
   else if (isFatal(macro))
-    return "Your heavy breasts obliterate " + container.describe(verbose) + ". ";
+    return [
+      "You let your breasts drop,",
+      pickString("crushing", "smashing", "burying", "smothering"),
+      container.describe(verbose),
+      "beneath those",
+      length(macro.breastDiameter, unit, true) + "-wide",
+      pickString("knockers", "tits", "boobs") + ".",
+      pickStringChance(0.5, (macro.lactationEnabled ? "A spray of milk spurts from your nipples." : ""))
+    ].filter(Boolean).join(" ");
   else
-    return "You smoosh " + container.describe(verbose) + " with your breasts.";
+    return "You smoosh " + container.describe(verbose) + " beneath your breasts.";
 }
 
 function defaultBreastVore(container, macro, verbose, flat) {
