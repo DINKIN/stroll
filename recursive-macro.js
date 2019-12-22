@@ -392,7 +392,7 @@ function fill_area(area, weights, variance=0.15)
       continue;
 
     var max = Math.floor(area / candidate.area);
-    var limit = Math.min(max, 100);
+    var limit = Math.min(max, 1000);
 
     var count = 0;
     var loopvar = 0;
@@ -418,8 +418,10 @@ function fill_area(area, weights, variance=0.15)
       ++loopvar;
     }
 
+    // if we're doing more than 100 victims, then we randomly  
+
     if (limit < max) {
-      count += Math.round((max-limit) * candidate.weight);
+      count += Math.round((max/limit) * candidate.weight);
     }
 
     area -= count * candidate.area;
