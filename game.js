@@ -2551,7 +2551,7 @@ function paw_stench() {
   macro.arouse(5);
 }
 
-function grind()
+function grind(active=true)
 {
   let area = macro.assArea / 2;
 
@@ -2576,9 +2576,17 @@ function grind()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(20);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
+
+  if (macro.femaleMuskEnabled) {
+    female_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
+  }
 }
 
-function ass_grind()
+function ass_grind(active=true)
 {
   let area = macro.assArea / 2;
 
@@ -2598,6 +2606,14 @@ function ass_grind()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(15);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
+
+  if (macro.femaleMuskEnabled) {
+    female_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
+  }
 }
 
 function anal_vore()
@@ -3099,7 +3115,7 @@ function foreskin_absorb()
   macro.arouse(45);
 }
 
-function cockslap()
+function cockslap(active=true)
 {
   let area = macro.dickArea;
   let prey = getPrey(biome, area);
@@ -3116,9 +3132,13 @@ function cockslap()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(15);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
 }
 
-function cock_vore()
+function cock_vore(active=true)
 {
   let area = macro.dickStretchGirth;
   let prey = getPrey(biome, area, macro.sameSizeCockVore);
@@ -3137,9 +3157,13 @@ function cock_vore()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(20);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
 }
 
-function ball_smother()
+function ball_smother(active=true)
 {
   let area = macro.ballArea * 2;
   let prey = getPrey(biome, area);
@@ -3156,6 +3180,27 @@ function ball_smother()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(10);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
+  }
+}
+
+function male_musk(area, active=true) {
+  let prey = getPrey(biome, area);
+  let line = describe("male-musk", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  if (get_living_prey(prey.sum()) == 0)
+    return;
+
+  let preyMass = prey.sum_property("mass");
+
+  add_victim_people("male-musk",prey);
+
+  update([line,linesummary,newline], active);
 }
 
 function male_spurt(vol, active=true)
@@ -3195,7 +3240,7 @@ function male_spurt_musk(area, active=true) {
 
   add_victim_people("male-spurt-musk",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
@@ -3236,6 +3281,25 @@ function male_orgasm_musk(area, active=true) {
   let preyMass = prey.sum_property("mass");
 
   add_victim_people("male-orgasm-musk",prey);
+
+  update([line,linesummary,newline], active);
+
+  macro.arouse(5);
+}
+
+function female_musk(area, active=true) {
+  let prey = getPrey(biome, area);
+  let line = describe("female-musk", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  if (get_living_prey(prey.sum()) == 0)
+    return;
+
+  let preyMass = prey.sum_property("mass");
+
+  add_victim_people("female-musk",prey);
 
   update([line,linesummary,newline], active);
 

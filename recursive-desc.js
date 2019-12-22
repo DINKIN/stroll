@@ -46,9 +46,9 @@ function getDefaultVictim(name) {
   return window[funcName];
 }
 
-var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
+var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-musk","female-musk","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
 
-var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
+var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-musk", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-musk", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
@@ -807,6 +807,26 @@ function defaultScatStench(container, macro, verbose, flat) {
     return "Vile fumes waft from your scat, choking the life from " + (sum > 1 ? sum + " people." : "a person.");
   else
     return "Your stinky scat overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
+}
+
+function defaultMaleMusk(container, macro, verbose, flat) {
+  let sum = get_living_prey(container.sum());
+  if (isSadistic(macro))
+    return "Waves of corrosive musk waft from your shaft, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describeSimple(flat) + ".";
+  if (isFatal(macro))
+    return "Powerful musk wafts from your shaft, choking the life from " + (sum > 1 ? sum + " people." : "a person.");
+  else
+    return "Your masculine musk overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
+}
+
+function defaultFemaleMusk(container, macro, verbose, flat) {
+  let sum = get_living_prey(container.sum());
+  if (isSadistic(macro))
+    return "Waves of corrosive musk waft from your slit, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describeSimple(flat) + ".";
+  if (isFatal(macro))
+    return "Powerful musk wafts from your slit, choking the life from " + (sum > 1 ? sum + " people." : "a person.");
+  else
+    return "Your feminine musk overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
 function defaultMaleSpurtMusk(container, macro, verbose, flat) {
@@ -1661,15 +1681,27 @@ function defaultVictimCumFlood(macro) {
   }
 }
 
+function defaultVictimMaleMusk(macro) {
+  if (isSadistic(macro)) {
+    return "reduced to slurry by corrosive masculine musk";
+  } else if (isGory(macro)) {
+    return "suffocated by masculine musk";
+  } else if (isFatal(macro)) {
+    return "snuffed out by masculine musk";
+  } else if (isNonFatal(macro)) {
+    return "dazed by masculine musk";
+  }
+}
+
 function defaultVictimMaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
-    return "dissolved in a tide of slick, musky precum";
+    return "corroded by your caustic, overwhelming masculine musk";
   } else if (isGory(macro)) {
-    return "drowned in your slick precum";
+    return "snuffed out by your masculine musk";
   } else if (isFatal(macro)) {
-    return "washed away by precum";
+    return "overwhelmed by masculine musk";
   } else if (isNonFatal(macro)) {
-    return "flooded with your precum";
+    return "dazed by masculine musk";
   }
 }
 
@@ -1709,15 +1741,27 @@ function defaultVictimFemcumFlood(macro) {
   }
 }
 
+function defaultVictimFemaleMusk(macro) {
+  if (isSadistic(macro)) {
+    return "dissolved to slurry by feminine musk";
+  } else if (isGory(macro)) {
+    return "suffocated by feminine musk";
+  } else if (isFatal(macro)) {
+    return "snuffed out by feminine musk";
+  } else if (isNonFatal(macro)) {
+    return "dazed by feminine musk";
+  }
+}
+
 function defaultVictimFemaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
-    return "suffocated by a spurt of corrosive feminine precum";
+    return "corroded by your caustic, overwhelming feminine musk";
   } else if (isGory(macro)) {
-    return "snuffed out by a splatter of feminine fluid";
+    return "snuffed out by your feminine musk";
   } else if (isFatal(macro)) {
-    return "flooded by your spurting precum";
+    return "overwhelmed by feminine musk";
   } else if (isNonFatal(macro)) {
-    return "soaked with your feminine precum";
+    return "dazed by feminine musk";
   }
 }
 
