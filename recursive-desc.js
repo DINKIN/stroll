@@ -12,7 +12,8 @@ const synonyms = {
   gulp: ["gulp", "gluk", "glrk", "glp"],
   swallow: ["swallow", "gulp"],
   looming: ["looming", "imposing", "awe-inspiring", "menacing"],
-  putrid: ["putrid", "foul", "wretched", "choking", "rancid", "utterly foul", "miasma-shrouded", "eye-wateringly foul"]
+  putrid: ["putrid", "foul", "wretched", "choking", "rancid", "utterly foul", "miasma-shrouded", "eye-wateringly foul"],
+  moan: ["moan", "gasp", "growl"]
 }
 
 function plural(quantity, singular, plural) {
@@ -436,8 +437,32 @@ function defaultBreastMilk(container, macro, verbose, flat) {
 function defaultUnbirth(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your slit...but they won't fit.";
-  else
-    return "You gasp as you slide " + container.describe(verbose) + " up your slit. ";
+  else {
+    return pickString([
+      "You",
+      pickString(...synonyms.moan),
+      "as",
+      container.describe(verbose),
+      (container.count > 1 ? "spread" : "spreads"),
+      "open your",
+      pickString("sex", macro.describeVagina + " slit") + ",",
+      pickString("swallowed", "sucked", "drawn"),
+      pickString("within", "inside", "down deep"),
+      "by",
+      pickString("tender", "sensuous", "lustful"),
+      pickString("folds", "muscle") + "."
+    ], [
+      capitalize(container.describe(verbose)),
+      "fall prey to your",
+      pickString("sex", macro.describeVagina + " slit"),
+      "with a messy",
+      pickString("<i>SQUELCH</i>,", "<i>SQUISH</i>,"),
+      "vanishing into your womb and sending a",
+      pickString("jolt", "surge", "shock"),
+      "of ecstasy up your spine."
+    ]).filter(Boolean).join(" ");
+  }
+    
 }
 
 function defaultSheathStuff(container, macro, verbose, flat) {
