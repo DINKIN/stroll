@@ -2089,7 +2089,7 @@ function getOnePrey(biome, area, sameSize = true)
   let potAreas = [];
 
   potential.forEach(function (x) {
-    potAreas.push([x,areas[x]]);
+    potAreas.push([x,things[x].area]);
   });
 
   potAreas = potAreas.sort(function (x,y) {
@@ -2099,12 +2099,12 @@ function getOnePrey(biome, area, sameSize = true)
   for (let i=0; i<potAreas.length; i++) {
     let x = potAreas[i];
     if (x[1] < area) {
-      return new Container([new things[x[0]](1)]);
+      return new Container([new things[x[0]][x[0]](1)]);
     }
   }
 
   if (sameSize)
-    return new Container([new things["Person"](1)]);
+    return new Container([new things["Person"]["Person"](1)]);
   else
     return new Container();
 }
@@ -2112,7 +2112,7 @@ function getOnePrey(biome, area, sameSize = true)
 function getWeights(region, area) {
   let weights = {};
 
-  if (area > areas["Planet"]) {
+  if (area > things["Planet"].area) {
     weights = {
       "Planet": 1.47e-10,
       "Star": 1.7713746e-12,
@@ -2123,7 +2123,7 @@ function getWeights(region, area) {
       "Multiverse": 1
     };
   }
-  else if (area > areas["Town"]) {
+  else if (area > things["Town"].area) {
     weights = {
       "Town": 0.001,
       "City": 0.0005,

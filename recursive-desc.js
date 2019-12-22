@@ -111,7 +111,7 @@ function hasNothingElse(container, things) {
 function nothingLarger(container, thing) {
   for (var key in container.contents)
     if (container.contents.hasOwnProperty(key))
-      if (areas[key] > areas[thing])
+      if (things[key].area > things[thing].area)
         return false;
 
   return true;

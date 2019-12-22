@@ -1,150 +1,460 @@
+
+/*
+
+function defaultSumDST(thing) {
+  return function() {
+    var counts = {};
+
+    if (thing.name != "Container") //if a container is detected, sets counts 
+      counts[thing.name] = thing.count; 
+
+    for (var key in thing.contents) {
+      if (thing.contents.hasOwnProperty(key)) {
+        var subcount = thing.contents[key].sum();
+        for (var subkey in subcount) {
+          if (!counts.hasOwnProperty(subkey)) {
+            counts[subkey] = 0;
+          }
+          counts[subkey] += subcount[subkey];
+        }
+      }
+    }
+
+    return counts;
+  };
+}
+
+function defaultSumProperty(thing) {
+  return function(prop) {
+    var total = 0;
+
+    total += thing[prop] * thing.count;
+
+    for (var key in thing.contents) {
+      if (thing.contents.hasOwnProperty(key)) {
+        total += thing.contents[key].sum_property(prop);
+      }
+    }
+
+    return total;
+  };
+}
+
+function defaultArea(thing) {
+  return areas[thing.name];
+}
+
+function DefaultDestructable() {
+  this.name = this.defaults.name;
+  this.area = this.defaults.area;
+  this.mass = this.defaults.mass;
+  this.sum = defaultSumDST;
+  this.sum_property = defaultSumProperty;
+  this.merge = defaultMerge;
+  this.multiply = defaultMultiply;
+  this.describeSimple = defaultDescribeSimple;
+
+  return this;
+}
+
+function copy_defaultsDST(self,proto) {
+  for (var key in proto) {
+    if (proto.hasOwnProperty(key)) {
+      self[key] = proto[key](self);
+    }
+  }
+}
+
+  personVar = {
+    name: "Person",
+    area: 0.33,
+    mass: 80,
+    clusters: 5,
+    cluster_chances: .8,
+    contents: [],
+    body: [["skinny", -10,0],["fat", 15,.05],["tall", 7, 0],["short",-7,0],["stocky",5,.02],["spindly",-5,-.02],["muscular",7,0],["fit",0,0],["multi-colored",0,0]],//["bodytype", mass modifier, area modifier]
+    sex: [["male",2,.02],["female",2,.02]],//["sex", mass modifier, area modifier]
+    species: [["wolf",80,.35],["cat",70,.3],["dog",75,.31],["squirrel",68,.29],["horse",90,.4],["hyena",78,.32],["fox",72,.3],["jackal",74,.32],["crux",90,.33],["sergal",77,.34]],//["species", mass modifier, area modifier]
+    singular: "person",
+    plural: "people"
+    }
+function PersonDST(count = 1) {
+  this.defaults = personVar;
+
+  copy_defaultsDST(this,new DefaultDestructable());
+
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function (verbose=true) {
+    var body = random_desc(this.properties.body, (verbose ? 0.6 : 0));
+    var sex = random_desc(this.properties.sex, (verbose ? 1 : 0));
+    var species = random_desc(this.properties.species);
+    return "a " + merge_desc([body,sex,species]);
+  };
+
+  this.describe = function(verbose=true) {
+    if (verbose) {
+      if (count <= 3) {
+        var list = [];
+        for (var i = 0; i < count; i++) {
+          list.push(this.describeOne(this.count <= 2));
+        }
+        return merge_things(list);
+      } else {
+        return this.count + " people";
+      }
+    } else {
+      return (this.count > 1 ? this.count + " people" : "a person");
+    }
+  };
+
+  return this;
+}
+*/
+
+
 'use strict';
 
 var things =
 {
-  "Container": Container,
+  "Container": {
+    "Container": Container,
+    mass: 0,
+    area: 0,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [],
+    },
 
 //Creatures
-  "Person": Person,
-  "Human": Human,
-  "Cow": Cow,
-  "Micro": Micro,
-  "Macro": Macro,
+  "Person": {
+    "Person": Person,
+    mass: 80,
+    area: .33,
+    clusters: 5,
+    cluster_chances: .8,
+    contents: [],
+    },
+  "Human": {
+    "Human": Human,
+    mass: 80,
+    area: .33,
+    clusters: 5,
+    cluster_chances: .8,
+    contents: [],
+    },
+  "Cow": {
+    "Cow": Cow,
+    mass: 300,
+    area: 2,
+    clusters: 15,
+    cluster_chances: .5,
+    contents: [],
+    },
+  "Micro": {
+    "Micro": Micro,
+    mass: .01,
+    area: .05,
+    clusters: 50,
+    cluster_chances: 1,
+    contents: [[]],
+    },
+  "Macro": {
+   "Macro": Macro,
+    mass: 8e4,
+    area: 100,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [[]],
+    },
 //Vehicles
-  "Empty Car": EmptyCar,
-  "Car": Car,
-  "Bus": Bus,
-  "Tram": Tram,
-  "Train": Train,
-  "Train Car": TrainCar,
+  "Empty Car": {
+    "Empty Car": EmptyCar,
+    mass: 1000,
+    area: 4,
+    clusters: 2,
+    cluster_chances: .3,
+    contents: [[]],
+    },
+  "Car": {
+    "Car": Car,
+    mass: 1000,
+    area: 4,
+    clusters: 4,
+    cluster_chances: .5,
+    contents: [["Person",1,4]],
+    },
+  "Bus": {
+    "Bus": Bus,
+    mass: 5000,
+    area: 12,
+    clusters: 1,
+    cluster_chances: .25,
+    contents: [["Person",2,30]],
+    },
+  "Tram": {
+    "Tram": Tram,
+    mass: 1e4,
+    area: 20,
+    clusters: 1,
+    cluster_chances: .2,
+    contents: [["Person",10,50]],
+    },
+  "Train": {
+    "Train": Train,
+    mass: 5e4,
+    area: 40,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Person",1,4,"engine"],["Train Car",2,10]],
+    },
+  "Train Car": {
+    "Train Car": TrainCar,
+    mass: 7500,
+    area: 20,
+    clusters: 1,
+    cluster_chances: .05,
+    contents: [["Person",10,40]],
+    },
 //Buildings
-  "House": House,
-  "Business": Business,
-  "Barn": Barn,
-  "Small Skyscraper": SmallSkyscraper,
-  "Large Skyscraper": LargeSkyscraper,
-  "Parking Garage": ParkingGarage,
+  "House": {
+    "House": House,
+    mass: 1e4,
+    area: 150,
+    clusters: 5,
+    cluster_chances: .5,
+    contents: [["Person",0,8],["Empty Car",0,2]],
+    },
+  "Business": {
+    "Business": Business,
+    mass: 5e4,
+    area: 400,
+    clusters: 5,
+    cluster_chances: .25,
+    contents: [["Person",0,30],["Car",0,5],["Empty Car",0,20]],
+    },
+  "Barn": {
+    "Barn": Barn,
+    mass: 5e3,
+    area: 300,
+    clusters: 1,
+    cluster_chances: .1,
+    contents: [["Person",0,2],["Cow",30,70]],
+    },
+  "Small Skyscraper": {
+    "Small Skyscraper": SmallSkyscraper,
+    mass: 1e7,
+    area: 1000,
+    clusters: 2,
+    cluster_chances: .25,
+    contents: [["Person",150,750],["Empty Car",10,50]],
+    },
+  "Large Skyscraper": {
+    "Large Skyscraper": LargeSkyscraper,
+    mass: 8e7,
+    area: 2000,
+    clusters: 1,
+    cluster_chances: .25,
+    contents: [["Person",500,1500],["Empty Car",20,100]],
+    },
+  "Parking Garage": {
+    "Parking Garage": ParkingGarage,
+    mass: 1e7,
+    area: 750,
+    clusters: 1,
+    cluster_chances: .1,
+    contents: [["Person",10,200],["Empty Car",100,300],["Car",5,30]],
+    },
 //Places
-  "Town": Town,
-  "City": City,
-  "Continent": Continent,
-  "Planet": Planet,
-  "Star": Star,
-  "Solar System": SolarSystem,
-  "Galaxy": Galaxy,
-  "Cluster": Cluster,
-  "Universe": Universe,
-  "Multiverse": Multiverse,
+  "Town": {
+    "Town": Town,
+    mass: 1,
+    area: 1e7,
+    clusters: 5,
+    cluster_chances: .1,
+    contents: [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25],["Business",500,5000]],
+    },
+  "City": {
+    "City": City,
+    mass: 1,
+    area: 1e9,
+    clusters: 0,
+    cluster_chances: .2,
+    contents: [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10],["Business",2000,10000]],
+    },
+  "Continent": {
+    "Continent": Continent,
+    mass: 1e21,
+    area: 1.5e13,
+    clusters: 5,
+    cluster_chances: .5,
+    contents: [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
+    },
+  "Planet": {
+    "Planet": Planet,
+    mass: 5.972e24,
+    area: 2.5e14,
+    clusters: 0,
+    cluster_chances: 1,
+    contents: [["Continent",4,9]],
+    },
+  "Star": {
+    "Star": Star,
+    mass: 1e40,
+    area: 3e18,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [],
+    },
+  "Solar System": {
+    "Solar System": SolarSystem,
+    mass: 1,
+    area: 3e21,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [["Star",1,1],["Planet",5,15]],
+    },
+  "Galaxy": {
+    "Galaxy": Galaxy,
+    mass: 1,
+    area: 2e45,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [["Star",1e9,500e9],["Solar System",1e8,500e8]],
+    },
+  "Cluster": {
+    "Cluster": Cluster,
+    mass: 1,
+    area: 2e49,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [["Galaxy",200,5000]],
+    },
+  "Universe": {
+    "Universe": Universe,
+    mass: 1,
+    area: 7e53,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [["Cluster",1.5e9,2.5e9]],
+    },
+  "Multiverse": {
+    "Multiverse": Multiverse,
+    mass: 1,
+    area: 5e56,
+    clusters: 1,
+    cluster_chances: 1,
+    contents: [["Universe",100,1000]],
+    },
 //Military
-  "Soldier": Soldier,
-  "Tank": Tank,
-  "Artillery": Artillery,
-  "Helicopter": Helicopter,
-  "Squad": Squad,
-  "Platoon": Platoon,
-  "Company": Company,
-  "Battalion": Battalion,
-  "Brigade": Brigade,
-  "Division": Division,
-  "Tank Division": TankDivision,
-  "Army": Army,
+  "Soldier": {
+    "Soldier": Soldier,
+    mass: 80,
+    area: 1,
+    clusters: 2,
+    cluster_chances: .2,
+    contents: [],
+    },
+  "Tank": {
+    "Tank": Tank,
+    mass: 5000,
+    area: 20,
+    clusters: 2,
+    cluster_chances: .25,
+    contents: [["Soldier",3,5]],
+    },
+  "Artillery": {
+    "Artillery": Artillery,
+    mass: 7000,
+    area: 25,
+    clusters: 3,
+    cluster_chances: .5,
+    contents: [["Soldier",4,6]],
+    },
+  "Helicopter": {
+    "Helicopter": Helicopter,
+    mass: 1500,
+    area: 12,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [["Soldier",4,16]],
+    },
+  "Squad": {
+    "Squad": Squad,
+    mass: 1,
+    area: 30,
+    clusters: 20,
+    cluster_chances: .05,
+    contents: [["Soldier",6,9]],
+    },
+  "Platoon": {
+    "Platoon": Platoon,
+    mass: 100,
+    area: 150,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Soldier",16,44]],
+    },
+  "Company": {
+    "Company": Company,
+    mass: 500,
+    area: 600,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Soldier",60,200]],
+    },
+  "Battalion": {
+    "Battalion": Battalion,
+    mass: 1000,
+    area: 3500,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Soldier",300,1000]],
+    },
+  "Brigade": {
+    "Brigade": Brigade,
+    mass: 1500,
+    area: 2e4,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Soldier",1500,3200]],
+    },
+  "Division": {
+    "Division": Division,
+    mass: 2000,
+    area: 8e4,
+    clusters: 3,
+    cluster_chances: .1,
+    contents: [["Soldier",10000,16000]],
+    },
+  "Tank Division": {
+    "Tank Division": TankDivision,
+    mass: 3000,
+    area: 1e5,
+    clusters: 1,
+    cluster_chances: .15,
+    contents: [["Soldier",8000,1200],["Tank",250,500]],
+    },
+  "Army": {
+    "Army": Army,
+    mass: 5000,
+    area: 1e6,
+    clusters: 2,
+    cluster_chances: .1,
+    contents: [["Soldier",40000,75000]],
+    },
 };
+  //Alterante Army Structuring, may be used later
+  //"Squad": [["Soldier",6,9]],
+  // "Platoon": [["Squad",3,4]],
+  //"Company": [["Platoon",3,5],["Squad",0,2]],
+  //"Battalion": [["Company",4,6]],
+  //"Brigade": [["Battalion",2,5],["Company",0,3]],
+  //"Division": [["Brigade",2,4]],
+  //"Tank Division": [["Brigade",2,4],["Tank",250,500]],
+  //"Army": [["Division",3,8],["Tank Division",1,5]],
 
-var areas =
-{
-  "Container": 0,
-//Creatures
-  "Person": 0.33,
-  "Human": 0.33,
-  "Cow": 2,
-  "Micro": 0.05,
-  "Macro": 100,
-//Vehicles
-  "Car": 4,
-  "Bus": 12,
-  "Tram": 20,
-  "Train": 40,
-  "Train Car": 20,
-//Buildings
-  "House": 150,
-  "Business": 400,
-  "Barn": 300,
-  "Small Skyscraper": 1000,
-  "Large Skyscraper": 2000,
-  "Parking Garage": 750,
-//Places
-  "Town": 1e7,
-  "City": 1e9,
-  "Continent": 1.5e13,
-  "Planet": 2.5e14,
-  "Star": 3e18,
-  "Solar System": 3e21,
-  "Galaxy": 2e45,
-  "Cluster": 2e49,
-  "Universe": 7e53,
-  "Multiverse": 5e56,
-//Military
-  "Soldier": 1,
-  "Tank": 10,
-  "Artillery": 12,
-  "Helicopter": 8,
-  "Squad": 20,
-  "Platoon": 100,
-  "Company": 500,
-  "Battalion": 3000,
-  "Brigade": 20000,
-  "Division": 80000,
-  "Tank Division": 100000,
-  "Army": 750000,
-};
-
-var masses =
-{
-  "Container": 0,
-//Creatures
-  "Person": 80,
-  "Human": 80,
-  "Cow": 300,
-  "Micro": 0.01,
-  "Macro": 80000,
-//Vehicles
-  "Car": 1000,
-  "Bus": 5000,
-  "Tram": 10000,
-  "Train": 50000,
-  "Train Car": 7500,
-//Buildings
-  "House": 10000,
-  "Business": 50000,
-  "Barn": 5000,
-  "Small Skyscraper": 10000000,
-  "Large Skyscraper": 80000000,
-  "Parking Garage": 10000000,
-//Places
-  "Town": 1,
-  "City": 1,
-  "Continent": 1e21,
-  "Planet": 5.972e24,
-  "Star": 1e40,
-  "Solar System": 1,
-  "Galaxy": 1,
-  "Cluster": 1,
-  "Universe": 1,
-  "Multiverse": 1,
-//Military
-  "Soldier": 80,
-  "Tank": 5000,
-  "Artillery": 7000,
-  "Helicopter": 1500,
-  "Squad": 1,
-  "Platoon": 100,
-  "Company": 500,
-  "Battalion": 1000,
-  "Brigade": 1500,
-  "Division": 2000,
-  "Tank Division": 3000,
-  "Army": 5000,
-};
 
 var clusters =
 {
@@ -337,18 +647,18 @@ function contents_insert(parent,thing,min,max,label) {
     owner.push([thing,min,max,label]);
 }
 
-function initContents(name,count) {
+function initContents(name,count) { //builds the contents for each destrucable(thing) when called
   let result = {};
-  let type = contents[name];
+  let type = things[name].contents;
 
   for (let i=0; i<type.length; i++) {
-    let amount = distribution(type[i][1],type[i][2],count);
+    let amount = distribution(type[i][1],type[i][2],count); //arrays of contents look like ["thing name",min,max,"optional name"] so those values have to pulled out
     if (amount > 0) {
       // if a custom label is supplied, use it!
-      if (type[i].length == 4)
-        result[type[i][3]] = new things[type[i][0]](amount);
+      if (type[i].length == 4) //if has optional name
+        result[type[i][3]] = new things[type[i][0]][type[i][0]](amount); //creates a "thing name" under the key of "optional name"
       else
-        result[type[i][0]] = new things[type[i][0]](amount);
+        result[type[i][0]] = new things[type[i][0]][type[i][0]](amount);
     }
   }
 
@@ -377,7 +687,7 @@ function fill_area(area, weights, variance=0.15)
   var candidates = [];
   for (var key in weights) {
     if (weights.hasOwnProperty(key)) {
-      candidates.push({"name": key, "area": areas[key], "weight": weights[key]});
+      candidates.push({"name": key, "area": things[key].area, "weight": weights[key]});
     }
   }
 
@@ -430,7 +740,7 @@ function fill_area(area, weights, variance=0.15)
     area -= count * candidate.area;
 
     if (count > 0)
-      result.push(new things[candidate.name](count));
+      result.push(new things[candidate.name][candidate.name](count));
   }
 
   return new Container(result);
@@ -535,18 +845,17 @@ function defaultMultiply(thing) {
 }
 
 function defaultArea(thing) {
-  return areas[thing.name];
+  return things[thing.name].area;
 }
 
 function defaultMass(thing) {
-  return masses[thing.name];
+  return things[thing.name].mass;
 }
 
-function defaultMerge(thing) {
+function defaultMerge(thing) { //this merges all objects into one containers
   return function(container) {
     var newCount = this.count + container.count;
-
-    var newThing = new things[thing.name](newCount);
+    var newThing = new things[thing.name][thing.name](newCount);
     newThing.contents = {};
 
     for (var key in this.contents) {
@@ -573,7 +882,7 @@ function listSum(sum) {
   let result = [];
   for (let key in sum) {
     if (sum.hasOwnProperty(key)) {
-      result.push(new things[key](sum[key]).describe(false));
+      result.push(new things[key][key](sum[key]).describe(false));
     }
   }
 
@@ -588,7 +897,7 @@ function flatten(thing) {
   let list = [];
 
   Object.entries(dict).forEach(function([key, val]) {
-    let obj = new things[key](val);
+    let obj = new things[key][key](val);
 
     obj.contents = [];
 
@@ -680,8 +989,8 @@ function DefaultEntity() {
 
 // god I love reinventing the wheel
 
-function copy_defaults(self,proto) {
-  for (var key in proto) {
+function copy_defaults(self,proto) { //loads the values defined in things into the fuction that calls it
+  for (var key in proto) { //proto will always be a new DefaultEntity, self is the parent function
     if (proto.hasOwnProperty(key)) {
       self[key] = proto[key](self);
     }
@@ -727,9 +1036,9 @@ function Person(count = 1) {
 
   this.describeOne = function (verbose=true) {
     var body = random_desc(["skinny","fat","tall","short","stocky","spindly","muscular","fit","multi-colored"], (verbose ? 0.6 : 0));
-    var sex = random_desc(["male", "female"], (verbose ? 1 : 0));
+    var sex = random_desc(["male", "female"], (verbose ? 0.75 : 0));
     var species = "";
-    species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal"]);
+    species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal","coyote","rabbit","lizard","avian"]);
     return "a " + merge_desc([body,sex,species]);
   };
 
@@ -1567,3 +1876,15 @@ function Army(count = 1) {
       }
     };
   }
+
+
+
+  //todo
+  //redo everything
+  //airports
+  //farms
+  //racetracks
+  //more building types
+  //nebula
+  //grand army
+  //armada
