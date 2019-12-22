@@ -92,6 +92,9 @@ let macro = //macro controls every customizable part of the players body
   "wombScale": 1,
   "breastScale": 1,
   "tailScale": 1,
+  "wingScale": 1,
+  "muskScale": 1,
+  "stenchScale": 1,
 
   "tailDensity": 1000,
   "dickDensity": 1000,
@@ -115,8 +118,8 @@ let macro = //macro controls every customizable part of the players body
   get handWidth() { return this.scaling(this.baseHandWidth, this.scale, 1); },
   get handArea() { return this.handLength * this.handWidth },
 
-  get wingLength() { return this.scaling(this.baseWingLength, this.scale, 1); },
-  get wingWidth() { return this.scaling(this.baseWingWidth, this.scale, 1); },
+  get wingLength() { return this.scaling(this.baseWingLength, this.scale * this.wingScale, 1); },
+  get wingWidth() { return this.scaling(this.baseWingWidth, this.scale * this.wingScale, 1); },
   get wingArea() { return this.wingLength * this.wingWidth; },
 
   "footOnlyDesc": function(plural=false,capital=false) {
@@ -1456,11 +1459,11 @@ let macro = //macro controls every customizable part of the players body
   },
 
   get pawStenchArea() {
-    return this.pawArea * this.basePawStenchArea;
+    return this.pawArea * this.basePawStenchArea * this.stenchScale;
   },
 
   get assStenchArea() {
-    return this.assArea * this.baseAssStenchArea;
+    return this.assArea * this.baseAssStenchArea * this.stenchScale;
   },
 
   get gasDigestFactor() {
@@ -3174,7 +3177,7 @@ function male_spurt(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_spurt_musk(area * macro.baseMaleMuskArea, active);
+    male_spurt_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3216,7 +3219,7 @@ function male_orgasm(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_orgasm_musk(area * macro.baseMaleMuskArea, active);
+    male_orgasm_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3258,7 +3261,7 @@ function female_spurt(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_spurt_musk(area * macro.baseFemaleMuskArea, active);
+    female_spurt_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3300,7 +3303,7 @@ function female_orgasm(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_orgasm_musk(area * macro.baseFemaleMuskArea, active);
+    female_orgasm_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3793,7 +3796,7 @@ function piss(vol, active=true) {
   macro.arouse(20);
 
   if (macro.stenchEnabled && macro.basePissStenchArea > 0) {
-    piss_stench(area * macro.basePissStenchArea, active);
+    piss_stench(area * macro.basePissStenchArea * macro.stenchScale, active);
   }
 }
 
@@ -3863,7 +3866,7 @@ function scat(vol, active=true) {
   macro.arouse(50);
 
   if (macro.stenchEnabled && macro.baseScatStenchArea > 0) {
-    scat_stench(area*macro.baseScatStenchArea, active);
+    scat_stench(area * macro.baseScatStenchArea * macro.stenchScale, active);
   }
 }
 
@@ -4529,6 +4532,8 @@ function grow_pick(times) {
       case "womb": grow_womb(times); break;
       case "breasts": grow_breasts(times); break;
       case "wings": grow_wings(times); break;
+      case "musk": grow_musk(times); break;
+      case "stench": grow_stench(times); break;
     }
   }
 }
@@ -4715,14 +4720,44 @@ function grow_wings(factor, simpleCalc=true){
   let oldLength = macro.wingLength;
 
   if (simpleCalc == true){
-    macro.pawScale *= factor;
+    macro.wingScale *= factor;
 } else {
     macro.wingScale = (macro.wingScale + (factor/macro.mass))
     }
 
   let lengthDelta = macro.wingLength - oldLength;
 
-  update([pickString("Power surges through you","Energy flows into you","Your back muscles fight for space","Your muscles tense","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your " + macro.wingDesc(true) + " grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","Your back muscles fight for space","Your muscles tense","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your " + macro.wingDesc + " wings grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
+}
+
+function grow_musk(factor, simpleCalc=true){
+
+  let oldScale = macro.muskScale;
+
+  if (simpleCalc == true){
+    macro.muskScale *= factor;
+} else {
+    macro.muskScale = (macro.muskScale + (factor/Math.pow(macro.mass, 1/3)))
+    }
+
+  let scaleDelta = macro.muskScale - oldScale;
+
+  update([pickString("Power surges through you","Energy flows into you","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your musk thickens, growing more potent.",newline]);
+}
+
+function grow_stench(factor, simpleCalc=true){
+
+  let oldScale = macro.muskScale;
+
+  if (simpleCalc == true){
+    macro.stenchScale *= factor;
+} else {
+    macro.stenchScale = (macro.stenchScale + (factor/Math.pow(macro.mass, 1/3)))
+    }
+
+  let scaleDelta = macro.stenchScale - oldScale;
+
+  update([pickString("Power surges through you","Energy flows into you","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your stench thickens, growing more potent.",newline]);
 }
 
 function resetSettings() {

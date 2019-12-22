@@ -1310,6 +1310,7 @@ options = [
         "name": "Musk",
         "id": "maleMuskEnabled",
         "type": "subcategory",
+        "parts": ["musk"],
         "entries":
         [
           {
@@ -1447,6 +1448,7 @@ options = [
         "name": "Musk",
         "id": "femaleMuskEnabled",
         "type": "subcategory",
+        "parts": ["musk"],
         "entries":
         [
           {
@@ -1574,6 +1576,7 @@ options = [
     "id": "stenchEnabled",
     "optional": true,
     "warning": "Stench is enabled",
+    "parts": ["stench"],
     "entries":
     [
       {
@@ -2050,7 +2053,7 @@ options = [
     "id": "hasWings",
     "optional": true,
     "panels": ["misc"],
-    //"parts": ["wings"],
+    "parts": ["wings"],
     "buttons": ["wings_flap"],
     "entries":
     [
