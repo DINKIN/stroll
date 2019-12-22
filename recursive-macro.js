@@ -416,10 +416,11 @@ function fill_area(area, weights, variance=0.15)
       ++loopvar;
     }
 
-    // if we're doing more than 100 victims, then we randomly  
+    // if we're doing more than the limit, then we just add on the rest, with some variance
 
     if (limit < max) {
-      count += Math.round((max/limit) * candidate.weight);
+      const base = (max-limit) * candidate.weight;
+      count += Math.round(base - base / 10 + base * Math.random() / 5);
     }
 
     area -= count * candidate.area;
