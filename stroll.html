@@ -166,21 +166,24 @@
         <div class="stat-line-hidden" id="piss"></div>
         <div class="stat-line-hidden" id="scat"></div>
       </div>
-      <div class="stat-header-self">Growth</div>
 
       <div class="growth-box">
         <div id="growth-box-left">
-          <button class="growth-part growth-part-active" id="button-growth-body">Body</button>
-          <button class="growth-part" id="button-growth-paws">Paws</button>
-          <button class="growth-part" id="button-growth-tail">Tail</button>
-          <button class="growth-part" id="button-growth-ass">Ass</button>
-          <button class="growth-part" id="button-growth-dick">Cock</button>
-          <button class="growth-part" id="button-growth-balls">Balls</button>
-          <button class="growth-part" id="button-growth-slit">Slit</button>
-          <button class="growth-part" id="button-growth-womb">Womb</button>
-          <button class="growth-part" id="button-growth-breasts">Breasts</button>
-        </div>
-        <div id="growth-box-right">
+          <div class="stat-header-self">Growth</div>
+          <select id="growth-part-select">
+            <option class="growth-part growth-part-active" id="option-growth-body" value="body">Body</option>
+            <option class="growth-part" id="option-growth-paws" value="paws">Paws</option>
+            <option class="growth-part" id="option-growth-tail" value="tail">Tail</option>
+            <option class="growth-part" id="option-growth-ass" value="ass">Ass</option>
+            <option class="growth-part" id="option-growth-dick" value="dick">Cock</option>
+            <option class="growth-part" id="option-growth-balls" value="balls">Balls</option>
+            <option class="growth-part" id="option-growth-slit" value="slit">Slit</option>
+            <option class="growth-part" id="option-growth-womb" value="womb">Womb</option>
+            <option class="growth-part" id="option-growth-breasts" value="breasts">Breasts</option>
+            <option class="growth-part" id="option-growth-wings" value="wings">Wings</option>
+            <option class="growth-part" id="option-growth-musk" value="musk">Musk</option>
+            <option class="growth-part" id="option-growth-stench" value="stench">Stench</option>
+          </select>
           <button class="growth-amount" id="button-growth-1.1">1.1x</button>
           <button class="growth-amount" id="button-growth-1.5">1.5x</button>
           <button class="growth-amount" id="button-growth-2">2x</button>
@@ -188,19 +191,23 @@
           <button class="growth-amount" id="button-growth-20">20x</button>
           <button class="growth-amount" id="button-growth-100">100x</button>
         </div>
+        <div id="growth-box-right">
+        </div>
       </div>
     </div>
     <div id="log-area">
       <div class="log" id="log">
         <div>Welcome to Stroll</div>
-        <br>
+        <div>&nbsp;</div>
         <div class="version"></div>
-        <br>
+        <div>&nbsp;</div>
         <div><b>This game features 18+ content</b></div>
         <div>&nbsp;</div>
       </div>
       <div class="log" id="react-log">
-        <div>It's a nice day for a walk</div>
+        <div>It's a nice day for a walk.</div>
+        <div>&nbsp;</div>
+        <div>This log will show automatic actions.</div>
         <div>&nbsp;</div>
       </div>
     </div>
@@ -218,11 +225,7 @@
 
       <p>Stroll is a text-based macro game. Stomp things, eat things, abuse things - then grow larger and do it all over again.</p>
 
-      <p><b>Stroll is designed for modern browsers. Chrome, Firefox, or Edge are suggested. Older browsers will likely fail to run the game. Mobile should work fine.</b></p>
-
-      <p>Leave a box empty for a sane default value</p>
-      <p>Lengths in meters, areas in square meters, masses in kilograms, times in seconds</p>
-      <p>(but you can preview the customary value)</p>
+      <p>Leave a box empty for a sane default value. Units are metric, but you can preview other unit systems.</p>
       <p>Click on boxed titles to enable and disable features.</p>
       <p class="has-tooltip" title="uwu">Underlined options have tooltips</p>
     </div>
@@ -282,9 +285,9 @@
         <div class="custom-category">
           <p>Or export/import your character to text here. Copy and paste to share.</p>
           <div class>
-            <button type="button" class="option-button" id="button-export-clear">Clear Space</button>
-            <button type="button" class="option-button" id="button-export-preset">Export Your Character</button>
-            <button type="button" class="option-button" id="button-import-preset">Import Your Character</button>
+            <button type="button" class="option-button" id="button-export-clear">Clear</button>
+            <button type="button" class="option-button" id="button-export-preset">Export</button>
+            <button type="button" class="option-button" id="button-import-preset">Import</button>
 
             <p><input autocomplete="off" type="text" id="export-area" placeholder="Paste character data here..."></p>
           </div>

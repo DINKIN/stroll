@@ -6,6 +6,7 @@ migrations = [
   // does nothing
   save => {
   },
+
   // 1 -> 2
 
   // automatic digestion is now a subcategory, so anyone with
@@ -35,8 +36,27 @@ migrations = [
       save.cropTransferAuto = false;
     if (save.wingDigestTime == 0)
       save.wingDigestAuto = false;
-  }
+  },
 
+  // 2 -> 3
+
+  // passive production is now written as percentage points;
+  // old values won't make sense anymore, so we'll just
+  // erase them
+  save => {
+    if (save.baseCumProduction)
+      delete save.baseCumProduction;
+    if (save.baseFemcumProduction)
+      delete save.baseFemcumProduction;
+    if (save.baseLactationProduction)
+      delete save.baseLactationProduction;
+    if (save.baseGasProduction)
+      delete save.baseGasProduction;
+    if (save.basePissProduction)
+      delete save.basePissProduction;
+    if (save.baseScatProduction)
+      delete save.baseScatProduction;
+  }
 ];
 
 function migrate(save, target=null) {

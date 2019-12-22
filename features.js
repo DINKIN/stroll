@@ -558,7 +558,7 @@ options = [
         "name": "Hand length",
         "id": "baseHandLength",
         "type": "float",
-        "default": "0.25",
+        "default": "0.2",
         "unit": "length"
       },
       {
@@ -572,7 +572,7 @@ options = [
         "name": "Ass area",
         "id": "baseAssArea",
         "type": "float",
-        "default": "0.2",
+        "default": "0.1",
         "unit": "area"
       },
       {
@@ -646,7 +646,6 @@ options = [
         "type": "radio",
         "id": "difficulty",
         "default": "0",
-        "tooltip": "Grow how you want, when you want.",
         "choices":
         [
           {
@@ -663,24 +662,23 @@ options = [
       },
       {
         "name": "Automatic Growth",
-        "id": "automaticGrowth",
+        "id": "automaticGrowthEnabled",
         "type": "subcategory",
         "entries":
         [
           {
-            "name": "Automatic growth",
-            "id": "automaticGrowthEnabled",
-            "type": "checkbox",
-            "default": false,
-            "warning": "Automatic Growth is enabled",
-            "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass.",
+            "name": "Help",
+            "id": "",
+            "type": "label",
+            "tooltip": "When checked, you will automaically grow by ingesting/absorbing mass."
           },
           {
             "name": "Prey growth factor",
             "id": "basePreyGrowthFactor",
             "type": "float",
-            "default": "0.8",
-            "tooltip": "How much of what you eat gets automatically added to your body. Setting this to [0] disables it. To add half of your prey mass to your own, set to [.5]."
+            "default": "80",
+            "unit": "percentage",
+            "tooltip": "How much of what you eat gets automatically added to your body. Setting this to 0% disables it. To add half of your prey mass to your own, set to 50%."
           },
           {
             "name": "Scale growth with size",
@@ -782,22 +780,26 @@ options = [
         [
           {
             "name": "Non-fatal",
-            "value": "0"
+            "value": "0",
+            "tooltip": "All actions are explicitly safe."
           },
           {
             "name": "Fatal",
             "value": "1",
-            "warning": "Fatal actions are enabled"
+            "warning": "Fatal actions are enabled",
+            "tooltip": "Actions can have fatal consequences, but don't go into detail."
           },
           {
             "name": "Gory",
             "value": "2",
-            "warning": "Gory actions are enabled"
+            "warning": "Gory actions are enabled",
+            "tooltip": "Descriptions are violent, but not excessively so."
           },
           {
             "name": "Sadistic",
             "value": "3",
-            "warning": "Brutal actions are enabled"
+            "warning": "Brutal actions are enabled",
+            "tooltip": "Cronch."
           },
         ]
       }
@@ -888,7 +890,7 @@ options = [
         "name": "Anus diameter",
         "id": "baseAnalVoreDiameter",
         "type": "float",
-        "default": "0.2",
+        "default": "0.1",
         "unit": "length"
       },
       {
@@ -910,8 +912,9 @@ options = [
         "name": "Anal autogrowth factor",
         "id": "assGrowthFactor",
         "type": "float",
-        "default": "0.01",
-        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
       },
       {
         "name": "Manual digestion",
@@ -1089,8 +1092,9 @@ options = [
             "name": "Tail autogrowth factor",
             "id": "tailGrowthFactor",
             "type": "float",
-            "default": "0.01",
-            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+            "default": "1",
+            "unit": "percentage",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
           },
           {
             "name": "Automatic Digestion",
@@ -1192,9 +1196,9 @@ options = [
         "name": "Passive cum production",
         "id": "baseCumProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Cum storage factor",
@@ -1206,15 +1210,17 @@ options = [
         "name": "Cock autogrowth factor",
         "id": "cockGrowthFactor",
         "type": "float",
-        "default": "0.01",
-        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
       },
       {
         "name": "Balls autogrowth factor",
         "id": "ballGrowthFactor",
         "type": "float",
-        "default": "0.01",
-        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
       },
       {
         "name": "Cock Vore",
@@ -1304,6 +1310,7 @@ options = [
         "name": "Musk",
         "id": "maleMuskEnabled",
         "type": "subcategory",
+        "parts": ["musk"],
         "entries":
         [
           {
@@ -1357,9 +1364,9 @@ options = [
         "name": "Passive femcum production",
         "id": "baseFemcumProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Femcum storage factor",
@@ -1390,15 +1397,17 @@ options = [
             "name": "Vagina autogrowth factor",
             "id": "vaginaGrowthFactor",
             "type": "float",
-            "default": "0.01",
-            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+            "default": "1",
+            "unit": "percentage",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
           },
           {
             "name": "Womb autogrowth factor",
             "id": "wombGrowthFactor",
             "type": "float",
-            "default": "0.01",
-            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+            "default": "1",
+            "unit": "percentage",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
           },
           {
             "name": "Automatic Digestion",
@@ -1439,6 +1448,7 @@ options = [
         "name": "Musk",
         "id": "femaleMuskEnabled",
         "type": "subcategory",
+        "parts": ["musk"],
         "entries":
         [
           {
@@ -1486,9 +1496,9 @@ options = [
             "name": "Passive milk production",
             "id": "baseLactationProduction",
             "type": "float",
-            "default": "0.001",
-            "unit": "volume",
-            "tooltip": "The fraction of your maximum capacity produced every second"
+            "default": "0.1",
+            "unit": "percentage",
+            "tooltip": "How much you fill up every second"
           },
           {
             "name": "Milk storage scale",
@@ -1521,8 +1531,9 @@ options = [
             "name": "Breast autogrowth factor",
             "id": "breastGrowthFactor",
             "type": "float",
-            "default": "0.01",
-            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+            "default": "1",
+            "unit": "percentage",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
           },
           {
             "name": "Automatic Digestion",
@@ -1565,6 +1576,7 @@ options = [
     "id": "stenchEnabled",
     "optional": true,
     "warning": "Stench is enabled",
+    "parts": ["stench"],
     "entries":
     [
       {
@@ -1618,9 +1630,9 @@ options = [
         "name": "Passive gas production",
         "id": "baseGasProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Gas storage scale",
@@ -1655,7 +1667,8 @@ options = [
         "name": "Souls autogrowth factor",
         "id": "soulGrowthFactor",
         "type": "float",
-        "default": "0.25",
+        "default": "25",
+        "unit": "percentage",
         "tooltip": "How much you grow when absorbing souls. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
       },
       {
@@ -1716,9 +1729,9 @@ options = [
         "name": "Passive piss production",
         "id": "basePissProduction",
         "type": "float",
-        "default": "0.01",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Piss storage scale",
@@ -1809,9 +1822,9 @@ options = [
         "name": "Passive scat production",
         "id": "baseScatProduction",
         "type": "float",
-        "default": "0.001",
-        "unit": "volume",
-        "tooltip": "The fraction of your maximum capacity produced every second"
+        "default": "0.1",
+        "unit": "percentage",
+        "tooltip": "How much you fill up every second"
       },
       {
         "name": "Scat storage scale",
@@ -1845,7 +1858,8 @@ options = [
             "name": "Goo autogrowth factor",
             "id": "gooGrowthFactor",
             "type": "float",
-            "default": "0.8",
+            "default": "80",
+            "unit": "percentage",
             "tooltip": "How much you grow when absorbing people via goo. [1]-you will gain equal mass to the souls you absorb. [.01]- you will grow by 1% of the mass of the souls you absorb. This does not stack with Prey growth factor"
           },
           {
@@ -1883,8 +1897,9 @@ options = [
         "name": "Paw autogrowth factor",
         "id": "pawGrowthFactor",
         "type": "float",
-        "default": "0.01",
-        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+        "default": "1",
+        "unit": "percentage",
+        "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
       },
       {
         "name": "Automatic Digestion",
@@ -2038,7 +2053,7 @@ options = [
     "id": "hasWings",
     "optional": true,
     "panels": ["misc"],
-    //"parts": ["wings"],
+    "parts": ["wings"],
     "buttons": ["wings_flap"],
     "entries":
     [
@@ -2073,8 +2088,9 @@ options = [
             "name": "Wing autogrowth factor",
             "id": "wingGrowthFactor",
             "type": "float",
-            "default": "0.01",
-            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, [1]:all mass goes to this part [.2]:20% part growth-80% overall growth."
+            "default": "1",
+            "unit": "percentage",
+            "tooltip": "How much this part grows during part specific digestion. This is relative to overall growth, 100%:all mass goes to this part 20%:20% part growth-80% overall growth."
           },
           {
             "name": "Automatic Digestion",

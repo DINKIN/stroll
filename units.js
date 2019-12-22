@@ -40,24 +40,32 @@ function numberRough(value,suffix="") {
     }
   }
 }
-function number(value, type="full", precision=3) {
+
+function fixedIfDecimal(num, fixed) {
+  if (fixed === undefined)
+    return num.toString();
+  else;
+    return num.toFixed(fixed);
+}
+
+function number(value, type="full", fixed) {
   var val = parseFloat(value);
   switch(type) {
     case "full":
       if (Math.log(value) / Math.log(10) < 10) {
-        return val.toString();
+        return fixedIfDecimal(val, fixed);
       }
 
-    case "scientific": return val.toExponential(precision).toString();
-    case "words": return number_words_repeated(val);
-    case "prefix": return number_prefix(val);
+    case "scientific": return val.toExponential(3, fixed).toString();
+    case "words": return number_words_repeated(val, fixed);
+    case "prefix": return number_prefix(val, fixed);
   }
 }
 
 function number_words(value) {
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0) {
-    return value.toString();
+    return fixedIfDecimal(value, fixed);
   }
   switch(scale) {
     case 0: return value.toString();
@@ -85,14 +93,14 @@ function number_words(value) {
   }
 }
 
-function number_words_repeated(value) {
+function number_words_repeated(value, fixed) {
   if (value == Infinity)
     return "a lot of";
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toString();
+    return fixedIfDecimal(value, fixed);
   switch(scale) {
-    case 0: return value.toString();
+    case 0: return fixedIfDecimal(value, fixed);
     case 1: return Math.round(value / 1e3).toString() + " thousand";
     case 2: return Math.round(value / 1e6).toString() + " million";
     case 3: return Math.round(value / 1e9).toString() + " billion";
@@ -108,12 +116,12 @@ function number_words_repeated(value) {
   }
 }
 
-function number_prefix(value) {
+function number_prefix(value, fixed) {
   var scale = Math.floor(Math.log(value) / Math.log(1000));
   if (scale < 0)
-    return value.toString();
+    return fixedIfDecimal(value, fixed);
   switch(scale) {
-    case 0: return value.toString();
+    case 0: return fixedIfDecimal(value, fixed);
     case 1: return Math.round(value / 1e3).toString() + "K";
     case 2: return Math.round(value / 1e6).toString() + "M";
     case 3: return Math.round(value / 1e9).toString() + "G";
@@ -434,6 +442,28 @@ function customarySymArea(m2, singular=false) {
   }
 }
 
+function approxArea(m2, singular=false) {
+  if (m2 < 20000) {
+    let area = round(m2/5341.85,1);
+    return area + (singular || area == 1 ? " football field" : " football fields");
+  } else if (m2 < 9.36e+15) {
+    let area = round(m2/10117.1,1);
+    return area + (singular || area == 1 ? " block" : " blocks");
+  } else if (m2 < 3.7920361e+13) {
+    let area = round(m2/9.36e+8,1);
+    return area + (singular || area == 1 ? " city" : " cities");
+  } else if (m2 < 9.4800902e+18) {
+    let area = round(m2/9.4800902e+12,1);
+    return area + (singular || area == 1 ? " moon" : " moons");
+  } else if (m2 < 2.8118957330513e+42) {
+    let area = round(m2/6.4900004e+28,1);
+    return area + (singular || area == 1 ? " solar system" : " solar systems");
+  } else {
+    let area = round(m2/2.8118957330513e+42,1);
+    return area + (singular || area == 1 ? " milky way" : " milky ways");
+  }
+}
+
 function metricVolume(m3, singular=false) {
   if (m3 < 1/1000) {
     let volume = round(m3*1e6, 0);
@@ -462,13 +492,13 @@ function metricSymVolume(m3, singular=false) {
     return volume + " L";
   } else if (m3 < 1000000) {
     let volume = round(m3, 0);
-    return volume + " m" + "3".sup();
+    return volume + " m" + "³";
   } else if (m3 < 1e12){
     let volume = round(m3/1e9, 3);
-    return volume + " km" + "3".sup();
+    return volume + " km" + "³";
   } else {
     let volume = round(m3/1e9, 0);
-    return volume + " km" + "3".sup();
+    return volume + " km" + "³";
   }
 }
 

@@ -3,7 +3,7 @@
 /*jshint browser: true*/
 /*jshint devel: true*/
 
-let version = "v1.0.1";
+let version = "v1.1.1";
 
 let errored = false;
 
@@ -18,6 +18,8 @@ window.onerror = function(msg, source, lineno, colno, error) { //opens a popup i
 };
 //generates initial conditions and sets up variables
 let started = false;
+
+const fillPeriod = 1000 / 60;
 
 const strollingEnum = {
     Standing: 0,
@@ -90,6 +92,9 @@ let macro = //macro controls every customizable part of the players body
   "wombScale": 1,
   "breastScale": 1,
   "tailScale": 1,
+  "wingScale": 1,
+  "muskScale": 1,
+  "stenchScale": 1,
 
   "tailDensity": 1000,
   "dickDensity": 1000,
@@ -113,8 +118,8 @@ let macro = //macro controls every customizable part of the players body
   get handWidth() { return this.scaling(this.baseHandWidth, this.scale, 1); },
   get handArea() { return this.handLength * this.handWidth },
 
-  get wingLength() { return this.scaling(this.baseWingLength, this.scale, 1); },
-  get wingWidth() { return this.scaling(this.baseWingWidth, this.scale, 1); },
+  get wingLength() { return this.scaling(this.baseWingLength, this.scale * this.wingScale, 1); },
+  get wingWidth() { return this.scaling(this.baseWingWidth, this.scale * this.wingScale, 1); },
   get wingArea() { return this.wingLength * this.wingWidth; },
 
   "footOnlyDesc": function(plural=false,capital=false) {
@@ -1336,23 +1341,21 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillCum": function(self) {
-    self.cumStorage.amount += self.scaling(self.baseCumProduction / 10 / 1000, self.scale * self.ballScale, 3);
+    self.cumStorage.amount += self.cumStorage.limit * self.baseCumProduction * fillPeriod / 1000;
     if (self.cumStorage.amount > self.cumStorage.limit)
       self.arouse(1 * (self.cumStorage.amount / self.cumStorage.limit - 1));
-    setTimeout(function () { self.fillCum(self); }, 100);
-    update();
+    setTimeout(function () { self.fillCum(self); }, fillPeriod);
   },
 
   "fillFemcum": function(self) {
-    self.femcumStorage.amount += self.scaling(self.baseFemcumProduction / 10 / 1000, self.scale * self.wombScale, 3);
+    self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000;
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
-    setTimeout(function () { self.fillFemcum(self); }, 100);
-    update();
+    setTimeout(function () { self.fillFemcum(self); }, fillPeriod);
   },
 
   "fillBreasts": function(self) {
-    self.milkStorage.amount += self.scaling(self.baseLactationProduction / 10 / 1000, self.scale * self.breastScale, 3);
+    self.milkStorage.amount += self.milkStorage.limit * self.baseLactationProduction * fillPeriod / 1000;
 
     if (self.milkStorage.amount > self.milkStorage.limit) {
       breast_milk(self.milkStorage.amount - self.milkStorage.limit/2);
@@ -1361,12 +1364,11 @@ let macro = //macro controls every customizable part of the players body
     if (self.milkStorage.amount > self.milkStorage.limit) {
       self.milkStorage.amount = self.milkStorage.limit;
     }
-    setTimeout(function () { self.fillBreasts(self); }, 100);
-    update();
+    setTimeout(function () { self.fillBreasts(self); }, fillPeriod);
   },
 
   "fillGas": function(self) {
-    self.gasStorage.amount += self.scaling(self.baseGasProduction / 10 / 1000, self.scale, 3);
+    self.gasStorage.amount += self.gasStorage.limit * self.baseGasProduction * fillPeriod / 1000;
 
     let ratio = self.gasStorage.amount / self.gasStorage.limit;
 
@@ -1384,8 +1386,7 @@ let macro = //macro controls every customizable part of the players body
       }
 
     }
-    setTimeout(function () { self.fillGas(self); }, 100);
-    update();
+    setTimeout(function () { self.fillGas(self); }, fillPeriod);
   },
 
   get urethraDiameter() {
@@ -1399,21 +1400,19 @@ let macro = //macro controls every customizable part of the players body
   },
 
   "fillPiss": function(self) {
-    self.pissStorage.amount += self.scaling(self.basePissProduction / 10 / 1000, self.scale, 3);
+    self.pissStorage.amount += self.pissStorage.limit * self.basePissProduction * fillPeriod / 1000;
 
     if (self.pissStorage.amount > self.pissStorage.limit * 2)
       piss(self.pissStorage.amount, false);
-    setTimeout(function () { self.fillPiss(self); }, 100);
-    update();
+    setTimeout(function () { self.fillPiss(self); }, fillPeriod);
   },
 
   "fillScat": function(self) {
-    self.scatStorage.amount += self.scaling(self.baseScatProduction / 10 / 1000, self.scale, 3);
+    self.scatStorage.amount += self.scatStorage.limit * self.baseScatProduction * fillPeriod / 1000;
 
     if (self.scatStorage.amount > self.scatStorage.limit * 2)
       scat(self.scatStorage.amount, false);
-    setTimeout(function () { self.fillScat(self); }, 100);
-    update();
+    setTimeout(function () { self.fillScat(self); }, fillPeriod);
   },
 
   "cumStorage": {
@@ -1460,11 +1459,11 @@ let macro = //macro controls every customizable part of the players body
   },
 
   get pawStenchArea() {
-    return this.pawArea * this.basePawStenchArea;
+    return this.pawArea * this.basePawStenchArea * this.stenchScale;
   },
 
   get assStenchArea() {
-    return this.assArea * this.baseAssStenchArea;
+    return this.assArea * this.baseAssStenchArea * this.stenchScale;
   },
 
   get gasDigestFactor() {
@@ -1527,7 +1526,6 @@ let macro = //macro controls every customizable part of the players body
       this.arousal = 0;
       this.afterglow = false;
     }
-    update();
   },
 
   "quenchExcess": function(self) {
@@ -1550,7 +1548,6 @@ let macro = //macro controls every customizable part of the players body
           female_spurt(macro.femcumVolume * (0.1 + Math.random() / 10), false);
           self.femaleSpurt = 0;
         }
-        update();
       } else if (self.orgasm) {
         self.quench(1);
       } else if (self.afterglow) {
@@ -2114,9 +2111,9 @@ function getWeights(region, area) {
 
   if (area > things["Planet"].area) {
     weights = {
-      "Planet": 1.47e-10,
-      "Star": 1.7713746e-12,
-      "Solar System": 4e-10,
+      "Planet": 1.47e-3,
+      "Star": 1.7713746e-3,
+      "Solar System": 4e-4,
       "Galaxy": 0.1,
       "Cluster": 0.5,
       "Universe": 1,
@@ -2186,7 +2183,7 @@ function getWeights(region, area) {
       }
     }
     if (macro.victimsMicros) {
-      weights["Micro"] = 1;
+      weights["Micro"] = 0.001;
     }
 
     if (macro.victimsMacros) {
@@ -2402,7 +2399,8 @@ function drool()
 
   update([sound,line,linesummary,newline]);
 }
-function stomp()
+
+function stomp(active=true)
 {
   if (macro.gooMolten && !macro.footShoeWorn && !macro.footSockWorn) {
     stomp_goo();
@@ -2412,7 +2410,7 @@ function stomp()
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
   let line = describe("stomp", prey, macro, verbose, flat);
-  let linesummary = summarize(prey.sum(), false);
+  let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
 
@@ -2422,20 +2420,20 @@ function stomp()
 
   add_victim_people("stomped",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 
   updateBiome(false);
 
   macro.arouse(5);
 
-  stomp_wedge();
+  stomp_wedge(active);
 
   if (macro.stenchEnabled && macro.basePawStenchArea > 0) {
-    paw_stench();
+    paw_stench(active);
   }
 }
 
-function stomp_wedge() {
+function stomp_wedge(active=true) {
   if (macro.footType == "hoof")
     return;
 
@@ -2466,14 +2464,14 @@ function stomp_wedge() {
 
   add_victim_people("stomped",prey);
 
-  update([sound,line,linesummary,newline]);
+  update([sound,line,linesummary,newline], active);
 }
 
 function stomp_goo() {
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
   let line = describe("stomp-goo", prey, macro, verbose, flat);
-  let linesummary = summarize(prey.sum(), true);
+  let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
 
@@ -2553,7 +2551,7 @@ function paw_stench() {
   macro.arouse(5);
 }
 
-function grind()
+function grind(active=true)
 {
   let area = macro.assArea / 2;
 
@@ -2578,9 +2576,17 @@ function grind()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(20);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
+
+  if (macro.femaleMuskEnabled) {
+    female_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
+  }
 }
 
-function ass_grind()
+function ass_grind(active=true)
 {
   let area = macro.assArea / 2;
 
@@ -2600,6 +2606,14 @@ function ass_grind()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(15);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
+
+  if (macro.femaleMuskEnabled) {
+    female_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
+  }
 }
 
 function anal_vore()
@@ -3101,7 +3115,7 @@ function foreskin_absorb()
   macro.arouse(45);
 }
 
-function cockslap()
+function cockslap(active=true)
 {
   let area = macro.dickArea;
   let prey = getPrey(biome, area);
@@ -3118,9 +3132,13 @@ function cockslap()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(15);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
 }
 
-function cock_vore()
+function cock_vore(active=true)
 {
   let area = macro.dickStretchGirth;
   let prey = getPrey(biome, area, macro.sameSizeCockVore);
@@ -3139,9 +3157,13 @@ function cock_vore()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(20);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale / 2, active);
+  }
 }
 
-function ball_smother()
+function ball_smother(active=true)
 {
   let area = macro.ballArea * 2;
   let prey = getPrey(biome, area);
@@ -3158,6 +3180,27 @@ function ball_smother()
   update([sound,line,linesummary,newline]);
 
   macro.arouse(10);
+
+  if (macro.maleMuskEnabled) {
+    male_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
+  }
+}
+
+function male_musk(area, active=true) {
+  let prey = getPrey(biome, area);
+  let line = describe("male-musk", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  if (get_living_prey(prey.sum()) == 0)
+    return;
+
+  let preyMass = prey.sum_property("mass");
+
+  add_victim_people("male-musk",prey);
+
+  update([line,linesummary,newline], active);
 }
 
 function male_spurt(vol, active=true)
@@ -3179,7 +3222,7 @@ function male_spurt(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_spurt_musk(area * macro.baseMaleMuskArea, active);
+    male_spurt_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3197,7 +3240,7 @@ function male_spurt_musk(area, active=true) {
 
   add_victim_people("male-spurt-musk",prey);
 
-  update([line,linesummary,newline]);
+  update([line,linesummary,newline], active);
 
   macro.arouse(5);
 }
@@ -3221,7 +3264,7 @@ function male_orgasm(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.maleMuskEnabled) {
-    male_orgasm_musk(area * macro.baseMaleMuskArea, active);
+    male_orgasm_musk(area * macro.baseMaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3238,6 +3281,25 @@ function male_orgasm_musk(area, active=true) {
   let preyMass = prey.sum_property("mass");
 
   add_victim_people("male-orgasm-musk",prey);
+
+  update([line,linesummary,newline], active);
+
+  macro.arouse(5);
+}
+
+function female_musk(area, active=true) {
+  let prey = getPrey(biome, area);
+  let line = describe("female-musk", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  if (get_living_prey(prey.sum()) == 0)
+    return;
+
+  let preyMass = prey.sum_property("mass");
+
+  add_victim_people("female-musk",prey);
 
   update([line,linesummary,newline], active);
 
@@ -3263,7 +3325,7 @@ function female_spurt(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_spurt_musk(area * macro.baseFemaleMuskArea, active);
+    female_spurt_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3305,7 +3367,7 @@ function female_orgasm(vol, active=true)
   update([sound,line,linesummary,newline], active);
 
   if (macro.femaleMuskEnabled) {
-    female_orgasm_musk(area * macro.baseFemaleMuskArea, active);
+    female_orgasm_musk(area * macro.baseFemaleMuskArea * macro.muskScale, active);
   }
 }
 
@@ -3798,7 +3860,7 @@ function piss(vol, active=true) {
   macro.arouse(20);
 
   if (macro.stenchEnabled && macro.basePissStenchArea > 0) {
-    piss_stench(area * macro.basePissStenchArea, active);
+    piss_stench(area * macro.basePissStenchArea * macro.stenchScale, active);
   }
 }
 
@@ -3868,7 +3930,7 @@ function scat(vol, active=true) {
   macro.arouse(50);
 
   if (macro.stenchEnabled && macro.baseScatStenchArea > 0) {
-    scat_stench(area*macro.baseScatStenchArea, active);
+    scat_stench(area * macro.baseScatStenchArea * macro.stenchScale, active);
   }
 }
 
@@ -4355,9 +4417,9 @@ function cooldown_end(category) {
     });
 }
 
-function transformNumbers(line)
+function transformNumbers(line, fixed=undefined)
 {
-  return line.toString().replace(/[0-9]+(\.[0-9]+)?(e\+[0-9]+)?/g, function(text) { return number(text, numbers); });
+  return line.toString().replace(/[0-9]+(\.[0-9]+)?(e\+[0-9]+)?/g, function(text) { return number(text, numbers, fixed); });
 }
 
 function update(lines = [], active=true)
@@ -4416,7 +4478,7 @@ function applyPercentage(name, meterPos) {
 }
 
 function stylePercentage(name, storage) {
-  document.getElementById(name).innerHTML = name + ": " + transformNumbers(volume(storage.amount,unit,false));
+  document.getElementById(name).innerHTML = name + ": " + transformNumbers(volume(storage.amount,unit,false), 2);
   let meterPos = 150 - storage.amount / storage.limit * 150;
   applyPercentage(name, meterPos);
 }
@@ -4448,7 +4510,7 @@ function pick_move()
     return;
   }
 
-  stomp();
+  stomp(false);
 }
 //Growth
   //Automatic Growth
@@ -4512,9 +4574,8 @@ function grow_part_pick(id) {
 }
 
 function grow_pick(times) {
-
-  let button = document.querySelector(".growth-part-active");
-
+  const select = document.querySelector("#growth-part-select");
+  const chosenPart = select.value;
   if (macro.difficulty > 0 && macro.growthPoints < (times - 1) * 10) {
     update(["You need " + times*10 + " growth points to grow that much.",newline]);
   } else {
@@ -4524,7 +4585,7 @@ function grow_pick(times) {
 
     times /= 10;
 
-    switch (button.id.replace("button-growth-", "")) {
+    switch (chosenPart) {
       case "body": grow(times); break;
       case "paws": grow_paws(times); break;
       case "tail": grow_tail(times); break;
@@ -4535,6 +4596,8 @@ function grow_pick(times) {
       case "womb": grow_womb(times); break;
       case "breasts": grow_breasts(times); break;
       case "wings": grow_wings(times); break;
+      case "musk": grow_musk(times); break;
+      case "stench": grow_stench(times); break;
     }
   }
 }
@@ -4721,14 +4784,44 @@ function grow_wings(factor, simpleCalc=true){
   let oldLength = macro.wingLength;
 
   if (simpleCalc == true){
-    macro.pawScale *= factor;
+    macro.wingScale *= factor;
 } else {
     macro.wingScale = (macro.wingScale + (factor/macro.mass))
     }
 
   let lengthDelta = macro.wingLength - oldLength;
 
-  update([pickString("Power surges through you","Energy flows into you","Your back muscles fight for space","Your muscles tense","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your " + macro.wingDesc(true) + " grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
+  update([pickString("Power surges through you","Energy flows into you","Your back muscles fight for space","Your muscles tense","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your " + macro.wingDesc + " wings grow, gaining " + length(2 * lengthDelta, unit, false) + " of wingspan.",newline]);
+}
+
+function grow_musk(factor, simpleCalc=true){
+
+  let oldScale = macro.muskScale;
+
+  if (simpleCalc == true){
+    macro.muskScale *= factor;
+} else {
+    macro.muskScale = (macro.muskScale + (factor/Math.pow(macro.mass, 1/3)))
+    }
+
+  let scaleDelta = macro.muskScale - oldScale;
+
+  update([pickString("Power surges through you","Energy flows into you","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your musk thickens, growing more potent.",newline]);
+}
+
+function grow_stench(factor, simpleCalc=true){
+
+  let oldScale = macro.muskScale;
+
+  if (simpleCalc == true){
+    macro.stenchScale *= factor;
+} else {
+    macro.stenchScale = (macro.stenchScale + (factor/Math.pow(macro.mass, 1/3)))
+    }
+
+  let scaleDelta = macro.stenchScale - oldScale;
+
+  update([pickString("Power surges through you","Energy flows into you","A crackeling fills the air","Your balance shifts","You feel a buzz of power","A warm sensation fills you") + " as your stench thickens, growing more potent.",newline]);
 }
 
 function resetSettings() {
@@ -4825,8 +4918,15 @@ function generateSettings(diff=false) {
     let value = form[i].value == "" ? form[i].placeholder : form[i].value;
     if (form[i].type == "text")
       settings[form[i].name] = value;
-    else if (form[i].type == "number")
-      settings[form[i].name] = parseFloat(value);
+    else if (form[i].type == "number") {
+      if (form[i].dataset.unit == "percentage") {
+        settings[form[i].name] = parseFloat(value) / 100;
+      } else if (form[i].dataset.unit == "volume") {
+        settings[form[i].name] = parseFloat(value) / 1000;
+      } else {
+        settings[form[i].name] = parseFloat(value);
+      }
+    }
     else if (form[i].type == "checkbox") {
       settings[form[i].name] = form[i].checked;
 
@@ -4879,8 +4979,20 @@ function recurseDeletePanel(settings, panel) {
       delete settings[option.id];
     } else if (option.type == "checkbox" && !settings[option.id] && option.default === undefined) {
       delete settings[option.id];
-    } else if (settings[option.id] == option.default && option.id != "name") {
-      delete settings[option.id];
+    } else {
+      if (option.unit == "percentage") {
+        if (settings[option.id] * 100 == option.default)
+          delete settings[option.id];
+      } 
+
+      else if (option.unit == "volume") {
+        if (settings[option.id] * 1000 == option.default)
+          delete settings[option.id];
+      }
+        
+      else if (settings[option.id] == option.default && option.id != "name") {
+        delete settings[option.id];
+      }
     }
   })
 
@@ -5003,8 +5115,16 @@ function loadSettings(settings = null) {
     if (settings[form[i].name] != undefined) {
       if (form[i].type == "text")
         form[i].value = settings[form[i].name];
-      else if (form[i].type == "number")
-        form[i].value = settings[form[i].name];
+      else if (form[i].type == "number") {
+        if (form[i].dataset.unit == "percentage") {
+          form[i].value = settings[form[i].name] * 100;
+        } else if (form[i].dataset.unit == "volume") {
+          form[i].value = settings[form[i].name] * 1000;
+        } else {
+          form[i].value = settings[form[i].name];
+        }
+      }
+        
       else if (form[i].type == "checkbox") {
         form[i].checked = settings[form[i].name];
       } else if (form[i].type == "radio") {
@@ -5027,8 +5147,6 @@ function add_victim_people(category, prey) {
   victims[category]["people"] += get_living_prey(prey.sum());
 
   macro.growthPoints += get_living_prey(prey.sum()) * 100 / (1 + Math.log10(macro.scale));
-
-  update();
 }
 
 function enable_victim(category) {
@@ -5054,7 +5172,7 @@ function enable_stat(name) {
 }
 
 function enable_growth_part(name) {
-  document.querySelector("#button-growth-" + name).style.display = 'block';
+  document.querySelector("#option-growth-" + name).style.display = 'block';
 }
 
 function disable_button(name) {
@@ -5233,8 +5351,14 @@ function startGame(e) {
   document.getElementById("actions-body").style.display = 'flex';
   document.getElementById("stat-container").style.display = 'flex';
 
+  repeatUpdate();
 
   window.scroll(0,0);
+}
+
+function repeatUpdate() {
+  update();
+  setTimeout(repeatUpdate, fillPeriod);
 }
 
 function actionTab(e) {
@@ -5355,7 +5479,8 @@ function updatePreview(name) {
     result = volume(value * scale * scale * scale / 1000, unit);
   else if (unitType == "mass")
     result = mass(value * scale * scale * scale, unit);
-
+  else if (unitType == "percentage")
+    result = value + "%";
   document.getElementById(name + "Preview").innerHTML = result;
 }
 
@@ -5455,7 +5580,7 @@ window.addEventListener('load', function(event) {
 
   document.getElementById("button-dark-mode-options").addEventListener("click",toggleDarkMode);
   document.querySelectorAll(".growth-part").forEach(function (button) {
-    button.addEventListener("click", function() { grow_part_pick(button.id); });
+    button.addEventListener("select", function() { grow_part_pick(button.id); });
   });
 
   document.getElementById("button-growth-1.1").addEventListener("click",function() { grow_pick(11); });
@@ -5576,6 +5701,13 @@ function render_radio_option(options_div, option) {
     let label = document.createElement("label");
     label.setAttribute("for", option.id + "-" + choice.value);
     label.innerText = choice.name;
+
+    label.classList.add("solo")
+
+    if (choice.tooltip) {
+      label.classList.add("has-tooltip")
+      label.title = choice.tooltip;
+    }
 
     attach_form_data(input, choice);
 

@@ -463,7 +463,7 @@ var clusters =
   "Person": 5,
   "Human": 5,
   "Cow": 15,
-  "Micro": 10,
+  "Micro": 50,
   "Macro": 0,
 //Vehicles
   "Car": 3,
@@ -482,7 +482,7 @@ var clusters =
   "Town": 5,
   "City": 1,
   "Continent": 5,
-  "Planet": 1,
+  "Planet": 9,
   "Star": 1,
   "Solar System": 1,
   "Galaxy": 1,
@@ -511,7 +511,7 @@ var cluster_chances =
   "Person": 0.8,
   "Human": 0.8,
   "Cow": 0.5,
-  "Micro": 10,
+  "Micro": 1,
   "Macro": 0,
 //Vehicles
   "Car": 0.5,
@@ -702,10 +702,10 @@ function fill_area(area, weights, variance=0.15)
       continue;
 
     var max = Math.floor(area / candidate.area);
-    var limit = Math.min(max, 100);
+    var limit = Math.min(max, 1000);
 
     var count = 0;
-    var loopvar = limit;
+    var loopvar = 0;
 
     // for small amounts, actually do the randomness
 
@@ -713,17 +713,13 @@ function fill_area(area, weights, variance=0.15)
 
     // if we have nothing at all, it's even better!
 
-    if (limit > 0 && result.length == 0) {
-      ++count;
-      ++loopvar;
-    }
-
     while (loopvar < limit) {
-      if (loopvar <= clusters[candidate.name] && loopvar == 0 && Math.random() < cluster_chances[candidate.name]) {
+      
+      if (loopvar == 0 && result.length == 0) {
         ++count;
       }
       else if (loopvar <= clusters[candidate.name]) {
-        if (Math.random() < candidate.weight ? 1 : 0 || Math.random() < 0.75 * cluster_chances[candidate.name]) {
+        if (Math.random() < candidate.weight ? 1 : Math.random() < cluster_chances[candidate.name]) {
           ++count;
         }
       }
@@ -733,8 +729,11 @@ function fill_area(area, weights, variance=0.15)
       ++loopvar;
     }
 
+    // if we're doing more than the limit, then we just add on the rest, with some variance
+
     if (limit < max) {
-      count += Math.round((max-limit) * candidate.weight);
+      const base = (max-limit) * candidate.weight;
+      count += Math.round(base - base / 10 + base * Math.random() / 5);
     }
 
     area -= count * candidate.area;

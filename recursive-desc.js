@@ -5,8 +5,23 @@
 var rules = {};
 var defaults = {};
 
+const synonyms = {
+  heavy: ["heavy", "weighty"],
+  huge: ["huge", "massive", "gigantic", "large"],
+  cosmic: ["cosmic", "utterly colossal", "star-spanning"],
+  gulp: ["gulp", "gluk", "glrk", "glp"],
+  swallow: ["swallow", "gulp"],
+  looming: ["looming", "imposing", "awe-inspiring", "menacing"],
+  putrid: ["putrid", "foul", "wretched", "choking", "rancid", "utterly foul", "miasma-shrouded", "eye-wateringly foul"],
+  moan: ["moan", "gasp", "growl"]
+}
+
 function plural(quantity, singular, plural) {
   return quantity > 1 ? plural : singular;
+}
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function getDefault(name) {
@@ -31,9 +46,9 @@ function getDefaultVictim(name) {
   return window[funcName];
 }
 
-var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
+var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-musk","female-musk","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
 
-var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
+var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-musk", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-musk", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
@@ -130,12 +145,12 @@ function describe(action, container, macro, verbose=true, flat=false, extra1=0) 
     container = flatten(container);
   }
 
-  if (options.length > 0 && Math.random() > (1 / (2 + rules[action].length))) {
+  if (options.length > 0 && Math.random() > (1 / (2 + options.length))) {
     let choice = Math.floor(Math.random() * options.length);
-    return options[choice](container, macro, extra1);
+    return options[choice](container, macro, verbose, flat, extra1);
   }
   else {
-    return getDefault(action)(container, macro, extra1);
+    return getDefault(action)(container, macro, verbose, flat, extra1);
   }
 }
 
@@ -148,13 +163,37 @@ function pickString(...array){
     var pick = strings[~~(Math.random() * strings.length)];
     return pick;
 }
+
+function pickStringChance(chance, ...array) {
+  if (Math.random() < chance) {
+    return pickString(...array);
+  } else {
+    return ""
+  }
+}
+
 // DEFAULTS
 
 function defaultEat(container, macro, verbose, flat) {
+  console.log(verbose);
   if (container.count == 0)
     return "You reach down for a delicious treat and grab - oh, nothing.";
   else
-    return "You scoop up " + container.describe(verbose) + " and swallow " + (container.count > 1 ? "them" : "it") + " whole.";
+    return pickString([
+      "You",
+      pickString("snatch up", "grab", "pluck up", "seize", "catch"),
+      container.describe(verbose) + ",",
+      "then",
+      pickString("swallow", "devour", "consume"),
+      (container.count > 1 ? "them" : "it"),
+      "whole."
+    ], [
+      "Your maw envelops",
+      container.describe(verbose),
+      "in a tight embrace of flesh.",
+      (container.count > 1 ? "They sink" : "Your victim sinks"),
+      "down deep with a little <i>gulp</i>."
+    ]).join(" ");
 }
 
 function defaultChew(container, macro, verbose, flat) {
@@ -190,21 +229,43 @@ function defaultStomp(container, macro, verbose, flat) {
   else if (isSadistic(macro))
     return "Your " + macro.footDesc(false) + " comes down on " + container.describe(verbose) + ", crushing your prey into gore and rubble with ease as your " + macro.toeDesc(true) + " shear bone and snap metal.";
   else if (isFatal(macro))
-    return "You crush " + container.describe(verbose) + " under" + macro.footDesc(false,false,true) + ".";
+    return pickString([
+      "You",
+      pickString("crush", "smash", "flatten"),
+      container.describe(verbose),
+      pickString("under", "beneath", "with"),
+      "your",
+      (macro.stenchEnabled ? pickString(...synonyms.putrid) + "," : ""),
+      pickStringChance(0.4, ...synonyms.looming),
+      macro.footDesc(false,false,true) + "."
+    ], [
+      capitalize(container.describe(verbose)),
+      (container.count > 1 ? "are" : "is"),
+      pickString("crushed", "flattened"),
+      pickString("under", "beneath"),
+      "your",
+      (macro.stenchEnabled ? pickString(...synonyms.putrid) : pickString("heavy", "weighty", "powerful")),
+      macro.footDesc(false,false,true) + "."
+    ], [
+      "A swift stroke of your",
+      macro.footDesc(false,false,true),
+      pickString("crushes", "smashes", "flattens"),
+      container.describe(verbose)
+    ]).filter(Boolean).join(" ");
   else
     return "You step on " + container.describe(verbose) + ".";
 }
 
 function defaultStompWedge(container, macro, verbose, flat) {
-  if (container.count == 1) {
-    let line = container.describe(verbose);
-    line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " is wedged in your " + macro.toeDesc(true);
-  } else {
-    let line = container.describe(verbose);
-    line = line.charAt(0).toUpperCase() + line.slice(1);
-    return line + " are wedged in your " + macro.toeDesc(true);
-  }
+  return [
+    capitalize(container.describe(verbose)),
+    (container.count > 1 ? "are" : "is"),
+    pickString("wedged", "trapped", "left stuck", "jammed"),
+    pickString("in", "between", "within"),
+    "your",
+    (macro.stenchEnabled ? pickString(...synonyms.putrid) : ""),
+    macro.toeDesc(true)
+  ].filter(Boolean).join(" ")
 }
 
 function defaultFlexToes(container, macro, verbose, flat) {
@@ -242,7 +303,20 @@ function defaultAnalVore(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You're pretty sure you just sat on a rock.";
   else
-    return "You sit yourself down on " + container.describe(false) + ". " + (container.count > 1 ? "They slide" : "It slides") + " inside with ease.";
+    return pickString([
+        "You sit yourself down on",
+        container.describe(false) + ". ",
+        (container.count > 1 ? "They slide" : "It slides"),
+        "inside with ease."
+      ], [
+        "You grab",
+        container.describe(false) + ",",
+        "shoving",
+        (container.count > 1 ? "your victims" : "your victim"),
+        "right up your rear with a muffled <i>shlrkh</i>."
+      ]
+    ).join(" ");
+
 }
 
 function defaultAssCrush(container, macro, verbose, flat) {
@@ -278,7 +352,7 @@ function defaultTailSlap(container, macro, verbose, flat) {
 
 function defaultTailVore(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your drooling tail swings to and fro";
+    return "Your drooling tail lashes about, but can't seem to chow down on anyone...";
   else if (isFatal(macro))
     return "Your tail lunges, maw agape, at " + container.describe(verbose) +
      ". It scarfs down everything in seconds, gulping forcefully to drag your prey into your sloppy confines.";
@@ -336,18 +410,52 @@ function defaultCleavageAbsorb(container, macro, verbose, flat) {
 
 function defaultBreastCrush(container, macro, verbose, flat) {
   if (container.count == 0)
-    return "Your thump your breasts against the ground.";
+    return "Your let your breasts thump against the ground.";
   else if (isFatal(macro))
-    return "Your heavy breasts obliterate " + container.describe(verbose) + ". ";
+    return [
+      "You let your breasts drop,",
+      pickString("crushing", "smashing", "burying", "smothering"),
+      container.describe(verbose),
+      "beneath those",
+      length(macro.breastDiameter, unit, true) + "-wide",
+      pickString("knockers", "tits", "boobs") + ".",
+      pickStringChance(0.5, (macro.lactationEnabled ? "A spray of milk spurts from your nipples." : ""))
+    ].filter(Boolean).join(" ");
   else
-    return "You smoosh " + container.describe(verbose) + " with your breasts.";
+    return "You smoosh " + container.describe(verbose) + " beneath your breasts.";
 }
 
 function defaultBreastVore(container, macro, verbose, flat) {
+  let prey = new Container();
+  macro.breasts.contents.forEach(function(x) {
+    prey = prey.merge(x);
+  });
+
   if (container.count == 0)
     return "It'd be pretty hot to stick someone in your breasts. Shame you can't right now.";
   else
-    return "Your nipples envelop " + container.describe(verbose) + ", pulling them into your breasts. ";
+    return pickString([
+      "Your breasts squish against",
+      container.describe(verbose),
+      "as",
+      (container.count > 1 ? "they're" : "it's"),
+      "forced right into your nipples! They stretch and",
+      pickString("envelop", "consume", "suck in"),
+      "your prey,",
+      pickStringChance(0.5, "swiftly", "easily"),
+      "burying them in those warm,",
+      (macro.lactationEnabled ? "milky" : "heavy"),
+      "mounds."
+    ], [
+      capitalize(container.describe(verbose)),
+      (container.count > 1 ? "are" : "is"),
+      pickStringChance(0.35, "abruptly", "swiftly"),
+      pickString("stuffed", "slipped"),
+      "into your breasts",
+      (container.count > 1 ? "their" : "its"),
+      "form lost within your bosom.",
+      (prey.count > 0 ? (prey.count > 1 ? "The " + prey.describe(false) : capitalize(prey.describe(true))) + " within " + (prey.count > 1 ? "slosh" : "sloshes") + " about as " + (prey.count > 1 ? "they're" : "it's") + " joined by fresh prey." : "")
+    ]).filter(Boolean).join(" ")
 }
 
 
@@ -363,8 +471,32 @@ function defaultBreastMilk(container, macro, verbose, flat) {
 function defaultUnbirth(container, macro, verbose, flat) {
   if (container.count == 0)
     return "You grab " + (macro.victimsHuman ? new Human(1).describe(verbose) : new Person(1).describe(verbose)) + " and grind them against your slit...but they won't fit.";
-  else
-    return "You gasp as you slide " + container.describe(verbose) + " up your slit. ";
+  else {
+    return pickString([
+      "You",
+      pickString(...synonyms.moan),
+      "as",
+      container.describe(verbose),
+      (container.count > 1 ? "spread" : "spreads"),
+      "open your",
+      pickString("sex", macro.describeVagina + " slit") + ",",
+      pickString("swallowed", "sucked", "drawn"),
+      pickString("within", "inside", "down deep"),
+      "by",
+      pickString("tender", "sensuous", "lustful"),
+      pickString("folds", "muscle") + "."
+    ], [
+      capitalize(container.describe(verbose)),
+      "fall prey to your",
+      pickString("sex", macro.describeVagina + " slit"),
+      "with a messy",
+      pickString("<i>SQUELCH</i>,", "<i>SQUISH</i>,"),
+      "vanishing into your womb and sending a",
+      pickString("jolt", "surge", "shock"),
+      "of ecstasy up your spine."
+    ]).filter(Boolean).join(" ");
+  }
+    
 }
 
 function defaultSheathStuff(container, macro, verbose, flat) {
@@ -677,6 +809,26 @@ function defaultScatStench(container, macro, verbose, flat) {
     return "Your stinky scat overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
 }
 
+function defaultMaleMusk(container, macro, verbose, flat) {
+  let sum = get_living_prey(container.sum());
+  if (isSadistic(macro))
+    return "Waves of corrosive musk waft from your shaft, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describeSimple(flat) + ".";
+  if (isFatal(macro))
+    return "Powerful musk wafts from your shaft, choking the life from " + (sum > 1 ? sum + " people." : "a person.");
+  else
+    return "Your masculine musk overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
+}
+
+function defaultFemaleMusk(container, macro, verbose, flat) {
+  let sum = get_living_prey(container.sum());
+  if (isSadistic(macro))
+    return "Waves of corrosive musk waft from your slit, the bitter cloud liquefying the flesh of  " + (sum > 1 ? numberRough(sum,"of") + " people" : "a person") + " as it dissolves " + container.describeSimple(flat) + ".";
+  if (isFatal(macro))
+    return "Powerful musk wafts from your slit, choking the life from " + (sum > 1 ? sum + " people." : "a person.");
+  else
+    return "Your feminine musk overwhelms " + (sum > 1 ? sum + " people" : "a person") + " with your scent!";
+}
+
 function defaultMaleSpurtMusk(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
@@ -743,13 +895,41 @@ function defaultFart(container, macro, verbose, flat) {
 
 function defaultStomach(container, macro, verbose, flat) {
   if (isSadistic(macro))
-    return "Your churning guts crushes your prey into a gory paste, annihilating " + container.describeSimple(flat) + " and reducing everything to rancid chyme.";
+    return [
+      "Your",
+      pickString("churning gut", "graveyard of a stomach", "fatal belly"),
+      pickString("crushes", "grinds", "mulches"),
+      "your prey into a gory paste,",
+      pickStringChance(0.5, "utterly", "completely"),
+      "annihilating",
+      container.describeSimple(flat),
+      "and",
+      pickStringChance(0.5, "swiftly"),
+      "reducing everything within to",
+      pickString("rancid", "putrid", "horrifying"),
+      pickString("sludge.", "slop.")
+    ].filter(Boolean).join(" ");
   else if (isGory(macro))
-    return "Your caustic stomach grinds " + container.describeSimple(flat) + " to a gory pulp.";
+    return [
+      "Your caustic stomach",
+      pickString("crushes", "grinds"),
+      container.describeSimple(flat),
+      "to a gory pulp."
+    ].filter(Boolean).join(" ");
   else if (isFatal(macro))
-    return "Your stomach gurgles as it digests " + container.describeSimple(flat) + ".";
+    return [
+      "Your stomach",
+      pickString("gurgles", "snarls", "sloshes"),
+      "as it digests",
+      container.describeSimple(flat) + "."
+    ].filter(Boolean).join(" ");
   else
-    return "Your stomach groans and abosrbs " + container.describeSimple(flat) + ".";
+    return [
+      "Your stomach",
+      pickString("squeezes", "groans", "shifts"),
+      "and absorbs",
+      container.describeSimple(flat) + "."
+    ].filter(Boolean).join(" ");
 }
 
 function defaultTail(container, macro, verbose, flat) {
@@ -1501,15 +1681,27 @@ function defaultVictimCumFlood(macro) {
   }
 }
 
+function defaultVictimMaleMusk(macro) {
+  if (isSadistic(macro)) {
+    return "reduced to slurry by corrosive masculine musk";
+  } else if (isGory(macro)) {
+    return "suffocated by masculine musk";
+  } else if (isFatal(macro)) {
+    return "snuffed out by masculine musk";
+  } else if (isNonFatal(macro)) {
+    return "dazed by masculine musk";
+  }
+}
+
 function defaultVictimMaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
-    return "dissolved in a tide of slick, musky precum";
+    return "corroded by your caustic, overwhelming masculine musk";
   } else if (isGory(macro)) {
-    return "drowned in your slick precum";
+    return "snuffed out by your masculine musk";
   } else if (isFatal(macro)) {
-    return "washed away by precum";
+    return "overwhelmed by masculine musk";
   } else if (isNonFatal(macro)) {
-    return "flooded with your precum";
+    return "dazed by masculine musk";
   }
 }
 
@@ -1549,15 +1741,27 @@ function defaultVictimFemcumFlood(macro) {
   }
 }
 
+function defaultVictimFemaleMusk(macro) {
+  if (isSadistic(macro)) {
+    return "dissolved to slurry by feminine musk";
+  } else if (isGory(macro)) {
+    return "suffocated by feminine musk";
+  } else if (isFatal(macro)) {
+    return "snuffed out by feminine musk";
+  } else if (isNonFatal(macro)) {
+    return "dazed by feminine musk";
+  }
+}
+
 function defaultVictimFemaleSpurtMusk(macro) {
   if (isSadistic(macro)) {
-    return "suffocated by a spurt of corrosive feminine precum";
+    return "corroded by your caustic, overwhelming feminine musk";
   } else if (isGory(macro)) {
-    return "snuffed out by a splatter of feminine fluid";
+    return "snuffed out by your feminine musk";
   } else if (isFatal(macro)) {
-    return "flooded by your spurting precum";
+    return "overwhelmed by feminine musk";
   } else if (isNonFatal(macro)) {
-    return "soaked with your feminine precum";
+    return "dazed by feminine musk";
   }
 }
 
@@ -1987,6 +2191,33 @@ rules["eat"].push({
   }
 });
 
+rules["eat"].push({
+  test: (container, macro) => {
+    return hasExactly(container, "Planet", 1) && nothingLarger(container, "Planet");
+  },
+  desc: (container, macro, verbose, flat) => {
+    return [
+      "Your colossal",
+      macro.jawDesc(true),
+      "yawn wide as you drift towards the planet, blotting out the sun in the shadow of your terrifying maw. Your tongue curls along the underside of your snack's crust, slathering it in drool and gently tugging it towards you. Cracks and quakes rock the fragile crust; your body's overwhelming gravity alone is enough to stretch and warp the planet. Before long, it is entombed within your",
+      macro.jawDesc(true),
+      "and, a heartbeat later, a massive GLURKH drags it into your gullet."
+    ].join(" ")
+  }
+})
+
+rules["eat"].push({
+  test: (container, macro) => hasAtleast(container, "Planet", 3) && hasLessThan(container, "Planet", 15) && nothingLarger(container, "Planet"),
+  desc: (container, macro, verbose, flat) => [
+    "You scoop up a plethora of planets, popping them into your",
+    macro.jawDesc(true),
+    "like the finger-food they've become, tugging each one into your gullet - and on an irreversible one-way journey to your gut - with little gluks and gulps, sealing away all",
+    container.contents["Planet"].count,
+    "of them within your cosmic body."
+  ].join(" ")
+});
+
+
 // CHEWING
 
 rules["chew"].push({
@@ -2023,6 +2254,17 @@ rules["chew"].push({
     to let the vehicle fall further your mouth, Once the car settles, you start slowly closing your jaw, feeling glass shatter, metal grind, and tires burst as those trapped inside try to escape. Every time your chew you feel your \
     " + macro.teethDesc(true) + " " + macro.biteDesc(false) + " the vehicle into a smaller and smaller lump. After you are satisfied, you tilt your head back and swallow the debries in a single fluid gulp.";
   }
+});
+
+rules["chew"].push({
+  test: (container, macro) => hasExactly(container, "Planet", 1) && nothingLarger(container, "Planet") && isFatal(macro),
+  desc: (container, macro, verbose, flat) => [
+    "A shadow falls over your next meal - your ",
+    macro.jawDesc(true),
+    "closing around the rocky sphere like bolt cutters around a chain-link...and then, with a sharp clench, they split the planet in twain. The heat of the planet's core spills out, the homeworld of billions rent asunder by your almighty",
+    macro.jawDesc(true) + ".",
+    "A few more chews and crunches reduce it to chunky, glowing rubble...and with a flick of your head, the planet's remains are lost to your hunger."
+  ].join(" ")
 });
 
 // STOMPING
@@ -2240,7 +2482,7 @@ rules["stomp"].push({
      macro.pawArea > 50 &&
      isGory(macro);
   }, "desc": function(container, macro, verbose, flat) {
-    return "You bring your " + length(macro.pawWidth, unit, true) + " wide " + macro.footDesc() + " " + macro.footDesc() + " down on " + container.describe(verbose) + ". As your " + macro.footDesc() + " impacts its target, you feel its weight sink through buildings and into the \
+    return "You bring your " + length(macro.pawWidth, unit, true) + " wide " + macro.footDesc() + " down on " + container.describe(verbose) + ". As your " + macro.footDesc() + " impacts its target, you feel its weight sink through buildings and into the \
      ground. After you lift your " + macro.soleDesc() + ", a deep indent full of rubble and mangled corpses is revealed.";
   }
 });

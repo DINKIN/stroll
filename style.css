@@ -58,7 +58,7 @@ body.dark div {
 
 @media (max-aspect-ratio: 1/1){
   .game-area {
-    width: 100%
+    width: 100%;
     height: 60%;
   }
   #stat-container {
@@ -72,36 +72,38 @@ body.dark div {
     position: fixed;
     right: 0%;
     top: 0%;
-    max-width: 33%;
+    max-width: 50%;
     max-height: 50%;
   }
   #log {
     position: fixed;
     left: 0%;
     bottom: 0%;
-    width: 50%;
+    width: 48%;
     height: 50%;
     max-height: 50%;
-    margin: 0 0 1vh 0;
+    margin-left: 1vw;
   }
   #react-log {
     position: fixed;
     right: 0%;
     bottom: 0%;
-    width: 50%;
+    width: 48%;
     height: 50%;
     max-height: 50%;
-    margin: 1vh 0 0 0;
-    height: 40vh;
+    margin-right: 1vw;
   }
   .growth-part {
+    width: 100px !important;
+  }
+  #growth-part-select {
     width: 100px !important;
   }
   .growth-amount {
     width: 100px !important;
   }
   .action-part-button {
-    width: 100px !important;
+    width: 33% !important;
   }
   .action-button {
     width: 100px !important;
@@ -388,7 +390,7 @@ body.dark .custom-header-static {
   display: inline-block;
   border-style: dotted;
   border-width: 1px;
-  border-length: 5px;
+  border-radius: 5px;
 }
 
 .custom-category-sub .custom-header {
@@ -420,7 +422,6 @@ body.light input[type="checkbox"]:checked+
 .custom-header {
   color: #000;
   border-style: solid;
-  margin: 10px;
   background-color: rgba(230, 230, 230, 0.3);
 }
 
@@ -428,7 +429,6 @@ body.dark input[type="checkbox"]:checked+
 .custom-header {
   color: #fff;
   border-style: solid;
-  margin: 10px;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -481,6 +481,9 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   background: #afa;
 }
 
+.flex-outer {
+  user-select: none;
+}
 .flex-outer label {
   flex: 0 1 40%;
   text-align: right;
@@ -513,24 +516,32 @@ body.light .flex-outer input[type="checkbox"]:checked + label:not(.custom-header
   width: 90%;
 }
 
+body.light .flex-outer-sub {
+  background: #c8c8c8;
+}
+
+body.light .flex-outer-sub .flex-outer-sub {
+  background: #c0c0c0;
+}
+
 body.dark .flex-outer-sub {
   background: #181818;
 }
 
 body.dark .flex-outer-sub .flex-outer-sub {
-  background: #222;
+  background: #202020;
 }
 
 body.light .has-tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted #777;
 }
 
 body.dark .has-tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted white;
+  border-bottom: 1px dotted #777;
 }
 
 body.light a {
@@ -596,10 +607,20 @@ ul {
   display: none;
 }
 
-.action-part-button.active {
-  background: #555;
+@media (max-aspect-ratio: 1) {
+  .action-part-button {
+    width: 33%;
+  }
 }
 
+
+body.light .action-part-button.active {
+  background: #ccc;
+}
+
+body.dark .action-part-button.active {
+  background: #555;
+}
 /* SRC: https://stackoverflow.com/questions/29738787/filling-water-animation/29740828 */
 
 .meter {
@@ -613,7 +634,7 @@ ul {
 }
 
 body.light .meter {
-  background: #ddd !important;
+  background: #ccc !important;
 }
 
 body.dark .meter {
@@ -739,6 +760,7 @@ body.dark .meterLabel {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  text-align: left;
   flex: 0 1 400px;
 }
 
@@ -752,8 +774,10 @@ body.dark .meterLabel {
   height: 100%;
 }
 
-#growth-box-right {
-  height: 100%;
+#growth-part-select {
+  display: block;
+  height: 100px;
+  font-size: 20px;
 }
 
 .growth-part {
