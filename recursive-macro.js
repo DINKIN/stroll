@@ -395,18 +395,13 @@ function fill_area(area, weights, variance=0.15)
     var limit = Math.min(max, 100);
 
     var count = 0;
-    var loopvar = limit;
+    var loopvar = 0;
 
     // for small amounts, actually do the randomness
 
     // the first few ones get a much better shot
 
     // if we have nothing at all, it's even better!
-
-    if (limit > 0 && result.length == 0) {
-      ++count;
-      ++loopvar;
-    }
 
     while (loopvar < limit) {
       if (loopvar <= clusters[candidate.name] && loopvar == 0 && Math.random() < cluster_chances[candidate.name]) {
