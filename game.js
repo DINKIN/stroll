@@ -1346,7 +1346,6 @@ let macro = //macro controls every customizable part of the players body
 
   "fillFemcum": function(self) {
     self.femcumStorage.amount += self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000;
-    console.log(self.femcumStorage.limit * self.baseFemcumProduction * fillPeriod / 1000);
     if (self.femcumStorage.amount > self.femcumStorage.limit)
       self.arouse(1 * (self.femcumStorage.amount / self.femcumStorage.limit - 1));
     setTimeout(function () { self.fillFemcum(self); }, fillPeriod);
