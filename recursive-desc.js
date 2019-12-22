@@ -418,10 +418,36 @@ function defaultBreastCrush(container, macro, verbose, flat) {
 }
 
 function defaultBreastVore(container, macro, verbose, flat) {
+  let prey = new Container();
+  macro.breasts.contents.forEach(function(x) {
+    prey = prey.merge(x);
+  });
+
   if (container.count == 0)
     return "It'd be pretty hot to stick someone in your breasts. Shame you can't right now.";
   else
-    return "Your nipples envelop " + container.describe(verbose) + ", pulling them into your breasts. ";
+    return pickString([
+      "Your breasts squish against",
+      container.describe(verbose),
+      "as",
+      (container.count > 1 ? "they're" : "it's"),
+      "forced right into your nipples! They stretch and",
+      pickString("envelop", "consume", "suck in"),
+      "your prey,",
+      pickStringChance(0.5, "swiftly", "easily"),
+      "burying them in those warm,",
+      (macro.lactationEnabled ? "milky" : "heavy"),
+      "mounds."
+    ], [
+      capitalize(container.describe(verbose)),
+      (container.count > 1 ? "are" : "is"),
+      pickStringChance(0.35, "abruptly", "swiftly"),
+      pickString("stuffed", "slipped"),
+      "into your breasts",
+      (container.count > 1 ? "their" : "its"),
+      "form lost within your bosom.",
+      (prey.count > 0 ? (prey.count > 1 ? "The " + prey.describe(false) : capitalize(prey.describe(true))) + " within " + (prey.count > 1 ? "slosh" : "sloshes") + " about as " + (prey.count > 1 ? "they're" : "it's") + " joined by fresh prey." : "")
+    ]).filter(Boolean).join(" ")
 }
 
 
