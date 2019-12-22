@@ -2407,7 +2407,7 @@ function stomp(active=true)
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
   let line = describe("stomp", prey, macro, verbose, flat);
-  let linesummary = summarize(prey.sum(), false);
+  let linesummary = summarize(prey.sum(), true);
 
   let people = get_living_prey(prey.sum());
 
@@ -2468,7 +2468,7 @@ function stomp_goo() {
   let area = macro.pawArea;
   let prey = getPrey(biome, area, macro.sameSizeStomp);
   let line = describe("stomp-goo", prey, macro, verbose, flat);
-  let linesummary = summarize(prey.sum(), true);
+  let linesummary = summarize(prey.sum(), false);
 
   let people = get_living_prey(prey.sum());
 
