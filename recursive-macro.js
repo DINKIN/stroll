@@ -1,119 +1,3 @@
-
-/*
-
-function defaultSumDST(thing) {
-  return function() {
-    var counts = {};
-
-    if (thing.name != "Container") //if a container is detected, sets counts 
-      counts[thing.name] = thing.count; 
-
-    for (var key in thing.contents) {
-      if (thing.contents.hasOwnProperty(key)) {
-        var subcount = thing.contents[key].sum();
-        for (var subkey in subcount) {
-          if (!counts.hasOwnProperty(subkey)) {
-            counts[subkey] = 0;
-          }
-          counts[subkey] += subcount[subkey];
-        }
-      }
-    }
-
-    return counts;
-  };
-}
-
-function defaultSumProperty(thing) {
-  return function(prop) {
-    var total = 0;
-
-    total += thing[prop] * thing.count;
-
-    for (var key in thing.contents) {
-      if (thing.contents.hasOwnProperty(key)) {
-        total += thing.contents[key].sum_property(prop);
-      }
-    }
-
-    return total;
-  };
-}
-
-function defaultArea(thing) {
-  return areas[thing.name];
-}
-
-function DefaultDestructable() {
-  this.name = this.defaults.name;
-  this.area = this.defaults.area;
-  this.mass = this.defaults.mass;
-  this.sum = defaultSumDST;
-  this.sum_property = defaultSumProperty;
-  this.merge = defaultMerge;
-  this.multiply = defaultMultiply;
-  this.describeSimple = defaultDescribeSimple;
-
-  return this;
-}
-
-function copy_defaultsDST(self,proto) {
-  for (var key in proto) {
-    if (proto.hasOwnProperty(key)) {
-      self[key] = proto[key](self);
-    }
-  }
-}
-
-  personVar = {
-    name: "Person",
-    area: 0.33,
-    mass: 80,
-    clusters: 5,
-    cluster_chances: .8,
-    contents: [],
-    body: [["skinny", -10,0],["fat", 15,.05],["tall", 7, 0],["short",-7,0],["stocky",5,.02],["spindly",-5,-.02],["muscular",7,0],["fit",0,0],["multi-colored",0,0]],//["bodytype", mass modifier, area modifier]
-    sex: [["male",2,.02],["female",2,.02]],//["sex", mass modifier, area modifier]
-    species: [["wolf",80,.35],["cat",70,.3],["dog",75,.31],["squirrel",68,.29],["horse",90,.4],["hyena",78,.32],["fox",72,.3],["jackal",74,.32],["crux",90,.33],["sergal",77,.34]],//["species", mass modifier, area modifier]
-    singular: "person",
-    plural: "people"
-    }
-function PersonDST(count = 1) {
-  this.defaults = personVar;
-
-  copy_defaultsDST(this,new DefaultDestructable());
-
-  this.count = count;
-  this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function (verbose=true) {
-    var body = random_desc(this.properties.body, (verbose ? 0.6 : 0));
-    var sex = random_desc(this.properties.sex, (verbose ? 1 : 0));
-    var species = random_desc(this.properties.species);
-    return "a " + merge_desc([body,sex,species]);
-  };
-
-  this.describe = function(verbose=true) {
-    if (verbose) {
-      if (count <= 3) {
-        var list = [];
-        for (var i = 0; i < count; i++) {
-          list.push(this.describeOne(this.count <= 2));
-        }
-        return merge_things(list);
-      } else {
-        return this.count + " people";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " people" : "a person");
-    }
-  };
-
-  return this;
-}
-*/
-
-
 'use strict';
 
 var things =
@@ -455,160 +339,6 @@ var things =
   //"Tank Division": [["Brigade",2,4],["Tank",250,500]],
   //"Army": [["Division",3,8],["Tank Division",1,5]],
 
-
-var clusters =
-{
-  "Container": 0,
-//Creatures
-  "Person": 5,
-  "Human": 5,
-  "Cow": 15,
-  "Micro": 50,
-  "Macro": 0,
-//Vehicles
-  "Car": 3,
-  "Bus": 1,
-  "Tram": 1,
-  "Train": 2,
-  "Train Car": 1,
-//Buildings
-  "House": 5,
-  "Business": 5,
-  "Barn": 1,
-  "Small Skyscraper": 2,
-  "Large Skyscraper": 1,
-  "Parking Garage": 1,
-//Places
-  "Town": 5,
-  "City": 1,
-  "Continent": 5,
-  "Planet": 9,
-  "Star": 1,
-  "Solar System": 1,
-  "Galaxy": 1,
-  "Cluster": 1,
-  "Universe": 1,
-  "Multiverse": 1,
-//Military
-  "Soldier": 0,
-  "Tank": 0,
-  "Artillery": 0,
-  "Helicopter": 0,
-  "Squad": 20,
-  "Platoon": 2,
-  "Company": 2,
-  "Battalion": 2,
-  "Brigade": 2,
-  "Division": 3,
-  "Tank Division": 1,
-  "Army": 2,
-};
-
-var cluster_chances =
-{
-  "Container": 0,
-//Creatures
-  "Person": 0.8,
-  "Human": 0.8,
-  "Cow": 0.5,
-  "Micro": 1,
-  "Macro": 0,
-//Vehicles
-  "Car": 0.5,
-  "Bus": 0.25,
-  "Tram": 0.2,
-  "Train": 0.1,
-  "Train Car": 0.05,
-//Buildings
-  "House": 0.5,
-  "Business": .05,
-  "Barn": 0.1,
-  "Small Skyscraper": 0.25,
-  "Large Skyscraper": 0.25,
-  "Parking Garage": 0.1,
-//Places
-  "Town": 0.1,
-  "City": 0.2,
-  "Continent": 0.5,
-  "Planet": 1,
-  "Star": 1,
-  "Solar System": 1,
-  "Galaxy": 1,
-  "Cluster": 1,
-  "Universe": 1,
-  "Multiverse": 1,
-//Military
-  "Soldier": 0,
-  "Tank": 0,
-  "Artillery": 0,
-  "Helicopter": 0,
-  "Squad": .05,
-  "Platoon": .05,
-  "Company": .1,
-  "Battalion": .1,
-  "Brigade": .1,
-  "Division": .1,
-  "Tank Division": 0.15,
-  "Army": .1,
-};
-
-var contents =
-{
-  "Container": [],
-//Creatures
-  "Person": [],
-  "Human": [],
-  "Cow": [],
-  "Micro": [[]],
-  "Macro": [[]],
-//Vehicles
-  "Car": [["Person",1,4]],
-  "Bus": [["Person",2,30]],
-  "Tram": [["Person",10,50]],
-  "Train": [["Person",1,4,"engine"],["Train Car",2,10]],
-  "Train Car": [["Person",10,40]],
-//Buildings
-  "House": [["Person",0,8],["Empty Car",0,2]],
-  "Business": [["Person",0,30],["Car",0,20]],
-  "Barn": [["Person",0,2],["Cow",30,70]],
-  "Small Skyscraper": [["Person",150,750],["Empty Car",10,50]],
-  "Large Skyscraper": [["Person",500,1500],["Empty Car",20,100]],
-  "Parking Garage": [["Person",10,200],["Empty Car",100,300],["Car",5,30]],
-//Places
-  "Town": [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25],["Business",500,5000]],
-  "City": [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10],["Business",2000,10000]],
-  "Continent": [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
-  "Planet": [["Continent",4,9]],
-  "Star": [],
-  "Solar System": [["Star",1,1],["Planet",5,15]],
-  "Galaxy": [["Star",1e9,500e9],["Solar System",1e8,500e8]],
-  "Cluster": [["Galaxy",200,5000]],
-  "Universe": [["Cluster",1.5e9,2.5e9]],
-  "Multiverse": [["Universe",100,1000]],
-//Military
-  "Soldier": [],
-  "Tank": [["Soldier",3,5]],
-  "Artillery": [["Soldier",4,6]],
-  "Helicopter": [["Soldier",4,16]],
-  //Alterante Army Structuring, may be used later
-  //"Squad": [["Soldier",6,9]],
-  // "Platoon": [["Squad",3,4]],
-  //"Company": [["Platoon",3,5],["Squad",0,2]],
-  //"Battalion": [["Company",4,6]],
-  //"Brigade": [["Battalion",2,5],["Company",0,3]],
-  //"Division": [["Brigade",2,4]],
-  //"Tank Division": [["Brigade",2,4],["Tank",250,500]],
-  //"Army": [["Division",3,8],["Tank Division",1,5]],
-  "Squad": [["Soldier",6,9]],
-  "Platoon": [["Soldier",16,44]],
-  "Company": [["Soldier",60,200]],
-  "Battalion": [["Soldier",300,1000]],
-  "Brigade": [["Soldier",1500,3200]],
-  "Division": [["Soldier",10000,16000]],
-  "Tank Division": [["Soldier",8000,1200],["Tank",250,500]],
-  "Army": [["Soldier",40000,75000]],
-};
-
 // replace all instances of from with to
 function contents_substitute(from,to) {
   for (let key in contents) {
@@ -640,7 +370,7 @@ function contents_remove(thing) {
 
 // adds thing to parent
 function contents_insert(parent,thing,min,max,label) {
-  let owner = contents[parent];
+  let owner = things[parent].contents;
   if (label == undefined)
     owner.push([thing,min,max]);
   else
@@ -718,8 +448,8 @@ function fill_area(area, weights, variance=0.15)
       if (loopvar == 0 && result.length == 0) {
         ++count;
       }
-      else if (loopvar <= clusters[candidate.name]) {
-        if (Math.random() < candidate.weight ? 1 : Math.random() < cluster_chances[candidate.name]) {
+      else if (loopvar <= things[candidate.name].clusters) {
+        if (Math.random() < candidate.weight ? 1 : Math.random() < things[candidate.name].cluster_chances) {
           ++count;
         }
       }
@@ -799,6 +529,25 @@ function merge_desc(list) {
   if (result.length > 0) {
     result = result.substring(0, result.length - 1);
   }
+  //a/an overwriting terms
+  let forcedTerms = ["honor","heir"]; //words that need to start with an but don't start with a,e,i,o,u
+  let force = false;
+  for (let i of forcedTerms){
+  if (i === result.substring(0, i.length)){force = true;}
+  }
+
+  let exceptionTerms = ["uniform","unique"]; //words that need to start with a and start with a,e,i,o,u
+  let exception = false;
+  for (let i of exceptionTerms){
+  if (i === result.substring(0, i.length)){exception = true;}
+  }
+  //check if the string should start with a or an
+  if ((force == true) || (exception == false && ((result.charAt(0) == "a")||(result.charAt(0) == "e")||(result.charAt(0) == "i")||(result.charAt(0) == "o")||(result.charAt(0) == "u")))){
+    result = "an " + result; 
+  }else{
+    result = "a " + result;
+  }
+
 
   return result;
 }
@@ -1030,6 +779,7 @@ function Person(count = 1) {
 
   copy_defaults(this,new DefaultEntity());
 
+  this.mass = ((Math.random() -.5)*20)+this.mass;
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
@@ -1038,7 +788,7 @@ function Person(count = 1) {
     var sex = random_desc(["male", "female"], (verbose ? 0.75 : 0));
     var species = "";
     species = random_desc(["wolf","cat","dog","squirrel","horse","hyena","fox","jackal","crux","sergal","coyote","rabbit","lizard","avian"]);
-    return "a " + merge_desc([body,sex,species]);
+    return merge_desc([body,sex,species]);
   };
 
   this.describe = function(verbose=true) {
@@ -1065,13 +815,14 @@ function Human(count = 1) {
 
   copy_defaults(this,new DefaultEntity());
 
+  this.mass = ((Math.random() -.5)*20)+this.mass;
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function (verbose=true) {
     var body = random_desc(["skinny","fat","tall","short","stocky","spindly","muscular","fit","tanned"], (verbose ? 0.6 : 0));
     var sex = random_desc(["man", "woman"], 1);
-    return "a " + merge_desc([body,sex]);
+    return merge_desc([body,sex]);
   };
 
   this.describe = function(verbose=true) {
@@ -1104,7 +855,7 @@ function Cow(count = 1) {
   this.describeOne = function (verbose=true) {
     var body = random_desc(["skinny","fat","tall","short","stocky","spindly"], (verbose ? 0.6 : 0));
     var sex = random_desc(["male", "female"], (verbose ? 1 : 0));
-    return "a " + merge_desc([body,sex,"cow"]);
+    return merge_desc([body,sex,"cow"]);
   };
 
   this.describe = function(verbose=true) {
@@ -1137,7 +888,7 @@ function EmptyCar(count = 1) {
     var color = random_desc(["black","black","gray","gray","blue","red","tan","white","white"]);
     var adjective = random_desc(["rusty","brand-new","luxury","beat-up","dented","restored","classic"],0.3);
     var type = random_desc(["SUV","coupe","sedan","truck","van","convertible"]);
-    return "a parked " + merge_desc([adjective,color,type]);
+    return merge_desc(["parked",adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1169,7 +920,7 @@ function Car(count = 1) {
     var color = random_desc(["black","black","gray","gray","blue","red","tan","white","white"], (verbose ? 1 : 0));
     var adjective = random_desc(["rusty","brand-new","luxury","beat-up","dented","restored","classic"], (verbose ? 0.3 : 0));
     var type = random_desc(["SUV","coupe","sedan","truck","van","convertible"]);
-    return "a " + merge_desc([adjective,color,type]);
+    return merge_desc([adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1201,7 +952,7 @@ function Bus(count = 1) {
     var adjective = random_desc(["rusty","brand-new","aging","modern"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
     var type = random_desc(["bus","double-decker bus","articulating bus","open-top bus","sleeper bus","intercity bus"]);
-    return "a " + merge_desc([adjective,color,type]);
+    return merge_desc([adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1233,7 +984,7 @@ function Tram(count = 1) {
     var adjective = random_desc(["rusty","weathered","well-maintained",], (verbose ? 0.3 : 0));
     var color = random_desc(["blue","brown","gray"], (verbose ? 1 : 0));
     var type = random_desc(["tram"]);
-    return "a " + merge_desc([adjective,color,type]);
+    return merge_desc([adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1268,7 +1019,7 @@ function Train(count = 1) {
     var adjective = random_desc(["rusty","brand-new","steam","freshly-painted"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray"], (verbose ? 1 : 0));
     var type = random_desc(["train","passenger train","freight train"]);
-    return "a " + merge_desc([adjective,color,type]);
+    return merge_desc([adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1305,7 +1056,7 @@ function TrainCar(count = 1) {
     var adjective = random_desc(["rusty","brand-new","vintage","graffitied","well-maintained"], (verbose ? 0.3 : 0));
     var color = random_desc(["black","tan","gray","yellow","steel","wooden"], (verbose ? 1 : 0));
     var type = random_desc(["train car","passenger train car","freight train car"]);
-    return "a " + merge_desc([adjective,color,type]);
+    return merge_desc([adjective,color,type]);
   };
 
   this.describe = function(verbose = true) {
@@ -1327,7 +1078,7 @@ function House(count = 1) {
     var size = random_desc(["little","two-story","large","well-built","run-down","cheap",], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","wooden","brick"], (verbose ? 0.5 : 0));
     var name = random_desc(["house","home","house","house","house","trailer"], 1);
-    return "a " + merge_desc([size,color,name]);
+    return merge_desc([size,color,name]);
   };
 
   this.describe = function(verbose = true) {
@@ -1357,7 +1108,7 @@ function Business(count = 1) {
     var size = random_desc(["little","two-story","large","well-built","run-down","cheap","aging","corner"], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","brick","concrete"], (verbose ? 0.5 : 0));
     var name = random_desc(["mall","resturant","bank","clinic","shop","post office","tire shop","chain resturant","grocery store","barber shop","pizza resturant","hardware store","movie theather","gas station"], 1);
-    return "a " + merge_desc([size,color,name]);
+    return merge_desc([size,color,name]);
   };
 
   this.describe = function(verbose = true) {
@@ -1387,7 +1138,7 @@ function Barn(count = 1) {
     var size = random_desc(["little","big","large","weathered","rotted","new"], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","red"], (verbose ? 0.5 : 0));
     var name = random_desc(["barn","barn","barn","barn","barn","farmhouse"], 1);
-    return "a " + merge_desc([size,color,name]);
+    return merge_desc([size,color,name]);
   };
 
   this.describe = function(verbose = true) {
@@ -1416,7 +1167,7 @@ function SmallSkyscraper(count = 1) {
   this.describeOne = function(verbose=true) {
     var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
     var name = random_desc(["skyscraper","office tower","office building","high rise"], 1);
-    return "a " + merge_desc([color,name]);
+    return merge_desc([color,name]);
   };
 
   this.describe = function(verbose = true) {
@@ -1446,7 +1197,7 @@ function LargeSkyscraper(count = 1) {
   this.describeOne = function(verbose=true) {
     var color = random_desc(["blue","white","gray","tan","green","glass"], (verbose ? 0.5 : 0));
     var name = random_desc(["skyscraper","office tower","office building"], 1);
-    return "a " + merge_desc(["towering",color,name]);
+    return merge_desc(["towering",color,name]);
   };
 
   this.describe = function(verbose = true) {
