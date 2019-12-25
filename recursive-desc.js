@@ -3763,7 +3763,7 @@ rules["male-orgasm"].push({
      isFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ".";
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ".";
   }
 });
 
@@ -3775,7 +3775,7 @@ rules["male-orgasm"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
       is basted to smithereens as it carves a deep chasm. The destroyed buildings and people it swept along are deposited at the sides of the chasm, forming an unstable wall of gore and rubble.";
   }
 });
@@ -3788,7 +3788,7 @@ rules["male-orgasm"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
       is basted to smithereens as it carves a deep gore lined chasm that extends from where it landed to the ocean. As it hits the ocean the resulting wave reverses the tide, dashes ships, and turns the water into an inhabitable murky soup. The destroyed \
       buildings and people it swept along are deposited at the bottom of the bay.";
   }
