@@ -766,16 +766,16 @@ function defaultDescribe(verbose=true, parent){
       for (var i = 0; i < parent.count; i++) {
         list.push(parent.describeOne(parent.count <= 2));
       }
-      if (parent.contents == []){
+      if (things[parent.name].contents.length <= 1){
         return merge_things(list);
       } else {
-        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";
+        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";        
       }
     } else {
-      if (parent.contents == []){
+      if (things[parent.name].contents.length <= 1){
         return parent.count + " " + things[parent.name].descriptor[1];
       } else {
-        return parent.count + " homes with " + describe_all(parent.contents,verbose) + " inside";
+        return parent.count + " " + things[parent.name].descriptor[1] +" with " + describe_all(parent.contents,verbose) + " inside";
       }
     }
   } else {//not verbose
@@ -838,7 +838,7 @@ function Person(count = 1) {
 }
 
 function Human(count = 1) {
-  this.name = "Human";
+  this.name = "Person";
 
   copy_defaults(this,new DefaultEntity());
 
@@ -874,20 +874,8 @@ function Cow(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    if (verbose) {
-      if (count <= 3) {
-        var list = [];
-        for (var i = 0; i < count; i++) {
-          list.push(this.describeOne(this.count <= 2));
-        }
-        return merge_things(list);
-      } else {
-        return this.count + " cattle";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " cattle" : "a cow");
-    }
-  };
+    return defaultDescribe(verbose, this);
+  }
 
   return this;
 }
@@ -906,22 +894,9 @@ function EmptyCar(count = 1) {
     return merge_desc(["parked",adjective,color,type]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne());
-        }
-        return merge_things(list);
-      } else {
-        return this.count + " parked cars";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " parked cars" : "a parked car");
-    }
-
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Car(count = 1) {
@@ -938,22 +913,9 @@ function Car(count = 1) {
     return merge_desc([adjective,color,type]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " cars with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " cars" : "a car");
-    }
-
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Bus(count = 1) {
@@ -970,22 +932,9 @@ function Bus(count = 1) {
     return merge_desc([adjective,color,type]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " buses with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " buses" : "a bus");
-    }
-
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Tram(count = 1) {
@@ -1002,21 +951,9 @@ function Tram(count = 1) {
     return merge_desc([adjective,color,type]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count == 1) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(verbose));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " trams with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " trams" : "a tram");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 
   this.anal_vore = function() {
     return "You slide " + this.describe() + " up your tight ass";
@@ -1096,21 +1033,9 @@ function House(count = 1) {
     return merge_desc([size,color,name]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " homes with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " houses" : "a house");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 //might split this into a general business and resutrant categories
 function Business(count = 1) {
@@ -1126,21 +1051,9 @@ function Business(count = 1) {
     return merge_desc([size,color,name]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose);
-      } else {
-        return this.count + " local business containing " + describe_all(this.contents,verbose);
-      }
-    } else {
-      return (this.count > 1 ? this.count + " buildings" : "a local business");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Barn(count = 1) {
@@ -1156,21 +1069,9 @@ function Barn(count = 1) {
     return merge_desc([size,color,name]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " barns with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " barns" : "a barn");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function SmallSkyscraper(count = 1) {
@@ -1185,22 +1086,9 @@ function SmallSkyscraper(count = 1) {
     return merge_desc([color,name]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " small skyscrapers with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " small skyscrapers" : "a small skyscraper");
-    }
-
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function LargeSkyscraper(count = 1) {
@@ -1215,21 +1103,9 @@ function LargeSkyscraper(count = 1) {
     return merge_desc(["towering",color,name]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      if (this.count <= 3) {
-        var list = [];
-        for (var i = 0; i < this.count; i++) {
-          list.push(this.describeOne(this.count < 2));
-        }
-        return merge_things(list) + " with " + describe_all(this.contents,verbose) + " inside";
-      } else {
-        return this.count + " large skyscrapers with " + describe_all(this.contents,verbose) + " inside";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " large skyscrapers" : "a large skyscraper");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function ParkingGarage(count = 1) {
@@ -1242,13 +1118,9 @@ function ParkingGarage(count = 1) {
     return "a parking garage";
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a parking garage" : this.count + " parking garages") + " with " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a parking garage" : this.count + " parking garages");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 function Town(count = 1) {
   this.name = "Town";
@@ -1473,9 +1345,9 @@ function Micro(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    return (this.count == 1 ? "a micro" : this.count + " micros");
-  };
+  tthis.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Macro(count = 1) {
@@ -1485,9 +1357,9 @@ function Macro(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    return (this.count == 1 ? "a smaller macro" : this.count + " smaller macros");
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Squad(count = 1) {
@@ -1645,7 +1517,6 @@ function Army(count = 1) {
 
 
   //todo
-  //redo everything
   //airports
   //farms
   //racetracks
