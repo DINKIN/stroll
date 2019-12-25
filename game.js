@@ -1808,6 +1808,7 @@ const biomeEnum = {
         biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
            "Car": 0.1,
            "Bus": 0.05,
+           "Tram": 0.03,
            "Business": 0.075,
            "Parking Garage": 0.003,
            "Small Skyscraper": 0.06,
@@ -1817,10 +1818,11 @@ const biomeEnum = {
         enabled: "ruralEnabled",
         biomeSize: [4000,8000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
         biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
-           "Cow": 0,
+           "Cow": 0.005,
            "House": 0.1,
            "Barn": 0.08,
            "Car": 0.1,
+           "Train": 0.002,
            "Business": 0.075,
            "Town": 0.00001
         }},
@@ -5314,7 +5316,7 @@ function startGame(e) {
 
   if (macro.victimsHuman) {
     // eh this is ok
-    things["Person"] = Human;
+    things["Person"]["Person"] = Human;
   }
 
   if (macro.victimsMacros) {
