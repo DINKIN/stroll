@@ -19,6 +19,7 @@ var things =
     clusters: 5,
     cluster_chances: .8,
     contents: [],
+    descriptor: ["a person", "people"]
     },
   "Human": {
     "Human": Human,
@@ -27,6 +28,7 @@ var things =
     clusters: 5,
     cluster_chances: .8,
     contents: [],
+    descriptor: ["a person", "people"]
     },
   "Cow": {
     "Cow": Cow,
@@ -35,6 +37,7 @@ var things =
     clusters: 15,
     cluster_chances: .5,
     contents: [],
+    descriptor: ["a cow", "cattle"]
     },
   "Micro": {
     "Micro": Micro,
@@ -43,6 +46,7 @@ var things =
     clusters: 50,
     cluster_chances: 1,
     contents: [[]],
+    descriptor: ["a micro", "micros"]
     },
   "Macro": {
    "Macro": Macro,
@@ -51,6 +55,7 @@ var things =
     clusters: 0,
     cluster_chances: 0,
     contents: [[]],
+    descriptor: ["a smaller macro", "smaller macros"]
     },
 //Vehicles
   "Empty Car": {
@@ -60,6 +65,7 @@ var things =
     clusters: 2,
     cluster_chances: .3,
     contents: [[]],
+    descriptor: ["a parked car", "parked cars"]
     },
   "Car": {
     "Car": Car,
@@ -68,6 +74,7 @@ var things =
     clusters: 4,
     cluster_chances: .5,
     contents: [["Person",1,4]],
+    descriptor: ["a car", "cars"]
     },
   "Bus": {
     "Bus": Bus,
@@ -76,6 +83,7 @@ var things =
     clusters: 1,
     cluster_chances: .25,
     contents: [["Person",2,30]],
+    descriptor: ["a bus", "busses"]
     },
   "Tram": {
     "Tram": Tram,
@@ -84,6 +92,7 @@ var things =
     clusters: 1,
     cluster_chances: .2,
     contents: [["Person",10,50]],
+    descriptor: ["a tram", "trams"]
     },
   "Train": {
     "Train": Train,
@@ -109,6 +118,7 @@ var things =
     clusters: 5,
     cluster_chances: .5,
     contents: [["Person",0,8],["Empty Car",0,2]],
+    descriptor: ["house", "houses"]
     },
   "Business": {
     "Business": Business,
@@ -117,6 +127,7 @@ var things =
     clusters: 5,
     cluster_chances: .25,
     contents: [["Person",0,30],["Car",0,5],["Empty Car",0,20]],
+    descriptor: ["a local business", "buildings"]
     },
   "Barn": {
     "Barn": Barn,
@@ -125,6 +136,7 @@ var things =
     clusters: 1,
     cluster_chances: .1,
     contents: [["Person",0,2],["Cow",30,70]],
+    descriptor: ["a barn", "barns"]
     },
   "Small Skyscraper": {
     "Small Skyscraper": SmallSkyscraper,
@@ -133,6 +145,7 @@ var things =
     clusters: 2,
     cluster_chances: .25,
     contents: [["Person",150,750],["Empty Car",10,50]],
+    descriptor: ["a small skyscraper", "small skyscrapers"]
     },
   "Large Skyscraper": {
     "Large Skyscraper": LargeSkyscraper,
@@ -141,6 +154,7 @@ var things =
     clusters: 1,
     cluster_chances: .25,
     contents: [["Person",500,1500],["Empty Car",20,100]],
+    descriptor: ["a large skyscraper", "large skyscrapers"]
     },
   "Parking Garage": {
     "Parking Garage": ParkingGarage,
@@ -745,6 +759,31 @@ function copy_defaults(self,proto) { //loads the values defined in things into t
   }
 }
 
+function defaultDescribe(verbose=true, parent){
+  if (verbose) {
+    if (parent.count <= 3) {
+      var list = [];
+      for (var i = 0; i < parent.count; i++) {
+        list.push(parent.describeOne(parent.count <= 2));
+      }
+      if (parent.contents == []){
+        return merge_things(list);
+      } else {
+        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";
+      }
+    } else {
+      if (parent.contents == []){
+        return parent.count + " " + things[parent.name].descriptor[1];
+      } else {
+        return parent.count + " homes with " + describe_all(parent.contents,verbose) + " inside";
+      }
+    }
+  } else {//not verbose
+    return (parent.count > 1 ? parent.count + " " + things[parent.name].descriptor[1] : things[parent.name].descriptor[0]);
+  }
+}
+
+
 function Container(contents = []) {
   this.name = "Container";
 
@@ -792,26 +831,14 @@ function Person(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    if (verbose) {
-      if (count <= 3) {
-        var list = [];
-        for (var i = 0; i < count; i++) {
-          list.push(this.describeOne(this.count <= 2));
-        }
-        return merge_things(list);
-      } else {
-        return this.count + " people";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " people" : "a person");
-    }
-  };
+    return defaultDescribe(verbose, this);
+  }
 
   return this;
 }
 
 function Human(count = 1) {
-  this.name = "Person";
+  this.name = "Human";
 
   copy_defaults(this,new DefaultEntity());
 
@@ -826,20 +853,8 @@ function Human(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    if (verbose) {
-      if (count <= 3) {
-        var list = [];
-        for (var i = 0; i < count; i++) {
-          list.push(this.describeOne(this.count <= 2));
-        }
-        return merge_things(list);
-      } else {
-        return this.count + " people";
-      }
-    } else {
-      return (this.count > 1 ? this.count + " people" : "a person");
-    }
-  };
+    return defaultDescribe(verbose, this);
+  }
 
   return this;
 }
@@ -1077,7 +1092,7 @@ function House(count = 1) {
   this.describeOne = function(verbose=true) {
     var size = random_desc(["little","two-story","large","well-built","run-down","cheap",], (verbose ? 0.5 : 0));
     var color = random_desc(["blue","white","gray","tan","green","wooden","brick"], (verbose ? 0.5 : 0));
-    var name = random_desc(["house","home","house","house","house","trailer"], 1);
+    var name = random_desc(["house","home","duplex","house","house","trailer"], 1);
     return merge_desc([size,color,name]);
   };
 
