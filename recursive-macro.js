@@ -766,16 +766,16 @@ function defaultDescribe(verbose=true, parent){
       for (var i = 0; i < parent.count; i++) {
         list.push(parent.describeOne(parent.count <= 2));
       }
-      if (things[parent.name].contents.length <= 1){
-        return merge_things(list);
+      if (things[parent.name].contents.length > 0){
+        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";       
       } else {
-        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";        
+        return merge_things(list);
       }
     } else {
-      if (things[parent.name].contents.length <= 1){
-        return parent.count + " " + things[parent.name].descriptor[1];
-      } else {
+      if (things[parent.name].contents.length > 0){
         return parent.count + " " + things[parent.name].descriptor[1] +" with " + describe_all(parent.contents,verbose) + " inside";
+      } else {
+        return parent.count + " " + things[parent.name].descriptor[1];
       }
     }
   } else {//not verbose
@@ -1522,5 +1522,6 @@ function Army(count = 1) {
   //racetracks
   //more building types
   //nebula
+  //chemical factory
   //grand army
   //armada
