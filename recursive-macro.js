@@ -726,15 +726,6 @@ function defaultAddContent(thing) {
   };
 }
 
-function defaultDescribeSimple(thing) {
-  return function(flat) {
-    if (flat) {
-      return flatten(thing).describe(false)
-    } else {
-      return thing.describe(false);
-    }
-  }
-}
 function DefaultEntity() {
   this.sum = defaultSum;
   this.area = defaultArea;
@@ -753,6 +744,16 @@ function copy_defaults(self,proto) { //loads the values defined in things into t
   for (var key in proto) { //proto will always be a new DefaultEntity, self is the parent function
     if (proto.hasOwnProperty(key)) {
       self[key] = proto[key](self);
+    }
+  }
+}
+
+function defaultDescribeSimple(thing) {
+  return function(flat) {
+    if (flat) {
+      return flatten(thing).describe(false)
+    } else {
+      return thing.describe(false);
     }
   }
 }
@@ -1343,7 +1344,7 @@ function Micro(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  tthis.describe = function(verbose=true) {
+  this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
   }
 }
