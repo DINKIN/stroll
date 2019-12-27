@@ -1094,30 +1094,35 @@ function defaultDumpSock(container, macro, verbose, flat) {
 }
 
 function defaultPiss(container, macro, verbose, flat) {
-  if (macro.maleParts) {
-    if (container.count == 0) {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + ".";
-    } else if (isSadistic(macro)) {
-      return "You sigh with relief as $VOLUME of hot, rancid piss erupts from your " + macro.describeDick + ", inundating " + container.describe(verbose) + " in a disgusting tide of yellow death."
-    } else {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeDick + ", spraying down " + container.describe(verbose) + " in a shower of golden, musky fluid.";
-    }
-  } else if (macro.femaleParts) {
-    if (container.count == 0) {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeVagina + " slit.";
-    } else if (isSadistic(macro)) {
-      return "You sigh with relief as $VOLUME of hot, rancid piss erupts from your " + macro.describeVagina + " slit, inundating " + container.describe(verbose) + " in a disgusting tide of yellow death."
-    } else {
-      return "You sigh with relief as $VOLUME of piss erupts from your " + macro.describeVagina + " slit, spraying down " + container.describe(verbose) + " in a shower of golden, musky fluid.";
-    }
-  } else {
-    if (container.count == 0) {
-      return "You sigh with relief as $VOLUME of piss erupts from between your legs.";
-    } else if (isSadistic(macro)) {
-      return "You sigh with relief as $VOLUME of hot, rancid piss erupts from between your legs, inundating " + container.describe(verbose) + " in a disgusting tide of yellow death."
-    } else {
-      return "You sigh with relief as $VOLUME of piss erupts from between your legs, spraying down " + container.describe(verbose) + " in a shower of golden, musky fluid.";
-    }
+  if (container.count == 0) {
+    return [
+      "You sigh with relief as",
+      "$VOLUME",
+      "of piss erupts from",
+      macro.maleParts ? "your " + macro.describeDick + "." : "between your legs."
+    ].filter(Boolean).join(" ")
+  }
+  else if (isSadistic(macro)) {
+    return [
+      "You sigh with relief as",
+      "$VOLUME",
+      "of hot, rancid piss erupts from",
+      macro.maleParts ? "your " + macro.describeDick + "," : "between your legs,",
+      "inundating",
+      container.describe(verbose),
+      "in a disgusting tide of yellow death."
+    ].filter(Boolean).join(" ")
+  }
+  else {
+    return [
+      "You sigh with relief as",
+      "$VOLUME",
+      "of hot, rancid piss erupts from",
+      macro.maleParts ? "your " + macro.describeDick + "," : "between your legs,",
+      "spraying down",
+      container.describe(verbose),
+      "in a shower of golden, musky fluid."
+    ].filter(Boolean).join(" ")
   }
 }
 
