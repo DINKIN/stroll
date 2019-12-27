@@ -1106,18 +1106,24 @@ function defaultPiss(container, macro, verbose, flat) {
     return [
       "You sigh with relief as",
       "$VOLUME",
-      "of hot, rancid piss erupts from",
+      "of hot,",
+      pickString("rancid", "steaming", "fuming"),
+      "piss erupts from",
       macro.maleParts ? "your " + macro.describeDick + "," : "between your legs,",
       "inundating",
       container.describe(verbose),
-      "in a disgusting tide of yellow death."
+      "and melting",
+      (container.count > 1 ? "them" : "it"),
+      "them down to a boiling",
+      pickString("slurry of molten prey", "stew", "heap of charred slag"),
+      pickString("in mere seconds", "with terrifying speed", "like " + (container.count > 1 ? "they were" : "it was") + " tissue paper")
     ].filter(Boolean).join(" ")
   }
   else {
     return [
       "You sigh with relief as",
       "$VOLUME",
-      "of hot, rancid piss erupts from",
+      "of piss erupts from",
       macro.maleParts ? "your " + macro.describeDick + "," : "between your legs,",
       "spraying down",
       container.describe(verbose),
