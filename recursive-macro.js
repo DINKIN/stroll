@@ -543,6 +543,7 @@ function merge_desc(list) {
   if (result.length > 0) {
     result = result.substring(0, result.length - 1);
   }
+  let article = "a "
   //a/an overwriting terms
   let forcedTerms = ["honor","heir"]; //words that need to start with an but don't start with a,e,i,o,u
   let force = false;
@@ -555,14 +556,11 @@ function merge_desc(list) {
   for (let i of exceptionTerms){
   if (i === result.substring(0, i.length)){exception = true;}
   }
-  //check if the string should start with a or an
+  //check if the string should start with an
   if ((force == true) || (exception == false && ((result.charAt(0) == "a")||(result.charAt(0) == "e")||(result.charAt(0) == "i")||(result.charAt(0) == "o")||(result.charAt(0) == "u")))){
-    result = "an " + result; 
-  }else{
-    result = "a " + result;
+    article = "an "; 
   }
-
-
+  result = article + result;
   return result;
 }
 

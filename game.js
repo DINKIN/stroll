@@ -48,12 +48,12 @@ const textFadeChoices = {
   },
   dims: {
     name: "Text Dims",
-    animation: "log-dim 10s linear",
+    animation: "log-dim 15s linear",
     next: "fades"
   },
   fades: {
     name: "Text Fades",
-    animation: "log-fade 10s linear",
+    animation: "log-fade 20s linear",
     next: "stays"
   }
 };
