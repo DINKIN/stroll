@@ -109,6 +109,23 @@ var things =
     clusters: 1,
     cluster_chances: .05,
     contents: [["Person",10,40]],
+  "Business Jet": {
+    "Business Jet": BusinessJet,
+    mass: 6500,
+    area: 50,
+    clusters: 1,
+    cluster_chances: .05,
+    contents: [["Person",2,9]],
+    descriptor: ["a business jet", "business jets"]
+    },
+  "Airliner": {
+    "Airliner": Airliner,
+    mass: 6500,
+    area: 50,
+    clusters: 1,
+    cluster_chances: .05,
+    contents: [["Person",5,300]],
+    descriptor: ["an airliner", "airliners"]
     },
 //Buildings
   "House": {
@@ -957,6 +974,44 @@ function Tram(count = 1) {
   this.anal_vore = function() {
     return "You slide " + this.describe() + " up your tight ass";
   };
+}
+
+function BusinessJet(count = 1) {
+  this.name = "Business Jet";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var adjective = random_desc(["brand-new","aging","modern"], (verbose ? 0.2 : 0));
+    var color = random_desc(["blue","white","white","blue and white","red and white","black","gold"], (verbose ? 0.9 : 0));
+    var type = random_desc(["luxury jet","business jet","single-engine plane","light aircraft"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
+}
+
+function Airliner(count = 1) {
+  this.name = "Airliner";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var adjective = random_desc(["brand-new","aging","modern"], (verbose ? 0.2 : 0));
+    var color = random_desc(["blue","white","white","blue and white"], (verbose ? 0.9 : 0));
+    var type = random_desc(["airliner","twin-engine jet","trijet","four engine jet","double-decker airliner","widebody airliner","passenger jet","airliner"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
 }
 
 function Train(count = 1) {
