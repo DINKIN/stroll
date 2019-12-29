@@ -45,7 +45,7 @@ var things =
     area: .05,
     clusters: 50,
     cluster_chances: 1,
-    contents: [[]],
+    contents: [],
     descriptor: ["a micro", "micros"]
     },
   "Macro": {
@@ -54,7 +54,7 @@ var things =
     area: 100,
     clusters: 0,
     cluster_chances: 0,
-    contents: [[]],
+    contents: [],
     descriptor: ["a smaller macro", "smaller macros"]
     },
 //Vehicles
@@ -64,7 +64,7 @@ var things =
     area: 4,
     clusters: 2,
     cluster_chances: .3,
-    contents: [[]],
+    contents: [],
     descriptor: ["a parked car", "parked cars"]
     },
   "Car": {
@@ -109,6 +109,8 @@ var things =
     clusters: 1,
     cluster_chances: .05,
     contents: [["Person",10,40]],
+    descriptor: ["a train car", "train cars"]
+    },
   "Business Jet": {
     "Business Jet": BusinessJet,
     mass: 6500,
@@ -180,6 +182,7 @@ var things =
     clusters: 1,
     cluster_chances: .1,
     contents: [["Person",10,200],["Empty Car",100,300],["Car",5,30]],
+    descriptor: ["a parking garage", "parking garages"]
     },
 //Places
   "Town": {
@@ -189,6 +192,7 @@ var things =
     clusters: 5,
     cluster_chances: .1,
     contents: [["Person",10000,100000],["House",5000,50000],["Empty Car",200,800],["Car",500,80000],["Bus",5,25],["Train",5,25],["Business",500,5000]],
+    descriptor: ["a town", "towns"]
     },
   "City": {
     "City": City,
@@ -197,6 +201,7 @@ var things =
     clusters: 0,
     cluster_chances: .2,
     contents: [["Person",100000,1500000],["House",20000,200000],["Empty Car",10000,100000],["Car",7500,125000],["Bus",200,400],["Train",10,50],["Tram",25,100],["Small Skyscraper",50,300],["Large Skyscraper",10,75],["Parking Garage",5,10],["Business",2000,10000]],
+    descriptor: ["a city", "cities"]
     },
   "Continent": {
     "Continent": Continent,
@@ -205,6 +210,7 @@ var things =
     clusters: 5,
     cluster_chances: .5,
     contents: [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
+    descriptor: ["a continent", "continents"]
     },
   "Planet": {
     "Planet": Planet,
@@ -213,6 +219,7 @@ var things =
     clusters: 0,
     cluster_chances: 1,
     contents: [["Continent",4,9]],
+    descriptor: ["a planet", "planets"]
     },
   "Star": {
     "Star": Star,
@@ -229,6 +236,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [["Star",1,1],["Planet",5,15]],
+    descriptor: ["a solar system", "solar systems"]
     },
   "Galaxy": {
     "Galaxy": Galaxy,
@@ -237,6 +245,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [["Star",1e9,500e9],["Solar System",1e8,500e8]],
+    descriptor: ["a galaxy", "galaxies"]
     },
   "Cluster": {
     "Cluster": Cluster,
@@ -245,6 +254,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [["Galaxy",200,5000]],
+    descriptor: ["a cluster", "clusters"]
     },
   "Universe": {
     "Universe": Universe,
@@ -253,6 +263,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [["Cluster",1.5e9,2.5e9]],
+    descriptor: ["a universe", "universes"]
     },
   "Multiverse": {
     "Multiverse": Multiverse,
@@ -261,6 +272,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [["Universe",100,1000]],
+    descriptor: ["a multiverse", "multiverses"]
     },
 //Military
   "Soldier": {
@@ -270,6 +282,7 @@ var things =
     clusters: 2,
     cluster_chances: .2,
     contents: [],
+    descriptor: ["a soldier","soldiers"]
     },
   "Tank": {
     "Tank": Tank,
@@ -278,6 +291,7 @@ var things =
     clusters: 2,
     cluster_chances: .25,
     contents: [["Soldier",3,5]],
+    descriptor: ["a tank", "tanks"]
     },
   "Artillery": {
     "Artillery": Artillery,
@@ -286,6 +300,7 @@ var things =
     clusters: 3,
     cluster_chances: .5,
     contents: [["Soldier",4,6]],
+    descriptor: ["an artillery tank", "artillery tanks"]
     },
   "Helicopter": {
     "Helicopter": Helicopter,
@@ -294,6 +309,7 @@ var things =
     clusters: 0,
     cluster_chances: 0,
     contents: [["Soldier",4,16]],
+    descriptor: ["a helicoptor", "helicoptors"]
     },
   "Squad": {
     "Squad": Squad,
@@ -302,6 +318,7 @@ var things =
     clusters: 20,
     cluster_chances: .05,
     contents: [["Soldier",6,9]],
+    descriptor: ["a squad", "squads"]
     },
   "Platoon": {
     "Platoon": Platoon,
@@ -310,6 +327,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Soldier",16,44]],
+    descriptor: ["a military platoon", "platoons"]
     },
   "Company": {
     "Company": Company,
@@ -318,6 +336,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Soldier",60,200]],
+    descriptor: ["a company of soldiers", "companies"]
     },
   "Battalion": {
     "Battalion": Battalion,
@@ -326,6 +345,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Soldier",300,1000]],
+    descriptor: ["a battalion", "battalions"]
     },
   "Brigade": {
     "Brigade": Brigade,
@@ -334,6 +354,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Soldier",1500,3200]],
+    descriptor: ["a brigade", "brigades"]
     },
   "Division": {
     "Division": Division,
@@ -342,6 +363,7 @@ var things =
     clusters: 3,
     cluster_chances: .1,
     contents: [["Soldier",10000,16000]],
+    descriptor: ["a division", "divisions"]
     },
   "Tank Division": {
     "Tank Division": TankDivision,
@@ -350,6 +372,7 @@ var things =
     clusters: 1,
     cluster_chances: .15,
     contents: [["Soldier",8000,1200],["Tank",250,500]],
+    descriptor: ["a tank division", "tank divisions"]
     },
   "Army": {
     "Army": Army,
@@ -358,6 +381,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Soldier",40000,75000]],
+    descriptor: ["an army", "armies"]
     },
 };
   //Alterante Army Structuring, may be used later
@@ -504,81 +528,6 @@ function fill_area(area, weights, variance=0.15)
   }
 
   return new Container(result);
-}
-// describes everything in the container
-
-function describe_all(contents,verbose=true,except=[]) {
-    var things = [];
-    for (var key in contents) {
-      if (contents.hasOwnProperty(key) && !except.includes(key)) {
-        things.push(contents[key].describe(verbose));
-      }
-    }
-    return merge_things(things);
-}
-
-function random_desc(list, odds=1) {
-  if (Math.random() < odds)
-    return list[Math.floor(Math.random() * list.length)];
-  else
-    return "";
-}
-
-// combine strings into a list with proper grammar
-
-function merge_things(list,semicolons=false) {
-  if (list.length == 0) {
-    return "";
-  } else if (list.length == 1) {
-    return list[0];
-  } else if (list.length == 2) {
-    return list[0] + " and " + list[1];
-  } else {
-    var result = "";
-
-    list.slice(0,list.length-1).forEach(function(term) {
-      result += term + ", ";
-    });
-
-    result += "and " + list[list.length-1];
-
-    return result;
-  }
-}
-
-// combine the adjectives for something into a single string
-
-function merge_desc(list) {
-  var result = "";
-
-  list.forEach(function(term) {
-    if (term != "")
-      result += term + " ";
-  });
-
-  // knock off the last space
-  if (result.length > 0) {
-    result = result.substring(0, result.length - 1);
-  }
-  let article = "a "
-  //a/an overwriting terms
-  let forcedTerms = ["honor","heir"]; //words that need to start with an but don't start with a,e,i,o,u
-  let force = false;
-  for (let i of forcedTerms){
-  if (i === result.substring(0, i.length)){force = true;}
-  }
-
-  let exceptionTerms = ["uniform","unique"]; //words that need to start with a and start with a,e,i,o,u
-  let exception = false;
-  for (let i of exceptionTerms){
-  if (i === result.substring(0, i.length)){exception = true;}
-  }
-  //check if the string should start with an
-  if ((force == true) || (exception == false && ((result.charAt(0) == "a")||(result.charAt(0) == "e")||(result.charAt(0) == "i")||(result.charAt(0) == "o")||(result.charAt(0) == "u")))){
-    article = "an "; 
-  }
-  result = article + result;
-  return result;
 }
 
 // maybe make this something that approximates a
@@ -765,6 +714,84 @@ function copy_defaults(self,proto) { //loads the values defined in things into t
   }
 }
 
+// combine strings into a list with proper grammar
+
+function merge_things(list,semicolons=false) {
+  if (list.length == 0) {
+    return "";
+  } else if (list.length == 1) {
+    return list[0];
+  } else if (list.length == 2) {
+    return list[0] + " and " + list[1];
+  } else {
+    var result = "";
+
+    list.slice(0,list.length-1).forEach(function(term) {
+      result += term + ", ";
+    });
+
+    result += "and " + list[list.length-1];
+
+    return result;
+  }
+}
+
+// combine the adjectives for something into a single string
+
+function merge_desc(list) {
+  var result = "";
+
+  list.forEach(function(term) {
+    if (term != "")
+      result += term + " ";
+  });
+
+  // knock off the last space
+  if (result.length > 0) {
+    result = result.substring(0, result.length - 1);
+  }
+
+  let article = "a "
+  //a/an overwriting terms
+  let forcedTerms = ["honor","heir"]; //words that need to start with an but don't start with a,e,i,o,u
+  let force = false;
+  for (let i of forcedTerms){
+  if (i === result.substring(0, i.length)){force = true;}
+  }
+
+  let exceptionTerms = ["uniform","unique"]; //words that need to start with a and start with a,e,i,o,u
+  let exception = false;
+  for (let i of exceptionTerms){
+  if (i === result.substring(0, i.length)){exception = true;}
+  }
+
+  //check if the string should start with an
+  if ((force == true) || (exception == false && ((result.charAt(0) == "a")||(result.charAt(0) == "e")||(result.charAt(0) == "i")||(result.charAt(0) == "o")||(result.charAt(0) == "u")))){
+    article = "an "; 
+  }
+  result = article + result;
+  return result;
+}
+
+// describes everything in the container
+
+function describe_all(contents,verbose=true,except=[]) {
+    var things = [];
+    for (var key in contents) {
+      if (contents.hasOwnProperty(key) && !except.includes(key)) {
+        things.push(contents[key].describe(verbose));
+      }
+    }
+    return merge_things(things);
+}
+
+function random_desc(list, odds=1) { //strings together an array into a series of words
+  if (Math.random() < odds)
+    return list[Math.floor(Math.random() * list.length)];
+  else
+    return "";
+}
+
 function defaultDescribeSimple(thing) {
   return function(flat) {
     if (flat) {
@@ -775,27 +802,49 @@ function defaultDescribeSimple(thing) {
   }
 }
 
-function defaultDescribe(verbose=true, parent){
-  if (verbose) {
-    if (parent.count <= 3) {
+function defaultDescribe(verbose=true, parent, descAs){
+    let descriptorEnd = " inside";
+    let descriptorConjunction = " with ";
+    let groupLessThan3 = false;
+    switch(descAs) {
+      case "vehicle":
+        descriptorEnd = pickString(" inside"," inside"," inside", " inside"," riding inside", " trapped inside", " sitting inside");
+        break;
+      case "community":
+        groupLessThan3 = true;
+        descriptorEnd = " in " + (parent.count == 1 ? "it" : "them");
+        break;
+      case "celestial":
+        groupLessThan3 = true;
+        descriptorConjunction = pickString(" made up of "," consisting of "," containing ");
+        descriptorEnd = "";
+        break;
+      case "military":
+        groupLessThan3 = true;
+        descriptorConjunction = pickString(" of "," of "," made up of "," comprised of "," containing ");
+        descriptorEnd = "";
+        break;
+    
+    } if (verbose) {
+    if (parent.count <= 3 && groupLessThan3 == false) {
       var list = [];
       for (var i = 0; i < parent.count; i++) {
         list.push(parent.describeOne(parent.count <= 2));
       }
       if (things[parent.name].contents.length > 0){
-        return merge_things(list) + " with " + describe_all(parent.contents,verbose) + " inside";       
+        return (merge_things(list) + descriptorConjunction + describe_all(parent.contents,false) + descriptorEnd);       
       } else {
-        return merge_things(list);
+        return (merge_things(list));
       }
-    } else {
+    } else {//if there are more than 3 of the object
       if (things[parent.name].contents.length > 0){
-        return parent.count + " " + things[parent.name].descriptor[1] +" with " + describe_all(parent.contents,verbose) + " inside";
+        return (parent.count + " " + things[parent.name].descriptor[1] + descriptorConjunction + describe_all(parent.contents,false) + descriptorEnd);
       } else {
-        return parent.count + " " + things[parent.name].descriptor[1];
+        return (parent.count + " " + things[parent.name].descriptor[0]);
       }
     }
   } else {//not verbose
-    return (parent.count > 1 ? parent.count + " " + things[parent.name].descriptor[1] : things[parent.name].descriptor[0]);
+    return (parent.count > 1 ? (parent.count + " " + things[parent.name].descriptor[1]) : things[parent.name].descriptor[0]);
   }
 }
 
@@ -897,7 +946,7 @@ function Cow(count = 1) {
 }
 
 function EmptyCar(count = 1) {
-  this.name = "Car";
+  this.name = "Empty Car";
 
   copy_defaults(this,new DefaultEntity());
   this.count = count;
@@ -930,7 +979,7 @@ function Car(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this);
+    return defaultDescribe(verbose, this, "vehicle");
   }
 }
 
@@ -949,7 +998,7 @@ function Bus(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this);
+    return defaultDescribe(verbose, this, "vehicle");
   }
 }
 
@@ -968,7 +1017,7 @@ function Tram(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this);
+    return defaultDescribe(verbose, this, "vehicle");
   }
 
   this.anal_vore = function() {
@@ -1065,13 +1114,9 @@ function TrainCar(count = 1) {
     return merge_desc([adjective,color,type]);
   };
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count > 1 ? this.count + " train cars" : "a train car") + " with " + describe_all(this.contents) + " inside";
-    } else {
-      return (this.count > 1 ? this.count + " train cars" : "a train car");
-    }
-  };
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
 }
 
 function House(count = 1) {
@@ -1169,13 +1214,14 @@ function ParkingGarage(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function(verbose=true) {
-    return "a parking garage";
+    return things[this.name].descriptor[0];
   };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
   }
 }
+
 function Town(count = 1) {
   this.name = "Town";
 
@@ -1183,13 +1229,13 @@ function Town(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a town" : this.count + " towns") + " with " + describe_all(this.contents, verbose) + " in " + (this.count == 1 ? "it" : "them");
-    } else {
-      return (this.count == 1 ? "a town" : this.count + " towns");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
+  }
 }
 
 function City(count = 1) {
@@ -1199,13 +1245,13 @@ function City(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a city" : this.count + " cities") + " with " + describe_all(this.contents, verbose) + " in " + (this.count == 1 ? "it" : "them");
-    } else {
-      return (this.count == 1 ? "a city" : this.count + " cities");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
+  }
 }
 
 function Continent(count = 1) {
@@ -1215,13 +1261,13 @@ function Continent(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a continent" : this.count + " continents") + " with " + describe_all(this.contents, verbose) + " on " + (this.count == 1 ? "it" : "them");
-    } else {
-      return (this.count == 1 ? "a continent" : this.count + " continents");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
+  }
 }
 
 function Planet(count = 1) {
@@ -1231,13 +1277,13 @@ function Planet(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a planet" : this.count + " planets") + " with " + describe_all(this.contents, verbose) + " on " + (this.count == 1 ? "it" : "them");
-    } else {
-      return (this.count == 1 ? "a planet" : this.count + " planets");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
+  }
 }
 
 function Star(count = 1) {
@@ -1259,13 +1305,13 @@ function SolarSystem(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a solar system" : this.count + " solar systems") + " made up of " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a solar system" : this.count + " solar systems");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "celestial");
+  }
 }
 
 function Galaxy(count = 1) {
@@ -1275,13 +1321,13 @@ function Galaxy(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a galaxy" : this.count + " galaxies") + " made up of " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a galaxy" : this.count + " galaxies");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "celestial");
+  }
 }
 
 function Cluster(count = 1) {
@@ -1291,13 +1337,13 @@ function Cluster(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a cluster" : this.count + " clusters") + " made up of " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a cluster" : this.count + " clusters");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "celestial");
+  }
 }
 
 function Universe(count = 1) {
@@ -1307,13 +1353,13 @@ function Universe(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a universe" : this.count + " universes") + " made up of " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a universe" : this.count + " universes");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "celestial");
+  }
 }
 
 function Multiverse(count = 1) {
@@ -1323,13 +1369,13 @@ function Multiverse(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a multiverse" : this.count + " multiverses") + " made up of " + describe_all(this.contents, verbose);
-    } else {
-      return (this.count == 1 ? "a multiverse" : this.count + " multiverses");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "celestial");
+  }
 }
 
 function Soldier(count = 1) {
@@ -1339,9 +1385,13 @@ function Soldier(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-      return (this.count == 1 ? "a soldier" : this.count + " soldiers");
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
 }
 
 function Tank(count = 1) {
@@ -1351,13 +1401,13 @@ function Tank(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a tank" : this.count + " tanks") + " with " + describe_all(this.contents, verbose) + " trapped inside";
-    } else {
-      return (this.count == 1 ? "a tank" : this.count + " tanks");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
 }
 
 function Artillery(count = 1) {
@@ -1367,13 +1417,13 @@ function Artillery(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units") + " with " + describe_all(this.contents, verbose) + " trapped inside";
-    } else {
-      return (this.count == 1 ? "an artillery unit" : this.count + " artillery units");
-    }
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
   };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
 }
 
 function Helicopter(count = 1) {
@@ -1383,13 +1433,13 @@ function Helicopter(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describe = function(verbose = true) {
-    if (verbose) {
-      return (this.count == 1 ? "a helicopter" : this.count + " helicopters") + " with " + describe_all(this.contents, verbose) + " riding inside";
-    } else {
-      return (this.count == 1 ? "a helicopter" : this.count + " helicopters");
-    }
-  };
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
+    };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
 }
 
 function Micro(count = 1) {
@@ -1398,6 +1448,10 @@ function Micro(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
+    };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
@@ -1411,6 +1465,10 @@ function Macro(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
+  this.describeOne = function(verbose=true) {
+    return things[this.name].descriptor[0];
+    };
+
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
   }
@@ -1423,16 +1481,12 @@ function Squad(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a squad";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a squad" : this.count + " squads") + " made up of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a squad" : this.count + " squads");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Platoon(count = 1) {
@@ -1442,16 +1496,12 @@ function Platoon(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a military platoon";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a platoon" : this.count + " platoons") + " consisting of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a platoon" : this.count + " platoons");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Company(count = 1) {
@@ -1461,16 +1511,12 @@ function Company(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a company of soldiers";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a company" : this.count + " companies") + " of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a company" : this.count + " companies");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Battalion(count = 1) {
@@ -1480,16 +1526,12 @@ function Battalion(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a battalion";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a battalion" : this.count + " battalions") + " containing " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a battalion" : this.count + " battalions");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Brigade(count = 1) {
@@ -1499,16 +1541,12 @@ function Brigade(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a brigade";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a brigade" : this.count + " brigades") + " made up of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a brigade" : this.count + " brigades");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Division(count = 1) {
@@ -1518,16 +1556,12 @@ function Division(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a division";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a division" : this.count + " divisions") + " of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a division" : this.count + " divisions");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function TankDivision(count = 1) {
@@ -1537,16 +1571,12 @@ function TankDivision(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "a tank division";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "a tank division" : this.count + " tank divisions") + " of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "a tank division" : this.count + " tank divisions");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 function Army(count = 1) {
@@ -1556,16 +1586,12 @@ function Army(count = 1) {
     this.contents = initContents(this.name,this.count);
 
     this.describeOne = function(verbose=true) {
-        return "an army";
+      return things[this.name].descriptor[0];
     };
 
-    this.describe = function(verbose = true) {
-      if (verbose) {
-        return (this.count == 1 ? "an army" : this.count + " armies") + " made up of " + describe_all(this.contents, verbose);
-      } else {
-        return (this.count == 1 ? "an army" : this.count + " armies");
-      }
-    };
+    this.describe = function(verbose=true) {
+      return defaultDescribe(verbose, this, "military");
+    }
   }
 
 
@@ -1575,6 +1601,7 @@ function Army(count = 1) {
   //farms
   //racetracks
   //more building types
+  //cranes and other construction equipment
   //nebula
   //chemical factory
   //grand army
