@@ -4826,6 +4826,7 @@ function grow_stench(factor, simpleCalc=true){
 
 function resetSettings() {
   document.forms.namedItem("custom-species-form").reset();
+  reset_visible_groups();
   updateAllPreviews();
 }
 
@@ -5596,7 +5597,6 @@ function update_visible_groups() {
 
   groups.forEach(group => {
     const state = document.querySelector("#group-toggle-" + group).checked;
-    console.log(state);
     document.querySelectorAll(".sheet-group-" + group).forEach(category => {
       if (state)
         category.style.display = "";
