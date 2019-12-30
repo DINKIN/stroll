@@ -5976,12 +5976,14 @@ function construct_options() {
 
     label.setAttribute("for", "group-toggle-" + group);
     label.innerText = groupInfo[group].name;
+    label.classList.add("group-toggle");
     
     input.addEventListener("input", update_visible_groups);
 
     label.classList.add("solo");
     group_holder.appendChild(input);
     group_holder.appendChild(label);
+    group_holder.appendChild(document.createElement("br"));
 
   })
 
