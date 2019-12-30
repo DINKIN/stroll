@@ -5960,7 +5960,7 @@ function construct_options() {
     input.setAttribute("type", "checkbox");
 
     label.setAttribute("for", "group-toggle-" + group);
-    label.innerText = group;
+    label.innerText = groupInfo[group].name;
     
     input.addEventListener("input", update_visible_groups);
 
@@ -5969,10 +5969,22 @@ function construct_options() {
     group_holder.appendChild(label);
 
   })
+
   let root = document.getElementById("character-flex-outer");
 
   options.forEach(function(category) {
     render_category(root, category);
+  });
+
+  groups.forEach(group => { 
+    let div = document.createElement("div");
+    div.classList.add("group-banner");
+  
+    div.classList.add("sheet-group-" + group);
+
+    div.innerText = groupInfo[group].name;
+
+    root.appendChild(div);
   });
 }
 

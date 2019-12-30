@@ -890,10 +890,16 @@ body.dark .meterLabel {
 
 body {
   --main-order: 1;
-  --body-part-order: 2;
-  --nsfw-order: 3;
-  --alt-vore-order: 4;
-  --gross-order: 5;
+  --body-part-order-banner: 2;
+  --body-part-order: 3;
+  --nsfw-order-banner: 4;
+  --nsfw-order: 5;
+  --alt-vore-order-banner: 6;
+  --alt-vore-order: 7;
+  --gross-order-banner: 8;
+  --gross-order: 9;
+  --magic-order-banner: 10;
+  --magic-order: 11;
 }
 
 .sheet-group-main {
@@ -904,14 +910,52 @@ body {
   order: var(--body-part-order);
 }
 
+.group-banner.sheet-group-body-part {
+  order: var(--body-part-order-banner);
+}
+
+.sheet-group-nsfw {
+  order: var(--nsfw-order);
+}
+
+.group-banner.sheet-group-nsfw {
+  order: var(--nsfw-order-banner);
+}
+
 .sheet-group-alt-vore {
   order: var(--alt-vore-order);
+}
+
+.group-banner.sheet-group-alt-vore {
+  order: var(--alt-vore-order-banner);
 }
 
 .sheet-group-gross {
   order: var(--gross-order);
 }
 
-.sheet-group-nsfw {
-  order: var(--nsfw-order);
+.group-banner.sheet-group-gross {
+  order: var(--gross-order-banner);
+}
+
+.sheet-group-magic {
+  order: var(--magic-order);
+}
+
+.group-banner.sheet-group-magic {
+  order: var(--magic-order-banner);
+}
+
+.group-banner {
+  min-width: 80vw;
+  min-height: 10vh;
+  font-size: 6vh;
+  margin: auto;
+}
+
+body.dark div.group-banner {
+  background-color: #444;
+}
+body.light div.group-banner {
+  background-color: #bbb;
 }

@@ -1,4 +1,22 @@
-const groups = ["body-part", "nsfw", "alt-vore", "gross"];
+const groups = ["body-part", "nsfw", "alt-vore", "gross", "magic"];
+
+const groupInfo = {
+  "body-part": {
+    name: "Body parts",
+  },
+  "nsfw": {
+    name: "Sexual parts"
+  },
+  "alt-vore": {
+    name: "Alt vore"
+  },
+  "gross": {
+    name: "Disposal/waste"
+  },
+  "magic": {
+    name: "Magic"
+  }
+}
 
 const panels = {
     "body": {
@@ -947,7 +965,7 @@ options = [
   {
     "name": "Footwear",
     "id": "footWear",
-    "group": "main",
+    "group": "body-part",
     "optional": true,
     "panels": ["shoes"],
     "entries":
@@ -1147,7 +1165,7 @@ options = [
   {
     "name": "Pouch",
     "id": "hasPouch",
-    "group": "body-part",
+    "group": "alt-vore",
     "optional": true,
     "panels": ["misc"],
     "buttons": ["pouch_stuff", "pouch_rub"],
@@ -1981,7 +1999,7 @@ options = [
   {
     "name": "Breath",
     "id": "breathEnabled",
-    "group": "main",
+    "group": "magic",
     "optional": true,
     "panels": ["breath"],
     "buttons": ["breath_line", "breath_cone"],
@@ -2052,7 +2070,7 @@ options = [
   {
     "name": "Magic",
     "id": "magicEnabled",
-    "group": "main",
+    "group": "magic",
     "optional": true,
     "panels": ["magic"],
     "entries":
