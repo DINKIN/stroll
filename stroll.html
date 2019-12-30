@@ -236,12 +236,6 @@
       <ul class="flex-outer">
 
         <div class="custom-category">
-          <p>Reset the sheet here (saved data isn't affected). You can also load the character you started your most recent game with.</p>
-
-          <div>
-            <button class="option-button" id="button-reset-custom">Reset</button>
-            <button class="option-button" id="button-load-autosave">Load Last</button>
-          </div>
         </div>
 
         <div class="custom-category">
@@ -249,14 +243,11 @@
             <button class="option-button" id="button-start">Start Game</button>
           </div>
         </div>
-
         <div class="custom-category">
-          <button class="option-button" id="button-dark-mode-options">Toggle Dark Mode</button>
-          <button class="option-button" id="button-units-options">Units: Metric</button>
         </div>
 
         <div class="custom-category">
-          <p>You can load a preset character here...</p>
+          <p>Preset characters are contributed by players.</p>
           <div>
             <select id="character-presets">
 
@@ -268,7 +259,7 @@
         </div>
 
         <div class="custom-category">
-          <p>Or, load/save your own character internally here. It'll be saved in your browser, so you can come back to it later.</p>
+          <p>Save/load your own characters here. They will be stored in your browser.</p>
           <div>
             <select id="custom-characters">
               <option>No character to load</option>
@@ -283,7 +274,7 @@
         </div>
 
         <div class="custom-category">
-          <p>Or export/import your character to text here. Copy and paste to share.</p>
+          <p>Export your current character or import someone else's character.</p>
           <div class>
             <button type="button" class="option-button" id="button-export-clear">Clear</button>
             <button type="button" class="option-button" id="button-export-preset">Export</button>
@@ -294,10 +285,26 @@
         </div>
 
         <div class="custom-category">
+          <p>Reset the sheet here (saved data isn't affected). You can also load the character you started your most recent game with.</p>
+
+          <div>
+            <button class="option-button" id="button-reset-custom">Reset</button>
+            <button class="option-button" id="button-load-autosave">Load Last</button>
+          </div>
+        </div>
+
+        <div class="custom-category">
           <p>Show/hide whole groups of character features here.</p>
           <div id="group-button-holder">
 
           </div>
+        </div>
+
+        <div class="custom-category">
+          <p>Misc options</p>
+          <br>
+          <button class="option-button" id="button-dark-mode-options">Toggle Dark Mode</button>
+          <button class="option-button" id="button-units-options">Units: Metric</button>
         </div>
       </ul>
       <form id="custom-species-form" name="custom-species-form">
