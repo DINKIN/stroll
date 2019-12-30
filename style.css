@@ -887,3 +887,31 @@ body.dark .meterLabel {
     height: 0;
   }
 }
+
+body {
+  --main-order: 1;
+  --body-part-order: 2;
+  --nsfw-order: 3;
+  --alt-vore-order: 4;
+  --gross-order: 5;
+}
+
+.sheet-group-main {
+  order: var(--main-order);
+}
+
+.sheet-group-body-part {
+  order: var(--body-part-order);
+}
+
+.sheet-group-alt-vore {
+  order: var(--alt-vore-order);
+}
+
+.sheet-group-gross {
+  order: var(--gross-order);
+}
+
+.sheet-group-nsfw {
+  order: var(--nsfw-order);
+}

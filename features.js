@@ -1,4 +1,6 @@
-panels = {
+const groups = ["body-part", "nsfw", "alt-vore", "gross"];
+
+const panels = {
     "body": {
         "name": "Body",
         "buttons": [
@@ -505,6 +507,7 @@ options = [
   {
     "name": "Basics",
     "optional": false,
+    "group": "main",
     "entries": [
       {
         "name": "Name",
@@ -585,6 +588,7 @@ options = [
   {
     "name": "Body Details",
     "optional": false,
+    "group": "main",
     "entries":
     [
       {
@@ -640,6 +644,7 @@ options = [
   {
     "name": "Gameplay",
     "optional": false,
+    "group": "main",
     "entries":
     [
       { 
@@ -770,6 +775,7 @@ options = [
   {
     "name": "Brutality",
     "optional": false,
+    "group": "main",
     "entries":
     [
       {
@@ -808,6 +814,7 @@ options = [
   {
     "name": "Victims",
     "optional": false,
+    "group": "main",
     "entries":
     [
       {
@@ -837,6 +844,7 @@ options = [
   {
     "name": "Oral Vore",
     "id": "oralVore",
+    "group": "main",
     "optional": true,
     "buttons": [
       "feed", "chew"
@@ -883,6 +891,7 @@ options = [
     "name": "Anal Vore",
     "id": "analVore",
     "optional": true,
+    "group": "alt-vore",
     "buttons": ["anal_vore"],
     "entries":
     [
@@ -938,6 +947,7 @@ options = [
   {
     "name": "Footwear",
     "id": "footWear",
+    "group": "main",
     "optional": true,
     "panels": ["shoes"],
     "entries":
@@ -1015,6 +1025,7 @@ options = [
   {
     "name": "Arousal",
     "id": "arousalEnabled",
+    "group": "nsfw",
     "optional": true,
     "warning": "Arousal is enabled",
     "entries":
@@ -1044,6 +1055,7 @@ options = [
   {
     "name": "Tail",
     "id": "hasTail",
+    "group": "body-part",
     "optional": true,
     "parts": ["tail"],
     "panels": ["tails"],
@@ -1135,6 +1147,7 @@ options = [
   {
     "name": "Pouch",
     "id": "hasPouch",
+    "group": "body-part",
     "optional": true,
     "panels": ["misc"],
     "buttons": ["pouch_stuff", "pouch_rub"],
@@ -1151,6 +1164,7 @@ options = [
   {
     "name": "Male Genitals",
     "id": "maleParts",
+    "group": "nsfw",
     "optional": true,
     "stats": ["cum"],
     "parts": ["dick", "balls"],
@@ -1326,6 +1340,7 @@ options = [
   {
     "name": "Female Genitals",
     "id": "femaleParts",
+    "group": "nsfw",
     "optional": true,
     "stats": ["femcum"],
     "parts": ["slit", "womb"],
@@ -1464,6 +1479,7 @@ options = [
   {
     "name": "Breasts",
     "id": "hasBreasts",
+    "group": "body-part",
     "optional": true,
     "panels": ["breasts"],
     "parts": ["breasts"],
@@ -1574,6 +1590,7 @@ options = [
   {
     "name": "Stench",
     "id": "stenchEnabled",
+    "group": "gross",
     "optional": true,
     "warning": "Stench is enabled",
     "parts": ["stench"],
@@ -1608,6 +1625,7 @@ options = [
   {
     "name": "Gas",
     "id": "gasEnabled",
+    "group": "gross",
     "optional": true,
     "stats": ["gas"],
     "panels": ["waste"],
@@ -1657,6 +1675,7 @@ options = [
   {
     "name": "Soul Vore",
     "id": "soulVoreEnabled",
+    "group": "alt-vore",
     "optional": true,
     "panels": ["souls"],
     "buttons": ["soul_vore", "soul_absorb_paw"],
@@ -1718,6 +1737,7 @@ options = [
   {
     "name": "Piss",
     "id": "pissEnabled",
+    "group": "gross",
     "optional": true,
     "stats": ["piss"],
     "panels": ["waste"],
@@ -1805,6 +1825,7 @@ options = [
   {
     "name": "Scat",
     "id": "scatEnabled",
+    "group": "gross",
     "optional": true,
     "stats": ["scat"],
     "panels": ["waste"],
@@ -1843,6 +1864,7 @@ options = [
   {
     "name": "Goo",
     "id": "gooEnabled",
+    "group": "body-part",
     "optional": true,
     "panels": ["goo"],
     "buttons": ["melt"],
@@ -1889,6 +1911,7 @@ options = [
   {
     "name": "Paw Vore",
     "id": "pawVoreEnabled",
+    "group": "alt-vore",
     "optional": true,
     "buttons": ["paw_vore"],
     "entries":
@@ -1933,6 +1956,7 @@ options = [
   {
     "name": "Crop",
     "id": "cropEnabled",
+    "group": "alt-vore",
     "optional": true,
     "buttons": ["crop_swallow"],
     "entries":
@@ -1957,6 +1981,7 @@ options = [
   {
     "name": "Breath",
     "id": "breathEnabled",
+    "group": "main",
     "optional": true,
     "panels": ["breath"],
     "buttons": ["breath_line", "breath_cone"],
@@ -2010,6 +2035,7 @@ options = [
   {
     "name": "Drool",
     "id": "droolEnabled",
+    "group": "gross",
     "optional": true,
     "buttons": ["drool"],
     "entries":
@@ -2026,6 +2052,7 @@ options = [
   {
     "name": "Magic",
     "id": "magicEnabled",
+    "group": "main",
     "optional": true,
     "panels": ["magic"],
     "entries":
@@ -2051,6 +2078,7 @@ options = [
   {
     "name": "Wings",
     "id": "hasWings",
+    "group": "body-part",
     "optional": true,
     "panels": ["misc"],
     "parts": ["wings"],

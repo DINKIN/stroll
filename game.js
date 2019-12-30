@@ -5571,6 +5571,28 @@ window.addEventListener('load', function(event) {
     list.appendChild(opt);
   }
 
+  register_buttons();
+  update_visible_groups();
+
+  setTimeout(pick_move, 2000);
+});
+
+function update_visible_groups() {
+
+  groups.forEach(group => {
+    const state = document.querySelector("#group-toggle-" + group).checked;
+    console.log(state);
+    document.querySelectorAll(".sheet-group-" + group).forEach(category => {
+      if (state)
+        category.style.display = "";
+      else
+        category.style.display = "none";
+    });
+  });
+}
+
+function register_buttons() {
+
   document.querySelectorAll(".action-part-button").forEach(function (element) {
     element.addEventListener("click",actionTab);
   });
@@ -5608,10 +5630,7 @@ window.addEventListener('load', function(event) {
   document.getElementById("button-save-custom").addEventListener("click", function() { saveSettings(); });
   document.getElementById("button-delete-custom").addEventListener("click", function() { deleteSettings(); });
   document.getElementById("button-start").addEventListener("click", startGame);
-
-  setTimeout(pick_move, 2000);
-});
-
+}
 function render_text_option(li, option) {
   let input = document.createElement("input");
   input.setAttribute("autocomplete", "off");
@@ -5905,6 +5924,10 @@ function render_category(root, category) {
     header.classList.add("custom-header-static");
   }
 
+  if (category.group) {
+    cat_div.classList.add("sheet-group-" + category.group);
+  }
+
   header.innerText = name;
 
   let options_div = document.createElement("div")
@@ -5925,6 +5948,27 @@ function render_category(root, category) {
 }
 
 function construct_options() {
+  let group_holder = document.getElementById("group-button-holder");
+
+  groups.forEach(group => {
+    const label = document.createElement("label");
+
+    const input = document.createElement("input");
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("id", "group-toggle-" + group);
+    input.setAttribute("name", "group-toggle-" + group);
+    input.setAttribute("type", "checkbox");
+
+    label.setAttribute("for", "group-toggle-" + group);
+    label.innerText = group;
+    
+    input.addEventListener("input", update_visible_groups);
+
+    label.classList.add("solo");
+    group_holder.appendChild(input);
+    group_holder.appendChild(label);
+
+  })
   let root = document.getElementById("character-flex-outer");
 
   options.forEach(function(category) {
