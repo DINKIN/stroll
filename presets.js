@@ -2,6 +2,7 @@ let presets = [
   {
     "version": 3,
     "name": "Fen",
+    "scale": 15,
     "priority": 1,
     "brutality": "2",
     "oralVore": true,
