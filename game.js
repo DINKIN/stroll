@@ -5108,6 +5108,8 @@ function loadSettings(settings = null) {
   }
 
   migrate(settings);
+  
+  reset_visible_groups();
 
   let form = document.forms.namedItem("custom-species-form");
 
@@ -5127,6 +5129,12 @@ function loadSettings(settings = null) {
         
       else if (form[i].type == "checkbox") {
         form[i].checked = settings[form[i].name];
+
+        options.forEach(option => {
+          if (option.group && option.group != "main" && option.id == form[i].name && settings[form[i].name]) {
+            document.querySelector("#group-toggle-" + option.group).checked = true;
+          }
+        })
       } else if (form[i].type == "radio") {
         let name = form[i].name;
         form[i].checked = (settings[name] == form[i].value);
@@ -5141,6 +5149,7 @@ function loadSettings(settings = null) {
     }
   }
   updateAllPreviews();
+  update_visible_groups();
 }
 
 function add_victim_people(category, prey) {
@@ -5577,6 +5586,12 @@ window.addEventListener('load', function(event) {
   setTimeout(pick_move, 2000);
 });
 
+function reset_visible_groups() {
+  groups.forEach(group => {
+    document.querySelector("#group-toggle-" + group).checked = false;
+  });
+  update_visible_groups();
+}
 function update_visible_groups() {
 
   groups.forEach(group => {
