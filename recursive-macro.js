@@ -9,6 +9,7 @@ var things =
     clusters: 0,
     cluster_chances: 0,
     contents: [],
+    descriptor: ["", ""]
     },
 
 //Creatures
@@ -101,6 +102,7 @@ var things =
     clusters: 2,
     cluster_chances: .1,
     contents: [["Person",1,4,"engine"],["Train Car",2,10]],
+    descriptor: ["a train", "trains"]
     },
   "Train Car": {
     "Train Car": TrainCar,
@@ -228,6 +230,7 @@ var things =
     clusters: 1,
     cluster_chances: 1,
     contents: [],
+    descriptor: ["a star", "stars"]
     },
   "Solar System": {
     "Solar System": SolarSystem,
@@ -578,6 +581,10 @@ function defaultMass(thing) {
   return things[thing.name].mass;
 }
 
+function defaultDescribeOne(thing) {
+  return things[thing.name].descriptor[0];
+}
+
 function defaultMerge(thing) { //this merges all objects into one containers
   return function(container) {
     var newCount = this.count + container.count;
@@ -700,7 +707,7 @@ function DefaultEntity() {
   this.merge = defaultMerge;
   this.multiply = defaultMultiply;
   this.describeSimple = defaultDescribeSimple;
-
+  this.describeOne = defaultDescribeOne;
   return this;
 }
 
@@ -824,9 +831,20 @@ function defaultDescribe(verbose=true, parent, descAs){
         descriptorConjunction = pickString(" of "," of "," made up of "," comprised of "," containing ");
         descriptorEnd = "";
         break;
+      case "generic vehicle":
+        groupLessThan3 = true;
+        descriptorEnd = pickString(" inside"," inside"," inside", " inside"," riding inside", " trapped inside", " sitting inside");
+        break;
     
     } if (verbose) {
-    if (parent.count <= 3 && groupLessThan3 == false) {
+    if (parent.count = 1 ) { //singular parent (specifying single to catch cases where groupLessThan3 = true, otherwise it would output "1 towns" instead of "a town"
+      if (things[parent.name].contents.length > 0){
+        return (things[parent.name].descriptor[0] + descriptorConjunction + describe_all(parent.contents,false) + descriptorEnd);
+      } else {
+        return parent.describeOne(verbose);
+      }
+    }
+    else if (parent.count <= 3 && groupLessThan3 == false) { // less than 3 parents and an ojbect that has varety when described
       var list = [];
       for (var i = 0; i < parent.count; i++) {
         list.push(parent.describeOne(parent.count <= 2));
@@ -834,13 +852,13 @@ function defaultDescribe(verbose=true, parent, descAs){
       if (things[parent.name].contents.length > 0){
         return (merge_things(list) + descriptorConjunction + describe_all(parent.contents,false) + descriptorEnd);       
       } else {
-        return (merge_things(list));
+        return merge_things(list);
       }
     } else {//if there are more than 3 of the object
       if (things[parent.name].contents.length > 0){
         return (parent.count + " " + things[parent.name].descriptor[1] + descriptorConjunction + describe_all(parent.contents,false) + descriptorEnd);
       } else {
-        return (parent.count + " " + things[parent.name].descriptor[0]);
+        return (parent.count + " " + things[parent.name].descriptor[1]);
       }
     }
   } else {//not verbose
@@ -1213,10 +1231,6 @@ function ParkingGarage(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
   }
@@ -1228,10 +1242,6 @@ function Town(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "community");
@@ -1245,10 +1255,6 @@ function City(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "community");
   }
@@ -1261,10 +1267,6 @@ function Continent(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "community");
   }
@@ -1276,10 +1278,6 @@ function Planet(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "community");
@@ -1305,10 +1303,6 @@ function SolarSystem(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "celestial");
   }
@@ -1320,10 +1314,6 @@ function Galaxy(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "celestial");
@@ -1337,10 +1327,6 @@ function Cluster(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "celestial");
   }
@@ -1352,10 +1338,6 @@ function Universe(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "celestial");
@@ -1369,10 +1351,6 @@ function Multiverse(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this, "celestial");
   }
@@ -1385,12 +1363,8 @@ function Soldier(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this);
+    return defaultDescribe(verbose, this, "military");
   }
 }
 
@@ -1401,12 +1375,8 @@ function Tank(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this, "vehicle");
+    return defaultDescribe(verbose, this, "generic vehicle");
   }
 }
 
@@ -1417,12 +1387,8 @@ function Artillery(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-  };
-
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this, "vehicle");
+    return defaultDescribe(verbose, this, "generic vehicle");
   }
 }
 
@@ -1433,12 +1399,8 @@ function Helicopter(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-    };
-
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this, "vehicle");
+    return defaultDescribe(verbose, this, "generic vehicle");
   }
 }
 
@@ -1448,10 +1410,6 @@ function Micro(count = 1) {
   copy_defaults(this,new DefaultEntity());
   this.count = count;
   this.contents = initContents(this.name,this.count);
-
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-    };
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
@@ -1465,10 +1423,6 @@ function Macro(count = 1) {
   this.count = count;
   this.contents = initContents(this.name,this.count);
 
-  this.describeOne = function(verbose=true) {
-    return things[this.name].descriptor[0];
-    };
-
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
   }
@@ -1479,10 +1433,6 @@ function Squad(count = 1) {
     copy_defaults(this,new DefaultEntity());
     this.count = count;
     this.contents = initContents(this.name,this.count);
-
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
 
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
@@ -1495,10 +1445,6 @@ function Platoon(count = 1) {
     this.count = count;
     this.contents = initContents(this.name,this.count);
 
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
-
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
     }
@@ -1509,10 +1455,6 @@ function Company(count = 1) {
     copy_defaults(this,new DefaultEntity());
     this.count = count;
     this.contents = initContents(this.name,this.count);
-
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
 
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
@@ -1525,10 +1467,6 @@ function Battalion(count = 1) {
     this.count = count;
     this.contents = initContents(this.name,this.count);
 
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
-
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
     }
@@ -1539,10 +1477,6 @@ function Brigade(count = 1) {
     copy_defaults(this,new DefaultEntity());
     this.count = count;
     this.contents = initContents(this.name,this.count);
-
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
 
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
@@ -1555,10 +1489,6 @@ function Division(count = 1) {
     this.count = count;
     this.contents = initContents(this.name,this.count);
 
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
-
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
     }
@@ -1570,10 +1500,6 @@ function TankDivision(count = 1) {
     this.count = count;
     this.contents = initContents(this.name,this.count);
 
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
-
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
     }
@@ -1584,10 +1510,6 @@ function Army(count = 1) {
     copy_defaults(this,new DefaultEntity());
     this.count = count;
     this.contents = initContents(this.name,this.count);
-
-    this.describeOne = function(verbose=true) {
-      return things[this.name].descriptor[0];
-    };
 
     this.describe = function(verbose=true) {
       return defaultDescribe(verbose, this, "military");
