@@ -5572,20 +5572,55 @@ window.addEventListener('load', function(event) {
     
   } );
 
+  let category_list = document.getElementById("character-preset-categories");
+
+  presetCategories.forEach(name => {
+    let opt = document.createElement("option");
+    opt.innerHTML = name;
+    opt.value = name;
+    category_list.appendChild(opt);
+  });
+
+  category_list.addEventListener("change", updatePresets);
+
   let list = document.getElementById("character-presets");
 
   for (let i=0; i < presets.length; i++) {
     let opt = document.createElement("option");
     opt.innerHTML = presets[i]["name"];
+    opt.dataset.category = presets[i].category || "default";
     opt.value = i;
     list.appendChild(opt);
   }
-
+  
+  updatePresets();
   register_buttons();
   update_visible_groups();
 
   setTimeout(pick_move, 2000);
 });
+
+function updatePresets(e) {
+  const list = document.getElementById("character-presets");
+  const category_list = document.getElementById("character-preset-categories");
+
+  Array.from(list.options).forEach(x => {
+    if (x.dataset.category == category_list.value) {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  });
+
+  if (list.selectedOptions[0].style.display == "none") {
+    for (let i = 0; i < list.options.length; i++) {
+      if (list.options[i].style.display != "none") {
+        list.selectedIndex = i;
+        break;
+      }
+    }
+  }
+};
 
 function reset_visible_groups() {
   groups.forEach(group => {

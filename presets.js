@@ -1,7 +1,13 @@
+let presetCategories = [
+  "default",
+  "special"
+]
+
 let presets = [
   {
     "version": 3,
     "name": "Fen",
+    "category": "special",
     "scale": 15,
     "priority": 1,
     "brutality": "2",
