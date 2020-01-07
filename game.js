@@ -1824,6 +1824,9 @@ const biomeEnum = {
            "Car": 0.1,
            "Train": 0.002,
            "Business": 0.075,
+           "Ranch": 0.01,
+           "Airstrip": 0.002,
+           "Airport": 0.002,
            "Town": 0.00001
         }},
     Suburb: {
@@ -2161,7 +2164,7 @@ function getWeights(region, area) {
         weights["Soldier"] = 0.08;
         weights["Tank"] = 0.07;
         weights["Artillery"] = 0.06;
-        weights["Helicopter"] = 0.05,
+        weights["Military Helicopter"] = 0.05,
         weights["Squad"]= .04;
         weights["Platoon"]= .2,
         weights["Company"]= .3,

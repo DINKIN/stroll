@@ -113,23 +113,59 @@ var things =
     contents: [["Person",10,40]],
     descriptor: ["a train car", "train cars"]
     },
-  "Business Jet": {
-    "Business Jet": BusinessJet,
+  "Helicopter": {
+    "Helicopter": Helicopter,
+    mass: 1500,
+    area: 12,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [["Person",4,16]],
+    descriptor: ["a helicopter", "helicopters"]
+    },
+  "Empty Helicopter": {
+    "Empty Helicopter": EmptyHelicopter,
+    mass: 1500,
+    area: 12,
+    clusters: 3,
+    cluster_chances: 0.05,
+    contents: [],
+    descriptor: ["a parked helicopter", "parked helicopters"]
+    },
+  "Plane": {
+    "Plane": Plane,
+    mass: 6500,
+    area: 50,
+    clusters: 1,
+    cluster_chances: .05,
+    contents: [],
+    descriptor: ["a small plane", "small planes"]
+    },
+  "Empty Plane": {
+    "Empty Plane": EmptyPlane,
     mass: 6500,
     area: 50,
     clusters: 1,
     cluster_chances: .05,
     contents: [["Person",2,9]],
-    descriptor: ["a business jet", "business jets"]
+    descriptor: ["a parked plane", "parked aircraft"]
     },
   "Airliner": {
     "Airliner": Airliner,
     mass: 6500,
-    area: 50,
+    area: 1250,
     clusters: 1,
     cluster_chances: .05,
     contents: [["Person",5,300]],
     descriptor: ["an airliner", "airliners"]
+    },
+  "Empty Airliner": {
+    "Empty Airliner": EmptyAirliner,
+    mass: 6500,
+    area: 1250,
+    clusters: 1,
+    cluster_chances: .05,
+    contents: [],
+    descriptor: ["a parked airliner", "parked airliners"]
     },
 //Buildings
   "House": {
@@ -159,6 +195,33 @@ var things =
     contents: [["Person",0,2],["Cow",30,70]],
     descriptor: ["a barn", "barns"]
     },
+  "Small Hangar": {
+    "Small Hangar": SmallHangar,
+    mass: 5e5,
+    area: 2500,
+    clusters: 1,
+    cluster_chances: .1,
+    contents: [["Person",0,3],["Plane",0,1],["Empty Plane",2,6]],
+    descriptor: ["a small hangar", "small hangars"]
+    },
+  "Helicopter Hangar": {
+    "Helicopter Hangar": HelicopterHangar,
+    mass: 5e5,
+    area: 2000,
+    clusters: 1,
+    cluster_chances: .1,
+    contents: [["Person",0,3],["Helicopter",0,1],["Helicopter",2,6]],
+    descriptor: ["a helicopter hangar", "helicopter hangar"]
+    },
+  "Large Hangar": {
+    "Large Hangar": LargeHangar,
+    mass: 5e6,
+    area: 8000,
+    clusters: 1,
+    cluster_chances: .1,
+    contents: [["Person",0,5],["Airliner",0,1],["Empty Airliner",1,2]],
+    descriptor: ["an aircraft hangar", "hangars"]
+    },
   "Small Skyscraper": {
     "Small Skyscraper": SmallSkyscraper,
     mass: 1e7,
@@ -187,6 +250,33 @@ var things =
     descriptor: ["a parking garage", "parking garages"]
     },
 //Places
+  "Ranch": {
+    "Ranch": Ranch,
+    mass: 2e7,
+    area: 4e4,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [["Person",10,50],["House",1,3],["Barn",1,2]],
+    descriptor: ["a ranch", "ranchs"]
+    },
+  "Airstrip": {
+    "Airstrip": Airstrip,
+    mass: 2e7,
+    area: 9e5,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [["Person",10,50],["Small Hangar",1,3],["Plane",0,2],["Helicopter",0,1],["Helicopter Hangar",0,1],["Car",0,5],["Empty Car",0,20]],
+    descriptor: ["an airstrip", "airstrips"]
+    },
+  "Airport": {
+    "Airport": Airport,
+    mass: 1.5e8,
+    area: 6e6,
+    clusters: 0,
+    cluster_chances: 0,
+    contents: [["Person",1500,4000],["Small Hangar",4,12],["Plane",2,5],["Helicopter",1,3],["Helicopter Hangar",2,6],["Airliner",1,3],["Large Hangar",2,6],["Car",20,75],["Empty Car",400,1000]],
+    descriptor: ["an airport", "airports"]
+    },
   "Town": {
     "Town": Town,
     mass: 1,
@@ -214,6 +304,7 @@ var things =
     contents: [["Person",1000000,15000000],["House",2500,10000],["Car",25000,375000],["Train",50,500],["Town",500,1000],["City",50,250],["Business",250,1000]],
     descriptor: ["a continent", "continents"]
     },
+//Celestial Bodies
   "Planet": {
     "Planet": Planet,
     mass: 5.972e24,
@@ -305,14 +396,14 @@ var things =
     contents: [["Soldier",4,6]],
     descriptor: ["an artillery tank", "artillery tanks"]
     },
-  "Helicopter": {
-    "Helicopter": Helicopter,
+  "Military Helicopter": {
+    "Military Helicopter": MilitaryHelicopter,
     mass: 1500,
     area: 12,
     clusters: 0,
     cluster_chances: 0,
     contents: [["Soldier",4,16]],
-    descriptor: ["a helicoptor", "helicoptors"]
+    descriptor: ["a helicopter", "helicopters"]
     },
   "Squad": {
     "Squad": Squad,
@@ -582,7 +673,9 @@ function defaultMass(thing) {
 }
 
 function defaultDescribeOne(thing) {
+  return function(verbose){ //verbose doesn't matter for this case, becasue it handles things with no extra text to use when being verbose
   return things[thing.name].descriptor[0];
+  }
 }
 
 function defaultMerge(thing) { //this merges all objects into one containers
@@ -951,9 +1044,9 @@ function Cow(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describeOne = function (verbose=true) {
-    var body = random_desc(["skinny","fat","tall","short","stocky","spindly"], (verbose ? 0.6 : 0));
-    var sex = random_desc(["male", "female"], (verbose ? 1 : 0));
-    return merge_desc([body,sex,"cow"]);
+    var body = random_desc(["skinny","fat","tall","short","stocky","spindly","brown"], (verbose ? 0.6 : 0));
+    var sex = random_desc(["bull","steer","cow","cow","cow","heifer"], (verbose ? 1 : 0));
+    return merge_desc([body,sex]);
   };
 
   this.describe = function(verbose=true) {
@@ -978,7 +1071,7 @@ function EmptyCar(count = 1) {
   };
 
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this);
+    return defaultDescribe(verbose, this, "vehicle");
   }
 }
 
@@ -1043,8 +1136,44 @@ function Tram(count = 1) {
   };
 }
 
-function BusinessJet(count = 1) {
-  this.name = "Business Jet";
+function EmptyHelicopter(count = 1) {
+  this.name = "Empty Helicopter";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var color = random_desc(["blue","white","white","red","black","gold","yellow"], (verbose ? 0.6 : 0));
+    var type = random_desc(["bubble coptor","helicopter","helicopter","news chopper","police helicopter","chopper"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
+}
+
+function Helicopter(count = 1) {
+  this.name = "Helicopter";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var color = random_desc(["blue","white","white","red","black","gold","yellow"], (verbose ? 0.6 : 0));
+    var type = random_desc(["bubble coptor","helicopter","helicopter","news chopper","police helicopter","chopper"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
+}
+
+function EmptyPlane(count = 1) {
+  this.name = "Empty Plane";
 
   copy_defaults(this,new DefaultEntity());
   this.count = count;
@@ -1054,6 +1183,44 @@ function BusinessJet(count = 1) {
     var adjective = random_desc(["brand-new","aging","modern"], (verbose ? 0.2 : 0));
     var color = random_desc(["blue","white","white","blue and white","red and white","black","gold"], (verbose ? 0.9 : 0));
     var type = random_desc(["luxury jet","business jet","single-engine plane","light aircraft"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
+}
+
+function Plane(count = 1) {
+  this.name = "Plane";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var adjective = random_desc(["brand-new","aging","modern"], (verbose ? 0.2 : 0));
+    var color = random_desc(["blue","white","white","blue and white","red and white","black","gold"], (verbose ? 0.9 : 0));
+    var type = random_desc(["luxury jet","business jet","single-engine plane","light aircraft"]);
+    return merge_desc([adjective,color,type]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "vehicle");
+  }
+}
+
+function EmptyAirliner(count = 1) {
+  this.name = "Empty Airliner";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var adjective = random_desc(["brand-new","aging","modern"], (verbose ? 0.2 : 0));
+    var color = random_desc(["blue","white","white","blue and white"], (verbose ? 0.9 : 0));
+    var type = random_desc(["airliner","twin-engine jet","trijet","four engine jet","double-decker airliner","widebody airliner","passenger jet","airliner"]);
     return merge_desc([adjective,color,type]);
   };
 
@@ -1191,6 +1358,60 @@ function Barn(count = 1) {
   }
 }
 
+function SmallHangar(count = 1) {
+  this.name = "Small Hangar";
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var size = random_desc(["weathered","aging","new"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var name = random_desc(["hangar","hangar","hangar","aircraft hangar"], 1);
+    return merge_desc([size,color,name]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
+}
+
+function HelicopterHangar(count = 1) {
+  this.name = "Helicopter Hangar";
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var size = random_desc(["weathered","aging","new"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var name = random_desc(["hangar","hangar","hangar","helicopter hangar"], 1);
+    return merge_desc([size,color,name]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
+}
+
+function LargeHangar(count = 1) {
+  this.name = "Large Hangar";
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var size = random_desc(["weathered","aging","new"], (verbose ? 0.5 : 0));
+    var color = random_desc(["blue","white","gray","tan","green"], (verbose ? 0.5 : 0));
+    var name = random_desc(["hangar","hangar","hangar","large hangar","spacious hangar"], 1);
+    return merge_desc([size,color,name]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
+}
+
 function SmallSkyscraper(count = 1) {
   this.name = "Small Skyscraper";
   copy_defaults(this,new DefaultEntity());
@@ -1233,6 +1454,47 @@ function ParkingGarage(count = 1) {
 
   this.describe = function(verbose=true) {
     return defaultDescribe(verbose, this);
+  }
+}
+
+function Ranch(count = 1) {
+  this.name = "Ranch";
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describeOne = function(verbose=true) {
+    var size = random_desc(["little","large","prosperous","run-down"], (verbose ? 0.5 : 0));
+    var name = random_desc(["ranch","farm","ranch","dairy farm","cattle farm","ranch","farm"], 1);
+    return merge_desc([size,name]);
+  };
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this);
+  }
+}
+
+function Airstrip(count = 1) {
+  this.name = "Airstrip";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
+  }
+}
+
+function Airport(count = 1) {
+  this.name = "Airport";
+
+  copy_defaults(this,new DefaultEntity());
+  this.count = count;
+  this.contents = initContents(this.name,this.count);
+
+  this.describe = function(verbose=true) {
+    return defaultDescribe(verbose, this, "community");
   }
 }
 
@@ -1392,8 +1654,8 @@ function Artillery(count = 1) {
   }
 }
 
-function Helicopter(count = 1) {
-  this.name = "Helicopter";
+function MilitaryHelicopter(count = 1) {
+  this.name = "Military Helicopter";
 
   copy_defaults(this,new DefaultEntity());
   this.count = count;
@@ -1519,12 +1781,13 @@ function Army(count = 1) {
 
 
   //todo
-  //airports
   //farms
+  //factories
   //racetracks
   //more building types
   //cranes and other construction equipment
   //nebula
+  //biome magic also set it so that you can't roll your existing biome
   //chemical factory
   //grand army
   //armada
