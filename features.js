@@ -604,6 +604,20 @@ options = [
     ]
   },
   {
+    "name": "Extra Info",
+    "optional": false,
+    "group": "main",
+    "entries":
+    [
+      {
+        "name": "Bio",
+        "id": "bio",
+        "type": "text",
+        "default": "Big stompy monster, innit"
+      }
+    ]
+  },
+  {
     "name": "Body Details",
     "optional": false,
     "group": "main",
