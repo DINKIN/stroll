@@ -469,6 +469,10 @@ const panels = {
             {
                 "name": "Fast Digestion",
                 "target": "magic_fast_digestion"
+            },
+            {
+                "name": "Pause Digestion",
+                "target": "magic_pause_digestion"
             }
         ]
     },
@@ -2105,6 +2109,14 @@ options = [
         "default": true,
         "tooltip": "Fast Digestion allows you to speed up your digestion for a short duration."
       },
+      {
+        "name": "Pause digestion",
+        "id": "magicPauseDigestion",
+        "type": "checkbox",
+        "buttons": ["magic_pause_digestion"],
+        "default": true,
+        "tooltip": "Pause Digestion allows you to halt digestion until you cast it again."
+      }
     ]
   },
   {

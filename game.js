@@ -70,6 +70,7 @@ let macro = //macro controls every customizable part of the players body
   "shrunkPrey": null,
   "fastDigestFactor": 1,
   "fastDigestTimer": null,
+  "pauseDigest": false,
   "walkSpeed": 1,
 
   "growthPoints": 0,
@@ -558,6 +559,10 @@ let macro = //macro controls every customizable part of the players body
     // just leave this here to keep that from breaking things
     if (auto && time != 0) {
       setTimeout(function() { owner.digest(owner, organ, time); }, time * 1000 / organ.stages / macro.fastDigestFactor);
+    }
+
+    if (macro.pauseDigest) {
+      return;
     }
 
     let count = Math.min(organ.contents.length, organ.maxDigest);
@@ -4329,6 +4334,20 @@ function magic_fast_digestion()
   update([line, newline]);
 }
 
+function magic_pause_digestion()
+{
+  let line;
+
+  if (macro.pauseDigest) {
+    line = "You end the spell, and your body resumes its work.";
+  } else {
+    line = "Your magic halts your digestive processes.";
+  }
+
+  macro.pauseDigest = !macro.pauseDigest;
+
+  update([line, newline]);
+}
 function wings_flap()
 {
   let area = macro.wingArea * 2;
