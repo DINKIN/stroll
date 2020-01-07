@@ -4348,6 +4348,26 @@ function magic_pause_digestion()
 
   update([line, newline]);
 }
+
+function magic_arousal() {
+  let line = "Ooo";
+  
+  if (macro.maleParts && macro.femaleParts) {
+    
+  }
+
+  update([line, newline]);
+
+  macro_arousal_execute(100, 100);
+}
+
+function macro_arousal_execute(remaining, max) {
+  if (remaining > 0) {
+    macro.arouse(2 * remaining / max);
+    setTimeout(() => macro_arousal_execute(remaining - 1, max), 25);
+  }
+}
+
 function wings_flap()
 {
   let area = macro.wingArea * 2;
@@ -5282,10 +5302,6 @@ function startGame(e) {
 
   enable_growth_part("body");
   enable_growth_part("ass");
-
-  if (macro.magicEnabled) {
-    enable_panel("magic");
-  }
 
   if (macro.arousalEnabled) {
     document.querySelector("#arousalMeter").style.display = 'inline-block';

@@ -473,6 +473,10 @@ const panels = {
             {
                 "name": "Pause Digestion",
                 "target": "magic_pause_digestion"
+            },
+            {
+                "name": "Arousal",
+                "target": "magic_arousal"
             }
         ]
     },
@@ -1509,6 +1513,24 @@ options = [
             "default": "0.5"
           }
         ]
+      }
+    ]
+  },
+  {
+    "name": "Sexual Magic",
+    "id": "sexualMagicEnabled",
+    "group": "nsfw",
+    "optional": true,
+    "panels": ["magic"],
+    "entries":
+    [
+      {
+        "name": "Arousal",
+        "id": "magicArousal",
+        "type": "checkbox",
+        "buttons": ["magic_arousal"],
+        "default": true,
+        "tooltip": "Rapidly arouses the caster"
       }
     ]
   },
