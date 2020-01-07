@@ -7,7 +7,22 @@ let presets = [
   {
     "version": 3,
     "name": "Fen",
+    "scale": 15,
+    "priority": 1,
+    "brutality": "2",
+    "oralVore": true,
+    "analVore": true,
+    "analVoreToStomach": true,
+    "hasTail": true,
+    "tailType": "twisted",
+    "baseTailLength": 2,
+    "baseTailDiameter": 0.4
+  },
+  {
+    "version": 3,
+    "name": "Special Fen",
     "category": "special",
+    "bio": "He's VERY fluffy",
     "scale": 15,
     "priority": 1,
     "brutality": "2",
