@@ -4378,10 +4378,10 @@ function magic_fill_sexual() {
 
 function macro_fill_sexual_execute(remaining, max) {
   if (macro.maleParts) {
-    macro.cumStorage.amount += macro.cumStorage.limit * 0.03 * remaining / max;
+    macro.cumStorage.amount += macro.cumStorage.limit * 0.02 * remaining / max;
   }
   if (macro.femaleParts) {
-    macro.femcumStorage.amount += macro.femcumStorage.limit * 0.03 * remaining / max;
+    macro.femcumStorage.amount += macro.femcumStorage.limit * 0.02 * remaining / max;
   }
 
   if (remaining > 0) {
