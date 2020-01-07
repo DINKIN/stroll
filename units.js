@@ -300,9 +300,18 @@ function metricLength(m, singular=false) {
   } else if (m < 500) {
     let length = round(m,2);
     return length + (singular || length == 1 ? " meter" : " meters");
-  } else {
+  } else if (m < 1e12) {
     let length = round(m / 1000,1);
     return length + (singular || length == 1 ? " kilometer" : " kilometers");
+  } else if (m < 1e15) {
+    let length = round(m / 1e6,1);
+    return length + (singular || length == 1 ? " megameter" : " megameters");
+  } else if (m < 1e18) {
+    let length = round(m / 1e9,1);
+    return length + (singular || length == 1 ? " gigameter" : " gigameters");
+  } else {
+    let length = round(m / 1e12,1);
+    return length + (singular || length == 1 ? " terameter" : " terameters");
   }
 }
 
@@ -379,12 +388,21 @@ function approxLength(m, singular=false) {
   } else if (m < 9.4607e22) {
     let length = round(m/9.4607e15,3);
     return length + (singular || length == 1 ? " light year" : " light years");
-  } else if (m < 5e26) {
-    let length = round(m/9.4607e21,3);
-    return length + (singular || length == 1 ? " galaxy" : " galaxies");
+  } else if (m < 3e19) {
+    let length = round(m/3.0856776e16,3);
+    return length + (singular || length == 1 ? " parsec" : " parsecs");
+  } else if (m < 3e22) {
+    let length = round(m/3.0856776e19,3);
+    return length + (singular || length == 1 ? " kiloparsec" : " kiloparsecs");
+  } else if (m < 3e25) {
+    let length = round(m/3.0856776e22,3);
+    return length + (singular || length == 1 ? " megaparsec" : " megaparsecs");
+  } else if (m < 3e28) {
+    let length = round(m/3.0856776e25,3);
+    return length + (singular || length == 1 ? " gigaparsec" : " gigaparsecss");
   } else {
-    let length = round(m/4.40e26,3);
-    return length + (singular || length == 1 ? " universe" : " universes");
+    let length = round(m/3.0856776e28,3);
+    return length + (singular || length == 1 ? " teraparsec" : " teraparsecs");
   }
 }
 
