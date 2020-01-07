@@ -4368,6 +4368,27 @@ function macro_arousal_execute(remaining, max) {
   }
 }
 
+function magic_fill_sexual() {
+  let line = "Full up!";
+
+  update([line, newline]);
+
+  macro_fill_sexual_execute(100, 100);
+}
+
+function macro_fill_sexual_execute(remaining, max) {
+  if (macro.maleParts) {
+    macro.cumStorage.amount += macro.cumStorage.limit * 0.03 * remaining / max;
+  }
+  if (macro.femaleParts) {
+    macro.femcumStorage.amount += macro.femcumStorage.limit * 0.03 * remaining / max;
+  }
+
+  if (remaining > 0) {
+    setTimeout(() => macro_fill_sexual_execute(remaining - 1, max), 25);
+  }
+}
+
 function wings_flap()
 {
   let area = macro.wingArea * 2;

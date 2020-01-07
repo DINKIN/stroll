@@ -477,6 +477,10 @@ const panels = {
             {
                 "name": "Arousal",
                 "target": "magic_arousal"
+            },
+            {
+                "name": "Summon Cum",
+                "target": "magic_fill_sexual"
             }
         ]
     },
@@ -1531,6 +1535,14 @@ options = [
         "buttons": ["magic_arousal"],
         "default": true,
         "tooltip": "Rapidly arouses the caster"
+      },
+      {
+        "name": "Summon cum",
+        "id": "magicFillSexual",
+        "type": "checkbox",
+        "buttons": ["magic_fill_sexual"],
+        "default": true,
+        "tooltip": "Prepares the caster for quite the gush!"
       }
     ]
   },
