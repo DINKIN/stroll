@@ -350,6 +350,12 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
   width: 500px;
 }
 
+body.dark .custom-category.wide-category,
+body.light .custom-category.wide-category {
+  width: 90%;
+  background: none;
+}
+
 .custom-category-sub {
   text-align: center;
   margin: 10px;
