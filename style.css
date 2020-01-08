@@ -109,8 +109,11 @@ body.dark div {
   .action-part-button {
     width: 33% !important;
   }
+  .action-part-container {
+    width: 50vw !important;
+  }
   .action-button {
-    width: 100px !important;
+    width: 16.6667vw !important;
   }
 }
 
