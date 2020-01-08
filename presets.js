@@ -1,7 +1,20 @@
 let presetCategories = [
   "default",
+  "neopuc",
   "special"
 ]
+
+let presetInfo = {
+  default: {
+    name: "Default"
+  },
+  neopuc: {
+    name: "Neopuc's Chars"
+  },
+  special: {
+    name: "Extra Special"
+  }
+}
 
 let presets = [
   {
@@ -766,5 +779,10 @@ let presets = [
     "breathElectric": true,
     "droolEnabled": true,
     "magicEnabled": true
-  }
+  },
+  {"version":3,"name":"Elbial","category": "neopuc", "priority": 4, "scale":200,"bio":"Delights in tormenting mortals, devilishly mischievous, very arrogant and cocky.","species":"hybrid demon","automaticGrowthEnabled":true,"brutality":"2","victimsMacros":true,"oralVore":true,"oralDigestTime":5,"oralDigestManual":true,"analVore":true,"analDigestTime":10,"analVoreToStomach":true,"arousalEnabled":true,"hasTail":true,"maleParts":true,"baseDickDiameter":0.06,"dickType":"demonic","baseBallDiameter":0.06,"cockVoreEnabled":true,"cockDigestTime":5,"cockDigestManual":true,"hasSheath":true,"sheathAbsorptionEnabled":true,"femaleParts":true,"unbirthEnabled":true,"unbirthDigestTime":5,"unbirthDigestManual":true,"sexualMagicEnabled":true,"hasBreasts":true,"lactationEnabled":true,"breastVore":true,"soulVoreEnabled":true,"magicEnabled":true},
+  {"version":3,"name":"Mira","category": "neopuc", "priority": 4, "scale":5000,"bio":"Mira is a touch on the arrogant side and can be fairly greedy. She believes anything and anyone smaller than herself belongs to her. Considering she is a size shifter that can reach mind boggling proportions that means just about ever ything is smaller than herself and she lays claim to a significant portion of her universe.","species":"dragon","brutality":"2","victimsMilitary":true,"victimsMacros":true,"oralVore":true,"arousalEnabled":true,"hasTail":true,"tailType":"draconic","baseTailLength":2,"femaleParts":true,"hasBreasts":true,"hasWings":true,"wingDesc":"draconic"},
+  {"version":3,"name":"Carmine","category": "neopuc", "priority": 3, "scale":28500,"bio":"Always smiling, but the smile hides a cruel personality. Never truly as happy as when he is tormenting those smaller than himself.","species":"otter","brutality":"3","victimsMilitary":true,"victimsMacros":true,"oralVore":true,"analVore":true,"footWear":true,"footShoeEnabled":true,"footShoe":"boot","arousalEnabled":true,"hasTail":true,"tailType":"rudder","baseTailLength":2.2,"maleParts":true,"cockVoreEnabled":true,"hasSheath":true,"sheathAbsorptionEnabled":true},
+  {"version":3,"name":"Jennifer","category": "neopuc", "priority": 3, "scale":24.5,"bio":"Assertive in all things. She goes out and takes the things she likes, especially when they are people. Only feels the need to have a small select group of friends. Can be fairly uncaring towards the fate of little folk even though she does think they are cute.","species":"rat ifrit","footType":"foot","arousalEnabled":true,"hasTail":true,"tailType":"skinny","baseTailLength":2,"femaleParts":true,"unbirthEnabled":true,"hasBreasts":true,"magicEnabled":true},
+  {"version":3,"name":"Porter","category": "neopuc", "priority": 2, "scale":1.58,"bio":"Devilishly charismatic, but secretly holds most people in contempt. Wildly in love Holly. Dominant Personality.","species":"Bernese mountain dog","brutality":"2","victimsMicros":true,"oralVore":true,"oralDigestManual":true,"arousalEnabled":true,"hasTail":true,"maleParts":true,"baseDickLength":0.35,"cockVoreEnabled":true,"cockDigestManual":true,"hasSheath":true,"sheathAbsorptionEnabled":true,"sexualMagicEnabled":true,"magicEnabled":true}
 ]
