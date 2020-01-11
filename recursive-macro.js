@@ -1542,7 +1542,7 @@ function Planet(count = 1) {
   this.contents = initContents(this.name,this.count);
 
   this.describe = function(verbose=true) {
-    return defaultDescribe(verbose, this, "community");
+    return defaultDescribe(verbose, this, "celestial");
   }
 }
 
