@@ -48,12 +48,12 @@ const textFadeChoices = {
   },
   dims: {
     name: "Text Dims",
-    animation: "log-dim 10s linear",
+    animation: "log-dim 15s linear",
     next: "fades"
   },
   fades: {
     name: "Text Fades",
-    animation: "log-fade 10s linear",
+    animation: "log-fade 20s linear",
     next: "stays"
   }
 };
@@ -1813,6 +1813,7 @@ const biomeEnum = {
         biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
            "Car": 0.1,
            "Bus": 0.05,
+           "Tram": 0.03,
            "Business": 0.075,
            "Parking Garage": 0.003,
            "Small Skyscraper": 0.06,
@@ -1822,11 +1823,15 @@ const biomeEnum = {
         enabled: "ruralEnabled",
         biomeSize: [4000,8000], //[min,max] Note: this is the distance you will walk until getting to the end of the biome
         biomeWeights: {         //Weights determine if and how often you run into something while inside of a biome
-           "Cow": 0,
+           "Cow": 0.005,
            "House": 0.1,
            "Barn": 0.08,
            "Car": 0.1,
+           "Train": 0.002,
            "Business": 0.075,
+           "Ranch": 0.01,
+           "Airstrip": 0.002,
+           "Airport": 0.002,
            "Town": 0.00001
         }},
     Suburb: {
@@ -2091,7 +2096,7 @@ function getOnePrey(biome, area, sameSize = true)
   let potAreas = [];
 
   potential.forEach(function (x) {
-    potAreas.push([x,areas[x]]);
+    potAreas.push([x,things[x].area]);
   });
 
   potAreas = potAreas.sort(function (x,y) {
@@ -2101,12 +2106,12 @@ function getOnePrey(biome, area, sameSize = true)
   for (let i=0; i<potAreas.length; i++) {
     let x = potAreas[i];
     if (x[1] < area) {
-      return new Container([new things[x[0]](1)]);
+      return new Container([new things[x[0]][x[0]](1)]);
     }
   }
 
   if (sameSize)
-    return new Container([new things["Person"](1)]);
+    return new Container([new things["Person"]["Person"](1)]);
   else
     return new Container();
 }
@@ -2114,7 +2119,7 @@ function getOnePrey(biome, area, sameSize = true)
 function getWeights(region, area) {
   let weights = {};
 
-  if (area > areas["Planet"]) {
+  if (area > things["Planet"].area) {
     weights = {
       "Planet": 1.47e-3,
       "Star": 1.7713746e-3,
@@ -2125,7 +2130,7 @@ function getWeights(region, area) {
       "Multiverse": 1
     };
   }
-  else if (area > areas["Town"]) {
+  else if (area > things["Town"].area) {
     weights = {
       "Town": 0.001,
       "City": 0.0005,
@@ -2164,7 +2169,7 @@ function getWeights(region, area) {
         weights["Soldier"] = 0.08;
         weights["Tank"] = 0.07;
         weights["Artillery"] = 0.06;
-        weights["Helicopter"] = 0.05,
+        weights["Military Helicopter"] = 0.05,
         weights["Squad"]= .04;
         weights["Platoon"]= .2,
         weights["Company"]= .3,
@@ -5380,7 +5385,7 @@ function startGame(e) {
 
   if (macro.victimsHuman) {
     // eh this is ok
-    things["Person"] = Human;
+    things["Person"]["Person"] = Human;
   }
 
   if (macro.victimsMacros) {

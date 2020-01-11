@@ -126,7 +126,7 @@ function hasNothingElse(container, things) {
 function nothingLarger(container, thing) {
   for (var key in container.contents)
     if (container.contents.hasOwnProperty(key))
-      if (areas[key] > areas[thing])
+      if (things[key].area > things[thing].area)
         return false;
 
   return true;
@@ -772,7 +772,7 @@ function defaultSoulAbsorbPaw(container, macro, verbose, flat) {
 function defaultPawStench(container, macro, verbose, flat) {
   let sum = get_living_prey(container.sum());
   if (isSadistic(macro))
-    return "Horrific miasma flows from your " + macro.footDesc(true)+ ", the corrsoive fumes reducing " + (sum > 1 ? sum + " people" : "a person") + " to charred flesh as they wash over " + container.describeSimple(flat) + ".";
+    return "Horrific miasma flows from your " + macro.footDesc(true)+ ", the corrosive fumes reducing " + (sum > 1 ? sum + " people" : "a person") + " to charred flesh as they wash over " + container.describeSimple(flat) + ".";
   if (isFatal(macro))
     return "Vile fumes waft from your " + macro.footDesc(true) + " , choking the life from " + (sum > 1 ? sum + " people." : "a person.");
   else
@@ -2568,7 +2568,7 @@ rules["stomp"].push({
        isNonFatal(macro);
   }, "desc": function(container, macro, verbose, flat) {
     return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". You feel it make contact, and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of \
-    your " + macro.toeDesc(true) + "preserved in newly formed hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide \
+    your " + macro.toeDesc(true) + " preserved in newly formed hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide \
     dust-filled crater you created.";
   }
 });
@@ -2580,8 +2580,8 @@ rules["stomp"].push({
        !hasAtleast(container, "Planet", 1) &&
        isFatal(macro);
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". You feel it make contact, and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + "\
-     preserved in newly formed hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone and twisted steel; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide debris-filled crater you created.";
+    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". You feel it make contact, and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + " preserved \
+    in newly formed hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone and twisted steel; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide debris-filled crater you created.";
   }
 });
 
@@ -2592,8 +2592,8 @@ rules["stomp"].push({
        !hasAtleast(container, "Planet", 1) &&
        isGory(macro);
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". You feel it make contact, and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + "\
-     preserved in debris strewn hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone and twisted steel; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide gore-filled crater you created. \
+    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". You feel it make contact, and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + " preserved \
+    in debris-strewn hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone and twisted steel; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide gore-filled crater you created. \
      The basin of the crater lined with with a smooth steel, glass, and bone aggregate. Steam rises from the mix as it cools and hardens";
   }
 });
@@ -2605,8 +2605,8 @@ rules["stomp"].push({
        !hasAtleast(container, "Planet", 1) && 
        isSadistic(macro);
   }, "desc": function(container, macro, verbose, flat) {
-    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". As you lower your leg, you feel it catch the tops of the taller skycrapers first, collapsing them with no effort. As they fall, you \
-     crush more and more buildings until you feel your " + macro.footDesc() + " smash into the ground. You settle into the landscape and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + "preserved in debris strewn \
+    return "Your massive " + macro.footDesc() + " casts a shadow over the landscape. You lazily bring it down on "+ container.describe(verbose) + ". As you lower your leg, you feel it catch the tops of the taller skyscrapers first, collapsing them with no effort. As they fall, you \
+     crush more and more buildings until you feel your " + macro.footDesc() + " smash into the ground. You settle into the landscape and cloud of dust spreads around the area. As the dust settles, you can see the clear outline of your " + macro.toeDesc(true) + " preserved in debris-strewn \
      hills and valleys. Surrounding your " + macro.footDesc() + "print is a jagged mound of cracked stone and twisted steel; forming the wall of the " + length((Math.pow(macro.pawArea/Math.PI, .5)* 2.5), unit, true) + " wide gore-filled crater you created. The basin of the crater \
      lined with with a smooth steel, glass, and bone aggregate. Steam rises from the mix as it cools and hardens";
   }
@@ -3774,7 +3774,7 @@ rules["male-orgasm"].push({
      isFatal(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ".";
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ".";
   }
 });
 
@@ -3786,7 +3786,7 @@ rules["male-orgasm"].push({
      isGory(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
       is basted to smithereens as it carves a deep chasm. The destroyed buildings and people it swept along are deposited at the sides of the chasm, forming an unstable wall of gore and rubble.";
   }
 });
@@ -3799,7 +3799,7 @@ rules["male-orgasm"].push({
      isSadistic(macro);
 
   }, "desc": function(container, macro, spurtVolume) {
-      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the plaent, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
+      return "You're cumming! Your " + macro.describeDick + " launches $VOLUMEs of frothing load into the atmosphere. As the ocean of cum roars across the planet, it smashes through " + container.describe(verbose) + ". Everything your semen rolls across \
       is basted to smithereens as it carves a deep gore lined chasm that extends from where it landed to the ocean. As it hits the ocean the resulting wave reverses the tide, dashes ships, and turns the water into an inhabitable murky soup. The destroyed \
       buildings and people it swept along are deposited at the bottom of the bay.";
   }
