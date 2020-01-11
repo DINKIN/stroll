@@ -780,6 +780,18 @@ function defaultSumProperty(thing) {
   };
 }
 
+function defaultModProperty(thing) {
+  return function(prop, func) {
+    thing[prop] = func(thing[prop]);
+
+    for (var key in thing.contents) {
+      if (thing.contents.hasOwnProperty(key)) {
+        thing.contents[key].mod_property(prop, func);
+      }
+    }
+  };
+}
+
 function defaultAddContent(thing) {
   return function(name, min, max, count) {
     if (min == max) {
@@ -797,6 +809,7 @@ function DefaultEntity() {
   this.area = defaultArea;
   this.mass = defaultMass;
   this.sum_property = defaultSumProperty;
+  this.mod_property = defaultModProperty;
   this.merge = defaultMerge;
   this.multiply = defaultMultiply;
   this.describeSimple = defaultDescribeSimple;

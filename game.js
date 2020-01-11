@@ -4358,7 +4358,7 @@ function magic_shrink()
   prey = getPrey(biome, macro.height * macro.height * 100, true);
 
   macro.shrunkPrey = prey;
-  macro.shrunkPrey.mass /= 1000000;
+  macro.shrunkPrey.mod_property("mass", x => x/1e2)
 
   let line = describe("magic-shrink", prey, macro, false, flat);
   let linesummary = summarize(prey.sum(), false);
