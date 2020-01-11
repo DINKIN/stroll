@@ -46,9 +46,9 @@ function getDefaultVictim(name) {
   return window[funcName];
 }
 
-var action_keys = ["eat","chew","vomit","stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-musk","female-musk","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
+var action_keys = ["eat","chew","vomit","hand-crush", "foot-crush", "stomp","stomp-wedge","flex-toes","kick","anal-vore","ass-crush","ass-grind","tail-slap","tail-vore","tails-vore","cleavage-stuff","cleavage-crush","cleavage-drop","cleavage-absorb","breast-crush","breast-vore","breast-milk","unbirth","sheath-stuff","sheath-clench","sheath-crush","sheath-absorb","foreskin-stuff","foreskin-clench","foreskin-crush","foreskin-absorb","cock-vore","cockslap","ball-smother","male-spurt","male-orgasm","female-spurt","female-orgasm","grind","pouch-stuff","pouch-rub","pouch-eat","pouch-absorb","soul-vore","soul-absorb-paw","paw-stench","ass-stench","piss-stench","scat-stench","male-musk","female-musk","male-orgasm-musk","female-orgasm-musk","male-spurt-musk","female-spurt-musk","belch","fart","stomach","tail","tail-to-stomach","womb","balls","bowels","bowels-to-stomach","breasts","bladder","soul-digest","wings","wings-to-stomach","wear-shoe","remove-shoe","wear-sock","remove-sock","stuff-shoe","dump-shoe","stuff-sock","dump-sock","piss","bladder-vore","scat","sheath-toy","foreskin-toy","slit-toy","breast-toy","melt","solidify","flood","stomp-goo","goo-digest","ass-goo","goo-stomach-pull","goo-stomach-push","goo-bowels-pull","goo-bowels-push","goo-womb-pull","goo-womb-push","goo-balls-pull","goo-balls-push","goo-breasts-pull","goo-breasts-push","goo-tail-pull","goo-tail-push","goo-paws-pull","goo-paws-push","paw-vore","paw-vore-toes","paws","crop-swallow","crop-transfer","breath-fire","breath-ice","breath-electric","breath-smoke","breath-radiation","breath-foul","drool","magic-shrink","magic-hypnotize","wings-flap","wings-vore"];
 
-var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-musk", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-musk", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
+var victim_keys = ["victim-cum-flood", "victim-femcum-flood", "victim-crushed-hand", "victim-crushed-foot", "victim-stomped", "victim-flex-toes", "victim-eaten", "victim-ass-crush", "victim-ass-ground", "victim-humped", "victim-vomit", "victim-chew", "victim-drool", "victim-anal-vore", "victim-tail-slap", "victim-tail-vore", "victim-cock-slap", "victim-cock-vore", "victim-ball-smother", "victim-sheath-crush", "victim-sheath-absorb", "victim-foreskin-crush", "victim-foreskin-absorb", "victim-cum-flood", "victim-male-musk", "victim-male-spurt-musk", "victim-male-orgasm-musk", "victim-unbirth", "victim-femcum-flood", "victim-female-musk", "victim-female-spurt-musk", "victim-female-orgasm-musk", "victim-breast-crush", "victim-cleavage-crush", "victim-cleavage-absorb", "victim-cleavage-drop", "victim-milk-flood", "victim-breast-vore", "victim-pouch-absorb", "victim-soul-digest", "victim-soul-paw", "victim-paw-stench", "victim-ass-stench", "victim-gas-belch", "victim-gas-fart", "victim-piss", "victim-bladder-vore", "victim-piss-stench", "victim-scat", "victim-scat-stench", "victim-goo", "victim-paw-vore", "victim-breath-fire", "victim-breath-ice", "victim-breath-electric", "victim-breath-smoke", "victim-breath-radiation", "victim-breath-foul", "victim-wings-flap", "victim-wings-vore"]
 
 for (let i=0; i<action_keys.length; i++) {
   rules[action_keys[i]] = [];
@@ -221,6 +221,57 @@ function defaultVomit(container, macro, verbose, flat) {
   } else {
     return "You hack up " + container.describeSimple(flat) + ".";
   }
+}
+
+function defaultHandCrush(container, macro, verbose, flat) {
+  if (isFatal(macro)) {
+    return [
+      "You grab",
+      container.describe(false),
+      "and, with a sharp squeeze, crush",
+      (container.count > 1 ? "them" : "it") + "."
+    ].join(" ");
+  } else {
+    return [
+      "You grab",
+      container.describe(false),
+      "and, after giving",
+      (container.count > 1 ? "them" : "it"),
+      "a playful squeeze, set",
+      (container.count > 1 ? "them" : "it"),
+      "back down."
+    ].join(" ");
+  }
+}
+
+function defaultFootCrush(container, macro, verbose, flat) {
+  if (isFatal(macro)) {
+    return [
+      "Your",
+      macro.footDesc(false),
+      "snatches up",
+      container.describe(false) + ";",
+      "you crush it",
+      (container.count > 1 ? "them" : "it"),
+      "in your",
+      macro.toeDesc(true),
+      "with ease."
+    ].join(" ");
+  } else {
+    return [
+      "Your",
+      macro.footDesc(false),
+      "snatches up",
+      container.describe(false) + ".",
+      "You give",
+      (container.count > 1 ? "them" : "it"),
+      "a friendly squeeze before dropping",
+      (container.count > 1 ? "them" : "it"),
+      "from your",
+      macro.toeDesc(true) + "."
+    ].join(" ");
+  }
+  
 }
 
 function defaultStomp(container, macro, verbose, flat) {

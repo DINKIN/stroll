@@ -39,6 +39,10 @@ const panels = {
                 "target": "chew"
             },
             {
+                "name": "Grab",
+                "target": "hand_crush"
+            },
+            {
                 "name": "Drool",
                 "target": "drool"
             },
@@ -74,6 +78,10 @@ const panels = {
             {
                 "name": "Stomp",
                 "target": "stomp"
+            },
+            {
+                "name": "Grab",
+                "target": "foot_crush"
             },
             {
                 "name": "Flex Toes",

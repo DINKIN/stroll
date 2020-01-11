@@ -134,8 +134,10 @@ let macro = //macro controls every customizable part of the players body
         result = plural ? "hooves" : "hoof";
         break;
       case "foot":
-      case "avian":
         result = plural ? "feet" : "foot";
+        break;
+      case "avian":
+        result = plural ? "avian feet" : "avian foot";
         break;
       }
     return capital ? result.charAt(0).toUpperCase() + result.slice(1) : result;
@@ -2408,6 +2410,48 @@ function drool()
   add_victim_people("drool",prey);
 
   update([sound,line,linesummary,newline]);
+}
+
+function hand_crush(active=true)
+{
+  let area = macro.handArea;
+  let prey = getOnePrey(biome, area, macro.sameSizeStomp);
+  let line = describe("hand-crush", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("crush",preyMass);
+
+  add_victim_people("stomped",prey);
+
+  update([sound,line,linesummary,newline], active);
+
+  macro.arouse(5);
+}
+
+function foot_crush(active=true)
+{
+  let area = macro.pawArea;
+  let prey = getOnePrey(biome, area, macro.sameSizeStomp);
+  let line = describe("foot-crush", prey, macro, verbose, flat);
+  let linesummary = summarize(prey.sum(), true);
+
+  let people = get_living_prey(prey.sum());
+
+  let preyMass = prey.sum_property("mass");
+
+  let sound = getSound("crush",preyMass);
+
+  add_victim_people("stomped",prey);
+
+  update([sound,line,linesummary,newline], active);
+
+  updateBiome(false);
+
+  macro.arouse(5);
 }
 
 function stomp(active=true)
@@ -5318,6 +5362,8 @@ function startGame(e) {
   enable_panel("paws");
 
   enable_button("stomp");
+  enable_button("hand_crush");
+  enable_button("foot_crush");
   enable_button("sit");
   enable_button("grind");
   enable_button("ass_grind");
