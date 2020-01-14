@@ -10,7 +10,7 @@ function toggleDarkMode(e) {
 
 function setDarkMode(darkMode) {
   dark = darkMode;
-  window.localStorage.setItem("dark-mode",dark);
+  window.localStorage.setItem("dark-mode", dark);
   if (dark) {
     document.querySelector("body").classList.remove("light");
     document.querySelector("body").classList.add("dark");
