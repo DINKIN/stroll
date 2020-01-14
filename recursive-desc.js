@@ -2149,7 +2149,7 @@ function defaultVictimWingsVore(macro) {
 }
 }
 
-// EATING
+// eat
 
 {
 rules["eat"].push({
@@ -2258,7 +2258,7 @@ rules["eat"].push({
 });
 }
 
-// CHEWING
+// chew
 
 {
 rules["chew"].push({
@@ -2309,7 +2309,7 @@ rules["chew"].push({
 });
 }
 
-// STOMPING
+// stomp
 
 {
 rules["stomp"].push({
@@ -2765,7 +2765,7 @@ rules["stomp"].push({
 });
 }
 
-// ANAL VORE
+// anal-vore
 
 {
 rules["anal-vore"].push({
@@ -2831,7 +2831,7 @@ rules["anal-vore"].push({
 });
 }
 
-//Cock Vore
+// cock-vore
 
 {
 rules["cock-vore"].push({
@@ -2961,7 +2961,7 @@ rules["cock-vore"].push({
 });
 }
 
-//Ball Smother
+// ball-smother
 
 {
 //Balls weigh 1,000kg or less
@@ -3404,7 +3404,7 @@ rules["ball-smother"].push({
 });
 }
 
-//male orgasm
+// male-orgasm
 
 {
   rules["male-orgasm"].push({
@@ -3974,7 +3974,7 @@ Their form falls lifeless on the ground once your cumshot has ended.";
   });
 }
 
-//precum-male
+// male-spurt
 
 {
 //contains a person
