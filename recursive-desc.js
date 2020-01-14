@@ -29,14 +29,7 @@ function getDefault(name) {
 }
 
 function getDefaultVictim(name) {
-  let tokens = name.split("-");
-  for (let i = 0; i < tokens.length; i++) {
-    tokens[i] = tokens[i].charAt(0).toUpperCase() + tokens[i].slice(1);
-  }
-
-  let funcName = "default" + tokens.join("");
-
-  return window[funcName];
+  return defaults[name];
 }
 
 var action_keys = ["eat", "chew", "vomit", "hand-crush", "foot-crush", "stomp", "stomp-wedge", "flex-toes", "kick", "anal-vore", "ass-crush", "ass-grind", "tail-slap", "tail-vore", "tails-vore", "cleavage-stuff", "cleavage-crush", "cleavage-drop", "cleavage-absorb", "breast-crush", "breast-vore", "breast-milk", "unbirth", "sheath-stuff", "sheath-clench", "sheath-crush", "sheath-absorb", "foreskin-stuff", "foreskin-clench", "foreskin-crush", "foreskin-absorb", "cock-vore", "cockslap", "ball-smother", "male-spurt", "male-orgasm", "female-spurt", "female-orgasm", "grind", "pouch-stuff", "pouch-rub", "pouch-eat", "pouch-absorb", "soul-vore", "soul-absorb-paw", "paw-stench", "ass-stench", "piss-stench", "scat-stench", "male-musk", "female-musk", "male-orgasm-musk", "female-orgasm-musk", "male-spurt-musk", "female-spurt-musk", "belch", "fart", "stomach", "tail", "tail-to-stomach", "womb", "balls", "bowels", "bowels-to-stomach", "breasts", "bladder", "soul-digest", "wings", "wings-to-stomach", "wear-shoe", "remove-shoe", "wear-sock", "remove-sock", "stuff-shoe", "dump-shoe", "stuff-sock", "dump-sock", "piss", "bladder-vore", "scat", "sheath-toy", "foreskin-toy", "slit-toy", "breast-toy", "melt", "solidify", "flood", "stomp-goo", "goo-digest", "ass-goo", "goo-stomach-pull", "goo-stomach-push", "goo-bowels-pull", "goo-bowels-push", "goo-womb-pull", "goo-womb-push", "goo-balls-pull", "goo-balls-push", "goo-breasts-pull", "goo-breasts-push", "goo-tail-pull", "goo-tail-push", "goo-paws-pull", "goo-paws-push", "paw-vore", "paw-vore-toes", "paws", "crop-swallow", "crop-transfer", "breath-fire", "breath-ice", "breath-electric", "breath-smoke", "breath-radiation", "breath-foul", "drool", "magic-shrink", "magic-hypnotize", "wings-flap", "wings-vore"];
