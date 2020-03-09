@@ -577,42 +577,7 @@ let presets = [
     "gooDigestion": true,
     "pawVoreEnabled": true
   },
-  {
-    "version": 3,
-    "name": "Ona",
-    "baseMass": 125,
-    "baseAssArea": 0.45,
-    "sameSizeStomp": true,
-    "species": "Raven",
-    "footType": "avian",
-    "jawType": "beak",
-    "brutality": "2",
-    "victimsMilitary": true,
-    "victimsMacros": true,
-    "oralVore": true,
-    "analVore": true,
-    "baseAnalVoreDiameter": 0.1,
-    "footWear": true,
-    "footShoeEnabled": true,
-    "footShoe": "sandal",
-    "arousalEnabled": true,
-    "tailType": "slinky",
-    "tailStretchiness": 1,
-    "dickStretchiness": 1,
-    "hasSheath": true,
-    "femaleParts": true,
-    "baseVaginaLength": 0.2,
-    "baseVaginaWidth": 0.1,
-    "vaginaStretchiness": 2,
-    "hasBreasts": true,
-    "lactationEnabled": true,
-    "breastVore": true,
-    "breastStretchiness": 1,
-    "baseAssStenchArea": 1,
-    "belchEnabled": true,
-    "soulVoreEnabled": true,
-    "soulVoreType": "oblivion"
-  },
+  {"version":3,"name":"Ona","scale":100,"baseHeight":3,"baseMass":125,"basePawLength":0.45,"basePawWidth":0.25,"baseHandLength":0.3,"baseHandWidth":0.2,"baseAssArea":0.5,"sameSizeStomp":true,"species":"Raven","footType":"avian","jawType":"beak","automaticGrowthEnabled":true,"biomes":true,"changingBiomes":true,"brutality":"3","victimsMilitary":true,"victimsMacros":true,"oralVore":true,"analVore":true,"footWear":true,"footShoeEnabled":true,"footShoe":"heel","arousalEnabled":true,"hasTail":true,"tailType":"Feathery","baseTailDiameter":0.5,"tailStretchiness":1,"baseCumVolume":0.1,"dickStretchiness":1,"hasSheath":true,"femaleParts":true,"baseVaginaLength":0.3,"baseVaginaWidth":0.15,"baseWombVolume":0.1,"femcumStorageScale":10,"unbirthEnabled":true,"vaginaStretchiness":2,"femcumScaleWithSize":true,"femaleMuskEnabled":true,"hasBreasts":true,"lactationEnabled":true,"breastVore":true,"breastStretchiness":1,"milkScaleWithSize":true,"baseAssStenchArea":1,"gasEnabled":true,"belchEnabled":true,"fartEnabled":true,"gasScaleWithSize":true,"soulVoreEnabled":true,"soulVoreType":"release","pissEnabled":true,"scatEnabled":true,"scatScaleWithSize":true,"cropEnabled":true,"breathEnabled":true,"breathSmoke":true,"droolBaseVolume":0.01,"magicEnabled":true,"hasWings":true,"baseWingWidth":2,"baseWingLength":4}
   {
     "version": 3,
     "name": "Rain Fallen",
@@ -784,5 +749,6 @@ let presets = [
   {"version":3,"name":"Mira","category": "neopuc", "priority": 4, "scale":5000,"bio":"Mira is a touch on the arrogant side and can be fairly greedy. She believes anything and anyone smaller than herself belongs to her. Considering she is a size shifter that can reach mind boggling proportions that means just about ever ything is smaller than herself and she lays claim to a significant portion of her universe.","species":"dragon","brutality":"2","victimsMilitary":true,"victimsMacros":true,"oralVore":true,"arousalEnabled":true,"hasTail":true,"tailType":"draconic","baseTailLength":2,"femaleParts":true,"hasBreasts":true,"hasWings":true,"wingDesc":"draconic"},
   {"version":3,"name":"Carmine","category": "neopuc", "priority": 3, "scale":28500,"bio":"Always smiling, but the smile hides a cruel personality. Never truly as happy as when he is tormenting those smaller than himself.","species":"otter","brutality":"3","victimsMilitary":true,"victimsMacros":true,"oralVore":true,"analVore":true,"footWear":true,"footShoeEnabled":true,"footShoe":"boot","arousalEnabled":true,"hasTail":true,"tailType":"rudder","baseTailLength":2.2,"maleParts":true,"cockVoreEnabled":true,"hasSheath":true,"sheathAbsorptionEnabled":true},
   {"version":3,"name":"Jennifer","category": "neopuc", "priority": 3, "scale":24.5,"bio":"Assertive in all things. She goes out and takes the things she likes, especially when they are people. Only feels the need to have a small select group of friends. Can be fairly uncaring towards the fate of little folk even though she does think they are cute.","species":"rat ifrit","footType":"foot","arousalEnabled":true,"hasTail":true,"tailType":"skinny","baseTailLength":2,"femaleParts":true,"unbirthEnabled":true,"hasBreasts":true,"magicEnabled":true},
-  {"version":3,"name":"Porter","category": "neopuc", "priority": 2, "scale":1.58,"bio":"Devilishly charismatic, but secretly holds most people in contempt. Wildly in love Holly. Dominant Personality.","species":"Bernese mountain dog","brutality":"2","victimsMicros":true,"oralVore":true,"oralDigestManual":true,"arousalEnabled":true,"hasTail":true,"maleParts":true,"baseDickLength":0.35,"cockVoreEnabled":true,"cockDigestManual":true,"hasSheath":true,"sheathAbsorptionEnabled":true,"sexualMagicEnabled":true,"magicEnabled":true}
+  {"version":3,"name":"Porter","category": "neopuc", "priority": 2, "scale":1.58,"bio":"Devilishly charismatic, but secretly holds most people in contempt. Wildly in love Holly. Dominant Personality.","species":"Bernese mountain dog","brutality":"2","victimsMicros":true,"oralVore":true,"oralDigestManual":true,"arousalEnabled":true,"hasTail":true,"maleParts":true,"baseDickLength":0.35,"cockVoreEnabled":true,"cockDigestManual":true,"hasSheath":true,"sheathAbsorptionEnabled":true,"sexualMagicEnabled":true,"magicEnabled":true},
+  {"version":3,"name":"Rat jeice","baseHeight":2,"baseMass":200,"basePawLength":0.5,"basePawWidth":0.27,"baseHandLength":0.19,"baseHandWidth":0.29,"baseAssArea":0.5,"species":"Rat","biomes":true,"changingBiomes":true,"brutality":"0","victimsHuman":true,"victimsMacros":true,"oralVore":true,"oralDigestAuto":false,"oralDigestTime":0,"oralDigestManual":true,"analVore":true,"baseAnalVoreDiameter":0.23,"analDigestAuto":false,"analDigestTime":0,"analDigestManual":true,"hasTail":true,"tailType":"sinewy hungry","baseTailLength":1.5,"baseTailDiameter":0.1,"tailMaw":true,"tailStretchiness":2,"tailDigestAuto":false,"tailDigestManual":true,"maleParts":true,"baseDickLength":0.4,"baseDickDiameter":0.2,"dickType":"meaty","baseBallDiameter":0.1,"baseCumVolume":0.004,"baseCumProduction":0.004,"cumStorageScale":10,"cockVoreEnabled":true,"dickStretchiness":4,"baseCumDigestFactor":0,"cockDigestAuto":false,"cockDigestTime":0,"cockDigestManual":true,"sheathAbsorptionEnabled":true,"hasForeskin":true,"gasEnabled":true,"belchEnabled":true,"fartEnabled":true,"gasStorageScale":7,"baseGasDigestFactor":7,"gasScaleWithSize":true,"gooEnabled":true,"gooDigestion":true,"gooGrowthFactor":0.3,"gooDigestAuto":false,"gooDigestTime":0,"gooDigestManual":true}
 ]
